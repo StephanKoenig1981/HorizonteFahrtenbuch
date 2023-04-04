@@ -10,6 +10,17 @@ import MapKit
 import CoreLocation
 import HealthKit
 import CoreData
+import ActivityKit
+import SwiftUI
+
+// MARK: Struct for Live Activities
+
+struct ActivityAttributesSample: ActivityAttributes {
+    public typealias Status = ContentState
+    public struct ContentState: Codable, Hashable {
+        var value: String
+    }
+}
 
 extension UIView {
     
