@@ -13,15 +13,22 @@ import Combine
 class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
     var locationManager: CLLocationManager?
-
+    
+    var timer = Timer()
+    var (hours, minutes, seconds, fractions) = (0, 0, 0, 0)
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var timeElapsed: UILabel!
     @IBOutlet weak var distanceDriven: UILabel!
     @IBOutlet weak var baseToolbarView: UIView!
     @IBOutlet weak var TopNotchView: UIView!
-    @IBOutlet weak var startStopButton: UIButton!
+    @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var locationButton: UIButton!
+    
+    // Outletts for Timer
+    
+    @IBOutlet weak var stopwatchPauseButton: UIButton!
+    @IBOutlet weak var stopwatchResetButton: UIButton!
     
     // MARK: Base Setup for the main map view
     
@@ -52,54 +59,54 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     // MARK: Base setup for the Overlay renderer
     
     
+    // MARK: Stopwatch Function
+    
+    @objc func keepTimer() {
+        seconds += 1
+        
+        if seconds == 60 {
+            minutes += 1
+            seconds = 0
+        }
+        
+        if minutes == 60 {
+            hours += 1
+            minutes = 0
+        }
+        
+        let secondsString = seconds > 9 ? "\(seconds)" : "0\(seconds)"
+        let minutesString = minutes > 9 ? "\(minutes)" : "0\(minutes)"
+        let hoursString = hours > 9 ? "\(hours)" : "0\(hours)"
+        
+        // Update label outside of main thread
+        
+        DispatchQueue.main.async {
+            self.timeElapsed.text = "\(hoursString):\(minutesString):\(secondsString)"
+        }
+    }
+    
+    @objc func pauseTimer() {
+        timer.invalidate()
+    }
+    
+    // MARK: Stopwatch Function Buttons
 
-    
-    // MARK: Base Class for the stopwatch
-    
-    class Stopwatch: ObservableObject {
-    private var startTime: Date?
-        private var accumulatedTime:TimeInterval = 0
-        private var timer: Cancellable?
-      
-        @Published var isRunning = false {
-            didSet {
-                if self.isRunning {
-                   self.start()
-                } else {
-                    self.stop()
-                }
-            }
-        }
-        @Published private(set) var elapsedTime: TimeInterval = 0
-        private func start() -> Void {
-            self.startTime = Date()
-             self.timer?.cancel()
-             self.timer = Timer.publish(every: 0.5, on: .main, in: .common)
-             .autoconnect()
-             .sink { _ in
-                        self.elapsedTime = self.getElapsedTime()
-                    }
-        }
-        private func stop() -> Void {
-            self.timer?.cancel()
-            self.timer = nil
-            self.accumulatedTime = self.elapsedTime
-            self.startTime = nil
-        }
-        func reset() -> Void {
-            self.accumulatedTime = 0
-            self.elapsedTime = 0
-            self.startTime = nil
-            self.isRunning = false
-        }
-        private func getElapsedTime() -> TimeInterval {
-            return -(self.startTime?.timeIntervalSinceNow ??     0)+self.accumulatedTime
-        }
+    @IBAction func start(_sender: UIButton) {
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(MainMapViewViewController.keepTimer), userInfo: nil, repeats: true)
+            startButton.isEnabled = false
     }
     
-    @IBAction func startStopButtonPressed(_ sender: Any) {
+    @IBAction func pauseButtonPressed(_ sender: Any) {
+        timer.invalidate()
+        startButton.isEnabled = true
     }
     
+    @IBAction func stopButtonPressed(_ sender: Any) {
+        timer.invalidate()
+        (hours, minutes, seconds, fractions) = (0, 0, 0, 0)
+        timeElapsed.text = "00:00:00"
+        startButton.isEnabled = true
+    }
     
     @IBAction func locationButtonPressed(_ sender: Any) {
         
@@ -119,16 +126,5 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
             }
         
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
 }
 

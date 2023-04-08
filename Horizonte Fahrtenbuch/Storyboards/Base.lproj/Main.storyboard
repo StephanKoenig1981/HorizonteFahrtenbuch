@@ -204,26 +204,38 @@
                                 <rect key="frame" x="0.0" y="756" width="393" height="96"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="azT-he-wRo">
-                                        <rect key="frame" x="132" y="-73" width="129" height="169"/>
+                                        <rect key="frame" x="132" y="-26" width="129" height="83"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="GreenButtonHighRes"/>
                                         <connections>
-                                            <action selector="startStopButtonPressed:" destination="K7b-6J-Pvw" eventType="touchUpInside" id="kv4-tQ-ipt"/>
+                                            <action selector="startWith_sender:" destination="K7b-6J-Pvw" eventType="touchUpInside" id="wLS-gy-4J1"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RWI-Bn-Xfh">
                                         <rect key="frame" x="15" y="0.0" width="100" height="69"/>
                                         <color key="tintColor" red="0.47451927109999997" green="0.57119112350000001" blue="0.33582876480000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="person.crop.circle.fill.badge.plus" catalog="system">
+                                        <buttonConfiguration key="configuration" style="plain" image="pause.fill" catalog="system">
                                             <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" scale="large"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <action selector="pauseButtonPressed:" destination="K7b-6J-Pvw" eventType="touchUpInside" id="ySa-em-Dyc"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UWe-WQ-5qq">
-                                        <rect key="frame" x="315" y="17" width="50" height="35"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gk4-wB-OuN">
+                                        <rect key="frame" x="269" y="17" width="50" height="35"/>
                                         <color key="tintColor" red="0.47451927109999997" green="0.57119112350000001" blue="0.33582876480000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="location" catalog="system"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="restart.circle.fill" catalog="system"/>
+                                        <connections>
+                                            <action selector="stopButtonPressed:" destination="K7b-6J-Pvw" eventType="touchUpInside" id="EYH-oM-yVt"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UWe-WQ-5qq">
+                                        <rect key="frame" x="335" y="17" width="50" height="35"/>
+                                        <color key="tintColor" red="0.47451927109999997" green="0.57119112350000001" blue="0.33582876480000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="location.fill" catalog="system"/>
                                         <connections>
                                             <action selector="locationButtonPressed:" destination="K7b-6J-Pvw" eventType="touchUpInside" id="aqd-bv-Yts"/>
                                         </connections>
@@ -232,15 +244,17 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="azT-he-wRo" firstAttribute="leading" secondItem="TGn-q2-5b7" secondAttribute="leading" constant="132" id="5a0-Es-75m"/>
-                                    <constraint firstAttribute="bottom" secondItem="azT-he-wRo" secondAttribute="bottom" id="6dg-pd-FHC"/>
-                                    <constraint firstItem="azT-he-wRo" firstAttribute="top" secondItem="TGn-q2-5b7" secondAttribute="top" constant="-73" id="CEW-38-xMO"/>
+                                    <constraint firstAttribute="bottom" secondItem="azT-he-wRo" secondAttribute="bottom" constant="39" id="6dg-pd-FHC"/>
+                                    <constraint firstItem="azT-he-wRo" firstAttribute="top" secondItem="TGn-q2-5b7" secondAttribute="top" constant="-26" id="CEW-38-xMO"/>
                                     <constraint firstItem="RWI-Bn-Xfh" firstAttribute="top" secondItem="TGn-q2-5b7" secondAttribute="top" id="Lg1-se-Efb"/>
                                     <constraint firstItem="azT-he-wRo" firstAttribute="centerX" secondItem="TGn-q2-5b7" secondAttribute="centerX" id="OAV-qK-n1N"/>
                                     <constraint firstItem="azT-he-wRo" firstAttribute="leading" secondItem="RWI-Bn-Xfh" secondAttribute="trailing" constant="17" id="Qxr-2x-NJB"/>
                                     <constraint firstItem="UWe-WQ-5qq" firstAttribute="top" secondItem="TGn-q2-5b7" secondAttribute="top" constant="17" id="T6N-Tt-Mwo"/>
+                                    <constraint firstItem="Gk4-wB-OuN" firstAttribute="baseline" secondItem="UWe-WQ-5qq" secondAttribute="baseline" id="nNT-uI-d3c"/>
                                     <constraint firstItem="RWI-Bn-Xfh" firstAttribute="leading" secondItem="TGn-q2-5b7" secondAttribute="leading" constant="15" id="ojV-Mk-iYo"/>
+                                    <constraint firstItem="Gk4-wB-OuN" firstAttribute="leading" secondItem="azT-he-wRo" secondAttribute="trailing" constant="8" id="pLv-Xi-4ZL"/>
                                     <constraint firstAttribute="bottom" secondItem="RWI-Bn-Xfh" secondAttribute="bottom" constant="27" id="sDQ-Uf-NFC"/>
-                                    <constraint firstItem="UWe-WQ-5qq" firstAttribute="leading" secondItem="azT-he-wRo" secondAttribute="trailing" constant="54" id="zUh-hz-Fba"/>
+                                    <constraint firstItem="UWe-WQ-5qq" firstAttribute="leading" secondItem="azT-he-wRo" secondAttribute="trailing" constant="74" id="zUh-hz-Fba"/>
                                 </constraints>
                             </view>
                             <view alpha="0.69999999999999996" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Eu-nI-m0D">
@@ -252,7 +266,7 @@
                                         <color key="textColor" red="0.64705884459999996" green="0.77647060160000003" blue="0.45490196350000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" text="01:00:24" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qPz-4x-PxP">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" text="00:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qPz-4x-PxP">
                                         <rect key="frame" x="0.0" y="15" width="196" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="ZHR-0s-qhk"/>
@@ -298,7 +312,9 @@
                         <outlet property="distanceDriven" destination="Kbx-Ar-dBc" id="shx-32-bZz"/>
                         <outlet property="locationButton" destination="UWe-WQ-5qq" id="XgV-nQ-GSU"/>
                         <outlet property="mapView" destination="isM-cH-fZc" id="eeZ-qe-7UA"/>
-                        <outlet property="startStopButton" destination="azT-he-wRo" id="zJ9-Gf-7aH"/>
+                        <outlet property="startButton" destination="azT-he-wRo" id="a0u-xU-zFD"/>
+                        <outlet property="stopwatchPauseButton" destination="RWI-Bn-Xfh" id="s2B-kV-riK"/>
+                        <outlet property="stopwatchResetButton" destination="Gk4-wB-OuN" id="mcD-bU-v8o"/>
                         <outlet property="timeElapsed" destination="qPz-4x-PxP" id="rpc-eB-bcO"/>
                     </connections>
                 </viewController>
@@ -311,8 +327,9 @@
         <image name="Checkmark" width="2133.5" height="2133.5"/>
         <image name="GreenButtonHighRes" width="128" height="128"/>
         <image name="Logo" width="609" height="238.5"/>
-        <image name="location" catalog="system" width="128" height="121"/>
-        <image name="person.crop.circle.fill.badge.plus" catalog="system" width="128" height="114"/>
+        <image name="location.fill" catalog="system" width="128" height="119"/>
+        <image name="pause.fill" catalog="system" width="117" height="128"/>
+        <image name="restart.circle.fill" catalog="system" width="128" height="123"/>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
