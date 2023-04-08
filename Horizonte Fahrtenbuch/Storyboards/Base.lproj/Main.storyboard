@@ -223,7 +223,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gk4-wB-OuN">
-                                        <rect key="frame" x="269" y="17" width="50" height="35"/>
+                                        <rect key="frame" x="269" y="17" width="50" height="34"/>
                                         <color key="tintColor" red="0.47451927109999997" green="0.57119112350000001" blue="0.33582876480000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="restart.circle.fill" catalog="system"/>
@@ -232,7 +232,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UWe-WQ-5qq">
-                                        <rect key="frame" x="335" y="17" width="50" height="35"/>
+                                        <rect key="frame" x="335" y="17" width="50" height="34"/>
                                         <color key="tintColor" red="0.47451927109999997" green="0.57119112350000001" blue="0.33582876480000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="location.fill" catalog="system"/>

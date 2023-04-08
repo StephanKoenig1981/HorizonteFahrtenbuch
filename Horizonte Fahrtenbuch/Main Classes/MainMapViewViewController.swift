@@ -8,14 +8,19 @@
 import UIKit
 import MapKit
 import CoreLocation
+import CoreMotion
 import Combine
 
 class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
     var locationManager: CLLocationManager?
     
+    // Variables for the Timer
+    
     var timer = Timer()
     var (hours, minutes, seconds, fractions) = (0, 0, 0, 0)
+    
+    // Outlets for Buttons and Views
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var timeElapsed: UILabel!
@@ -52,7 +57,9 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         mapView.mapType = MKMapType(rawValue: 0)!
         mapView.setUserTrackingMode(.followWithHeading, animated: true)
         
+        // Base stuff for CoreMotion
         
+        let motionActivityManager = CMMotionActivityManager()
         
     }
     
