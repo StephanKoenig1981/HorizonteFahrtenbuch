@@ -53,6 +53,9 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        stopwatchPauseButton.isEnabled = false
+        stopwatchResetButton.isEnabled = false
+        
         startTime = userDefaults.object( forKey: START_TIME_KEY) as? Date
         stopTime = userDefaults.object( forKey: STOP_TIME_KEY) as? Date
         timerCounting = userDefaults.bool( forKey: COUNTING_KEY)
@@ -120,6 +123,8 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         timeElapsed.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
             startButton.isEnabled = false
         timeElapsed.fadeIn(duration: 1.0)
+        stopwatchPauseButton.isEnabled = true
+        stopwatchResetButton.isEnabled = true
     }
     
     @IBAction func pauseButtonPressed(_ sender: Any) {
@@ -128,6 +133,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         timeElapsed.fadeIn(duration: 1.0)
         timer.invalidate()
         startButton.isEnabled = true
+        stopwatchPauseButton.isEnabled = false
     }
     
     @IBAction func stopButtonPressed(_ sender: Any) {
@@ -138,7 +144,10 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         timeElapsed.text = "00:00:00"
         timeElapsed.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
         startButton.isEnabled = true
+        stopwatchPauseButton.isEnabled = true
         timeElapsed.fadeIn(duration: 1.0)
+        stopwatchResetButton.isEnabled = false
+        stopwatchPauseButton.isEnabled = false
     }
     
     @IBAction func locationButtonPressed(_ sender: Any) {
