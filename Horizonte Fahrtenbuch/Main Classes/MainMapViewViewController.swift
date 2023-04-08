@@ -20,6 +20,19 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     var timer = Timer()
     var (hours, minutes, seconds, fractions) = (0, 0, 0, 0)
     
+    var timerCounting:Bool = false
+    
+    var startTime:Date?
+    var stopTime:Date?
+    let userDefaults = UserDefaults.standard
+    
+    let START_TIME_KEY = "startTime"
+    let STOP_TIME_KEY = "stopTime"
+    let COUNTING_KEY = "countingKey"
+    
+    var attributedText: NSAttributedString?
+    
+    
     // Outlets for Buttons and Views
     
     @IBOutlet weak var mapView: MKMapView!
@@ -40,6 +53,10 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        startTime = userDefaults.object( forKey: START_TIME_KEY) as? Date
+        stopTime = userDefaults.object( forKey: STOP_TIME_KEY) as? Date
+        timerCounting = userDefaults.bool( forKey: COUNTING_KEY)
+        
         TopNotchView.layer.cornerRadius = 20
         
         mapView.delegate = self
@@ -56,10 +73,6 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         mapView.delegate = self
         mapView.mapType = MKMapType(rawValue: 0)!
         mapView.setUserTrackingMode(.followWithHeading, animated: true)
-        
-        // Base stuff for CoreMotion
-        
-        let motionActivityManager = CMMotionActivityManager()
         
     }
     
@@ -96,23 +109,36 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         timer.invalidate()
     }
     
+   
+    
     // MARK: Stopwatch Function Buttons
 
     @IBAction func start(_sender: UIButton) {
+        
+        timeElapsed.fadeOut(duration: 1.0)
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(MainMapViewViewController.keepTimer), userInfo: nil, repeats: true)
+        timeElapsed.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
             startButton.isEnabled = false
+        timeElapsed.fadeIn(duration: 1.0)
     }
     
     @IBAction func pauseButtonPressed(_ sender: Any) {
+        timeElapsed.fadeOut(duration: 1.0)
+        timeElapsed.textColor = UIColor.orange
+        timeElapsed.fadeIn(duration: 1.0)
         timer.invalidate()
         startButton.isEnabled = true
     }
     
     @IBAction func stopButtonPressed(_ sender: Any) {
+        
         timer.invalidate()
         (hours, minutes, seconds, fractions) = (0, 0, 0, 0)
+        timeElapsed.fadeOut(duration: 1.0)
         timeElapsed.text = "00:00:00"
+        timeElapsed.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
         startButton.isEnabled = true
+        timeElapsed.fadeIn(duration: 1.0)
     }
     
     @IBAction func locationButtonPressed(_ sender: Any) {
