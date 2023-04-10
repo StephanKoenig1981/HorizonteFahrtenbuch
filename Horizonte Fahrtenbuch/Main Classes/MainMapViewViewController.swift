@@ -123,7 +123,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         return MKOverlayRenderer()
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    /*override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let array = informationArray{
             if index == array.count{
                 index = 0}
@@ -132,7 +132,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
             }
             index += 1
         }
-    }
+    }*/
     
     // MARK: Stopwatch Function
     
