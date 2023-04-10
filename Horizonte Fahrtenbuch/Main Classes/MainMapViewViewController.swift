@@ -171,7 +171,6 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     @IBAction func start(_sender: UIButton) {
         
         locationManager.startUpdatingLocation()
-        //locationManager.startMonitoringSignificantLocationChanges()
         
         timeElapsed.fadeOut(duration: 1.0)
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(MainMapViewViewController.keepTimer), userInfo: nil, repeats: true)
@@ -224,9 +223,9 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
                        mapView.setRegion(viewRegion, animated: true)
                    }
 
-                   DispatchQueue.main.async {
-                       self.locationManager.startUpdatingLocation()
-                   }
+                   /*DispatchQueue.main.async {
+                       self.locationManager.startMonitoringSignificantLocationChanges()
+                   }*/
                
            }
     }
