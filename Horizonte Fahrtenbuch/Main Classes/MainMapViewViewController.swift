@@ -15,9 +15,6 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     
     
     var coordinates :[CLLocationCoordinate2D] = []
-    var strSpeed: String = ""
-    var strCourse:String = ""
-    var informationArray:[String]?
     var index = 0
     
     // Variables for the Timer
@@ -93,10 +90,6 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         for location in locations {
-            strSpeed = String(format: "Deine Geschwindigkeit beträgt %.1f m/s", location.speed)
-            strCourse = String (format: "Dein Kurs: %.1f°", location.course)
-            
-            informationArray = [strSpeed, strCourse]
             
             coordinates.append (location.coordinate)
             
@@ -122,17 +115,6 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         }
         return MKOverlayRenderer()
     }
-    
-    /*override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let array = informationArray{
-            if index == array.count{
-                index = 0}
-            else{
-                print("Test")
-            }
-            index += 1
-        }
-    }*/
     
     // MARK: Stopwatch Function
     
@@ -222,11 +204,6 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
                    let viewRegion = MKCoordinateRegion(center: userLocation, latitudinalMeters: 200, longitudinalMeters: 200)
                        mapView.setRegion(viewRegion, animated: true)
                    }
-
-                   /*DispatchQueue.main.async {
-                       self.locationManager.startMonitoringSignificantLocationChanges()
-                   }*/
-               
            }
     }
 
