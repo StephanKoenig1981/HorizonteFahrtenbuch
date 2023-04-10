@@ -13,7 +13,12 @@ import Combine
 
 class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
-    var locationManager: CLLocationManager?
+    
+    var coordinates :[CLLocationCoordinate2D] = []
+    var strSpeed: String = ""
+    var strCourse:String = ""
+    var informationArray:[String]?
+    var index = 0
     
     // Variables for the Timer
     
@@ -31,6 +36,8 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     let COUNTING_KEY = "countingKey"
     
     var attributedText: NSAttributedString?
+    
+    let locationManager = CLLocationManager()
     
     
     // Outlets for Buttons and Views
@@ -53,6 +60,10 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        locationManager.delegate = self
+        
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        
         stopwatchPauseButton.isEnabled = false
         stopwatchResetButton.isEnabled = false
         
@@ -66,7 +77,6 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         
         // Basic Map Setup
         
-        mapView.showsUserLocation = true
         mapView.showsCompass = true
         mapView.showsScale = false
         mapView.showsTraffic = true
@@ -79,8 +89,50 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         
     }
     
-    // MARK: Base setup for the Overlay renderer
+    // MARK: Base setup for drawing the polyline
     
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        for location in locations {
+            strSpeed = String(format: "Deine Geschwindigkeit beträgt %.1f m/s", location.speed)
+            strCourse = String (format: "Dein Kurs: %.1f°", location.course)
+            
+            informationArray = [strSpeed, strCourse]
+            
+            coordinates.append (location.coordinate)
+            
+            let numberOfLocations = coordinates.count
+            print (" :-) \(numberOfLocations)")
+            
+            if numberOfLocations > 5{
+            var pointsToConnect = [coordinates[numberOfLocations - 1], coordinates[numberOfLocations - 2]]
+                
+            let polyline = MKPolyline(coordinates: &pointsToConnect, count: pointsToConnect.count)
+                
+            mapView.addOverlay(polyline)
+            }
+        }
+    }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        if overlay is MKPolyline{
+            let renderer = MKPolylineRenderer(overlay: overlay)
+            renderer.strokeColor = UIColor.systemOrange
+            renderer.lineWidth = 8
+            return renderer
+        }
+        return MKOverlayRenderer()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let array = informationArray{
+            if index == array.count{
+                index = 0}
+            else{
+                print("Test")
+            }
+            index += 1
+        }
+    }
     
     // MARK: Stopwatch Function
     
@@ -118,6 +170,9 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
 
     @IBAction func start(_sender: UIButton) {
         
+        locationManager.startUpdatingLocation()
+        //locationManager.startMonitoringSignificantLocationChanges()
+        
         timeElapsed.fadeOut(duration: 1.0)
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(MainMapViewViewController.keepTimer), userInfo: nil, repeats: true)
         timeElapsed.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
@@ -128,6 +183,9 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     }
     
     @IBAction func pauseButtonPressed(_ sender: Any) {
+        
+        locationManager.stopUpdatingLocation()
+        
         timeElapsed.fadeOut(duration: 1.0)
         timeElapsed.textColor = UIColor.orange
         timeElapsed.fadeIn(duration: 1.0)
@@ -137,6 +195,9 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     }
     
     @IBAction func stopButtonPressed(_ sender: Any) {
+        
+        locationManager.stopUpdatingLocation()
+        mapView.removeOverlays(mapView.overlays)
         
         timer.invalidate()
         (hours, minutes, seconds, fractions) = (0, 0, 0, 0)
@@ -153,20 +214,21 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     @IBAction func locationButtonPressed(_ sender: Any) {
         
         // Re-Enable heading mode
+                
+                mapView.setUserTrackingMode(.followWithHeading, animated:true)
+                
+                //Zoom to user location
         
-        mapView.setUserTrackingMode(.followWithHeading, animated:true)
-        
-        //Zoom to user location
-        
-        if let userLocation = locationManager?.location?.coordinate {
-            let viewRegion = MKCoordinateRegion(center: userLocation, latitudinalMeters: 200, longitudinalMeters: 200)
-                mapView.setRegion(viewRegion, animated: true)
-            }
+        if let userLocation = locationManager.location?.coordinate {
+                   let viewRegion = MKCoordinateRegion(center: userLocation, latitudinalMeters: 200, longitudinalMeters: 200)
+                       mapView.setRegion(viewRegion, animated: true)
+                   }
 
-            DispatchQueue.main.async {
-                self.locationManager?.startUpdatingLocation()
-            }
-        
+                   DispatchQueue.main.async {
+                       self.locationManager.startUpdatingLocation()
+                   }
+               
+           }
     }
-}
+
 
