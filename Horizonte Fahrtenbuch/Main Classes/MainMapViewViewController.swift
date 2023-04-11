@@ -64,6 +64,10 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        baseToolbarView.topNotchViewfadeIn(duration: 1.0)
+        startButton.ButtonViewfadeIn(duration: 1.0)
+        locationButton.ButtonViewfadeIn(duration:1.0)
+        
         locationManager.delegate = self
         
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
