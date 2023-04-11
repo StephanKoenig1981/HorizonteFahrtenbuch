@@ -55,7 +55,7 @@
                                 </constraints>
                                 <color key="tintColor" red="0.64705884459999996" green="0.77647060160000003" blue="0.45490196350000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="tinted" title="Standortfreigabe erteilen">
+                                <buttonConfiguration key="configuration" style="tinted" title="Standortfreigabe erteilen" cornerStyle="capsule">
                                     <color key="baseForegroundColor" red="0.64705884459999996" green="0.77647060160000003" blue="0.45490196350000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <color key="baseBackgroundColor" red="0.64705884459999996" green="0.77647060160000003" blue="0.45490196350000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </buttonConfiguration>
@@ -70,7 +70,7 @@
                                 </constraints>
                                 <color key="tintColor" red="0.64705884459999996" green="0.77647060160000003" blue="0.45490196350000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="tinted" title="Hintergrundaktivität erlauben">
+                                <buttonConfiguration key="configuration" style="tinted" title="Hintergrundaktivität erlauben" cornerStyle="capsule">
                                     <color key="baseForegroundColor" red="0.64705884459999996" green="0.77647060160000003" blue="0.45490196350000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <color key="baseBackgroundColor" red="0.64705884459999996" green="0.77647060160000003" blue="0.45490196350000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </buttonConfiguration>
@@ -85,7 +85,7 @@
                                 </constraints>
                                 <color key="tintColor" red="0.64705884459999996" green="0.77647060160000003" blue="0.45490196350000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="tinted" title="Zugriff auf Bewegungsdaten">
+                                <buttonConfiguration key="configuration" style="tinted" title="Zugriff auf Bewegungsdaten" cornerStyle="capsule">
                                     <color key="baseForegroundColor" red="0.64705884459999996" green="0.77647060160000003" blue="0.45490196350000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <color key="baseBackgroundColor" red="0.64705884459999996" green="0.77647060160000003" blue="0.45490196350000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </buttonConfiguration>
@@ -106,7 +106,7 @@
                                 </constraints>
                                 <color key="tintColor" red="0.64705884459999996" green="0.77647060160000003" blue="0.45490196350000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="tinted" title="Weiter">
+                                <buttonConfiguration key="configuration" style="tinted" title="Weiter" cornerStyle="capsule">
                                     <color key="baseForegroundColor" red="0.64705884459999996" green="0.77647060160000003" blue="0.45490196350000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <color key="baseBackgroundColor" red="0.64705884459999996" green="0.77647060160000003" blue="0.45490196350000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </buttonConfiguration>
