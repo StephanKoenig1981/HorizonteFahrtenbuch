@@ -22,6 +22,16 @@ struct ActivityAttributesSample: ActivityAttributes {
     }
 }
 
+// MARK: Extension for converting doubles to strings
+
+extension Double {
+    func toString() -> String {
+        return String(format: "%.1f",self)
+    }
+}
+
+// MARK: Fade In and Fade Out Extension
+
 extension UIView {
     
 /**
@@ -34,6 +44,18 @@ extension UIView {
         self.alpha = 1.0
      })
  }
+    
+    func topNotchViewfadeIn(duration: TimeInterval = 1.0) {
+        UIView.animate(withDuration: duration, animations: {
+            self.alpha = 0.7
+        })
+    }
+    
+    func ButtonViewfadeIn(duration: TimeInterval = 1.0) {
+        UIView.animate(withDuration: duration, animations: {
+            self.alpha = 1.0
+        })
+    }
 
 /**
  Fade out a view with a duration
@@ -45,6 +67,18 @@ func fadeOut(duration: TimeInterval = 1.0) {
         self.alpha = 0.0
     })
   }
+    
+    func topNotchViewfadeOut(duration: TimeInterval = 1.0) {
+        UIView.animate(withDuration: duration, animations: {
+            self.alpha = 0.0
+        })
+      }
+    
+    func ButtonViewfadeOut(duration: TimeInterval = 1.0) {
+        UIView.animate(withDuration: duration, animations: {
+            self.alpha = 0.0
+        })
+      }
 
 }
 

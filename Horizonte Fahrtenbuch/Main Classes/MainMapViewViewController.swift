@@ -36,6 +36,13 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     
     let locationManager = CLLocationManager()
     
+    // Variables for travel distance
+    
+    let formatter = MKDistanceFormatter()
+    
+    var startLocation:CLLocation!
+    var lastLocation: CLLocation!
+    var traveledDistance:Double = 0
     
     // Outlets for Buttons and Views
     
@@ -85,7 +92,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         mapView.setUserTrackingMode(.followWithHeading, animated: true)
         
     }
-    
+        
     // MARK: Base setup for drawing the polyline
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -114,6 +121,19 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
             return renderer
         }
         return MKOverlayRenderer()
+    }
+    
+    // MARK: Travel distance function
+    
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+        if startLocation == nil {
+            startLocation = (locations.first as! CLLocation)
+        } else {
+            let lastLocation = locations.last as! CLLocation
+            let distance = startLocation.distance(from: lastLocation)
+            startLocation = lastLocation
+            traveledDistance += distance
+        }
     }
     
     // MARK: Stopwatch Function
@@ -146,46 +166,117 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         timer.invalidate()
     }
     
-   
     
     // MARK: Stopwatch Function Buttons
 
     @IBAction func start(_sender: UIButton) {
         
+        TopNotchView.topNotchViewfadeIn(duration: 1.0)
+        timeElapsed.fadeIn(duration: 1.0)
+        distanceDriven.fadeIn(duration: 1.0)
+        
+        stopwatchPauseButton.fadeIn(duration: 0.5)
+        stopwatchResetButton.fadeIn(duration: 0.5)
+        
+        // Testing disabling the screen sleep mode while recording a ride
+        
+        UIApplication.shared.isIdleTimerDisabled = true
+        
         locationManager.startUpdatingLocation()
+        locationManager.startMonitoringSignificantLocationChanges()
+        locationManager.distanceFilter = 5
         
         timeElapsed.fadeOut(duration: 1.0)
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(MainMapViewViewController.keepTimer), userInfo: nil, repeats: true)
         timeElapsed.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
-            startButton.isEnabled = false
         timeElapsed.fadeIn(duration: 1.0)
+        
+        distanceDriven.fadeOut(duration:1.0)
+        distanceDriven.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+        distanceDriven.fadeIn(duration: 1.0)
+        
         stopwatchPauseButton.isEnabled = true
         stopwatchResetButton.isEnabled = true
+        
+        startButton.ButtonViewfadeOut(duration: 0.5)
+        startButton.isEnabled = false
+        startButton.setImage(UIImage(named: "RedButtonHighRes.png"), for: .disabled)
+        startButton.ButtonViewfadeIn(duration: 0.5)
+        
+        formatter.units = .metric
+        formatter.unitStyle = .default
+        
+        let distanceString = formatter.string(fromDistance: traveledDistance)
+        distanceDriven.text = distanceString
+        
+        print (traveledDistance)
     }
     
     @IBAction func pauseButtonPressed(_ sender: Any) {
         
+        // Testing disabling the screen sleep mode while recording a ride (Reenabling sleep when pause is pressed
+        
+        UIApplication.shared.isIdleTimerDisabled = false
+        
         locationManager.stopUpdatingLocation()
+        locationManager.stopMonitoringSignificantLocationChanges()
         
         timeElapsed.fadeOut(duration: 1.0)
         timeElapsed.textColor = UIColor.orange
         timeElapsed.fadeIn(duration: 1.0)
+        
+        distanceDriven.fadeOut(duration: 1.0)
+        distanceDriven.textColor = UIColor.orange
+        distanceDriven.fadeIn(duration: 1.0)
+        
+        stopwatchPauseButton.fadeOut(duration: 0.5)
+        stopwatchPauseButton.fadeIn(duration: 0.5)
+        stopwatchResetButton.fadeOut(duration: 0.5)
+        stopwatchResetButton.fadeIn(duration: 0.5)
+        
         timer.invalidate()
         startButton.isEnabled = true
         stopwatchPauseButton.isEnabled = false
+        
+        startButton.ButtonViewfadeOut(duration: 0.5)
+        startButton.setImage(UIImage(named: "GreenButtonHighRes.png"), for: .normal)
+        startButton.ButtonViewfadeIn(duration: 0.5)
     }
     
     @IBAction func stopButtonPressed(_ sender: Any) {
         
+        TopNotchView.topNotchViewfadeOut(duration: 1.0)
+        timeElapsed.fadeOut(duration: 1.0)
+        distanceDriven.fadeOut(duration: 1.0)
+        
+        stopwatchPauseButton.fadeOut(duration: 0.5)
+        stopwatchResetButton.fadeOut(duration: 0.5)
+        
+        startButton.ButtonViewfadeOut(duration: 0.5)
+        startButton.setImage(UIImage(named: "GreenButtonHighRes.png"), for: .normal)
+        startButton.ButtonViewfadeIn(duration: 0.5)
+        
+        // Testing disabling the screen sleep mode while recording a ride (Reenabling sleep when stop is pressed)
+        
+        UIApplication.shared.isIdleTimerDisabled = false
+        
         locationManager.stopUpdatingLocation()
+        locationManager.stopMonitoringSignificantLocationChanges()
+        
         mapView.removeOverlays(mapView.overlays)
         
         timer.invalidate()
         (hours, minutes, seconds, fractions) = (0, 0, 0, 0)
         timeElapsed.fadeOut(duration: 1.0)
         timeElapsed.text = "00:00:00"
+        distanceDriven.text = "00.00 Km"
         timeElapsed.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
         startButton.isEnabled = true
+        
+        distanceDriven.fadeOut(duration: 1.0)
+        distanceDriven.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+        distanceDriven.fadeIn(duration: 1.0)
+        
         stopwatchPauseButton.isEnabled = true
         timeElapsed.fadeIn(duration: 1.0)
         stopwatchResetButton.isEnabled = false
