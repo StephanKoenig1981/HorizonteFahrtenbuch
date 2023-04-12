@@ -313,6 +313,11 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         timeElapsed.fadeIn(duration: 1.0)
         stopwatchResetButton.isEnabled = false
         stopwatchPauseButton.isEnabled = false
+        
+        // Reset traveled distance to 0 and apply on Label
+        
+        traveledDistance = 0
+        distanceDriven.text = "0 m"
     }
     
     @IBAction func locationButtonPressed(_ sender: Any) {
