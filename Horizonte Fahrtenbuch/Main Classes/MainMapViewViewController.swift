@@ -20,6 +20,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     // Variables for the Timer
     
     var timer = Timer()
+    var countdown = 0
     var (hours, minutes, seconds, fractions) = (0, 0, 0, 0)
     
     var timerCounting:Bool = false
@@ -90,17 +91,11 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         mapView.setUserTrackingMode(.followWithHeading, animated: true)
         
     }
-        
-    // MARK: Base setup for drawing the polyline
     
-    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        if overlay is MKPolyline{
-            let renderer = MKPolylineRenderer(overlay: overlay)
-            renderer.strokeColor = UIColor.systemOrange
-            renderer.lineWidth = 8
-            return renderer
-        }
-        return MKOverlayRenderer()
+    override func viewDidAppear(_ animated: Bool) {
+         countdown=5
+        timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector:  #selector(updateDistanceLabel), userInfo: nil, repeats: true)
+        distanceDriven.text = "\(traveledDistance)"
     }
     
     // MARK: Travel distance and route polyline drawing function
@@ -139,12 +134,22 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
                 
                 mapView.addOverlay(polyline)
             }
-            
-            
         }
     }
     
-    // MARK: Stopwatch Function
+    // MARK: Base setup for drawing the polyline
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        if overlay is MKPolyline{
+            let renderer = MKPolylineRenderer(overlay: overlay)
+            renderer.strokeColor = UIColor.systemOrange
+            renderer.lineWidth = 8
+            return renderer
+        }
+        return MKOverlayRenderer()
+    }
+    
+    // MARK: Stopwatch Function and Update Traveled Distance
     
     @objc func keepTimer() {
         seconds += 1
@@ -173,6 +178,25 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     @objc func pauseTimer() {
         timer.invalidate()
     }
+    
+    @objc func updateDistanceLabel() {
+        countdown = countdown - 1
+        //For infinite time
+        if (countdown == 0) {
+            countdown = 5
+        }
+
+        formatter.units = .metric
+        formatter.unitStyle = .default
+        
+        let distanceString = formatter.string(fromDistance: traveledDistance)
+        distanceDriven.text = distanceString
+        
+        DispatchQueue.main.async {
+            self.distanceDriven.text = "\(distanceString)"
+        }
+    }
+
     
     
     // MARK: Stopwatch Function Buttons
