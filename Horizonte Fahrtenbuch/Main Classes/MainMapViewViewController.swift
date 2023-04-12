@@ -63,10 +63,6 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        baseToolbarView.topNotchViewfadeIn(duration: 1.0)
-        startButton.ButtonViewfadeIn(duration: 1.0)
-        locationButton.ButtonViewfadeIn(duration:1.0)
-        
         locationManager.delegate = self
         
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -93,7 +89,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     }
     
     override func viewDidAppear(_ animated: Bool) {
-         countdown=5
+         countdown = 5
         timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector:  #selector(updateDistanceLabel), userInfo: nil, repeats: true)
         distanceDriven.text = "\(traveledDistance)"
     }
@@ -149,7 +145,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         return MKOverlayRenderer()
     }
     
-    // MARK: Stopwatch Function and Update Traveled Distance
+    // MARK: Stopwatch Functions and Update Traveled Distance
     
     @objc func keepTimer() {
         seconds += 1
@@ -199,7 +195,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
 
     
     
-    // MARK: Stopwatch Function Buttons
+    // MARK: Stopwatch and Distance Function Buttons
 
     @IBAction func start(_sender: UIButton) {
         
@@ -319,6 +315,8 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         traveledDistance = 0
         distanceDriven.text = "0 m"
     }
+    
+    // MARK: Function for Location and Heading Tracking
     
     @IBAction func locationButtonPressed(_ sender: Any) {
         
