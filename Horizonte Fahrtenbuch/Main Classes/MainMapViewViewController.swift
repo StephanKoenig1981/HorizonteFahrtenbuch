@@ -28,10 +28,6 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     var stopTime:Date?
     let userDefaults = UserDefaults.standard
     
-    let START_TIME_KEY = "startTime"
-    let STOP_TIME_KEY = "stopTime"
-    let COUNTING_KEY = "countingKey"
-    
     var attributedText: NSAttributedString?
     
     let locationManager = CLLocationManager()
@@ -43,6 +39,8 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     var startLocation:CLLocation!
     var lastLocation: CLLocation!
     var traveledDistance:Double = 0
+    
+    var startDate: Date!
     
     // Outlets for Buttons and Views
     
@@ -75,10 +73,6 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         stopwatchPauseButton.isEnabled = false
         stopwatchResetButton.isEnabled = false
         
-        startTime = userDefaults.object( forKey: START_TIME_KEY) as? Date
-        stopTime = userDefaults.object( forKey: STOP_TIME_KEY) as? Date
-        timerCounting = userDefaults.bool( forKey: COUNTING_KEY)
-        
         TopNotchView.layer.cornerRadius = 20
         
         mapView.delegate = self
@@ -99,24 +93,6 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         
     // MARK: Base setup for drawing the polyline
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        for location in locations {
-            
-            coordinates.append (location.coordinate)
-            
-            let numberOfLocations = coordinates.count
-            print (" :-) \(numberOfLocations)")
-            
-            if numberOfLocations > 5{
-            var pointsToConnect = [coordinates[numberOfLocations - 1], coordinates[numberOfLocations - 2]]
-                
-            let polyline = MKPolyline(coordinates: &pointsToConnect, count: pointsToConnect.count)
-                
-            mapView.addOverlay(polyline)
-            }
-        }
-    }
-    
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if overlay is MKPolyline{
             let renderer = MKPolylineRenderer(overlay: overlay)
@@ -127,16 +103,44 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         return MKOverlayRenderer()
     }
     
-    // MARK: Travel distance function
+    // MARK: Travel distance and route polyline drawing function
     
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        if startLocation == nil {
-            startLocation = (locations.first as! CLLocation)
-        } else {
-            let lastLocation = locations.last as! CLLocation
-            let distance = startLocation.distance(from: lastLocation)
-            startLocation = lastLocation
-            traveledDistance += distance
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+            
+            // Track Distance
+        
+            if startDate == nil {
+                startDate = Date()
+            } else {
+                print("elapsedTime:", String(format: "%.0fs", Date().timeIntervalSince(startDate)))
+            }
+            if startLocation == nil {
+                startLocation = locations.first
+            } else if let location = locations.last {
+                traveledDistance += lastLocation.distance(from: location)
+                print("Traveled Distance:",  traveledDistance)
+                print("Straight Distance:", startLocation.distance(from: locations.last!))
+            }
+            lastLocation = locations.last
+        
+            //Track Route
+        
+            for location in locations {
+            
+                coordinates.append (location.coordinate)
+            
+                let numberOfLocations = coordinates.count
+                print (" :-) \(numberOfLocations)")
+            
+            if numberOfLocations > 5{
+                var pointsToConnect = [coordinates[numberOfLocations - 1], coordinates[numberOfLocations - 2]]
+                
+                let polyline = MKPolyline(coordinates: &pointsToConnect, count: pointsToConnect.count)
+                
+                mapView.addOverlay(polyline)
+            }
+            
+            
         }
     }
     
