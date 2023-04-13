@@ -33,6 +33,8 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     
     let locationManager = CLLocationManager()
     
+    var oldPolyLines = MKPolyline()
+    
     // Variables for travel distance
     
     let formatter = MKDistanceFormatter()
@@ -291,8 +293,6 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         locationManager.stopUpdatingLocation()
         locationManager.stopMonitoringSignificantLocationChanges()
         
-        mapView.removeOverlays(mapView.overlays)
-        
         timer.invalidate()
         (hours, minutes, seconds, fractions) = (0, 0, 0, 0)
         timeElapsed.fadeOut(duration: 1.0)
@@ -312,7 +312,11 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         
         // Reset traveled distance to 0 and apply on Label
         
-        traveledDistance = 0
+        self.mapView.removeOverlays(self.mapView.overlays)
+        
+        coordinates.removeAll()
+        
+        traveledDistance -= traveledDistance
         distanceDriven.text = "0 m"
     }
     
