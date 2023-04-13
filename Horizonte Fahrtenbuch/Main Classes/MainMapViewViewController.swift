@@ -67,6 +67,8 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         
+        //locationManager.allowsBackgroundLocationUpdates = true
+        
         stopwatchPauseButton.isEnabled = false
         stopwatchResetButton.isEnabled = false
         
@@ -97,6 +99,10 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     // MARK: Travel distance and route polyline drawing function
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+            // Allow Background Updates
+        
+            locationManager.allowsBackgroundLocationUpdates = true
             
             // Track Distance
         
