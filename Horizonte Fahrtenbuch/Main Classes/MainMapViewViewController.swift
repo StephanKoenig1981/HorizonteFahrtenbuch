@@ -33,8 +33,6 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     
     let locationManager = CLLocationManager()
     
-    var oldPolyLines = MKPolyline()
-    
     // Variables for travel distance
     
     let formatter = MKDistanceFormatter()
@@ -240,6 +238,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         distanceDriven.text = distanceString
         
         print (traveledDistance)
+    
     }
     
     @IBAction func pauseButtonPressed(_ sender: Any) {
@@ -271,6 +270,10 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         startButton.ButtonViewfadeOut(duration: 0.5)
         startButton.setImage(UIImage(named: "GreenButtonHighRes.png"), for: .normal)
         startButton.ButtonViewfadeIn(duration: 0.5)
+        
+        // Remove all saved coordinates in order not to connect them when pressing start again.
+        
+        coordinates.removeAll()
     }
     
     @IBAction func stopButtonPressed(_ sender: Any) {
