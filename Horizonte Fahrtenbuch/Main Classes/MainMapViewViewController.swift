@@ -58,6 +58,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     @IBOutlet weak var stopwatchPauseButton: UIButton!
     @IBOutlet weak var stopwatchResetButton: UIButton!
     
+    
     // MARK: Base Setup for the main map view
     
     override func viewDidLoad() {
@@ -66,8 +67,6 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         locationManager.delegate = self
         
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        
-        //locationManager.allowsBackgroundLocationUpdates = true
         
         stopwatchPauseButton.isEnabled = false
         stopwatchResetButton.isEnabled = false
@@ -244,7 +243,6 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         distanceDriven.text = distanceString
         
         print (traveledDistance)
-    
     }
     
     @IBAction func pauseButtonPressed(_ sender: Any) {
@@ -314,7 +312,6 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         distanceDriven.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
         distanceDriven.fadeIn(duration: 1.0)
         
-        stopwatchPauseButton.isEnabled = true
         timeElapsed.fadeIn(duration: 1.0)
         stopwatchResetButton.isEnabled = false
         stopwatchPauseButton.isEnabled = false
@@ -325,6 +322,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         
         coordinates.removeAll()
         
+        startLocation = nil
         traveledDistance -= traveledDistance
         distanceDriven.text = "0 m"
     }
