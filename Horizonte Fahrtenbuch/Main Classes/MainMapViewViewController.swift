@@ -11,13 +11,15 @@ import CoreLocation
 import CoreMotion
 import Combine
 
+
 class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
+    // MARK: Variables for Location determination
     
     var coordinates :[CLLocationCoordinate2D] = []
     var index = 0
     
-    // Variables for the Timer
+    // MARK: Variables for the Timer
     
     var timer = Timer()
     var countdown = 0
@@ -27,14 +29,23 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     
     var startTime:Date?
     var stopTime:Date?
+    
+    let START_TIME_KEY = "startTime"
+    let STOP_TIME_KEY = "stopTime"
+    let TRAVELED_DISTANCE_KEY = "traveledDistance"
+    let COUNTING_KEY = "countingKey"
+    
+    var scheduledTimer: Timer!
+    
+    // MARK: Variables for NSUserDefaults and attributed text
+    
     let userDefaults = UserDefaults.standard
     
     var attributedText: NSAttributedString?
     
+    // MARK: Variables for travel distance
+    
     let locationManager = CLLocationManager()
-    
-    // Variables for travel distance
-    
     let formatter = MKDistanceFormatter()
     
     var startLocation:CLLocation!
@@ -43,7 +54,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     
     var startDate: Date!
     
-    // Outlets for Buttons and Views
+    // MARK: Outlets for Buttons and Views
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var timeElapsed: UILabel!
@@ -53,22 +64,48 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var locationButton: UIButton!
     
-    // Outletts for Timer
+    // MARK: Outletts for Timer
     
-    @IBOutlet weak var stopwatchPauseButton: UIButton!
     @IBOutlet weak var stopwatchResetButton: UIButton!
     
     
-    // MARK: Base Setup for the main map view
+    // MARK: Base functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+                startTime = userDefaults.object(forKey: START_TIME_KEY) as? Date
+                stopTime = userDefaults.object(forKey: STOP_TIME_KEY) as? Date
+                timerCounting = userDefaults.bool(forKey: COUNTING_KEY)
+                traveledDistance = (userDefaults.double(forKey: TRAVELED_DISTANCE_KEY) as Double)
+                
+                
+                if timerCounting
+                {
+                    TopNotchView.topNotchViewfadeIn(duration: 0.5)
+                    timeElapsed.fadeIn(duration: 0.5)
+                    distanceDriven.fadeIn(duration: 0.5)
+                    updateDistanceLabel()
+                    startTimer()
+                }
+                else
+                {
+                    stopTimer()
+                    if let start = startTime
+                    {
+                        if let stop = stopTime
+                        {
+                            let time = calcRestartTime(start: start, stop: stop)
+                            let diff = Date().timeIntervalSince(time)
+                            setTimeLabel(Int(diff))
+                        }
+                    }
+                }
+        
         locationManager.delegate = self
         
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         
-        stopwatchPauseButton.isEnabled = false
         stopwatchResetButton.isEnabled = false
         
         TopNotchView.layer.cornerRadius = 20
@@ -90,8 +127,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     }
     
     override func viewDidAppear(_ animated: Bool) {
-         countdown = 5
-        timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector:  #selector(updateDistanceLabel), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector:  #selector(updateDistanceLabel), userInfo: nil, repeats: true)
         distanceDriven.text = "\(traveledDistance)"
     }
     
@@ -99,7 +135,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-            // Allow Background Updates
+            // Allow Background Updates for proper polyline drawing when not in foreground
         
             locationManager.allowsBackgroundLocationUpdates = true
             
@@ -152,40 +188,92 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     
     // MARK: Stopwatch Functions and Update Traveled Distance
     
-    @objc func keepTimer() {
-        seconds += 1
-        
-        if seconds == 60 {
-            minutes += 1
-            seconds = 0
+    func startTimer()
+        {
+            scheduledTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(refreshValue), userInfo: nil, repeats: true)
+            setTimerCounting(true)
+            startButton.setImage(UIImage(named: "RedButtonHighRes.png"), for: .normal)
         }
-        
-        if minutes == 60 {
-            hours += 1
-            minutes = 0
+    
+    func calcRestartTime(start: Date, stop: Date) -> Date
+        {
+            let diff = start.timeIntervalSince(stop)
+            return Date().addingTimeInterval(diff)
         }
-        
-        let secondsString = seconds > 9 ? "\(seconds)" : "0\(seconds)"
-        let minutesString = minutes > 9 ? "\(minutes)" : "0\(minutes)"
-        let hoursString = hours > 9 ? "\(hours)" : "0\(hours)"
-        
-        // Update label outside of main thread
-        
-        DispatchQueue.main.async {
-            self.timeElapsed.text = "\(hoursString):\(minutesString):\(secondsString)"
+    
+    @objc func refreshValue()
+    {
+        if let start = startTime
+        {
+            let diff = Date().timeIntervalSince(start)
+            setTimeLabel(Int(diff))
+        }
+        else
+        {
+            stopTimer()
+            setTimeLabel(0)
         }
     }
     
-    @objc func pauseTimer() {
-        timer.invalidate()
+    func setTimeLabel(_ val: Int)
+    {
+        let time = secondsToHoursMinutesSeconds(val)
+        let timeString = makeTimeString(hour: time.0, min: time.1, sec: time.2)
+        timeElapsed.text = timeString
+        timeElapsed.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+        distanceDriven.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
     }
+    
+    func secondsToHoursMinutesSeconds(_ ms: Int) -> (Int, Int, Int)
+    {
+        let hour = ms / 3600
+        let min = (ms % 3600) / 60
+        let sec = (ms % 3600) % 60
+        return (hour, min, sec)
+    }
+    
+    func makeTimeString(hour: Int, min: Int, sec: Int) -> String
+    {
+        var timeString = ""
+        timeString += String(format: "%02d", hour)
+        timeString += ":"
+        timeString += String(format: "%02d", min)
+        timeString += ":"
+        timeString += String(format: "%02d", sec)
+        return timeString
+    }
+    
+    func stopTimer()
+    {
+        if scheduledTimer != nil
+        {
+            scheduledTimer.invalidate()
+        }
+        setTimerCounting(false)
+        startButton.setImage(UIImage(named: "GreenButtonHighRes.png"), for: .normal)
+    }
+    
+    func setStartTime(date: Date?)
+        {
+            startTime = date
+            userDefaults.set(startTime, forKey: START_TIME_KEY)
+        }
+        
+        func setStopTime(date: Date?)
+        {
+            stopTime = date
+            userDefaults.set(stopTime, forKey: STOP_TIME_KEY)
+            userDefaults.set(traveledDistance, forKey: TRAVELED_DISTANCE_KEY)
+        }
+        
+        func setTimerCounting(_ val: Bool)
+        {
+            timerCounting = val
+            userDefaults.set(timerCounting, forKey: COUNTING_KEY)
+        }
+    
     
     @objc func updateDistanceLabel() {
-        countdown = countdown - 1
-        //For infinite time
-        if (countdown == 0) {
-            countdown = 5
-        }
 
         formatter.units = .metric
         formatter.unitStyle = .default
@@ -193,22 +281,41 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         let distanceString = formatter.string(fromDistance: traveledDistance)
         distanceDriven.text = distanceString
         
-        DispatchQueue.main.async {
-            self.distanceDriven.text = "\(distanceString)"
-        }
+        self.distanceDriven.text = "\(distanceString)"
+        
     }
 
     
-    
-    // MARK: Stopwatch and Distance Function Buttons
+    // MARK: Start Button Action
 
     @IBAction func start(_sender: UIButton) {
+        
+        if timerCounting
+                {
+                    setStopTime(date: Date())
+                    stopTimer()
+                }
+                else
+                {
+                    if let stop = stopTime
+                    {
+                        let restartTime = calcRestartTime(start: startTime!, stop: stop)
+                        setStopTime(date: nil)
+                        setStartTime(date: restartTime)
+                        
+                    }
+                    else
+                    {
+                        setStartTime(date: Date())
+                    }
+                    startTimer()
+                }
         
         TopNotchView.topNotchViewfadeIn(duration: 1.0)
         timeElapsed.fadeIn(duration: 1.0)
         distanceDriven.fadeIn(duration: 1.0)
         
-        stopwatchPauseButton.fadeIn(duration: 0.5)
+        
         stopwatchResetButton.fadeIn(duration: 0.5)
         
         // Testing disabling the screen sleep mode while recording a ride
@@ -220,20 +327,17 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         locationManager.distanceFilter = 5
         
         timeElapsed.fadeOut(duration: 1.0)
-        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(MainMapViewViewController.keepTimer), userInfo: nil, repeats: true)
-        timeElapsed.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+        timeElapsed.textColor = UIColor.orange
         timeElapsed.fadeIn(duration: 1.0)
         
         distanceDriven.fadeOut(duration:1.0)
-        distanceDriven.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+        distanceDriven.textColor = UIColor.orange
         distanceDriven.fadeIn(duration: 1.0)
         
-        stopwatchPauseButton.isEnabled = true
         stopwatchResetButton.isEnabled = true
         
         startButton.ButtonViewfadeOut(duration: 0.5)
-        startButton.isEnabled = false
-        startButton.setImage(UIImage(named: "RedButtonHighRes.png"), for: .disabled)
+        startButton.isEnabled = true
         startButton.ButtonViewfadeIn(duration: 0.5)
         
         formatter.units = .metric
@@ -241,44 +345,12 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         
         let distanceString = formatter.string(fromDistance: traveledDistance)
         distanceDriven.text = distanceString
+    
         
         print (traveledDistance)
     }
     
-    @IBAction func pauseButtonPressed(_ sender: Any) {
-        
-        // Testing disabling the screen sleep mode while recording a ride (Reenabling sleep when pause is pressed
-        
-        UIApplication.shared.isIdleTimerDisabled = false
-        
-        locationManager.stopUpdatingLocation()
-        locationManager.stopMonitoringSignificantLocationChanges()
-        
-        timeElapsed.fadeOut(duration: 1.0)
-        timeElapsed.textColor = UIColor.orange
-        timeElapsed.fadeIn(duration: 1.0)
-        
-        distanceDriven.fadeOut(duration: 1.0)
-        distanceDriven.textColor = UIColor.orange
-        distanceDriven.fadeIn(duration: 1.0)
-        
-        stopwatchPauseButton.fadeOut(duration: 0.5)
-        stopwatchPauseButton.fadeIn(duration: 0.5)
-        stopwatchResetButton.fadeOut(duration: 0.5)
-        stopwatchResetButton.fadeIn(duration: 0.5)
-        
-        timer.invalidate()
-        startButton.isEnabled = true
-        stopwatchPauseButton.isEnabled = false
-        
-        startButton.ButtonViewfadeOut(duration: 0.5)
-        startButton.setImage(UIImage(named: "GreenButtonHighRes.png"), for: .normal)
-        startButton.ButtonViewfadeIn(duration: 0.5)
-        
-        // Remove all saved coordinates in order not to connect them when pressing start again.
-        
-        coordinates.removeAll()
-    }
+    // MARK: Stop Button Action
     
     @IBAction func stopButtonPressed(_ sender: Any) {
         
@@ -286,7 +358,6 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         timeElapsed.fadeOut(duration: 1.0)
         distanceDriven.fadeOut(duration: 1.0)
         
-        stopwatchPauseButton.fadeOut(duration: 0.5)
         stopwatchResetButton.fadeOut(duration: 0.5)
         
         startButton.ButtonViewfadeOut(duration: 0.5)
@@ -297,24 +368,22 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         
         UIApplication.shared.isIdleTimerDisabled = false
         
+        // Stopping Location Updates to save battery
+        
         locationManager.stopUpdatingLocation()
         locationManager.stopMonitoringSignificantLocationChanges()
         
-        timer.invalidate()
-        (hours, minutes, seconds, fractions) = (0, 0, 0, 0)
-        timeElapsed.fadeOut(duration: 1.0)
+        // Animations of the views and labels.
+        
+        timeElapsed.fadeOut(duration: 0.5)
         timeElapsed.text = "00:00:00"
         distanceDriven.text = "00.00 Km"
         timeElapsed.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
-        startButton.isEnabled = true
         
-        distanceDriven.fadeOut(duration: 1.0)
+        distanceDriven.fadeOut(duration: 0.5)
         distanceDriven.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
-        distanceDriven.fadeIn(duration: 1.0)
         
-        timeElapsed.fadeIn(duration: 1.0)
         stopwatchResetButton.isEnabled = false
-        stopwatchPauseButton.isEnabled = false
         
         // Reset traveled distance to 0 and apply on Label
         
@@ -325,6 +394,13 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         startLocation = nil
         traveledDistance -= traveledDistance
         distanceDriven.text = "0 m"
+        
+        // Reset Timer to Zero
+        
+        setStopTime(date: nil)
+        setStartTime(date: nil)
+        timeElapsed.text = makeTimeString(hour: 0, min: 0, sec: 0)
+        stopTimer()
     }
     
     // MARK: Function for Location and Heading Tracking

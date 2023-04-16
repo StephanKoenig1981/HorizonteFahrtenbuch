@@ -32,6 +32,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
+    
+    // MARK: Deleting NSUserDefaults when App is killed
+    
+    func applicationWillTerminate (_ application: UIApplication) {
+        if let bundleID = Bundle.main.bundleIdentifier {
+            UserDefaults.standard.removePersistentDomain(forName: bundleID)
+        }
+        print ("All Keys Removed")
+    }
+    
+    // MARK: Deleting NSUserDefaults when App is killed in case applicationWillTerminate was not called
+    
+    func applicationWillResignActive (_ application: UIApplication) {
+        if let bundleID = Bundle.main.bundleIdentifier {
+            UserDefaults.standard.removePersistentDomain(forName: bundleID)
+        }
+        print ("All Keys Removed")
+    }
+
 
     // MARK: - Core Data stack
 
