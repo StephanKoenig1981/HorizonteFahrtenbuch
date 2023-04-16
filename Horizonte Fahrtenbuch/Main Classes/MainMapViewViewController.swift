@@ -22,8 +22,6 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     // MARK: Variables for the Timer
     
     var timer = Timer()
-    var countdown = 0
-    var (hours, minutes, seconds, fractions) = (0, 0, 0, 0)
     
     var timerCounting:Bool = false
     
