@@ -10,6 +10,7 @@ import MapKit
 import CoreLocation
 import CoreMotion
 import Combine
+import ActivityKit
 
 
 class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
@@ -61,6 +62,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     @IBOutlet weak var TopNotchView: UIView!
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var locationButton: UIButton!
+    @IBOutlet weak var pauseStateLabel: UILabel!
     
     // MARK: Outlets for the Segmented control view and segmented control
     
@@ -77,20 +79,31 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Gradient for Base Toolbar View
+        
+        // Set up detail view frame and gradient
+        
+
+        
         // Mask Corner Radius for segmented control View
         
-        segmentedControlView.clipsToBounds = true
-        segmentedControlView.layer.cornerRadius = 15
-        segmentedControlView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
+                segmentedControlView.clipsToBounds = true
+                segmentedControlView.layer.cornerRadius = 15
+                segmentedControlView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
         
                 mapTypeSelector.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi / 2))
+        
+                // Saving NSUserDefault Keys
         
                 startTime = userDefaults.object(forKey: START_TIME_KEY) as? Date
                 stopTime = userDefaults.object(forKey: STOP_TIME_KEY) as? Date
                 timerCounting = userDefaults.bool(forKey: COUNTING_KEY)
                 traveledDistance = (userDefaults.double(forKey: TRAVELED_DISTANCE_KEY) as Double)
                 
-                
+                pauseStateLabel.fadeIn(duration: 2.0)
+                pauseStateLabel.text = "Bereit"
+                pauseStateLabel.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+        
                 if timerCounting
                 {
                     TopNotchView.topNotchViewfadeIn(duration: 0.5)
@@ -305,6 +318,10 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         
         if timerCounting
                 {
+                    pauseStateLabel.fadeIn(duration: 2.0)
+                    pauseStateLabel.text = "Pausiert"
+                    pauseStateLabel.textColor = UIColor.orange
+                    pauseStateLabel.blink()
                     setStopTime(date: Date())
                     stopTimer()
                 }
@@ -319,8 +336,18 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
                     }
                     else
                     {
+                        pauseStateLabel.fadeIn(duration: 2.0)
+                        
+                        pauseStateLabel.text = "Aufzeichnen"
+                        pauseStateLabel.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+                        pauseStateLabel.blink()
                         setStartTime(date: Date())
                     }
+                    pauseStateLabel.fadeIn(duration: 2.0)
+                    
+                    pauseStateLabel.text = "Aufzeichnen"
+                    pauseStateLabel.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+                    pauseStateLabel.blink()
                     startTimer()
                 }
         
@@ -415,6 +442,13 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         
         locationManager.allowsBackgroundLocationUpdates = false
         locationManager.pausesLocationUpdatesAutomatically = true
+        
+        // Reset status label to Ready when stop is pressed and change color to green
+        
+        pauseStateLabel.fadeOut(duration: 2.0)
+        pauseStateLabel.text = "Bereit"
+        pauseStateLabel.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+        pauseStateLabel.fadeIn(duration: 2.0)
     }
     
     // MARK: Function for the Map Type Selector
@@ -447,13 +481,6 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         // Re-Enable heading mode
                 
                 mapView.setUserTrackingMode(.followWithHeading, animated:true)
-                
-                //Zoom to user location
-        
-        if let userLocation = locationManager.location?.coordinate {
-                   let viewRegion = MKCoordinateRegion(center: userLocation, latitudinalMeters: 200, longitudinalMeters: 200)
-                       mapView.setRegion(viewRegion, animated: true)
-                   }
            }
     }
 

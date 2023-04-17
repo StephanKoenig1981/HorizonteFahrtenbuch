@@ -13,6 +13,7 @@ import CoreData
 import ActivityKit
 import SwiftUI
 
+
 // MARK: Struct for Live Activities
 
 struct ActivityAttributesSample: ActivityAttributes {
@@ -28,6 +29,15 @@ extension Double {
     func toString() -> String {
         return String(format: "%.1f",self)
     }
+}
+
+// MARK: Flashing Label Extension
+
+extension UIView{
+     func blink() {
+         self.alpha = 0.2
+         UIView.animate(withDuration: 1, delay: 0.0, options: [.curveLinear, .repeat, .autoreverse], animations: {self.alpha = 1.0}, completion: nil)
+     }
 }
 
 // MARK: Fade In and Fade Out Extension

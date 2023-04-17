@@ -18,6 +18,15 @@
 		0808422229C8FBF20030BB7E /* Horizonte_FahrtenbuchUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0808422129C8FBF20030BB7E /* Horizonte_FahrtenbuchUITestsLaunchTests.swift */; };
 		0809EB5829CD0A2500401FF3 /* Horizonte_FahrtenbuchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0808421529C8FBF20030BB7E /* Horizonte_FahrtenbuchTests.swift */; };
 		087F308029CD07C0009E52FC /* MainMapViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F307F29CD07C0009E52FC /* MainMapViewViewController.swift */; };
+		08DBAB2529EDE50C0044981E /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08DBAB2429EDE50C0044981E /* WidgetKit.framework */; };
+		08DBAB2729EDE50C0044981E /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08DBAB2629EDE50C0044981E /* SwiftUI.framework */; };
+		08DBAB2A29EDE50C0044981E /* FahrtenbuchBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DBAB2929EDE50C0044981E /* FahrtenbuchBundle.swift */; };
+		08DBAB2C29EDE50C0044981E /* FahrtenbuchLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DBAB2B29EDE50C0044981E /* FahrtenbuchLiveActivity.swift */; };
+		08DBAB2E29EDE50C0044981E /* Fahrtenbuch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DBAB2D29EDE50C0044981E /* Fahrtenbuch.swift */; };
+		08DBAB3129EDE50D0044981E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08DBAB3029EDE50D0044981E /* Assets.xcassets */; };
+		08DBAB3329EDE50D0044981E /* Fahrtenbuch.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 08DBAB2F29EDE50C0044981E /* Fahrtenbuch.intentdefinition */; };
+		08DBAB3429EDE50D0044981E /* Fahrtenbuch.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 08DBAB2F29EDE50C0044981E /* Fahrtenbuch.intentdefinition */; };
+		08DBAB3729EDE50D0044981E /* FahrtenbuchExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 08DBAB2229EDE50C0044981E /* FahrtenbuchExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,7 +44,28 @@
 			remoteGlobalIDString = 080841F729C8FBF10030BB7E;
 			remoteInfo = "Horizonte Fahrtenbuch";
 		};
+		08DBAB3529EDE50D0044981E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 080841F029C8FBF10030BB7E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 08DBAB2129EDE50C0044981E;
+			remoteInfo = FahrtenbuchExtension;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		08DBAB3829EDE50D0044981E /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				08DBAB3729EDE50D0044981E /* FahrtenbuchExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		080841F829C8FBF10030BB7E /* Horizonte Fahrtenbuch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Horizonte Fahrtenbuch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -54,6 +84,15 @@
 		0808422129C8FBF20030BB7E /* Horizonte_FahrtenbuchUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Horizonte_FahrtenbuchUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		087F307C29CCFC29009E52FC /* Horizonte Fahrtenbuch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Horizonte Fahrtenbuch.entitlements"; sourceTree = "<group>"; };
 		087F307F29CD07C0009E52FC /* MainMapViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapViewViewController.swift; sourceTree = "<group>"; };
+		08DBAB2229EDE50C0044981E /* FahrtenbuchExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = FahrtenbuchExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		08DBAB2429EDE50C0044981E /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		08DBAB2629EDE50C0044981E /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		08DBAB2929EDE50C0044981E /* FahrtenbuchBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FahrtenbuchBundle.swift; sourceTree = "<group>"; };
+		08DBAB2B29EDE50C0044981E /* FahrtenbuchLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FahrtenbuchLiveActivity.swift; sourceTree = "<group>"; };
+		08DBAB2D29EDE50C0044981E /* Fahrtenbuch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fahrtenbuch.swift; sourceTree = "<group>"; };
+		08DBAB2F29EDE50C0044981E /* Fahrtenbuch.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Fahrtenbuch.intentdefinition; sourceTree = "<group>"; };
+		08DBAB3029EDE50D0044981E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		08DBAB3229EDE50D0044981E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +117,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		08DBAB1F29EDE50C0044981E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				08DBAB2729EDE50C0044981E /* SwiftUI.framework in Frameworks */,
+				08DBAB2529EDE50C0044981E /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -91,6 +139,8 @@
 				080841FA29C8FBF10030BB7E /* Horizonte Fahrtenbuch */,
 				0808421429C8FBF20030BB7E /* Horizonte FahrtenbuchTests */,
 				0808421E29C8FBF20030BB7E /* Horizonte FahrtenbuchUITests */,
+				08DBAB2829EDE50C0044981E /* Fahrtenbuch */,
+				08DBAB2329EDE50C0044981E /* Frameworks */,
 				080841F929C8FBF10030BB7E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -101,6 +151,7 @@
 				080841F829C8FBF10030BB7E /* Horizonte Fahrtenbuch.app */,
 				0808421129C8FBF20030BB7E /* Horizonte FahrtenbuchTests.xctest */,
 				0808421B29C8FBF20030BB7E /* Horizonte FahrtenbuchUITests.xctest */,
+				08DBAB2229EDE50C0044981E /* FahrtenbuchExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -159,6 +210,28 @@
 			path = Delegates;
 			sourceTree = "<group>";
 		};
+		08DBAB2329EDE50C0044981E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				08DBAB2429EDE50C0044981E /* WidgetKit.framework */,
+				08DBAB2629EDE50C0044981E /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		08DBAB2829EDE50C0044981E /* Fahrtenbuch */ = {
+			isa = PBXGroup;
+			children = (
+				08DBAB2929EDE50C0044981E /* FahrtenbuchBundle.swift */,
+				08DBAB2B29EDE50C0044981E /* FahrtenbuchLiveActivity.swift */,
+				08DBAB2D29EDE50C0044981E /* Fahrtenbuch.swift */,
+				08DBAB2F29EDE50C0044981E /* Fahrtenbuch.intentdefinition */,
+				08DBAB3029EDE50D0044981E /* Assets.xcassets */,
+				08DBAB3229EDE50D0044981E /* Info.plist */,
+			);
+			path = Fahrtenbuch;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -169,10 +242,12 @@
 				080841F429C8FBF10030BB7E /* Sources */,
 				080841F529C8FBF10030BB7E /* Frameworks */,
 				080841F629C8FBF10030BB7E /* Resources */,
+				08DBAB3829EDE50D0044981E /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				08DBAB3629EDE50D0044981E /* PBXTargetDependency */,
 			);
 			name = "Horizonte Fahrtenbuch";
 			productName = "Horizonte Fahrtenbuch";
@@ -215,6 +290,23 @@
 			productReference = 0808421B29C8FBF20030BB7E /* Horizonte FahrtenbuchUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		08DBAB2129EDE50C0044981E /* FahrtenbuchExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 08DBAB3B29EDE50D0044981E /* Build configuration list for PBXNativeTarget "FahrtenbuchExtension" */;
+			buildPhases = (
+				08DBAB1E29EDE50C0044981E /* Sources */,
+				08DBAB1F29EDE50C0044981E /* Frameworks */,
+				08DBAB2029EDE50C0044981E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FahrtenbuchExtension;
+			productName = FahrtenbuchExtension;
+			productReference = 08DBAB2229EDE50C0044981E /* FahrtenbuchExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -222,7 +314,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1420;
+				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
 					080841F729C8FBF10030BB7E = {
@@ -235,6 +327,9 @@
 					0808421A29C8FBF20030BB7E = {
 						CreatedOnToolsVersion = 14.2;
 						TestTargetID = 080841F729C8FBF10030BB7E;
+					};
+					08DBAB2129EDE50C0044981E = {
+						CreatedOnToolsVersion = 14.3;
 					};
 				};
 			};
@@ -254,6 +349,7 @@
 				080841F729C8FBF10030BB7E /* Horizonte Fahrtenbuch */,
 				0808421029C8FBF20030BB7E /* Horizonte FahrtenbuchTests */,
 				0808421A29C8FBF20030BB7E /* Horizonte FahrtenbuchUITests */,
+				08DBAB2129EDE50C0044981E /* FahrtenbuchExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -283,6 +379,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		08DBAB2029EDE50C0044981E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				08DBAB3129EDE50D0044981E /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -293,6 +397,7 @@
 				087F308029CD07C0009E52FC /* MainMapViewViewController.swift in Sources */,
 				0808420029C8FBF10030BB7E /* ViewController.swift in Sources */,
 				0808420629C8FBF10030BB7E /* Horizonte_Fahrtenbuch.xcdatamodeld in Sources */,
+				08DBAB3429EDE50D0044981E /* Fahrtenbuch.intentdefinition in Sources */,
 				080841FC29C8FBF10030BB7E /* AppDelegate.swift in Sources */,
 				080841FE29C8FBF10030BB7E /* SceneDelegate.swift in Sources */,
 			);
@@ -315,6 +420,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		08DBAB1E29EDE50C0044981E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				08DBAB2A29EDE50C0044981E /* FahrtenbuchBundle.swift in Sources */,
+				08DBAB2E29EDE50C0044981E /* Fahrtenbuch.swift in Sources */,
+				08DBAB2C29EDE50C0044981E /* FahrtenbuchLiveActivity.swift in Sources */,
+				08DBAB3329EDE50D0044981E /* Fahrtenbuch.intentdefinition in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -327,6 +443,11 @@
 			isa = PBXTargetDependency;
 			target = 080841F729C8FBF10030BB7E /* Horizonte Fahrtenbuch */;
 			targetProxy = 0808421C29C8FBF20030BB7E /* PBXContainerItemProxy */;
+		};
+		08DBAB3629EDE50D0044981E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 08DBAB2129EDE50C0044981E /* FahrtenbuchExtension */;
+			targetProxy = 08DBAB3529EDE50D0044981E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -467,6 +588,7 @@
 		0808422629C8FBF20030BB7E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Horizonte Fahrtenbuch/Horizonte Fahrtenbuch.entitlements";
@@ -491,7 +613,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.horizonte.ch.Horizonte-Fahrtenbuch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -507,6 +629,7 @@
 		0808422729C8FBF20030BB7E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Horizonte Fahrtenbuch/Horizonte Fahrtenbuch.entitlements";
@@ -531,7 +654,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.horizonte.ch.Horizonte-Fahrtenbuch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -620,6 +743,64 @@
 			};
 			name = Release;
 		};
+		08DBAB3929EDE50D0044981E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2DK4UX7R4C;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Fahrtenbuch/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Fahrtenbuch;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.3;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.horizonte.ch.Horizonte-Fahrtenbuch.Fahrtenbuch";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		08DBAB3A29EDE50D0044981E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2DK4UX7R4C;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Fahrtenbuch/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Fahrtenbuch;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.3;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.horizonte.ch.Horizonte-Fahrtenbuch.Fahrtenbuch";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -655,6 +836,15 @@
 			buildConfigurations = (
 				0808422C29C8FBF20030BB7E /* Debug */,
 				0808422D29C8FBF20030BB7E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		08DBAB3B29EDE50D0044981E /* Build configuration list for PBXNativeTarget "FahrtenbuchExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				08DBAB3929EDE50D0044981E /* Debug */,
+				08DBAB3A29EDE50D0044981E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
