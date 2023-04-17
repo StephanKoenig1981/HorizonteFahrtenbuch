@@ -192,20 +192,44 @@
                                             </pointOfInterestFilter>
                                         </standardMapConfiguration>
                                     </mapView>
+                                    <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SYF-7v-vKo">
+                                        <rect key="frame" x="350" y="328" width="43" height="219"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </view>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="CnS-DX-FED">
+                                        <rect key="frame" x="267" y="421" width="210" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="210" id="CFC-Qs-eWT"/>
+                                        </constraints>
+                                        <segments>
+                                            <segment title="Normal"/>
+                                            <segment title="Gedimmt"/>
+                                            <segment title="Satellit"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="segmentedControlActionWithSender:" destination="K7b-6J-Pvw" eventType="valueChanged" id="oyN-7W-TPd"/>
+                                        </connections>
+                                    </segmentedControl>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstItem="SYF-7v-vKo" firstAttribute="trailing" secondItem="isM-cH-fZc" secondAttribute="trailing" id="DSc-P8-ueC"/>
                                     <constraint firstItem="isM-cH-fZc" firstAttribute="centerX" secondItem="rln-FP-q4v" secondAttribute="centerX" id="E3o-n4-mYc"/>
                                     <constraint firstItem="isM-cH-fZc" firstAttribute="centerY" secondItem="rln-FP-q4v" secondAttribute="centerY" id="JZc-LJ-lno"/>
+                                    <constraint firstAttribute="bottom" secondItem="SYF-7v-vKo" secondAttribute="bottom" constant="305" id="JyR-b9-ehY"/>
                                     <constraint firstItem="isM-cH-fZc" firstAttribute="leading" secondItem="rln-FP-q4v" secondAttribute="leading" id="Ohf-Xq-ZSE"/>
                                     <constraint firstItem="isM-cH-fZc" firstAttribute="top" secondItem="rln-FP-q4v" secondAttribute="top" id="PZC-w1-gUp"/>
+                                    <constraint firstAttribute="trailing" secondItem="CnS-DX-FED" secondAttribute="trailing" constant="-84" id="UF4-XU-Fez"/>
+                                    <constraint firstItem="SYF-7v-vKo" firstAttribute="top" secondItem="rln-FP-q4v" secondAttribute="top" constant="328" id="Z8d-FB-vRL"/>
+                                    <constraint firstItem="SYF-7v-vKo" firstAttribute="leading" secondItem="rln-FP-q4v" secondAttribute="leading" constant="350" id="xQI-At-S4o"/>
+                                    <constraint firstItem="CnS-DX-FED" firstAttribute="top" secondItem="rln-FP-q4v" secondAttribute="top" constant="421" id="xzq-lM-l9e"/>
                                 </constraints>
                             </view>
                             <view alpha="0.69999999999999996" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TGn-q2-5b7">
                                 <rect key="frame" x="0.0" y="756" width="393" height="96"/>
                                 <subviews>
                                     <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gk4-wB-OuN">
-                                        <rect key="frame" x="251.66666666666663" y="6" width="67" height="50.333333333333336"/>
+                                        <rect key="frame" x="251.66666666666663" y="6" width="67" height="50"/>
                                         <color key="tintColor" systemColor="systemRedColor"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" buttonSize="large">
@@ -217,7 +241,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UWe-WQ-5qq">
-                                        <rect key="frame" x="327" y="6" width="67" height="50.333333333333336"/>
+                                        <rect key="frame" x="327" y="6" width="67" height="50"/>
                                         <color key="tintColor" red="0.47451927109999997" green="0.57119112350000001" blue="0.33582876480000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" buttonSize="large">
@@ -303,7 +327,9 @@
                         <outlet property="baseToolbarView" destination="TGn-q2-5b7" id="HgO-WA-b8x"/>
                         <outlet property="distanceDriven" destination="Kbx-Ar-dBc" id="shx-32-bZz"/>
                         <outlet property="locationButton" destination="UWe-WQ-5qq" id="XgV-nQ-GSU"/>
+                        <outlet property="mapTypeSelector" destination="CnS-DX-FED" id="Tyh-d0-MKq"/>
                         <outlet property="mapView" destination="isM-cH-fZc" id="eeZ-qe-7UA"/>
+                        <outlet property="segmentedControlView" destination="SYF-7v-vKo" id="IDV-sZ-gOX"/>
                         <outlet property="startButton" destination="azT-he-wRo" id="a0u-xU-zFD"/>
                         <outlet property="stopwatchResetButton" destination="Gk4-wB-OuN" id="mcD-bU-v8o"/>
                         <outlet property="timeElapsed" destination="qPz-4x-PxP" id="rpc-eB-bcO"/>

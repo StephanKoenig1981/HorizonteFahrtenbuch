@@ -62,6 +62,11 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var locationButton: UIButton!
     
+    // MARK: Outlets for the Segmented control view and segmented control
+    
+    @IBOutlet weak var segmentedControlView: UIView!
+    @IBOutlet weak var mapTypeSelector: UISegmentedControl!
+    
     // MARK: Outletts for Timer
     
     @IBOutlet weak var stopwatchResetButton: UIButton!
@@ -71,6 +76,14 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Mask Corner Radius for segmented control View
+        
+        segmentedControlView.clipsToBounds = true
+        segmentedControlView.layer.cornerRadius = 15
+        segmentedControlView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
+        
+                mapTypeSelector.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi / 2))
         
                 startTime = userDefaults.object(forKey: START_TIME_KEY) as? Date
                 stopTime = userDefaults.object(forKey: STOP_TIME_KEY) as? Date
@@ -109,6 +122,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         TopNotchView.layer.cornerRadius = 20
         
         mapView.delegate = self
+        mapView.clipsToBounds = true
         
         // Basic Map Setup
         
@@ -402,6 +416,29 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         locationManager.allowsBackgroundLocationUpdates = false
         locationManager.pausesLocationUpdatesAutomatically = true
     }
+    
+    // MARK: Function for the Map Type Selector
+    
+    // Function for the segmented controlled map type selector
+        
+        @IBAction func segmentedControlAction(sender: UISegmentedControl) {
+            switch (sender.selectedSegmentIndex) {
+            case 0:
+                mapView.fadeOut(duration: 0.7)
+                mapView.mapType = .standard
+                mapView.fadeIn(duration: 0.7)
+            case 1:
+                mapView.fadeOut(duration: 0.7)
+                mapView.mapType = .mutedStandard
+                mapView.fadeIn(duration: 0.7)
+            case 2:
+                mapView.fadeOut(duration: 0.7)
+                mapView.mapType = .satellite
+                mapView.fadeIn(duration: 0.7)
+            default:
+                mapView.mapType = .standard
+            }
+        }
     
     // MARK: Function for Location and Heading Tracking
     
