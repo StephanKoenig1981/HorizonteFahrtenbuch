@@ -253,8 +253,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBAction func GrantBackgroundActivityButtonPressed(_ sender: Any) {
         
-        locationManager?.allowsBackgroundLocationUpdates = true
-        
         // Animations
         
         GrantHealthDataAccessButton.fadeIn(duration: 1.0)

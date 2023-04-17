@@ -136,6 +136,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
             // Allow Background Updates for proper polyline drawing when not in foreground
         
             locationManager.allowsBackgroundLocationUpdates = true
+            locationManager.pausesLocationUpdatesAutomatically = false
             
             // Track Distance
         
@@ -321,7 +322,6 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         UIApplication.shared.isIdleTimerDisabled = true
         
         locationManager.startUpdatingLocation()
-        locationManager.startMonitoringSignificantLocationChanges()
         locationManager.distanceFilter = 5
         
         timeElapsed.fadeOut(duration: 1.0)
@@ -369,7 +369,6 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         // Stopping Location Updates to save battery
         
         locationManager.stopUpdatingLocation()
-        locationManager.stopMonitoringSignificantLocationChanges()
         
         // Animations of the views and labels.
         
@@ -399,6 +398,9 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         setStartTime(date: nil)
         timeElapsed.text = makeTimeString(hour: 0, min: 0, sec: 0)
         stopTimer()
+        
+        locationManager.allowsBackgroundLocationUpdates = false
+        locationManager.pausesLocationUpdatesAutomatically = true
     }
     
     // MARK: Function for Location and Heading Tracking
