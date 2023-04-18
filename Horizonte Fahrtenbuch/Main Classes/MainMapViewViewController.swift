@@ -95,6 +95,8 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         
                 mapTypeSelector.selectedSegmentTintColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
         
+                wayBackButton.sendActions(for: .touchUpInside)
+        
                 // Saving NSUserDefault Keys
         
                 startTime = userDefaults.object(forKey: START_TIME_KEY) as? Date
@@ -209,12 +211,12 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         if overlay is MKPolyline{
             let renderer = MKPolylineRenderer(overlay: overlay)
             
-            // Change the stroke color depending on if it's on the way back or not.
+            // Change the stroke color depending on if it's on the way back or not. (Color is inverted since button was pressed programatically before.
             
             if isWayBack == false {
-                renderer.strokeColor = UIColor.systemOrange
-            } else if isWayBack == true {
                 renderer.strokeColor = UIColor.systemCyan
+            } else if isWayBack == true {
+                renderer.strokeColor = UIColor.systemOrange
             }
             renderer.lineWidth = 8
             return renderer
@@ -325,8 +327,6 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     // MARK: Start Button Action
 
     @IBAction func start(_sender: UIButton) {
-        
-        wayBackButton.sendActions(for: .touchUpInside)
         
         if timerCounting
                 {
