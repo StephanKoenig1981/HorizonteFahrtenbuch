@@ -206,10 +206,27 @@
                                             <segment title="Gedimmt"/>
                                             <segment title="Satellit"/>
                                         </segments>
+                                        <color key="selectedSegmentTintColor" red="0.51197211519999997" green="0.61627408100000003" blue="0.36233504840000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <connections>
                                             <action selector="segmentedControlActionWithSender:" destination="K7b-6J-Pvw" eventType="valueChanged" id="oyN-7W-TPd"/>
                                         </connections>
                                     </segmentedControl>
+                                    <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zRx-WB-SuS">
+                                        <rect key="frame" x="97" y="153" width="199" height="35"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CHl-90-wWZ">
+                                                <rect key="frame" x="45" y="1" width="111" height="35"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="tintColor" red="0.61176470589999998" green="0.78039215689999997" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="                    "/>
+                                                <connections>
+                                                    <action selector="wayBackButtonPressed:" destination="K7b-6J-Pvw" eventType="touchUpInside" id="WNt-Pu-7Ua"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
@@ -217,10 +234,14 @@
                                     <constraint firstItem="isM-cH-fZc" firstAttribute="centerX" secondItem="rln-FP-q4v" secondAttribute="centerX" id="E3o-n4-mYc"/>
                                     <constraint firstItem="isM-cH-fZc" firstAttribute="centerY" secondItem="rln-FP-q4v" secondAttribute="centerY" id="JZc-LJ-lno"/>
                                     <constraint firstAttribute="bottom" secondItem="SYF-7v-vKo" secondAttribute="bottom" constant="303" id="JyR-b9-ehY"/>
+                                    <constraint firstItem="zRx-WB-SuS" firstAttribute="top" secondItem="rln-FP-q4v" secondAttribute="top" constant="153" id="LH7-1Q-jpC"/>
+                                    <constraint firstItem="zRx-WB-SuS" firstAttribute="leading" secondItem="rln-FP-q4v" secondAttribute="leading" constant="97" id="Mfj-oe-Q4f"/>
                                     <constraint firstItem="isM-cH-fZc" firstAttribute="leading" secondItem="rln-FP-q4v" secondAttribute="leading" id="Ohf-Xq-ZSE"/>
                                     <constraint firstItem="isM-cH-fZc" firstAttribute="top" secondItem="rln-FP-q4v" secondAttribute="top" id="PZC-w1-gUp"/>
                                     <constraint firstAttribute="trailing" secondItem="CnS-DX-FED" secondAttribute="trailing" constant="-87" id="UF4-XU-Fez"/>
                                     <constraint firstItem="SYF-7v-vKo" firstAttribute="top" secondItem="rln-FP-q4v" secondAttribute="top" constant="328" id="Z8d-FB-vRL"/>
+                                    <constraint firstItem="zRx-WB-SuS" firstAttribute="centerX" secondItem="isM-cH-fZc" secondAttribute="centerX" id="ZCx-Fc-zqo"/>
+                                    <constraint firstAttribute="bottom" secondItem="zRx-WB-SuS" secondAttribute="bottom" constant="664" id="t99-8h-2CN"/>
                                     <constraint firstItem="SYF-7v-vKo" firstAttribute="leading" secondItem="rln-FP-q4v" secondAttribute="leading" constant="350" id="xQI-At-S4o"/>
                                     <constraint firstItem="CnS-DX-FED" firstAttribute="top" secondItem="rln-FP-q4v" secondAttribute="top" constant="422" id="xzq-lM-l9e"/>
                                 </constraints>
@@ -346,6 +367,8 @@
                         <outlet property="startButton" destination="azT-he-wRo" id="a0u-xU-zFD"/>
                         <outlet property="stopwatchResetButton" destination="Gk4-wB-OuN" id="mcD-bU-v8o"/>
                         <outlet property="timeElapsed" destination="qPz-4x-PxP" id="rpc-eB-bcO"/>
+                        <outlet property="wayBackButton" destination="CHl-90-wWZ" id="iyo-8m-R7G"/>
+                        <outlet property="wayBackButtonView" destination="zRx-WB-SuS" id="bYh-xD-V9c"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dyS-eY-LO9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

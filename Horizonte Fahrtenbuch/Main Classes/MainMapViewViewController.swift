@@ -20,6 +20,8 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     var coordinates :[CLLocationCoordinate2D] = []
     var index = 0
     
+    var isWayBack:Bool = false
+    
     // MARK: Variables for the Timer
     
     var timer = Timer()
@@ -63,6 +65,8 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var locationButton: UIButton!
     @IBOutlet weak var pauseStateLabel: UILabel!
+    @IBOutlet weak var wayBackButton: UIButton!
+    @IBOutlet weak var wayBackButtonView: UIView!
     
     // MARK: Outlets for the Segmented control view and segmented control
     
@@ -73,17 +77,13 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     
     @IBOutlet weak var stopwatchResetButton: UIButton!
     
+    // MARK: Outlet for Way Back Button
+    
     
     // MARK: Base functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Gradient for Base Toolbar View
-        
-        // Set up detail view frame and gradient
-        
-
         
         // Mask Corner Radius for segmented control View
         
@@ -92,6 +92,8 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
                 segmentedControlView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
         
                 mapTypeSelector.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi / 2))
+        
+                mapTypeSelector.selectedSegmentTintColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
         
                 // Saving NSUserDefault Keys
         
@@ -132,7 +134,8 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         
         stopwatchResetButton.isEnabled = false
         
-        TopNotchView.layer.cornerRadius = 20
+        TopNotchView.layer.cornerRadius = 10
+        wayBackButtonView.layer.cornerRadius = 10
         
         mapView.delegate = self
         mapView.clipsToBounds = true
@@ -205,7 +208,14 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if overlay is MKPolyline{
             let renderer = MKPolylineRenderer(overlay: overlay)
-            renderer.strokeColor = UIColor.systemOrange
+            
+            // Change the stroke color depending on if it's on the way back or not.
+            
+            if isWayBack == false {
+                renderer.strokeColor = UIColor.systemOrange
+            } else if isWayBack == true {
+                renderer.strokeColor = UIColor.systemCyan
+            }
             renderer.lineWidth = 8
             return renderer
         }
@@ -316,6 +326,8 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
 
     @IBAction func start(_sender: UIButton) {
         
+        wayBackButton.sendActions(for: .touchUpInside)
+        
         if timerCounting
                 {
                     pauseStateLabel.fadeIn(duration: 2.0)
@@ -354,6 +366,12 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         TopNotchView.topNotchViewfadeIn(duration: 1.0)
         timeElapsed.fadeIn(duration: 1.0)
         distanceDriven.fadeIn(duration: 1.0)
+        
+        wayBackButtonView.topNotchViewfadeIn(duration: 1.0)
+        wayBackButton.fadeIn(duration: 1.0)
+        
+        
+        wayBackButton.setTitleColor(UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0), for: .normal)
         
         
         stopwatchResetButton.fadeIn(duration: 0.5)
@@ -421,6 +439,13 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         distanceDriven.fadeOut(duration: 0.5)
         distanceDriven.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
         
+        wayBackButtonView.topNotchViewfadeOut(duration: 1.0)
+        wayBackButton.fadeOut(duration: 1.0)
+        
+        isWayBack = false
+        wayBackButton.setTitle("Lieferfahrt", for: .normal)
+        wayBackButton.setTitleColor(UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0), for: .normal)
+        
         stopwatchResetButton.isEnabled = false
         
         // Reset traveled distance to 0 and apply on Label
@@ -482,6 +507,25 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
                 
                 mapView.setUserTrackingMode(.followWithHeading, animated:true)
            }
+    @IBAction func wayBackButtonPressed(_ sender: Any) {
+        
+        wayBackButton.fadeOut(duration: 0.7)
+        wayBackButton.setTitle("Rückfahrt", for: .normal)
+        self.wayBackButton.setTitleColor(UIColor.orange, for: .normal)
+        wayBackButton.fadeIn(duration: 0.7)
+        
+        if isWayBack == false {
+            isWayBack = true
+            wayBackButton.fadeOut(duration: 0.7)
+            wayBackButton.setTitle("Lieferfahrt", for: .normal)
+            self.wayBackButton.setTitleColor(UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0), for: .normal)
+            wayBackButton.fadeIn(duration: 0.7)
+        }
+        else if isWayBack == true {
+            isWayBack = false
+            }
+        }
     }
+
 
 
