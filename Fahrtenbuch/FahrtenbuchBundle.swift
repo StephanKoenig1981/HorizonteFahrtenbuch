@@ -11,7 +11,7 @@ import SwiftUI
 @main
 struct FahrtenbuchBundle: WidgetBundle {
     var body: some Widget {
-        Fahrtenbuch()
+        //Fahrtenbuch()
         FahrtenbuchLiveActivity()
     }
 }

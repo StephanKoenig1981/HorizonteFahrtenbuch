@@ -22,7 +22,6 @@
 		08DBAB2729EDE50C0044981E /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08DBAB2629EDE50C0044981E /* SwiftUI.framework */; };
 		08DBAB2A29EDE50C0044981E /* FahrtenbuchBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DBAB2929EDE50C0044981E /* FahrtenbuchBundle.swift */; };
 		08DBAB2C29EDE50C0044981E /* FahrtenbuchLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DBAB2B29EDE50C0044981E /* FahrtenbuchLiveActivity.swift */; };
-		08DBAB2E29EDE50C0044981E /* Fahrtenbuch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DBAB2D29EDE50C0044981E /* Fahrtenbuch.swift */; };
 		08DBAB3129EDE50D0044981E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08DBAB3029EDE50D0044981E /* Assets.xcassets */; };
 		08DBAB3329EDE50D0044981E /* Fahrtenbuch.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 08DBAB2F29EDE50C0044981E /* Fahrtenbuch.intentdefinition */; };
 		08DBAB3429EDE50D0044981E /* Fahrtenbuch.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 08DBAB2F29EDE50C0044981E /* Fahrtenbuch.intentdefinition */; };
@@ -425,7 +424,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				08DBAB2A29EDE50C0044981E /* FahrtenbuchBundle.swift in Sources */,
-				08DBAB2E29EDE50C0044981E /* Fahrtenbuch.swift in Sources */,
 				08DBAB2C29EDE50C0044981E /* FahrtenbuchLiveActivity.swift in Sources */,
 				08DBAB3329EDE50D0044981E /* Fahrtenbuch.intentdefinition in Sources */,
 			);
