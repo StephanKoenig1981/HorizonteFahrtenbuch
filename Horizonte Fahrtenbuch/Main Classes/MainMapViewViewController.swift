@@ -443,6 +443,8 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         wayBackButton.fadeOut(duration: 1.0)
         
         isWayBack = false
+        wayBackButton.sendActions(for: .touchUpInside)
+        
         wayBackButton.setTitle("Lieferfahrt", for: .normal)
         wayBackButton.setTitleColor(UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0), for: .normal)
         
@@ -509,10 +511,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
            }
     @IBAction func wayBackButtonPressed(_ sender: Any) {
         
-        wayBackButton.fadeOut(duration: 0.7)
-        wayBackButton.setTitle("Rückfahrt", for: .normal)
-        self.wayBackButton.setTitleColor(UIColor.orange, for: .normal)
-        wayBackButton.fadeIn(duration: 0.7)
+        
         
         if isWayBack == false {
             isWayBack = true
@@ -523,6 +522,10 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         }
         else if isWayBack == true {
             isWayBack = false
+            wayBackButton.fadeOut(duration: 0.7)
+            wayBackButton.setTitle("Rückfahrt", for: .normal)
+            self.wayBackButton.setTitleColor(UIColor.orange, for: .normal)
+            wayBackButton.fadeIn(duration: 0.7)
             }
         }
     }
