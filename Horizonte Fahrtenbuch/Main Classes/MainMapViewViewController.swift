@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 import MapKit
 import CoreLocation
 import CoreMotion
@@ -67,7 +68,9 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     @IBOutlet weak var pauseStateLabel: UILabel!
     @IBOutlet weak var wayBackButton: UIButton!
     @IBOutlet weak var wayBackButtonView: UIView!
+    @IBOutlet weak var menuButtonView: UIView!
     
+    @IBOutlet weak var menuButton: UIButton!
     // MARK: Outlets for the Segmented control view and segmented control
     
     @IBOutlet weak var segmentedControlView: UIView!
@@ -87,13 +90,20 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         
         // Mask Corner Radius for segmented control View
         
+                menuButtonView.layer.cornerRadius = 25
+                menuButton.tintColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+        
                 segmentedControlView.clipsToBounds = true
                 segmentedControlView.layer.cornerRadius = 15
                 segmentedControlView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
         
+                // Customizing the Maptype Selector
+        
                 mapTypeSelector.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi / 2))
         
                 mapTypeSelector.selectedSegmentTintColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+                let titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+                mapTypeSelector.setTitleTextAttributes(titleTextAttributes, for:.selected)
         
                 wayBackButton.sendActions(for: .touchUpInside)
         
@@ -442,11 +452,11 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         wayBackButtonView.topNotchViewfadeOut(duration: 1.0)
         wayBackButton.fadeOut(duration: 1.0)
         
-        isWayBack = false
-        wayBackButton.sendActions(for: .touchUpInside)
-        
         wayBackButton.setTitle("Lieferfahrt", for: .normal)
         wayBackButton.setTitleColor(UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0), for: .normal)
+        isWayBack = false
+        
+        wayBackButton.sendActions(for: .touchUpInside)
         
         stopwatchResetButton.isEnabled = false
         
@@ -515,20 +525,22 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         
         if isWayBack == false {
             isWayBack = true
-            wayBackButton.fadeOut(duration: 0.7)
+            wayBackButton.fadeOut(duration: 2.5)
             wayBackButton.setTitle("Lieferfahrt", for: .normal)
-            self.wayBackButton.setTitleColor(UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0), for: .normal)
+            wayBackButton.setTitleColor(UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0), for: .normal)
             wayBackButton.fadeIn(duration: 0.7)
         }
         else if isWayBack == true {
             isWayBack = false
-            wayBackButton.fadeOut(duration: 0.7)
+            wayBackButton.fadeOut(duration: 2.5)
             wayBackButton.setTitle("Rückfahrt", for: .normal)
-            self.wayBackButton.setTitleColor(UIColor.orange, for: .normal)
+            wayBackButton.setTitleColor(UIColor.orange, for: .normal)
             wayBackButton.fadeIn(duration: 0.7)
             }
         }
+    @IBAction func menuButtonPressed(_ sender: Any) {
     }
+}
 
 
 

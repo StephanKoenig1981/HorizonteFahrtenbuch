@@ -17,6 +17,7 @@
 		0808422029C8FBF20030BB7E /* Horizonte_FahrtenbuchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0808421F29C8FBF20030BB7E /* Horizonte_FahrtenbuchUITests.swift */; };
 		0808422229C8FBF20030BB7E /* Horizonte_FahrtenbuchUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0808422129C8FBF20030BB7E /* Horizonte_FahrtenbuchUITestsLaunchTests.swift */; };
 		0809EB5829CD0A2500401FF3 /* Horizonte_FahrtenbuchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0808421529C8FBF20030BB7E /* Horizonte_FahrtenbuchTests.swift */; };
+		0816062B29F0432900B6F4A3 /* rideSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0816062A29F0432900B6F4A3 /* rideSummaryViewController.swift */; };
 		087F308029CD07C0009E52FC /* MainMapViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F307F29CD07C0009E52FC /* MainMapViewViewController.swift */; };
 		08DBAB2529EDE50C0044981E /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08DBAB2429EDE50C0044981E /* WidgetKit.framework */; };
 		08DBAB2729EDE50C0044981E /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08DBAB2629EDE50C0044981E /* SwiftUI.framework */; };
@@ -81,6 +82,7 @@
 		0808421B29C8FBF20030BB7E /* Horizonte FahrtenbuchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Horizonte FahrtenbuchUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0808421F29C8FBF20030BB7E /* Horizonte_FahrtenbuchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Horizonte_FahrtenbuchUITests.swift; sourceTree = "<group>"; };
 		0808422129C8FBF20030BB7E /* Horizonte_FahrtenbuchUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Horizonte_FahrtenbuchUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		0816062A29F0432900B6F4A3 /* rideSummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rideSummaryViewController.swift; sourceTree = "<group>"; };
 		087F307C29CCFC29009E52FC /* Horizonte Fahrtenbuch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Horizonte Fahrtenbuch.entitlements"; sourceTree = "<group>"; };
 		087F307F29CD07C0009E52FC /* MainMapViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapViewViewController.swift; sourceTree = "<group>"; };
 		08DBAB2229EDE50C0044981E /* FahrtenbuchExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = FahrtenbuchExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -158,6 +160,7 @@
 		080841FA29C8FBF10030BB7E /* Horizonte Fahrtenbuch */ = {
 			isa = PBXGroup;
 			children = (
+				0816062929F0430C00B6F4A3 /* DetailViews */,
 				087F308329CD0891009E52FC /* Delegates */,
 				087F308229CD085D009E52FC /* Storyboards */,
 				087F308129CD0844009E52FC /* Main Classes */,
@@ -180,6 +183,14 @@
 				0808422129C8FBF20030BB7E /* Horizonte_FahrtenbuchUITestsLaunchTests.swift */,
 			);
 			path = "Horizonte FahrtenbuchUITests";
+			sourceTree = "<group>";
+		};
+		0816062929F0430C00B6F4A3 /* DetailViews */ = {
+			isa = PBXGroup;
+			children = (
+				0816062A29F0432900B6F4A3 /* rideSummaryViewController.swift */,
+			);
+			path = DetailViews;
 			sourceTree = "<group>";
 		};
 		087F308129CD0844009E52FC /* Main Classes */ = {
@@ -399,6 +410,7 @@
 				08DBAB3429EDE50D0044981E /* Fahrtenbuch.intentdefinition in Sources */,
 				080841FC29C8FBF10030BB7E /* AppDelegate.swift in Sources */,
 				080841FE29C8FBF10030BB7E /* SceneDelegate.swift in Sources */,
+				0816062B29F0432900B6F4A3 /* rideSummaryViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
