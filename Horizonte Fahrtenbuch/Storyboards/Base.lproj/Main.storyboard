@@ -164,7 +164,7 @@
         <!--Main Map View View Controller-->
         <scene sceneID="xR7-qf-Dpy">
             <objects>
-                <viewController storyboardIdentifier="MapView" id="K7b-6J-Pvw" customClass="MainMapViewViewController" customModule="Horizonte_Fahrtenbuch" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainMapViewViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="K7b-6J-Pvw" customClass="MainMapViewViewController" customModule="Horizonte_Fahrtenbuch" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ywe-tN-fEP">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <subviews>
@@ -281,7 +281,7 @@
                                         </buttonConfiguration>
                                         <connections>
                                             <action selector="stopButtonPressed:" destination="K7b-6J-Pvw" eventType="touchUpInside" id="EYH-oM-yVt"/>
-                                            <segue destination="OWW-jK-S3G" kind="presentation" identifier="rideSummaryReportSegue" id="Lz1-Tw-eFM"/>
+                                            <segue destination="OWW-jK-S3G" kind="show" identifier="rideSummarySegue" id="Qam-e1-AYy"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UWe-WQ-5qq">
@@ -403,7 +403,7 @@
         <!--Ride Summary View Controller-->
         <scene sceneID="Q8N-hE-AiG">
             <objects>
-                <viewController id="OWW-jK-S3G" customClass="rideSummaryViewController" customModule="Horizonte_Fahrtenbuch" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="rideSummaryViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="OWW-jK-S3G" customClass="rideSummaryViewController" customModule="Horizonte_Fahrtenbuch" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" alpha="0.90000000000000002" contentMode="scaleToFill" id="1qg-Q1-AqB">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -420,7 +420,7 @@
                                 </vibrancyEffect>
                             </visualEffectView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Fahrtenübersicht" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Y3-3j-I48">
-                                <rect key="frame" x="91.666666666666629" y="44" width="209.66666666666663" height="31.333333333333314"/>
+                                <rect key="frame" x="91.666666666666629" y="39" width="209.66666666666663" height="31.333333333333314"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
                                 <nil key="textColor"/>
@@ -432,28 +432,28 @@
                                 <standardMapConfiguration key="preferredConfiguration"/>
                             </mapView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Gefahrene Distanz:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Wv-Zd-3vQ">
-                                <rect key="frame" x="16" y="563" width="226.33333333333348" height="21"/>
+                                <rect key="frame" x="16" y="563" width="208" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Gefahrene Zeit:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e1m-DN-sn6">
-                                <rect key="frame" x="16" y="604" width="166" height="28"/>
+                                <rect key="frame" x="16" y="604" width="208" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="24.35 Km" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M36-k1-zgI">
-                                <rect key="frame" x="272.33333333333326" y="563" width="104.66666666666674" height="21"/>
+                                <rect key="frame" x="232" y="563" width="145" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00:18:45" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rtk-D1-Jl8">
-                                <rect key="frame" x="272.33333333333326" y="608" width="104.66666666666674" height="21"/>
+                                <rect key="frame" x="244" y="608" width="133" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
                                 <nil key="textColor"/>
@@ -479,6 +479,7 @@
                         <viewLayoutGuide key="safeArea" id="UhX-FQ-KDC"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="85W-wK-5v5"/>
                     <connections>
                         <outlet property="cancelButton" destination="xee-vR-ZAa" id="tD2-n5-iJ2"/>
                         <outlet property="drivenDistance" destination="M36-k1-zgI" id="Kz7-Tt-Xuy"/>

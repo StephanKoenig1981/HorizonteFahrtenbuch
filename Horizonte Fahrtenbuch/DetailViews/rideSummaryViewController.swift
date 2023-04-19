@@ -8,8 +8,14 @@
 import UIKit
 import MapKit
 
+var MainMapViewController: MainMapViewViewController?
+var drivenDistanceText = ""
+var elapsedTimeText = ""
+
+
+
 class rideSummaryViewController: UIViewController, MKMapViewDelegate {
-    
+
     // MARK: Outlets
     
     @IBOutlet weak var rideSummaryMapView: MKMapView!
@@ -23,14 +29,38 @@ class rideSummaryViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
     
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        rideSummaryMapView.layer.cornerRadius = 20
-    
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.reloadLabel(notification:)), name: Notification.Name("reload"), object: nil)
+            
 
+        
+        // UI Customization
+        
+        rideSummaryMapView.layer.cornerRadius = 20
+        rideSummaryTitle.textColor = UIColor.orange
+        
+        elapsedTimeLabel.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+        elapsedTime.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+        drivenDistanceLabel.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+        drivenDistance.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+        
         // Do any additional setup after loading the view.
+        
+        
+    }
+    
+    @objc func reloadLabel(notification: Notification){
+            drivenDistance.text = drivenDistanceText
+            elapsedTime.text = elapsedTimeText
+        }
+
     }
 
+    extension Notification.Name{
+        static let reload = Notification.Name("reload")
+    }
 
-}

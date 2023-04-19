@@ -17,8 +17,8 @@
 		0808422029C8FBF20030BB7E /* Horizonte_FahrtenbuchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0808421F29C8FBF20030BB7E /* Horizonte_FahrtenbuchUITests.swift */; };
 		0808422229C8FBF20030BB7E /* Horizonte_FahrtenbuchUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0808422129C8FBF20030BB7E /* Horizonte_FahrtenbuchUITestsLaunchTests.swift */; };
 		0809EB5829CD0A2500401FF3 /* Horizonte_FahrtenbuchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0808421529C8FBF20030BB7E /* Horizonte_FahrtenbuchTests.swift */; };
-		0816062B29F0432900B6F4A3 /* rideSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0816062A29F0432900B6F4A3 /* rideSummaryViewController.swift */; };
 		087F308029CD07C0009E52FC /* MainMapViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F307F29CD07C0009E52FC /* MainMapViewViewController.swift */; };
+		088D667429F066AC009E50CF /* rideSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0816062A29F0432900B6F4A3 /* rideSummaryViewController.swift */; };
 		08DBAB2529EDE50C0044981E /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08DBAB2429EDE50C0044981E /* WidgetKit.framework */; };
 		08DBAB2729EDE50C0044981E /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08DBAB2629EDE50C0044981E /* SwiftUI.framework */; };
 		08DBAB2A29EDE50C0044981E /* FahrtenbuchBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DBAB2929EDE50C0044981E /* FahrtenbuchBundle.swift */; };
@@ -410,7 +410,7 @@
 				08DBAB3429EDE50D0044981E /* Fahrtenbuch.intentdefinition in Sources */,
 				080841FC29C8FBF10030BB7E /* AppDelegate.swift in Sources */,
 				080841FE29C8FBF10030BB7E /* SceneDelegate.swift in Sources */,
-				0816062B29F0432900B6F4A3 /* rideSummaryViewController.swift in Sources */,
+				088D667429F066AC009E50CF /* rideSummaryViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

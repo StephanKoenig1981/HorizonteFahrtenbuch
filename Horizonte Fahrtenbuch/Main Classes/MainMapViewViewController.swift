@@ -16,12 +16,17 @@ import ActivityKit
 
 class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
+    // MARK: Completion Handler for Pushing Data to summary view Controller
+    
+    public var completionHandler: ((String?) -> Void)?
+    
     // MARK: Variables for Location determination
     
     var coordinates :[CLLocationCoordinate2D] = []
     var index = 0
     
     var isWayBack:Bool = false
+    
     
     // MARK: Variables for the Timer
     
@@ -79,9 +84,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     // MARK: Outletts for Timer
     
     @IBOutlet weak var stopwatchResetButton: UIButton!
-    
-    // MARK: Outlet for Way Back Button
-    
+
     
     // MARK: Base functions
     
@@ -166,10 +169,17 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         
     }
     
+    
     override func viewDidAppear(_ animated: Bool) {
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector:  #selector(updateDistanceLabel), userInfo: nil, repeats: true)
         distanceDriven.text = "\(traveledDistance)"
     }
+    
+    /*override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "summarySegue" {
+        
+        }
+    }*/
     
     // MARK: Travel distance and route polyline drawing function
     
@@ -228,7 +238,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
             } else if isWayBack == true {
                 renderer.strokeColor = UIColor.systemOrange
             }
-            renderer.lineWidth = 8
+            renderer.lineWidth = 6
             return renderer
         }
         return MKOverlayRenderer()
@@ -420,6 +430,11 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     // MARK: Stop Button Action
     
     @IBAction func stopButtonPressed(_ sender: Any) {
+        
+        let drivenDistanceText = distanceDriven
+        let elapsedTimeText = timeElapsed
+        NotificationCenter.default.post(name: .reload, object: nil)
+        
         
         TopNotchView.topNotchViewfadeOut(duration: 1.0)
         timeElapsed.fadeOut(duration: 1.0)
