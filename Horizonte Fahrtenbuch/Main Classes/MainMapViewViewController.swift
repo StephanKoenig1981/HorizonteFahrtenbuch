@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import CoreData
+import RealmSwift
 import MapKit
 import CoreLocation
 import CoreMotion
@@ -16,9 +16,6 @@ import ActivityKit
 
 class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
-    // MARK: Completion Handler for Pushing Data to summary view Controller
-    
-    public var completionHandler: ((String?) -> Void)?
     
     // MARK: Variables for Location determination
     
@@ -74,8 +71,11 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     @IBOutlet weak var wayBackButton: UIButton!
     @IBOutlet weak var wayBackButtonView: UIView!
     @IBOutlet weak var menuButtonView: UIView!
-    
     @IBOutlet weak var menuButton: UIButton!
+    @IBOutlet weak var addContactButtonView: UIView!
+    @IBOutlet weak var addContactButton: UIButton!
+    
+    
     // MARK: Outlets for the Segmented control view and segmented control
     
     @IBOutlet weak var segmentedControlView: UIView!
@@ -95,6 +95,9 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         
                 menuButtonView.layer.cornerRadius = 25
                 menuButton.tintColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+        
+            addContactButtonView.layer.cornerRadius = 25
+            addContactButton.tintColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
         
                 segmentedControlView.clipsToBounds = true
                 segmentedControlView.layer.cornerRadius = 15
@@ -431,10 +434,6 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     
     @IBAction func stopButtonPressed(_ sender: Any) {
         
-        let drivenDistanceText = distanceDriven
-        let elapsedTimeText = timeElapsed
-        NotificationCenter.default.post(name: .reload, object: nil)
-        
         
         TopNotchView.topNotchViewfadeOut(duration: 1.0)
         timeElapsed.fadeOut(duration: 1.0)
@@ -555,6 +554,11 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         }
     @IBAction func menuButtonPressed(_ sender: Any) {
     }
+    
+    @IBAction func addContactButtonPressed(_ sender: Any) {
+    }
+    
+    
 }
 
 

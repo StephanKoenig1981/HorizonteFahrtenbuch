@@ -15,7 +15,7 @@ var elapsedTimeText = ""
 
 
 class rideSummaryViewController: UIViewController, MKMapViewDelegate {
-
+    
     // MARK: Outlets
     
     @IBOutlet weak var rideSummaryMapView: MKMapView!
@@ -29,14 +29,9 @@ class rideSummaryViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(self.reloadLabel(notification:)), name: Notification.Name("reload"), object: nil)
-            
-
         
         // UI Customization
         
@@ -52,15 +47,5 @@ class rideSummaryViewController: UIViewController, MKMapViewDelegate {
         
         
     }
-    
-    @objc func reloadLabel(notification: Notification){
-            drivenDistance.text = drivenDistanceText
-            elapsedTime.text = elapsedTimeText
-        }
-
-    }
-
-    extension Notification.Name{
-        static let reload = Notification.Name("reload")
-    }
+}
 
