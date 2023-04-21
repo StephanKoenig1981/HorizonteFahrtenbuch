@@ -20,6 +20,7 @@
 		0863585A29F30C4100FA36D1 /* addContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0863585929F30C4100FA36D1 /* addContactViewController.swift */; };
 		087F308029CD07C0009E52FC /* MainMapViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F307F29CD07C0009E52FC /* MainMapViewViewController.swift */; };
 		088D667429F066AC009E50CF /* rideSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0816062A29F0432900B6F4A3 /* rideSummaryViewController.swift */; };
+		08A9CC4629F3217A00D3D3A6 /* clients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A9CC4529F3217A00D3D3A6 /* clients.swift */; };
 		08DBAB2529EDE50C0044981E /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08DBAB2429EDE50C0044981E /* WidgetKit.framework */; };
 		08DBAB2729EDE50C0044981E /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08DBAB2629EDE50C0044981E /* SwiftUI.framework */; };
 		08DBAB2A29EDE50C0044981E /* FahrtenbuchBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DBAB2929EDE50C0044981E /* FahrtenbuchBundle.swift */; };
@@ -89,6 +90,7 @@
 		0863585929F30C4100FA36D1 /* addContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addContactViewController.swift; sourceTree = "<group>"; };
 		087F307C29CCFC29009E52FC /* Horizonte Fahrtenbuch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Horizonte Fahrtenbuch.entitlements"; sourceTree = "<group>"; };
 		087F307F29CD07C0009E52FC /* MainMapViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapViewViewController.swift; sourceTree = "<group>"; };
+		08A9CC4529F3217A00D3D3A6 /* clients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = clients.swift; sourceTree = "<group>"; };
 		08DBAB2229EDE50C0044981E /* FahrtenbuchExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = FahrtenbuchExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		08DBAB2429EDE50C0044981E /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		08DBAB2629EDE50C0044981E /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -173,6 +175,7 @@
 		080841FA29C8FBF10030BB7E /* Horizonte Fahrtenbuch */ = {
 			isa = PBXGroup;
 			children = (
+				08A9CC4429F3215E00D3D3A6 /* Datamodels */,
 				0863585829F30C2000FA36D1 /* SubscreenClasses */,
 				0816062929F0430C00B6F4A3 /* DetailViews */,
 				087F308329CD0891009E52FC /* Delegates */,
@@ -240,6 +243,14 @@
 				080841FD29C8FBF10030BB7E /* SceneDelegate.swift */,
 			);
 			path = Delegates;
+			sourceTree = "<group>";
+		};
+		08A9CC4429F3215E00D3D3A6 /* Datamodels */ = {
+			isa = PBXGroup;
+			children = (
+				08A9CC4529F3217A00D3D3A6 /* clients.swift */,
+			);
+			path = Datamodels;
 			sourceTree = "<group>";
 		};
 		08DBAB2329EDE50C0044981E /* Frameworks */ = {
@@ -512,6 +523,7 @@
 				08DBAB3429EDE50D0044981E /* Fahrtenbuch.intentdefinition in Sources */,
 				080841FC29C8FBF10030BB7E /* AppDelegate.swift in Sources */,
 				0863585A29F30C4100FA36D1 /* addContactViewController.swift in Sources */,
+				08A9CC4629F3217A00D3D3A6 /* clients.swift in Sources */,
 				080841FE29C8FBF10030BB7E /* SceneDelegate.swift in Sources */,
 				088D667429F066AC009E50CF /* rideSummaryViewController.swift in Sources */,
 			);

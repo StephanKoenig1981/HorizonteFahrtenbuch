@@ -255,7 +255,7 @@
                                                 <connections>
                                                     <action selector="addContactButtonPressed:" destination="K7b-6J-Pvw" eventType="touchUpInside" id="TyV-hC-Y7j"/>
                                                     <action selector="menuButtonPressed:" destination="K7b-6J-Pvw" eventType="touchUpInside" id="Fdk-UO-wLu"/>
-                                                    <segue destination="SDW-bC-dEn" kind="show" identifier="addContactSegue" id="n4T-ZL-0ba"/>
+                                                    <segue destination="SDW-bC-dEn" kind="presentation" identifier="addContactSegue" id="n4T-ZL-0ba"/>
                                                 </connections>
                                             </button>
                                         </subviews>
