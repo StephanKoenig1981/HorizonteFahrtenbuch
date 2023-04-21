@@ -17,8 +17,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        // MARK: Temporarily disabled constraint warnings in console
+        
+        UserDefaults.standard.set(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
+        
+        // MARK: Starting the keyboard Manager
+        
         IQKeyboardManager.shared.enable = true
             return true
+    
+        
     }
 
     // MARK: UISceneSession Lifecycle
