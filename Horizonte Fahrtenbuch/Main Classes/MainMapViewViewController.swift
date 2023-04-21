@@ -91,6 +91,11 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Initialize Realm
+        
+        let realm = try! Realm()
+        print (Realm.Configuration.defaultConfiguration.fileURL)
+        
         // Mask Corner Radius for segmented control View
         
                 menuButtonView.layer.cornerRadius = 25
