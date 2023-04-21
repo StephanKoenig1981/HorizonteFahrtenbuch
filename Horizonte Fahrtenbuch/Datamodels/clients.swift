@@ -8,6 +8,8 @@
 import Foundation
 import RealmSwift
 
+// MARK: Class Model for saving customers.
+
 class clients: Object {
     @objc dynamic var client: String?
     @objc dynamic var clientContactPerson: String?

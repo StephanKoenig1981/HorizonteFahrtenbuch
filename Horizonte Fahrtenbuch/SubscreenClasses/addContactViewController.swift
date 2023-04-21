@@ -23,6 +23,17 @@ class addContactViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Disable Swipe Down gesture
+        
+        if #available(iOS 13.0, *) {
+            self.isModalInPresentation = true
+        }
+        
+        let vc = UIViewController()
+        vc.presentationController?.presentedView?.gestureRecognizers?[0].isEnabled = false
+        
+            // Delegates for Textfields
+        
             clientTextfield.delegate = self
             clientContactPersonTextfield.delegate = self
             streetTextfield.delegate = self
@@ -58,7 +69,7 @@ class addContactViewController: UIViewController, UITextFieldDelegate {
         
         let realm = try! Realm()
         
-        var client = clients()
+        let client = clients()
         
         client.client = clientTextfield.text
         client.clientContactPerson = clientContactPersonTextfield.text
@@ -67,14 +78,46 @@ class addContactViewController: UIViewController, UITextFieldDelegate {
         client.city = cityTextfield.text
         client.phone = phoneTextfield.text
         
-        try! realm.write {
-            realm.add(clients())
-            
-        }
+        saveRealmObject(client: client)
+        
+        self.dismiss(animated: true)
     }
+    
+    // MARK: Function for finally saving client to database
+    
+    func saveRealmObject(client:clients) {
+            let realm = try? Realm()
+            try? realm?.write {
+                realm?.add(client)
+            }
+            print("Data Was Saved To Realm Database.")
+    }
+    
+    // MARK: Cancel Button pressed
     
     @IBAction func cancelButtonPressed(_ sender: Any) {
         
-        self.dismiss(animated: true)
+        let alert = UIAlertController(title: "Bist du sicher?", message: "Bist du sicher, dass du abbrechen möchtest ohne den Kontakt zu speichern?", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Fortfahren", style: .cancel))
+        alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { action in
+            
+            switch action.style{
+                
+                case .default:
+                print("default")
+                
+                case .cancel:
+                self.dismiss(animated: true)
+                
+                case .destructive:
+                self.dismiss(animated: true)
+                
+            @unknown default:
+                print("Unknown Fault")
+            }
+        }))
+        self.present(alert, animated: true, completion: nil)
+        
+        
     }
 }

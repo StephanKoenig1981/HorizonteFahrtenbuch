@@ -94,7 +94,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         // Initialize Realm
         
         let realm = try! Realm()
-        print (Realm.Configuration.defaultConfiguration.fileURL)
+        print (Realm.Configuration.defaultConfiguration.fileURL!)
         
         // Mask Corner Radius for segmented control View
         

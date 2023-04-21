@@ -114,7 +114,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var ProceedButton: UIButton!
     
-    // MARK: Methods
+    // MARK: Base Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -176,7 +176,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
-    // Function for pushing to the main map view controller if GPS Access is already granted
+    // MARK: Function for pushing to the main map view controller if GPS Access is already granted
     
     func pushLoginView(_ sender: Any) {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "EntryView") as? ViewController {

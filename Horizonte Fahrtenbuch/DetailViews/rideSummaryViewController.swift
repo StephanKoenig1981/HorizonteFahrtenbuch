@@ -33,6 +33,15 @@ class rideSummaryViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Disable Swipe Down gesture
+        
+        if #available(iOS 13.0, *) {
+            self.isModalInPresentation = true
+        }
+        
+        let vc = UIViewController()
+        vc.presentationController?.presentedView?.gestureRecognizers?[0].isEnabled = false
+        
         // UI Customization
         
         rideSummaryMapView.layer.cornerRadius = 20
@@ -46,6 +55,28 @@ class rideSummaryViewController: UIViewController, MKMapViewDelegate {
         // Do any additional setup after loading the view.
         
         
+    }
+    @IBAction func cancelButtonPressed(_ sender: Any) {
+        let alert = UIAlertController(title: "Bist du sicher?", message: "Bist du sicher, dass du abbrechen möchtest ohne die Fahrt zu speichern?", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Fortfahren", style: .cancel))
+        alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { action in
+            
+            switch action.style{
+                
+                case .default:
+                print("default")
+                
+                case .cancel:
+                self.dismiss(animated: true)
+                
+                case .destructive:
+                self.dismiss(animated: true)
+                
+            @unknown default:
+                print("Unknown Fault")
+            }
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
