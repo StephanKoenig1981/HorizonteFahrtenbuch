@@ -91,7 +91,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Initialize Realm
+        // Initialize Realm and print Realm Database file URL
         
         let realm = try! Realm()
         print (Realm.Configuration.defaultConfiguration.fileURL!)
