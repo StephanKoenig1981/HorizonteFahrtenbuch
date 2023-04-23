@@ -12,7 +12,7 @@ import RealmSwift
 
 class currentRide: Object {
     
-    dynamic var traveledDistance: Double?
+    @objc dynamic var distanceDriven: String?
     @objc dynamic var timeElapsed: String?
 
 }

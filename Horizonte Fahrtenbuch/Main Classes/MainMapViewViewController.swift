@@ -74,7 +74,8 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     @IBOutlet weak var menuButton: UIButton!
     @IBOutlet weak var addContactButtonView: UIView!
     @IBOutlet weak var addContactButton: UIButton!
-    
+    @IBOutlet weak var addressBookButtonView: UIView!
+    @IBOutlet weak var addressBookButton: UIButton!
     
     // MARK: Outlets for the Segmented control view and segmented control
     
@@ -93,7 +94,10 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         
         // Initialize Realm and print Realm Database file URL
         
-        let realm = try! Realm()
+        
+        lazy var realm:Realm = {
+            return try! Realm()
+        }()
         print (Realm.Configuration.defaultConfiguration.fileURL!)
         
         // Mask Corner Radius for segmented control View
@@ -103,6 +107,9 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         
             addContactButtonView.layer.cornerRadius = 25
             addContactButton.tintColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+        
+        addressBookButtonView.layer.cornerRadius = 25
+        addressBookButton.tintColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
         
                 segmentedControlView.clipsToBounds = true
                 segmentedControlView.layer.cornerRadius = 15
@@ -350,6 +357,16 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         self.distanceDriven.text = "\(distanceString)"
         
     }
+    
+    // MARK: Function for finally saving client to database
+    
+    func saveRealmObject(currentRides:currentRide) {
+            let realm = try? Realm()
+            try? realm?.write {
+                realm?.add(currentRides)
+            }
+            print("Data Was Saved To Realm Database.")
+    }
 
     
     // MARK: Start Button Action
@@ -453,6 +470,19 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         // Testing disabling the screen sleep mode while recording a ride (Reenabling sleep when stop is pressed)
         
         UIApplication.shared.isIdleTimerDisabled = false
+        
+        // MARK: Initializing Realm
+        
+        lazy var realm:Realm = {
+            return try! Realm()
+        }()
+        
+        let currentRides = currentRide()
+        
+        currentRides.timeElapsed = timeElapsed.text
+        currentRides.distanceDriven = distanceDriven.text
+        
+        saveRealmObject(currentRides: currentRides)
         
         // Stopping Location Updates to save battery
         
@@ -563,6 +593,8 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     @IBAction func addContactButtonPressed(_ sender: Any) {
     }
     
+    @IBAction func addressBookButtonPressed(_ sender: Any) {
+    }
     
 }
 
