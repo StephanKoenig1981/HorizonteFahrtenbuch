@@ -97,6 +97,10 @@ class contactsTableViewController: UITableViewController {
         cell.textLabel?.text = object.client?.description
         cell.detailTextLabel?.text = object.city?.description
         cell.textLabel?.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+        
+        // Adding the disclosure Indicator
+        
+        cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
 
 
         return cell
