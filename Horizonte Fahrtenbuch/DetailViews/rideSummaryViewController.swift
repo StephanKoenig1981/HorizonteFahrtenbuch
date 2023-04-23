@@ -7,6 +7,7 @@
 
 import UIKit
 import MapKit
+import RealmSwift
 
 var MainMapViewController: MainMapViewViewController?
 var drivenDistanceText = ""
@@ -52,10 +53,21 @@ class rideSummaryViewController: UIViewController, MKMapViewDelegate {
         drivenDistanceLabel.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
         drivenDistance.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
         
-        // Do any additional setup after loading the view.
+        // MARK: Getting objects from realm
+        
+        let realm = try! Realm()
+        
+        let currentRide = realm.objects(currentRide.self)
+        
+        
+        
+                
         
         
     }
+    
+    // MARK: Cancel Button
+    
     @IBAction func cancelButtonPressed(_ sender: Any) {
         let alert = UIAlertController(title: "Bist du sicher?", message: "Bist du sicher, dass du abbrechen möchtest ohne die Fahrt zu speichern?", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Fortfahren", style: .cancel))
@@ -77,6 +89,11 @@ class rideSummaryViewController: UIViewController, MKMapViewDelegate {
             }
         }))
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    // MARK: Save Button
+    
+    @IBAction func saveButtonPressed(_ sender: Any) {
     }
 }
 
