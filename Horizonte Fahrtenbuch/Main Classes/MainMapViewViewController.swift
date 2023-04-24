@@ -190,11 +190,6 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         distanceDriven.text = "\(traveledDistance)"
     }
     
-    /*override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "summarySegue" {
-        
-        }
-    }*/
     
     // MARK: Travel distance and route polyline drawing function
     

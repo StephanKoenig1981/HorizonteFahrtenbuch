@@ -1,31 +1,24 @@
 //
-//  contactsTableViewController.swift
+//  pastRidesTableViewController.swift
 //  Horizonte Fahrtenbuch
 //
-//  Created by Stephan König on 23.04.23.
+//  Created by Stephan König on 24.04.23.
 //
 
 import UIKit
 import RealmSwift
 
 
-
-class Cell: UITableViewCell {
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String!) {
-        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
-    }
-
-    required init(coder: NSCoder) {
-        fatalError("NSCoding not supported")
-    }
-}
-
-class contactsTableViewController: UITableViewController {
+class pastRidesTableViewController: UITableViewController {
     
     // MARK: Initializing Realm
     
     let realm = try! Realm()
-    let results = try! Realm().objects(clients.self).sorted(byKeyPath: "client")
+    let results = try! Realm().objects(currentRide.self).sorted(byKeyPath: "date")
+    
+    
+    
+    let clientResults = try! Realm().objects(clients.self).sorted(byKeyPath: "client")
         var notificationToken: NotificationToken?
     
     
@@ -56,23 +49,23 @@ class contactsTableViewController: UITableViewController {
     
     // MARK: Setting Up User Interface
         func setupUI() {
-            tableView.register(Cell.self, forCellReuseIdentifier: "clientCell")
+            tableView.register(Cell.self, forCellReuseIdentifier: "ridesCell")
 
-            self.title = "Kunden"
+            self.title = "Fahrten"
         }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let count = realm.objects(clients.self).count
+        let count = realm.objects(currentRide.self).count
         
         return count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "clientCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ridesCell", for: indexPath)
         
         let object = results[indexPath.row]
-        cell.textLabel?.text = object.client?.description
-        cell.detailTextLabel?.text = object.city?.description
+        cell.textLabel?.text = object.timeElapsed?.description
+        cell.detailTextLabel?.text = object.distanceDriven?.description
         cell.textLabel?.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
         
         // Adding the disclosure Indicator
@@ -92,7 +85,7 @@ class contactsTableViewController: UITableViewController {
         }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Kunden"
+        return "Fahrten"
     }
 
 }

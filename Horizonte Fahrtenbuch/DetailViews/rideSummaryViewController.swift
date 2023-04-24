@@ -9,13 +9,20 @@ import UIKit
 import MapKit
 import RealmSwift
 
-var MainMapViewController: MainMapViewViewController?
-var drivenDistanceText = ""
-var elapsedTimeText = ""
-
-
+extension DefaultStringInterpolation {
+  mutating func appendInterpolation<T>(_ optional: T?) {
+    appendInterpolation(String(describing: optional))
+  }
+}
 
 class rideSummaryViewController: UIViewController, MKMapViewDelegate {
+    
+    // MARK: Initializing Realm
+
+    let realm = try! Realm()
+    
+    let currentRides = currentRide()
+
     
     // MARK: Outlets
     
@@ -49,21 +56,22 @@ class rideSummaryViewController: UIViewController, MKMapViewDelegate {
         rideSummaryTitle.textColor = UIColor.orange
         
         elapsedTimeLabel.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
-        elapsedTime.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
         drivenDistanceLabel.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+        
+        // MARK: Updating Label from Realm Database value (Currently showing NIL)
+        
+        
+        elapsedTime.text =  "\(currentRides.timeElapsed?.description)"
+        drivenDistance.text = "\(currentRides.distanceDriven?.description)"
+    
+        
+        elapsedTime.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
         drivenDistance.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+
         
-        // MARK: Getting objects from realm
-        
-        let realm = try! Realm()
-        
-        let currentRide = realm.objects(currentRide.self)
-        
-        
-        
-                
-        
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
     }
     
     // MARK: Cancel Button

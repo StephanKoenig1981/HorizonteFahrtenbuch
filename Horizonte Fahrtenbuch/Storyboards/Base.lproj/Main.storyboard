@@ -118,6 +118,35 @@
             </objects>
             <point key="canvasLocation" x="138.1679389312977" y="-2.1126760563380285"/>
         </scene>
+        <!--Past Rides Table View Controller-->
+        <scene sceneID="9n4-DJ-tjq">
+            <objects>
+                <tableViewController id="NAE-jd-SvV" customClass="pastRidesTableViewController" customModule="Horizonte_Fahrtenbuch" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" id="Kr2-aO-BNz">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ridesCell" id="jLR-lC-qxu">
+                                <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jLR-lC-qxu" id="FbR-qS-uxf">
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="NAE-jd-SvV" id="L9j-Ph-0RO"/>
+                            <outlet property="delegate" destination="NAE-jd-SvV" id="mL2-Wi-XaC"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="ruz-Bb-36W"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4R6-MY-8Mr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="129" y="-704"/>
+        </scene>
         <!--Contacts Table View Controller-->
         <scene sceneID="EuO-Fh-vzj">
             <objects>
@@ -236,6 +265,7 @@
                                                 <buttonConfiguration key="configuration" style="plain" image="clipboard.fill" catalog="system"/>
                                                 <connections>
                                                     <action selector="menuButtonPressed:" destination="K7b-6J-Pvw" eventType="touchUpInside" id="AAd-au-wn5"/>
+                                                    <segue destination="NAE-jd-SvV" kind="show" identifier="pastRidesSegue" id="Fak-U9-RW7"/>
                                                 </connections>
                                             </button>
                                         </subviews>
