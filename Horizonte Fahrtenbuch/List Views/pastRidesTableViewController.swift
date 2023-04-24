@@ -16,16 +16,25 @@ class pastRidesTableViewController: UITableViewController {
     let realm = try! Realm()
     let results = try! Realm().objects(currentRide.self).sorted(byKeyPath: "date")
     
+    var notificationToken: NotificationToken?
     
+    // MARK: Variables
     
-    let clientResults = try! Realm().objects(clients.self).sorted(byKeyPath: "client")
-        var notificationToken: NotificationToken?
+    // Section Headers; we need 3 arrays
+    var sectionHeaderTitles = [String]()  // string array of section headers
+    let dateFormatter = DateFormatter() // Needed to extract the Year from Publication Date
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
         
         setupUI()
+        
+        tableView.rowHeight = 43 // same as storyboard, but better to declare it here too
+            dateFormatter.dateStyle = .full
+            dateFormatter.dateFormat = "DD/MM/YYYY"   // We only want the Year of Publication Date
+            dateFormatter.timeStyle = .none // remove time from date
         
         // Set results notification block
         self.notificationToken = results.observe { (changes: RealmCollectionChange) in
@@ -51,7 +60,7 @@ class pastRidesTableViewController: UITableViewController {
         func setupUI() {
             tableView.register(Cell.self, forCellReuseIdentifier: "ridesCell")
 
-            self.title = "Fahrten"
+            self.title = "Abgeschlossene Fahrten"
         }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -83,9 +92,11 @@ class pastRidesTableViewController: UITableViewController {
                 try! realm.commitWrite()
             }
         }
+    
+    // MARK: Method for the Section Indicators
 
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    /*override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Fahrten"
-    }
+    }*/
 
 }

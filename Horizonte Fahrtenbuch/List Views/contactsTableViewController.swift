@@ -91,8 +91,10 @@ class contactsTableViewController: UITableViewController {
             }
         }
 
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    // MARK: Method for the Section Indicators
+    
+    /*override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Kunden"
-    }
+    }*/
 
 }
