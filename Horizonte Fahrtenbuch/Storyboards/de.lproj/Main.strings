@@ -1,0 +1,138 @@
+
+/* Class = "UILabel"; text = "Gefahrene Distanz:"; ObjectID = "2Wv-Zd-3vQ"; */
+"2Wv-Zd-3vQ.text" = "Gefahrene Distanz:";
+
+/* Class = "UIButton"; configuration.title = "Weiter"; ObjectID = "3B6-QJ-SQI"; */
+"3B6-QJ-SQI.configuration.title" = "Weiter";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "3B6-QJ-SQI"; */
+"3B6-QJ-SQI.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Ort:"; ObjectID = "66M-Ci-w68"; */
+"66M-Ci-w68.text" = "Ort:";
+
+/* Class = "UIButton"; configuration.title = "Abbrechen"; ObjectID = "6lH-DS-qqE"; */
+"6lH-DS-qqE.configuration.title" = "Abbrechen";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "6lH-DS-qqE"; */
+"6lH-DS-qqE.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Fahrtenübersicht"; ObjectID = "7Y3-3j-I48"; */
+"7Y3-3j-I48.text" = "Fahrtenübersicht";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "7oK-LJ-Jko"; */
+"7oK-LJ-Jko.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "                    "; ObjectID = "CHl-90-wWZ"; */
+"CHl-90-wWZ.configuration.title" = "                    ";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "CHl-90-wWZ"; */
+"CHl-90-wWZ.normalTitle" = "Button";
+
+/* Class = "UISegmentedControl"; CnS-DX-FED.segmentTitles[0] = "Normal"; ObjectID = "CnS-DX-FED"; */
+"CnS-DX-FED.segmentTitles[0]" = "Normal";
+
+/* Class = "UISegmentedControl"; CnS-DX-FED.segmentTitles[1] = "Gedimmt"; ObjectID = "CnS-DX-FED"; */
+"CnS-DX-FED.segmentTitles[1]" = "Gedimmt";
+
+/* Class = "UISegmentedControl"; CnS-DX-FED.segmentTitles[2] = "Satellit"; ObjectID = "CnS-DX-FED"; */
+"CnS-DX-FED.segmentTitles[2]" = "Satellit";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Gk4-wB-OuN"; */
+"Gk4-wB-OuN.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Hintergrundaktivität erlauben"; ObjectID = "H2C-hV-jAf"; */
+"H2C-hV-jAf.configuration.title" = "Hintergrundaktivität erlauben";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "H2C-hV-jAf"; */
+"H2C-hV-jAf.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "00.00 Km"; ObjectID = "Kbx-Ar-dBc"; */
+"Kbx-Ar-dBc.text" = "00.00 Km";
+
+/* Class = "UILabel"; text = "24.35 Km"; ObjectID = "M36-k1-zgI"; */
+"M36-k1-zgI.text" = "24.35 Km";
+
+/* Class = "UILabel"; text = "Ansprechperson:"; ObjectID = "OhX-vS-WdU"; */
+"OhX-vS-WdU.text" = "Ansprechperson:";
+
+/* Class = "UIButton"; configuration.title = "Speichern"; ObjectID = "QKo-bn-LX7"; */
+"QKo-bn-LX7.configuration.title" = "Speichern";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "QKo-bn-LX7"; */
+"QKo-bn-LX7.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Kunde hinzufügen"; ObjectID = "QUV-ql-5RU"; */
+"QUV-ql-5RU.text" = "Kunde hinzufügen";
+
+/* Class = "UILabel"; text = "Kunde:"; ObjectID = "R83-hu-O91"; */
+"R83-hu-O91.text" = "Kunde:";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "UWe-WQ-5qq"; */
+"UWe-WQ-5qq.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Strasse:"; ObjectID = "ZFV-yO-Y2a"; */
+"ZFV-yO-Y2a.text" = "Strasse:";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "azT-he-wRo"; */
+"azT-he-wRo.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Alle Daten werden verschlüsselt gespeichert."; ObjectID = "bGJ-sv-JHw"; */
+"bGJ-sv-JHw.text" = "Alle Daten werden verschlüsselt gespeichert.";
+
+/* Class = "UIButton"; configuration.title = "Standortfreigabe erteilen"; ObjectID = "dUg-xJ-j65"; */
+"dUg-xJ-j65.configuration.title" = "Standortfreigabe erteilen";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "dUg-xJ-j65"; */
+"dUg-xJ-j65.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Speichern"; ObjectID = "dr7-Be-Ggd"; */
+"dr7-Be-Ggd.configuration.title" = "Speichern";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "dr7-Be-Ggd"; */
+"dr7-Be-Ggd.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Gefahrene Zeit:"; ObjectID = "e1m-DN-sn6"; */
+"e1m-DN-sn6.text" = "Gefahrene Zeit:";
+
+/* Class = "UITextView"; text = "Zuerst müssen wir einige Dinge einrichten, um das Fahrtenbuch optimal nutzen zu können. "; ObjectID = "f4E-nX-Jls"; */
+"f4E-nX-Jls.text" = "Zuerst müssen wir einige Dinge einrichten, um das Fahrtenbuch optimal nutzen zu können. ";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "gAV-Yt-EqJ"; */
+"gAV-Yt-EqJ.normalTitle" = "Button";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "l8p-Wk-jh1"; */
+"l8p-Wk-jh1.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "PLZ:"; ObjectID = "pPg-b2-RgW"; */
+"pPg-b2-RgW.text" = "PLZ:";
+
+/* Class = "UILabel"; text = "00:00:00"; ObjectID = "qPz-4x-PxP"; */
+"qPz-4x-PxP.text" = "00:00:00";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "rYw-8j-TB8"; */
+"rYw-8j-TB8.text" = "Title";
+
+/* Class = "UILabel"; text = "00:18:45"; ObjectID = "rtk-D1-Jl8"; */
+"rtk-D1-Jl8.text" = "00:18:45";
+
+/* Class = "UILabel"; text = "Pausiert"; ObjectID = "ru7-Qt-lnv"; */
+"ru7-Qt-lnv.text" = "Pausiert";
+
+/* Class = "UIButton"; configuration.title = "Zugriff auf Bewegungsdaten"; ObjectID = "slK-6e-vfl"; */
+"slK-6e-vfl.configuration.title" = "Zugriff auf Bewegungsdaten";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "slK-6e-vfl"; */
+"slK-6e-vfl.normalTitle" = "Button";
+
+/* Class = "UITextView"; text = "Willkommen"; ObjectID = "u0k-W2-dmc"; */
+"u0k-W2-dmc.text" = "Willkommen";
+
+/* Class = "UIButton"; configuration.title = "Abbrechen"; ObjectID = "xee-vR-ZAa"; */
+"xee-vR-ZAa.configuration.title" = "Abbrechen";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "xee-vR-ZAa"; */
+"xee-vR-ZAa.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Telefon:"; ObjectID = "ySh-SB-xPo"; */
+"ySh-SB-xPo.text" = "Telefon:";

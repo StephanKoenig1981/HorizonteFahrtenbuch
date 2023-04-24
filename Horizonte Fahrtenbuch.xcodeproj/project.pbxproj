@@ -90,6 +90,8 @@
 		0808422129C8FBF20030BB7E /* Horizonte_FahrtenbuchUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Horizonte_FahrtenbuchUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		080DEDEF29F33A1800E51F8D /* currentRide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = currentRide.swift; sourceTree = "<group>"; };
 		0816062A29F0432900B6F4A3 /* rideSummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rideSummaryViewController.swift; sourceTree = "<group>"; };
+		082C98D029F6E4BA00296204 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
+		082C98D129F6E4BA00296204 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		0863585929F30C4100FA36D1 /* addContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addContactViewController.swift; sourceTree = "<group>"; };
 		087F307C29CCFC29009E52FC /* Horizonte Fahrtenbuch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Horizonte Fahrtenbuch.entitlements"; sourceTree = "<group>"; };
 		087F307F29CD07C0009E52FC /* MainMapViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapViewViewController.swift; sourceTree = "<group>"; };
@@ -408,11 +410,12 @@
 			};
 			buildConfigurationList = 080841F329C8FBF10030BB7E /* Build configuration list for PBXProject "Horizonte Fahrtenbuch" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = de;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				de,
 			);
 			mainGroup = 080841EF29C8FBF10030BB7E;
 			productRefGroup = 080841F929C8FBF10030BB7E /* Products */;
@@ -597,6 +600,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				0808420229C8FBF10030BB7E /* Base */,
+				082C98D029F6E4BA00296204 /* de */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -605,6 +609,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				0808420A29C8FBF20030BB7E /* Base */,
+				082C98D129F6E4BA00296204 /* de */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -616,6 +621,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -677,6 +683,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";

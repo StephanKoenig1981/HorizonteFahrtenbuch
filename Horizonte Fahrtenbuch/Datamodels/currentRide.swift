@@ -12,12 +12,8 @@ import RealmSwift
 
 class currentRide: Object {
     
+    @objc dynamic var date = Date()
     @objc dynamic var distanceDriven: String?
-    
-    // TESTING
-    
-    //@objc dynamic var distanceDriven: Double = 0.0
-    
     @objc dynamic var timeElapsed: String?
 
 }

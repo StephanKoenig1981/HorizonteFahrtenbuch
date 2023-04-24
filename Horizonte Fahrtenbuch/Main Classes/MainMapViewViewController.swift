@@ -481,6 +481,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         
         currentRides.timeElapsed = timeElapsed.text
         currentRides.distanceDriven = distanceDriven.text
+        currentRides.date = Date()
         
         saveRealmObject(currentRides: currentRides)
         
