@@ -20,6 +20,7 @@
 		080DEDF029F33A1800E51F8D /* currentRide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080DEDEF29F33A1800E51F8D /* currentRide.swift */; };
 		082C98D329F6E9FC00296204 /* pastRidesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082C98D229F6E9FC00296204 /* pastRidesTableViewController.swift */; };
 		0863585A29F30C4100FA36D1 /* addContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0863585929F30C4100FA36D1 /* addContactViewController.swift */; };
+		087696C429F9C8D700246942 /* pastRidesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087696C329F9C8D700246942 /* pastRidesTableViewCell.swift */; };
 		087F308029CD07C0009E52FC /* MainMapViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F307F29CD07C0009E52FC /* MainMapViewViewController.swift */; };
 		088D667429F066AC009E50CF /* rideSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0816062A29F0432900B6F4A3 /* rideSummaryViewController.swift */; };
 		08A9CC4629F3217A00D3D3A6 /* clients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A9CC4529F3217A00D3D3A6 /* clients.swift */; };
@@ -95,6 +96,7 @@
 		082C98D129F6E4BA00296204 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		082C98D229F6E9FC00296204 /* pastRidesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pastRidesTableViewController.swift; sourceTree = "<group>"; };
 		0863585929F30C4100FA36D1 /* addContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addContactViewController.swift; sourceTree = "<group>"; };
+		087696C329F9C8D700246942 /* pastRidesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pastRidesTableViewCell.swift; sourceTree = "<group>"; };
 		087F307C29CCFC29009E52FC /* Horizonte Fahrtenbuch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Horizonte Fahrtenbuch.entitlements"; sourceTree = "<group>"; };
 		087F307F29CD07C0009E52FC /* MainMapViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapViewViewController.swift; sourceTree = "<group>"; };
 		08A9CC4529F3217A00D3D3A6 /* clients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = clients.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 		080841FA29C8FBF10030BB7E /* Horizonte Fahrtenbuch */ = {
 			isa = PBXGroup;
 			children = (
+				087696C229F9C8C500246942 /* Custom Cells */,
 				08C9BFB429F5BE220005DDA4 /* List Views */,
 				08A9CC4429F3215E00D3D3A6 /* Datamodels */,
 				0863585829F30C2000FA36D1 /* SubscreenClasses */,
@@ -225,6 +228,14 @@
 				0863585929F30C4100FA36D1 /* addContactViewController.swift */,
 			);
 			path = SubscreenClasses;
+			sourceTree = "<group>";
+		};
+		087696C229F9C8C500246942 /* Custom Cells */ = {
+			isa = PBXGroup;
+			children = (
+				087696C329F9C8D700246942 /* pastRidesTableViewCell.swift */,
+			);
+			path = "Custom Cells";
 			sourceTree = "<group>";
 		};
 		087F308129CD0844009E52FC /* Main Classes */ = {
@@ -545,6 +556,7 @@
 				080DEDF029F33A1800E51F8D /* currentRide.swift in Sources */,
 				0863585A29F30C4100FA36D1 /* addContactViewController.swift in Sources */,
 				082C98D329F6E9FC00296204 /* pastRidesTableViewController.swift in Sources */,
+				087696C429F9C8D700246942 /* pastRidesTableViewCell.swift in Sources */,
 				08C9BFBA29F5CB040005DDA4 /* contactsTableViewController.swift in Sources */,
 				08A9CC4629F3217A00D3D3A6 /* clients.swift in Sources */,
 				080841FE29C8FBF10030BB7E /* SceneDelegate.swift in Sources */,
