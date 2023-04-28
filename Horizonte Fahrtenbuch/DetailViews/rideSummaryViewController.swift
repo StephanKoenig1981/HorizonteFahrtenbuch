@@ -61,8 +61,8 @@ class rideSummaryViewController: UIViewController, MKMapViewDelegate {
         // MARK: Updating Label from Realm Database value (Currently showing NIL)
         
         
-        elapsedTime.text =  "\(currentRides.timeElapsed?.description)"
-        drivenDistance.text = "\(currentRides.distanceDriven?.description)"
+        elapsedTime.text =  currentRides.timeElapsed?.description
+        drivenDistance.text = currentRides.distanceDriven?.description
     
         
         elapsedTime.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)

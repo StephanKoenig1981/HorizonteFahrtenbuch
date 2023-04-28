@@ -474,9 +474,17 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         
         let currentRides = currentRide()
         
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "d. MMM YY"
+        dateFormatter.dateStyle = .long
+        
+        dateFormatter.string(from: date)
+        
         currentRides.timeElapsed = timeElapsed.text
         currentRides.distanceDriven = distanceDriven.text
-        currentRides.date = Date()
+        currentRides.date = dateFormatter.string(from: date)
+       
         
         saveRealmObject(currentRides: currentRides)
         

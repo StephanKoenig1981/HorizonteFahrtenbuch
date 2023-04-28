@@ -61,6 +61,8 @@ class pastRidesTableViewController: UITableViewController {
             tableView.register(Cell.self, forCellReuseIdentifier: "ridesCell")
 
             self.title = "Abgeschlossene Fahrten"
+            
+            tableView.rowHeight = 86.0
         }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -73,8 +75,8 @@ class pastRidesTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ridesCell", for: indexPath)
         
         let object = results[indexPath.row]
-        cell.textLabel?.text = object.timeElapsed?.description
-        cell.detailTextLabel?.text = object.distanceDriven?.description
+        cell.textLabel?.text = object.date
+        cell.detailTextLabel?.text = object.timeElapsed?.description
         cell.textLabel?.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
         
         // Adding the disclosure Indicator
