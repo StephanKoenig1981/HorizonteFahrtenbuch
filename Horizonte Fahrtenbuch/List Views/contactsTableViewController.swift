@@ -36,6 +36,8 @@ class contactsTableViewController: UITableViewController {
         
         setupUI()
         
+        tableView.rowHeight = 86 // same as storyboard, but better to declare it here too
+        
         // Set results notification block
         self.notificationToken = results.observe { (changes: RealmCollectionChange) in
             switch changes {

@@ -31,10 +31,8 @@ class pastRidesTableViewController: UITableViewController {
         
         setupUI()
         
-        tableView.rowHeight = 43 // same as storyboard, but better to declare it here too
-            dateFormatter.dateStyle = .full
-            dateFormatter.dateFormat = "DD/MM/YYYY"   // We only want the Year of Publication Date
-            dateFormatter.timeStyle = .none // remove time from date
+        tableView.rowHeight = 86 // same as storyboard, but better to declare it here too
+    
         
         // Set results notification block
         self.notificationToken = results.observe { (changes: RealmCollectionChange) in
@@ -75,13 +73,15 @@ class pastRidesTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ridesCell", for: indexPath)
         
         let object = results[indexPath.row]
+        cell.textLabel?.font.withSize(80)
         cell.textLabel?.text = object.date
+        cell.detailTextLabel?.font.withSize(15)
         cell.detailTextLabel?.text = object.timeElapsed?.description
         cell.textLabel?.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
         
-        // Adding the disclosure Indicator
+        // Adding the disclosure Indicator Currently inactive for later purposes
         
-        cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+        // cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
 
 
         return cell

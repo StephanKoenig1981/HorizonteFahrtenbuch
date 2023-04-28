@@ -60,8 +60,7 @@ class rideSummaryViewController: UIViewController, MKMapViewDelegate {
         
         // MARK: Updating Label from Realm Database value (Currently showing NIL)
         
-        
-        elapsedTime.text =  currentRides.timeElapsed?.description
+        elapsedTime.text = currentRides.timeElapsed?.description
         drivenDistance.text = currentRides.distanceDriven?.description
     
         
