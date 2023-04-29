@@ -9,15 +9,9 @@ import UIKit
 
 class clientsTableViewCell: UITableViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
+    @IBOutlet weak var clientNameLabel: UILabel!
+    @IBOutlet weak var clientPostalCodeLabel: UILabel!
+    @IBOutlet weak var clientPhoneLabel: UILabel!
+    @IBOutlet weak var clientCityLabel: UILabel!
 
 }
