@@ -14,7 +14,7 @@ class pastRidesTableViewController: UITableViewController {
     // MARK: Initializing Realm
     
     let realm = try! Realm()
-    let results = try! Realm().objects(currentRide.self).sorted(byKeyPath: "date")
+    let results = try! Realm().objects(currentRide.self).sorted(byKeyPath: "date", ascending: true)
     
     var notificationToken: NotificationToken?
     
