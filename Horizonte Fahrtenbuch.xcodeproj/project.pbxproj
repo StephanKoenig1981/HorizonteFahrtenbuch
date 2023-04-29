@@ -33,6 +33,7 @@
 		08DBAB3329EDE50D0044981E /* Fahrtenbuch.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 08DBAB2F29EDE50C0044981E /* Fahrtenbuch.intentdefinition */; };
 		08DBAB3429EDE50D0044981E /* Fahrtenbuch.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 08DBAB2F29EDE50C0044981E /* Fahrtenbuch.intentdefinition */; };
 		08DBAB3729EDE50D0044981E /* FahrtenbuchExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 08DBAB2229EDE50C0044981E /* FahrtenbuchExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		08DCB78829FD3D5700446CD0 /* clientsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DCB78729FD3D5700446CD0 /* clientsTableViewCell.swift */; };
 		B0493902EB448E53AEA2AA02 /* Pods_Horizonte_Fahrtenbuch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE1E02E38043DC5D8FABF81B /* Pods_Horizonte_Fahrtenbuch.framework */; };
 		D525ACF47EF907D2F879B2BD /* Pods_FahrtenbuchExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6927E86C3CE1CE44FE25BFE4 /* Pods_FahrtenbuchExtension.framework */; };
 /* End PBXBuildFile section */
@@ -110,6 +111,7 @@
 		08DBAB2F29EDE50C0044981E /* Fahrtenbuch.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Fahrtenbuch.intentdefinition; sourceTree = "<group>"; };
 		08DBAB3029EDE50D0044981E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		08DBAB3229EDE50D0044981E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		08DCB78729FD3D5700446CD0 /* clientsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = clientsTableViewCell.swift; sourceTree = "<group>"; };
 		33AF487F11DC504C7C82918F /* Pods-Horizonte Fahrtenbuch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Horizonte Fahrtenbuch.release.xcconfig"; path = "Target Support Files/Pods-Horizonte Fahrtenbuch/Pods-Horizonte Fahrtenbuch.release.xcconfig"; sourceTree = "<group>"; };
 		6927E86C3CE1CE44FE25BFE4 /* Pods_FahrtenbuchExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FahrtenbuchExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		985DBEBD767AB611C848F43F /* Pods-FahrtenbuchExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FahrtenbuchExtension.release.xcconfig"; path = "Target Support Files/Pods-FahrtenbuchExtension/Pods-FahrtenbuchExtension.release.xcconfig"; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				087696C329F9C8D700246942 /* pastRidesTableViewCell.swift */,
+				08DCB78729FD3D5700446CD0 /* clientsTableViewCell.swift */,
 			);
 			path = "Custom Cells";
 			sourceTree = "<group>";
@@ -548,6 +551,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08DCB78829FD3D5700446CD0 /* clientsTableViewCell.swift in Sources */,
 				087F308029CD07C0009E52FC /* MainMapViewViewController.swift in Sources */,
 				0808420029C8FBF10030BB7E /* ViewController.swift in Sources */,
 				0808420629C8FBF10030BB7E /* Horizonte_Fahrtenbuch.xcdatamodeld in Sources */,
