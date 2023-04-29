@@ -454,7 +454,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         let alert = UIAlertController(title: "Bist du sicher?", message: "Bist du sicher, dass du abbrechen möchtest ohne die Fahrt zu speichern?", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Fortsetzen", style: .cancel))
         alert.addAction(UIAlertAction(title: "Ohne speichern beenden", style: .destructive))
-        alert.addAction(UIAlertAction(title: "Fahrt beenden", style: .destructive, handler: { [self] action in
+        alert.addAction(UIAlertAction(title: "Speichern und beenden", style: .destructive, handler: { [self] action in
             
             switch action.style{
                 
