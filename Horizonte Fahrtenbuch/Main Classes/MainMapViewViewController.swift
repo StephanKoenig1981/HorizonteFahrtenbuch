@@ -451,94 +451,116 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     
     @IBAction func stopButtonPressed(_ sender: Any) {
         
-        
-        TopNotchView.topNotchViewfadeOut(duration: 1.0)
-        timeElapsed.fadeOut(duration: 1.0)
-        distanceDriven.fadeOut(duration: 1.0)
-        
-        stopwatchResetButton.fadeOut(duration: 0.5)
-        
-        startButton.ButtonViewfadeOut(duration: 0.5)
-        startButton.setImage(UIImage(named: "GreenButtonHighRes.png"), for: .normal)
-        startButton.ButtonViewfadeIn(duration: 0.5)
-        
-        // Testing disabling the screen sleep mode while recording a ride (Reenabling sleep when stop is pressed)
-        
-        UIApplication.shared.isIdleTimerDisabled = false
-        
-        // MARK: Initializing Realm
-        
-        lazy var realm:Realm = {
-            return try! Realm()
-        }()
-        
-        let currentRides = currentRide()
-        
-        let date = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "d. MMM YY"
-        dateFormatter.dateStyle = .long
-        
-        dateFormatter.string(from: date)
-        
-        currentRides.timeElapsed = timeElapsed.text
-        currentRides.distanceDriven = distanceDriven.text
-        currentRides.date = dateFormatter.string(from: date)
-       
-        
-        saveRealmObject(currentRides: currentRides)
-        
-        // Stopping Location Updates to save battery
-        
-        locationManager.stopUpdatingLocation()
-        
-        // Animations of the views and labels.
-        
-        timeElapsed.fadeOut(duration: 0.5)
-        timeElapsed.text = "00:00:00"
-        distanceDriven.text = "00.00 Km"
-        timeElapsed.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
-        
-        distanceDriven.fadeOut(duration: 0.5)
-        distanceDriven.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
-        
-        wayBackButtonView.topNotchViewfadeOut(duration: 1.0)
-        wayBackButton.fadeOut(duration: 1.0)
-        
-        wayBackButton.setTitle("Lieferfahrt", for: .normal)
-        wayBackButton.setTitleColor(UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0), for: .normal)
-        isWayBack = false
-        
-        wayBackButton.sendActions(for: .touchUpInside)
-        
-        stopwatchResetButton.isEnabled = false
-        
-        // Reset traveled distance to 0 and apply on Label
-        
-        self.mapView.removeOverlays(self.mapView.overlays)
-        
-        coordinates.removeAll()
-        
-        startLocation = nil
-        traveledDistance -= traveledDistance
-        distanceDriven.text = "0 m"
-        
-        // Reset Timer to Zero
-        
-        setStopTime(date: nil)
-        setStartTime(date: nil)
-        timeElapsed.text = makeTimeString(hour: 0, min: 0, sec: 0)
-        stopTimer()
-        
-        locationManager.allowsBackgroundLocationUpdates = false
-        locationManager.pausesLocationUpdatesAutomatically = true
-        
-        // Reset status label to Ready when stop is pressed and change color to green
-        
-        pauseStateLabel.fadeOut(duration: 2.0)
-        pauseStateLabel.text = "Bereit"
-        pauseStateLabel.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
-        pauseStateLabel.fadeIn(duration: 2.0)
+        let alert = UIAlertController(title: "Bist du sicher?", message: "Bist du sicher, dass du abbrechen möchtest ohne die Fahrt zu speichern?", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Fortsetzen", style: .cancel))
+        alert.addAction(UIAlertAction(title: "Ohne speichern beenden", style: .destructive))
+        alert.addAction(UIAlertAction(title: "Fahrt beenden", style: .destructive, handler: { [self] action in
+            
+            switch action.style{
+                
+                case .default:
+                print("default")
+                
+                case .cancel:
+                self.dismiss(animated: true)
+                
+                case .destructive:
+                
+                TopNotchView.topNotchViewfadeOut(duration: 1.0)
+                timeElapsed.fadeOut(duration: 1.0)
+                distanceDriven.fadeOut(duration: 1.0)
+                
+                stopwatchResetButton.fadeOut(duration: 0.5)
+                
+                startButton.ButtonViewfadeOut(duration: 0.5)
+                startButton.setImage(UIImage(named: "GreenButtonHighRes.png"), for: .normal)
+                startButton.ButtonViewfadeIn(duration: 0.5)
+                
+                // Testing disabling the screen sleep mode while recording a ride (Reenabling sleep when stop is pressed)
+                
+                UIApplication.shared.isIdleTimerDisabled = false
+                
+                // MARK: Initializing Realm
+                
+                lazy var realm:Realm = {
+                    return try! Realm()
+                }()
+                
+                let currentRides = currentRide()
+                
+                let date = Date()
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "d. MMM YY"
+                dateFormatter.dateStyle = .long
+                
+                dateFormatter.string(from: date)
+                
+                currentRides.timeElapsed = timeElapsed.text
+                currentRides.distanceDriven = distanceDriven.text
+                currentRides.date = dateFormatter.string(from: date)
+               
+                
+                saveRealmObject(currentRides: currentRides)
+                
+                // Stopping Location Updates to save battery
+                
+                locationManager.stopUpdatingLocation()
+                
+                // Animations of the views and labels.
+                
+                timeElapsed.fadeOut(duration: 0.5)
+                timeElapsed.text = "00:00:00"
+                distanceDriven.text = "00.00 Km"
+                timeElapsed.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+                
+                distanceDriven.fadeOut(duration: 0.5)
+                distanceDriven.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+                
+                wayBackButtonView.topNotchViewfadeOut(duration: 1.0)
+                wayBackButton.fadeOut(duration: 1.0)
+                
+                wayBackButton.setTitle("Lieferfahrt", for: .normal)
+                wayBackButton.setTitleColor(UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0), for: .normal)
+                isWayBack = false
+                
+                wayBackButton.sendActions(for: .touchUpInside)
+                
+                stopwatchResetButton.isEnabled = false
+                
+                // Reset traveled distance to 0 and apply on Label
+                
+                mapView.removeOverlays(self.mapView.overlays)
+                
+                coordinates.removeAll()
+                
+                startLocation = nil
+                traveledDistance -= self.traveledDistance
+                distanceDriven.text = "0 m"
+                
+                // Reset Timer to Zero
+                
+                setStopTime(date: nil)
+                setStartTime(date: nil)
+                timeElapsed.text = makeTimeString(hour: 0, min: 0, sec: 0)
+                stopTimer()
+                
+                locationManager.allowsBackgroundLocationUpdates = false
+                locationManager.pausesLocationUpdatesAutomatically = true
+                
+                // Reset status label to Ready when stop is pressed and change color to green
+                
+                pauseStateLabel.fadeOut(duration: 2.0)
+                pauseStateLabel.text = "Bereit"
+                pauseStateLabel.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+                pauseStateLabel.fadeIn(duration: 2.0)
+                
+                
+                
+            @unknown default:
+                print("Unknown Fault")
+            }
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     
     // MARK: Function for the Map Type Selector
