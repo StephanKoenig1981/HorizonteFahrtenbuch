@@ -272,9 +272,8 @@
                                     <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SYF-7v-vKo">
                                         <rect key="frame" x="350" y="315.66666666666669" width="43" height="221.00000000000006"/>
                                         <subviews>
-                                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="CnS-DX-FED">
-                                                <rect key="frame" x="-83" y="94.333333333333144" width="210" height="32"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="CnS-DX-FED">
+                                                <rect key="frame" x="-81" y="94" width="210" height="32"/>
                                                 <segments>
                                                     <segment title="Normal"/>
                                                     <segment title="Gedimmt"/>
@@ -288,8 +287,12 @@
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
+                                            <constraint firstItem="CnS-DX-FED" firstAttribute="leading" secondItem="SYF-7v-vKo" secondAttribute="leading" constant="-81" id="52i-0k-kEb"/>
                                             <constraint firstAttribute="height" constant="221" id="7TI-Jq-kCr"/>
+                                            <constraint firstAttribute="bottom" secondItem="CnS-DX-FED" secondAttribute="bottom" constant="95.670000000000002" id="FQ7-5a-Gf6"/>
                                             <constraint firstAttribute="width" constant="43" id="JhP-MQ-MXz"/>
+                                            <constraint firstItem="CnS-DX-FED" firstAttribute="top" secondItem="SYF-7v-vKo" secondAttribute="top" constant="94.329999999999998" id="YiB-LD-N5m"/>
+                                            <constraint firstAttribute="trailing" secondItem="CnS-DX-FED" secondAttribute="trailing" constant="-86" id="Zjv-Xs-q9P"/>
                                         </constraints>
                                     </view>
                                     <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zRx-WB-SuS">
@@ -460,7 +463,6 @@
                                             <constraint firstItem="azT-he-wRo" firstAttribute="centerX" secondItem="TGn-q2-5b7" secondAttribute="centerX" id="FQH-f1-nLa"/>
                                             <constraint firstItem="ru7-Qt-lnv" firstAttribute="top" secondItem="TGn-q2-5b7" secondAttribute="top" constant="18" id="H5F-Kh-TDH"/>
                                             <constraint firstItem="ru7-Qt-lnv" firstAttribute="leading" secondItem="TGn-q2-5b7" secondAttribute="leading" constant="8" id="J4A-Y7-hGt"/>
-                                            <constraint firstAttribute="bottom" secondItem="ru7-Qt-lnv" secondAttribute="bottom" constant="39" id="ZI3-1z-lsl"/>
                                             <constraint firstAttribute="trailing" secondItem="UWe-WQ-5qq" secondAttribute="trailing" constant="8" id="sSR-MI-zxe"/>
                                             <constraint firstItem="UWe-WQ-5qq" firstAttribute="leading" secondItem="azT-he-wRo" secondAttribute="trailing" constant="66" id="ukb-Hf-crR"/>
                                             <constraint firstItem="Gk4-wB-OuN" firstAttribute="top" secondItem="TGn-q2-5b7" secondAttribute="top" constant="6" id="yXC-Vl-Osf"/>
