@@ -427,9 +427,8 @@
                                                     <action selector="locationButtonPressed:" destination="K7b-6J-Pvw" eventType="touchUpInside" id="aqd-bv-Yts"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="azT-he-wRo">
-                                                <rect key="frame" x="132" y="-16" width="129" height="83"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <button opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="azT-he-wRo">
+                                                <rect key="frame" x="132" y="-17" width="129" height="84"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="GreenButtonHighRes"/>
                                                 <connections>
@@ -453,11 +452,14 @@
                                             <constraint firstAttribute="width" secondItem="TGn-q2-5b7" secondAttribute="height" multiplier="393:83" id="1XL-Tr-nal"/>
                                             <constraint firstAttribute="bottom" secondItem="UWe-WQ-5qq" secondAttribute="bottom" constant="27" id="7E0-DN-zu8"/>
                                             <constraint firstAttribute="bottom" secondItem="Gk4-wB-OuN" secondAttribute="bottom" constant="27" id="9d5-OG-pXb"/>
+                                            <constraint firstItem="azT-he-wRo" firstAttribute="top" secondItem="TGn-q2-5b7" secondAttribute="top" constant="-17" id="A0d-Go-Hbe"/>
                                             <constraint firstItem="UWe-WQ-5qq" firstAttribute="leading" secondItem="Gk4-wB-OuN" secondAttribute="trailing" constant="8.3300000000000001" id="Czv-NP-sz2"/>
+                                            <constraint firstItem="azT-he-wRo" firstAttribute="centerX" secondItem="TGn-q2-5b7" secondAttribute="centerX" id="FQH-f1-nLa"/>
                                             <constraint firstItem="ru7-Qt-lnv" firstAttribute="top" secondItem="TGn-q2-5b7" secondAttribute="top" constant="18" id="H5F-Kh-TDH"/>
                                             <constraint firstItem="ru7-Qt-lnv" firstAttribute="leading" secondItem="TGn-q2-5b7" secondAttribute="leading" constant="8" id="J4A-Y7-hGt"/>
                                             <constraint firstAttribute="bottom" secondItem="ru7-Qt-lnv" secondAttribute="bottom" constant="39" id="ZI3-1z-lsl"/>
                                             <constraint firstAttribute="trailing" secondItem="UWe-WQ-5qq" secondAttribute="trailing" constant="8" id="sSR-MI-zxe"/>
+                                            <constraint firstItem="UWe-WQ-5qq" firstAttribute="leading" secondItem="azT-he-wRo" secondAttribute="trailing" constant="66" id="ukb-Hf-crR"/>
                                             <constraint firstItem="Gk4-wB-OuN" firstAttribute="top" secondItem="TGn-q2-5b7" secondAttribute="top" constant="6" id="yXC-Vl-Osf"/>
                                         </constraints>
                                     </view>
