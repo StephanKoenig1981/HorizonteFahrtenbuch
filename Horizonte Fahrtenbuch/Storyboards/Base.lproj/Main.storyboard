@@ -323,6 +323,8 @@
                                             <constraint firstAttribute="bottom" secondItem="CHl-90-wWZ" secondAttribute="bottom" id="mO0-MP-v0u"/>
                                             <constraint firstAttribute="trailing" secondItem="CHl-90-wWZ" secondAttribute="trailing" id="ntq-GI-lDs"/>
                                             <constraint firstItem="CHl-90-wWZ" firstAttribute="leading" secondItem="zRx-WB-SuS" secondAttribute="leading" id="sXw-9k-Ywx"/>
+                                            <constraint firstAttribute="width" constant="196" id="tZq-lO-zuV"/>
+                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="35" id="zEz-Pn-yKM"/>
                                         </constraints>
                                     </view>
                                     <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H1K-us-mHC">
