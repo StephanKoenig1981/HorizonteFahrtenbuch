@@ -179,8 +179,8 @@
                                             <color key="textColor" systemColor="systemOrangeColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="PLZ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tci-ud-0Er">
-                                            <rect key="frame" x="20" y="46" width="71" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PLZ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tci-ud-0Er">
+                                            <rect key="frame" x="20" y="46" width="72" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -192,13 +192,13 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="044 780 78 70" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xVB-pi-tNL">
-                                            <rect key="frame" x="103" y="96" width="159" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="044 780 78 70" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xVB-pi-tNL">
+                                            <rect key="frame" x="103" y="96" width="158" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Ort" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EEW-nA-sHs">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ort" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EEW-nA-sHs">
                                             <rect key="frame" x="103" y="46" width="241" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -206,15 +206,15 @@
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="tci-ud-0Er" firstAttribute="leading" secondItem="50U-xV-ad2" secondAttribute="leading" id="0Dt-Jt-Dfh"/>
-                                        <constraint firstItem="tci-ud-0Er" firstAttribute="baseline" secondItem="EEW-nA-sHs" secondAttribute="baseline" id="0bI-QH-WEf"/>
-                                        <constraint firstItem="xVB-pi-tNL" firstAttribute="baseline" secondItem="bdF-Bj-hZt" secondAttribute="baseline" id="IF8-jq-BdM"/>
-                                        <constraint firstItem="tci-ud-0Er" firstAttribute="top" secondItem="50U-xV-ad2" secondAttribute="bottom" constant="14" id="Jdj-V1-hDM"/>
-                                        <constraint firstItem="EEW-nA-sHs" firstAttribute="leading" secondItem="tci-ud-0Er" secondAttribute="trailing" constant="12" id="Qil-dL-WGE"/>
-                                        <constraint firstItem="xVB-pi-tNL" firstAttribute="centerX" secondItem="50U-xV-ad2" secondAttribute="centerX" id="RqJ-Zw-j75"/>
-                                        <constraint firstItem="EEW-nA-sHs" firstAttribute="trailing" secondItem="50U-xV-ad2" secondAttribute="trailing" id="m2a-wE-vMC"/>
-                                        <constraint firstItem="tci-ud-0Er" firstAttribute="centerX" secondItem="bdF-Bj-hZt" secondAttribute="centerX" id="q6v-lz-jGm"/>
-                                        <constraint firstItem="EEW-nA-sHs" firstAttribute="leading" secondItem="xVB-pi-tNL" secondAttribute="leading" id="tNi-B4-D5H"/>
+                                        <constraint firstItem="tci-ud-0Er" firstAttribute="top" secondItem="50U-xV-ad2" secondAttribute="bottom" constant="14" id="65b-nk-gmg"/>
+                                        <constraint firstItem="xVB-pi-tNL" firstAttribute="leading" secondItem="bdF-Bj-hZt" secondAttribute="trailing" constant="11" id="Knj-2v-iGu"/>
+                                        <constraint firstItem="tci-ud-0Er" firstAttribute="centerX" secondItem="bdF-Bj-hZt" secondAttribute="centerX" id="Yo2-S7-AL8"/>
+                                        <constraint firstItem="EEW-nA-sHs" firstAttribute="trailing" secondItem="50U-xV-ad2" secondAttribute="trailing" id="eJq-c4-gP1"/>
+                                        <constraint firstItem="tci-ud-0Er" firstAttribute="leading" secondItem="50U-xV-ad2" secondAttribute="leading" id="oKU-bq-4yO"/>
+                                        <constraint firstItem="EEW-nA-sHs" firstAttribute="leading" secondItem="xVB-pi-tNL" secondAttribute="leading" id="phe-nz-9wk"/>
+                                        <constraint firstItem="xVB-pi-tNL" firstAttribute="baseline" secondItem="bdF-Bj-hZt" secondAttribute="baseline" id="sNA-Rg-17B"/>
+                                        <constraint firstItem="tci-ud-0Er" firstAttribute="baseline" secondItem="EEW-nA-sHs" secondAttribute="baseline" id="sY9-O3-QTm"/>
+                                        <constraint firstItem="xVB-pi-tNL" firstAttribute="centerX" secondItem="50U-xV-ad2" secondAttribute="centerX" id="xv1-2j-E1x"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <accessibility key="accessibilityConfiguration" identifier="clientCell"/>
