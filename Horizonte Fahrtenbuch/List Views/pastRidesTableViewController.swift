@@ -42,11 +42,16 @@ class pastRidesTableViewController: UITableViewController {
                 self.pastRidesTableView.reloadData()
             case .update(_, let deletions, let insertions, let modifications):
                 // Query results have changed, so apply them to the TableView
+                
                 self.pastRidesTableView.beginUpdates()
                 self.pastRidesTableView.insertRows(at: insertions.map { IndexPath(row: $0, section: 0) }, with: .automatic)
                 self.pastRidesTableView.deleteRows(at: deletions.map { IndexPath(row: $0, section: 0) }, with: .automatic)
                 self.pastRidesTableView.reloadRows(at: modifications.map { IndexPath(row: $0, section: 0) }, with: .automatic)
                 self.pastRidesTableView.endUpdates()
+                
+                /*let topIndexPath = IndexPath(row: 0, section: 0)
+                self.pastRidesTableView.insertRows(at: [topIndexPath], with: .automatic)*/
+                
             case .error(let err):
                 // An error occurred while opening the Realm file on the background worker thread
                 fatalError("\(err)")
