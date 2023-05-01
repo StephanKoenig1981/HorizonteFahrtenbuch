@@ -270,7 +270,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ort" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EEW-nA-sHs">
-                                            <rect key="frame" x="88" y="102" width="25.666666666666671" height="21"/>
+                                            <rect key="frame" x="78" y="102" width="26" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="nfa-Xe-I94"/>
                                             </constraints>
@@ -310,7 +310,7 @@
                                         <constraint firstItem="phJ-Hs-pdb" firstAttribute="leading" secondItem="eyD-bw-OGC" secondAttribute="leading" constant="20" id="6lZ-Mk-WOJ"/>
                                         <constraint firstItem="tci-ud-0Er" firstAttribute="leading" secondItem="eyD-bw-OGC" secondAttribute="leadingMargin" constant="16" id="FOl-kn-eBT"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="GUI-dC-Txk" secondAttribute="trailing" constant="7" id="Lhl-9Q-MHi"/>
-                                        <constraint firstItem="EEW-nA-sHs" firstAttribute="leading" secondItem="tci-ud-0Er" secondAttribute="trailing" constant="21" id="Nx5-oN-OLT"/>
+                                        <constraint firstItem="EEW-nA-sHs" firstAttribute="leading" secondItem="tci-ud-0Er" secondAttribute="trailing" constant="11" id="Nx5-oN-OLT"/>
                                         <constraint firstItem="DQ3-Vt-qg2" firstAttribute="top" secondItem="50U-xV-ad2" secondAttribute="bottom" constant="22.666666666666671" id="OKL-gC-m1b"/>
                                         <constraint firstItem="DQ3-Vt-qg2" firstAttribute="leading" secondItem="xVB-pi-tNL" secondAttribute="leading" id="Tb9-3f-6eP"/>
                                         <constraint firstItem="tci-ud-0Er" firstAttribute="top" secondItem="DQ3-Vt-qg2" secondAttribute="bottom" constant="9" id="V4h-Aw-sP5"/>
