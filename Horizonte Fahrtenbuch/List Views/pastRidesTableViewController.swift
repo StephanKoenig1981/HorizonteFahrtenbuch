@@ -76,7 +76,7 @@ class pastRidesTableViewController: UITableViewController {
         
         // For later purposes
         
-        // cell.rideClientLabel?.text = object.selectedClient?.description
+        // cell.rideClientLabel?.text = object.client?.description
         
         cell.durationLabel?.text = object.timeElapsed?.description
         cell.distanceLabel?.text = object.distanceDriven?.description
@@ -84,7 +84,7 @@ class pastRidesTableViewController: UITableViewController {
         
         // Adding the disclosure Indicator Currently inactive for later purposes
         
-        cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+        // cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
 
 
         return cell
