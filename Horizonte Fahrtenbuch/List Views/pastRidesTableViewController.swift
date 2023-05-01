@@ -8,6 +8,18 @@
 import UIKit
 import RealmSwift
 
+class pastRidesCell: UITableViewCell {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String!) {
+        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+        
+    }
+
+    required init(coder: NSCoder) {
+        fatalError("NSCoding not supported")
+    }
+    
+}
+
 
 class pastRidesTableViewController: UITableViewController {
     
@@ -56,7 +68,7 @@ class pastRidesTableViewController: UITableViewController {
     
     // MARK: Setting Up User Interface
         func setupUI() {
-            tableView.register(Cell.self, forCellReuseIdentifier: "ridesCell")
+            tableView.register(clientsCell.self, forCellReuseIdentifier: "ridesCell")
 
             self.title = "Abgeschlossene Fahrten"
             

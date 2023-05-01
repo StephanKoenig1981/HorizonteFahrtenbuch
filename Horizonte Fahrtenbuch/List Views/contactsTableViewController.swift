@@ -10,7 +10,7 @@ import RealmSwift
 
 
 
-class Cell: UITableViewCell {
+class clientsCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String!) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
         
@@ -23,6 +23,10 @@ class Cell: UITableViewCell {
 }
 
 class contactsTableViewController: UITableViewController {
+    
+    // MARK: Outlets
+    
+    @IBOutlet var clientTableView: UITableView!
     
     // MARK: Initializing Realm
     
@@ -60,7 +64,7 @@ class contactsTableViewController: UITableViewController {
     
     // MARK: Setting Up User Interface
         func setupUI() {
-            tableView.register(Cell.self, forCellReuseIdentifier: "clientCell")
+            tableView.register(clientsCell.self, forCellReuseIdentifier: "clientCell")
 
             self.title = "Kunden"
         }

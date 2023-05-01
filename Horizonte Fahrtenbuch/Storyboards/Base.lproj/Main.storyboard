@@ -232,6 +232,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="X90-zh-FWP"/>
+                    <connections>
+                        <outlet property="clientTableView" destination="kqT-BY-YUa" id="xTh-1h-Qjp"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fKC-qK-F8U" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
