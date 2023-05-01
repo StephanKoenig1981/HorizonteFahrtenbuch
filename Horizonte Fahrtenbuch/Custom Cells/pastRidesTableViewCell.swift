@@ -9,15 +9,12 @@ import UIKit
 
 class pastRidesTableViewCell: UITableViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
+    @IBOutlet weak var background: UIView!
+    
+    @IBOutlet weak var date: UILabel!
+    @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var durationLabel: UILabel!
+    
+    @IBOutlet weak var rideClientLabel: UILabel!
+    
 }

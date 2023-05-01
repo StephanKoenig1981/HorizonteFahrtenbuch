@@ -9,19 +9,6 @@ import UIKit
 import RealmSwift
 
 
-
-class clientsCell: UITableViewCell {
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String!) {
-        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
-        
-    }
-
-    required init(coder: NSCoder) {
-        fatalError("NSCoding not supported")
-    }
-    
-}
-
 class contactsTableViewController: UITableViewController {
     
     // MARK: Outlets

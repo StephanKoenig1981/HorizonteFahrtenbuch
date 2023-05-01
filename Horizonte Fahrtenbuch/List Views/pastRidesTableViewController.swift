@@ -8,20 +8,10 @@
 import UIKit
 import RealmSwift
 
-class pastRidesCell: UITableViewCell {
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String!) {
-        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
-        
-    }
-
-    required init(coder: NSCoder) {
-        fatalError("NSCoding not supported")
-    }
-    
-}
-
 
 class pastRidesTableViewController: UITableViewController {
+    
+    @IBOutlet var pastRidesTableView: UITableView!
     
     // MARK: Initializing Realm
     
@@ -32,8 +22,6 @@ class pastRidesTableViewController: UITableViewController {
     
     // MARK: Variables
     
-    // Section Headers; we need 3 arrays
-    var sectionHeaderTitles = [String]()  // string array of section headers
     let dateFormatter = DateFormatter() // Needed to extract the Year from Publication Date
     
     
@@ -43,7 +31,7 @@ class pastRidesTableViewController: UITableViewController {
         
         setupUI()
         
-        tableView.rowHeight = 86 // same as storyboard, but better to declare it here too
+        pastRidesTableView.rowHeight = 144
     
         
         // Set results notification block
@@ -51,14 +39,14 @@ class pastRidesTableViewController: UITableViewController {
             switch changes {
             case .initial:
                 // Results are now populated and can be accessed without blocking the UI
-                self.tableView.reloadData()
+                self.pastRidesTableView.reloadData()
             case .update(_, let deletions, let insertions, let modifications):
                 // Query results have changed, so apply them to the TableView
-                self.tableView.beginUpdates()
-                self.tableView.insertRows(at: insertions.map { IndexPath(row: $0, section: 0) }, with: .automatic)
-                self.tableView.deleteRows(at: deletions.map { IndexPath(row: $0, section: 0) }, with: .automatic)
-                self.tableView.reloadRows(at: modifications.map { IndexPath(row: $0, section: 0) }, with: .automatic)
-                self.tableView.endUpdates()
+                self.pastRidesTableView.beginUpdates()
+                self.pastRidesTableView.insertRows(at: insertions.map { IndexPath(row: $0, section: 0) }, with: .automatic)
+                self.pastRidesTableView.deleteRows(at: deletions.map { IndexPath(row: $0, section: 0) }, with: .automatic)
+                self.pastRidesTableView.reloadRows(at: modifications.map { IndexPath(row: $0, section: 0) }, with: .automatic)
+                self.pastRidesTableView.endUpdates()
             case .error(let err):
                 // An error occurred while opening the Realm file on the background worker thread
                 fatalError("\(err)")
@@ -68,11 +56,9 @@ class pastRidesTableViewController: UITableViewController {
     
     // MARK: Setting Up User Interface
         func setupUI() {
-            tableView.register(clientsCell.self, forCellReuseIdentifier: "ridesCell")
+            pastRidesTableView.register(pastRidesTableViewCell.self, forCellReuseIdentifier: "latestRideCell")
 
             self.title = "Abgeschlossene Fahrten"
-            
-            tableView.rowHeight = 86.0
         }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -82,18 +68,23 @@ class pastRidesTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ridesCell", for: indexPath)
+        let cell = pastRidesTableView.dequeueReusableCell(withIdentifier: "latestRidesCell", for: indexPath) as! pastRidesTableViewCell
         
         let object = results[indexPath.row]
-        cell.textLabel?.font.withSize(80)
-        cell.textLabel?.text = object.date
-        cell.detailTextLabel?.font.withSize(15)
-        cell.detailTextLabel?.text = object.timeElapsed?.description
+        
+        cell.date?.text = object.date?.description
+        
+        // For later purposes
+        
+        // cell.rideClientLabel?.text = object.selectedClient?.description
+        
+        cell.durationLabel?.text = object.timeElapsed?.description
+        cell.distanceLabel?.text = object.distanceDriven?.description
         cell.textLabel?.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
         
         // Adding the disclosure Indicator Currently inactive for later purposes
         
-        // cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+        cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
 
 
         return cell
