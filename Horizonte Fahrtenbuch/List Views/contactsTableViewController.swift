@@ -40,7 +40,7 @@ class contactsTableViewController: UITableViewController {
         
         setupUI()
         
-        tableView.rowHeight = 86 // same as storyboard, but better to declare it here too
+        clientTableView.rowHeight = 225 // same as storyboard, but better to declare it here too
         
         // Set results notification block
         self.notificationToken = results.observe { (changes: RealmCollectionChange) in
@@ -64,7 +64,7 @@ class contactsTableViewController: UITableViewController {
     
     // MARK: Setting Up User Interface
         func setupUI() {
-            tableView.register(clientsCell.self, forCellReuseIdentifier: "clientCell")
+            tableView.register(clientsTableViewCell.self, forCellReuseIdentifier: "clientCell")
 
             self.title = "Kunden"
         }
@@ -76,16 +76,22 @@ class contactsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "clientCell", for: indexPath)
+        let cell  =  clientTableView.dequeueReusableCell(withIdentifier: "customClientCell", for: indexPath) as! clientsTableViewCell
         
         let object = results[indexPath.row]
-        cell.textLabel?.text = object.client?.description
-        cell.detailTextLabel?.text = object.city?.description
-        cell.textLabel?.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+        //cell.textLabel?.text = object.client?.description
+        cell.clientNameLabel?.text = object.client?.description
+        cell.clientStreetLabel?.text = object.street?.description
+        cell.clientPostalCodeLabel?.text = object.postalCode?.description
+        cell.clientCityLabel?.text = object.city?.description
+        
+        cell.clientPhoneLabel?.text = object.phone?.description
+        
+        cell.clientNameLabel.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
         
         // Adding the disclosure Indicator
         
-        cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+        //cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
 
 
         return cell
@@ -98,11 +104,17 @@ class contactsTableViewController: UITableViewController {
                 try! realm.commitWrite()
             }
         }
-
-    // MARK: Method for the Section Indicators
     
-    /*override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Kunden"
-    }*/
-
+    // MARK: Action for selecting client
+    
+    @IBAction func clientSeclectButtonPressed(_ sender: Any) {
+        
+       /* let realm = try! Realm()
+        
+        let selectedClient = selectedClient()
+        
+        let selectedClient = clientNameLabel?.text
+        
+        saveRealmObject(client: selectedClient)*/
+    }
 }

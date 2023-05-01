@@ -8,10 +8,15 @@
 import UIKit
 
 class clientsTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var background: UIView!
 
     @IBOutlet weak var clientNameLabel: UILabel!
     @IBOutlet weak var clientPostalCodeLabel: UILabel!
     @IBOutlet weak var clientPhoneLabel: UILabel!
     @IBOutlet weak var clientCityLabel: UILabel!
-
+    @IBOutlet weak var clientStreetLabel: UILabel!
+    
+    @IBOutlet weak var selectButton: UIButton!
+    
 }
