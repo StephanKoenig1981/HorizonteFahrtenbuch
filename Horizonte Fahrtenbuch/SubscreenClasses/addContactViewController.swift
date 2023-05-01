@@ -66,9 +66,7 @@ class addContactViewController: UIViewController, UITextFieldDelegate {
     @IBAction func saveButtonPressed(_ sender: Any) {
         
         // MARK: Initializing Realm
-        
-        let realm = try! Realm()
-        
+                
         let client = clients()
         
         client.client = clientTextfield.text
