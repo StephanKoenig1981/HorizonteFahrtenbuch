@@ -107,8 +107,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var HorizonteLogo: UIImageView!
     
     @IBOutlet weak var GrantGPSAccessButton: UIButton!
-    @IBOutlet weak var GrantBackgroundActivityButton: UIButton!
-    @IBOutlet weak var GrantHealthDataAccessButton: UIButton!
     
     @IBOutlet weak var AllSetLogo: UIImageView!
     
@@ -236,19 +234,21 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             AllSetLogo.image = UIImage(named:"Cross")
             AllSetLogo.fadeIn(duration: 1.0)
         case .authorizedAlways:
-            GrantBackgroundActivityButton.fadeIn(duration: 1.0)
             GrantGPSAccessButton.isEnabled = false
             GrantGPSAccessButton.setTitle("GPS Nutzung erlaubt", for: .disabled)
+            AllSetLogo.fadeIn(duration: 1.0)
             print("GPS permanently granted")
         case .authorizedWhenInUse:
-            GrantBackgroundActivityButton.fadeIn(duration: 1.0)
             GrantGPSAccessButton.isEnabled = false
             GrantGPSAccessButton.setTitle("GPS Nutzung erlaubt", for: .disabled)
+            AllSetLogo.fadeIn(duration: 1.0)
+            ProceedButton.fadeIn(duration: 1.0)
             print("GPS Granted when in use")
         case .notDetermined:
             print("not determined")
         case .some(.restricted):
             GrantGPSAccessButton.isEnabled = false
+            
             GrantGPSAccessButton.setTitle("GPS Nutzung verweigert", for: .disabled)
             
             AllSetLogo.image = UIImage(named:"Cross")
@@ -260,24 +260,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             print("None")
         }
     }
-    
-    @IBAction func GrantBackgroundActivityButtonPressed(_ sender: Any) {
-        
-        // Animations
-        
-        GrantHealthDataAccessButton.fadeIn(duration: 1.0)
-        GrantBackgroundActivityButton.isEnabled = false
-        GrantBackgroundActivityButton.setTitle("Hintergrundaktivtät erlaubt", for: .disabled)
-    }
-    @IBAction func GrantHealthDataButtonPressed(_ sender: Any) {
-        
-        // Animations
-        
-        AllSetLogo.fadeIn(duration: 1.0)
-        ProceedButton.fadeIn(duration: 1.0)
-        GrantHealthDataAccessButton.isEnabled = false
-        GrantHealthDataAccessButton.setTitle("Bewegungsdaten erfasst", for: .disabled)
-    }
+
     
     @IBAction func ProceedButtonPressed(_ sender: Any) {
         print("Procedded to the main Map View")

@@ -19,32 +19,38 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Willkommen" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u0k-W2-dmc">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="scaleToFill" editable="NO" text="Willkommen" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u0k-W2-dmc">
                                 <rect key="frame" x="73" y="260" width="247" height="60"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="u0k-W2-dmc" secondAttribute="height" multiplier="247:60" id="txc-gR-Bia"/>
+                                </constraints>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="31"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="hpH-vc-7ZU">
-                                <rect key="frame" x="76" y="104" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="hpH-vc-7ZU">
+                                <rect key="frame" x="76" y="104" width="240" height="148"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="djg-u5-aK7"/>
+                                    <constraint firstAttribute="height" constant="148" id="laz-sS-n7R"/>
+                                </constraints>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Zuerst müssen wir einige Dinge einrichten, um das Fahrtenbuch optimal nutzen zu können. " textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f4E-nX-Jls">
-                                <rect key="frame" x="76" y="339" width="240" height="100"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Zuerst müssen wir einige Dinge einrichten, um das Fahrtenbuch optimal nutzen zu können. " textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f4E-nX-Jls">
+                                <rect key="frame" x="76" y="339" width="240" height="112"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" summaryElement="YES" notEnabled="YES"/>
                                 </accessibility>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="f4E-nX-Jls" secondAttribute="height" multiplier="10:3" constant="-133.33333333333337" id="pTm-9t-OjK"/>
+                                </constraints>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dUg-xJ-j65">
-                                <rect key="frame" x="73" y="484" width="247" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dUg-xJ-j65">
+                                <rect key="frame" x="73" y="459" width="247" height="35"/>
                                 <color key="tintColor" red="0.64705884459999996" green="0.77647060160000003" blue="0.45490196350000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="tinted" title="Standortfreigabe erteilen" cornerStyle="capsule">
@@ -55,39 +61,14 @@
                                     <action selector="GrantGPSAccesButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iK0-Px-IxD"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H2C-hV-jAf">
-                                <rect key="frame" x="73" y="539" width="247" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" red="0.64705884459999996" green="0.77647060160000003" blue="0.45490196350000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="tinted" title="Hintergrundaktivität erlauben" cornerStyle="capsule">
-                                    <color key="baseForegroundColor" red="0.64705884459999996" green="0.77647060160000003" blue="0.45490196350000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                    <color key="baseBackgroundColor" red="0.64705884459999996" green="0.77647060160000003" blue="0.45490196350000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="GrantBackgroundActivityButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nTt-XU-KV1"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="slK-6e-vfl">
-                                <rect key="frame" x="73" y="594" width="247" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" red="0.64705884459999996" green="0.77647060160000003" blue="0.45490196350000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="tinted" title="Zugriff auf Bewegungsdaten" cornerStyle="capsule">
-                                    <color key="baseForegroundColor" red="0.64705884459999996" green="0.77647060160000003" blue="0.45490196350000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                    <color key="baseBackgroundColor" red="0.64705884459999996" green="0.77647060160000003" blue="0.45490196350000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="GrantHealthDataButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bAg-Un-1Mi"/>
-                                </connections>
-                            </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="Tp3-Xq-jik">
-                                <rect key="frame" x="76" y="648" width="240" height="93"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="Tp3-Xq-jik">
+                                <rect key="frame" x="76" y="515" width="244" height="101"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Tp3-Xq-jik" secondAttribute="height" multiplier="241:101" constant="3" id="fcm-NO-JCc"/>
+                                </constraints>
                             </imageView>
-                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3B6-QJ-SQI">
-                                <rect key="frame" x="73" y="767" width="247" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3B6-QJ-SQI">
+                                <rect key="frame" x="73" y="638" width="247" height="35"/>
                                 <color key="tintColor" red="0.64705884459999996" green="0.77647060160000003" blue="0.45490196350000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="tinted" title="Weiter" cornerStyle="capsule">
@@ -102,13 +83,31 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Tp3-Xq-jik" firstAttribute="top" secondItem="dUg-xJ-j65" secondAttribute="bottom" constant="21" id="11U-gh-19l"/>
+                            <constraint firstItem="Tp3-Xq-jik" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="60" id="BqW-3G-O9S"/>
+                            <constraint firstItem="f4E-nX-Jls" firstAttribute="top" secondItem="u0k-W2-dmc" secondAttribute="bottom" constant="19" id="C7r-N4-7hz"/>
+                            <constraint firstItem="dUg-xJ-j65" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="57" id="Du6-iV-Zt5"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="hpH-vc-7ZU" secondAttribute="trailing" constant="61" id="Ftq-Tc-AQF"/>
+                            <constraint firstItem="u0k-W2-dmc" firstAttribute="top" secondItem="hpH-vc-7ZU" secondAttribute="bottom" constant="8" id="JmR-Hi-Klr"/>
+                            <constraint firstItem="dUg-xJ-j65" firstAttribute="top" secondItem="f4E-nX-Jls" secondAttribute="bottom" constant="8" id="LKU-r1-o4a"/>
+                            <constraint firstItem="u0k-W2-dmc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="57" id="M1c-hC-Wgp"/>
+                            <constraint firstItem="f4E-nX-Jls" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="60" id="VGo-yi-7hL"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="dUg-xJ-j65" secondAttribute="trailing" constant="57" id="WIP-gp-f8c"/>
+                            <constraint firstItem="3B6-QJ-SQI" firstAttribute="top" secondItem="Tp3-Xq-jik" secondAttribute="bottom" constant="22" id="XV4-ke-cTU"/>
+                            <constraint firstItem="3B6-QJ-SQI" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="57" id="fWm-jr-ZUJ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="u0k-W2-dmc" secondAttribute="trailing" constant="57" id="jan-CI-MhG"/>
+                            <constraint firstItem="hpH-vc-7ZU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="60" id="kZX-Qz-5ru"/>
+                            <constraint firstItem="hpH-vc-7ZU" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="45" id="nac-rO-PiM"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="f4E-nX-Jls" secondAttribute="trailing" constant="61" id="rOR-zi-ptK"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="3B6-QJ-SQI" secondAttribute="trailing" constant="57" id="rRI-Ph-Y4Y"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Tp3-Xq-jik" secondAttribute="trailing" constant="57" id="uxz-Sv-O0i"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="AllSetLogo" destination="Tp3-Xq-jik" id="k5Q-Fc-3LI"/>
                         <outlet property="ConfigureText" destination="f4E-nX-Jls" id="xKN-al-2RE"/>
-                        <outlet property="GrantBackgroundActivityButton" destination="H2C-hV-jAf" id="XA6-6b-Qbi"/>
                         <outlet property="GrantGPSAccessButton" destination="dUg-xJ-j65" id="qFY-U1-Q98"/>
-                        <outlet property="GrantHealthDataAccessButton" destination="slK-6e-vfl" id="fOC-t7-HZ8"/>
                         <outlet property="HorizonteLogo" destination="hpH-vc-7ZU" id="8B6-KT-0OV"/>
                         <outlet property="ProceedButton" destination="3B6-QJ-SQI" id="Ur1-2A-Njc"/>
                         <outlet property="WelcomeText" destination="u0k-W2-dmc" id="335-Kq-VQV"/>
