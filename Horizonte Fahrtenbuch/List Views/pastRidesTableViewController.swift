@@ -90,7 +90,7 @@ class pastRidesTableViewController: UITableViewController {
         
         // Adding the disclosure Indicator Currently inactive for later purposes
         
-        cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+        // cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
 
 
         return cell
