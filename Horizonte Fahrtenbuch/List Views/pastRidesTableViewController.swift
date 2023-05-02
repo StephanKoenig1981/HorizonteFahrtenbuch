@@ -85,6 +85,7 @@ class pastRidesTableViewController: UITableViewController {
         
         cell.durationLabel?.text = object.timeElapsed?.description
         cell.distanceLabel?.text = object.distanceDriven?.description
+        cell.rideClientLabel?.text = object.currentClientName?.description
         cell.textLabel?.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
         
         // Adding the disclosure Indicator Currently inactive for later purposes

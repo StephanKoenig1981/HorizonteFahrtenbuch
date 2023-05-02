@@ -15,5 +15,6 @@ class currentRide: Object {
     @objc dynamic var date: String?
     @objc dynamic var distanceDriven: String?
     @objc dynamic var timeElapsed: String?
+    @objc dynamic var currentClientName: String?
 
 }

@@ -14,7 +14,7 @@ import Combine
 import ActivityKit
 
 
-class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
+class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITextFieldDelegate {
     
     
     // MARK: Variables for Location determination
@@ -76,6 +76,10 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     @IBOutlet weak var addContactButton: UIButton!
     @IBOutlet weak var addressBookButtonView: UIView!
     @IBOutlet weak var addressBookButton: UIButton!
+    @IBOutlet weak var settingsButtonView: UIView!
+    @IBOutlet weak var settingsButton: UIButton!
+    @IBOutlet weak var clientTextFieldView: UIView!
+    @IBOutlet weak var clientTextField: UITextField!
     
     // MARK: Outlets for the Segmented control view and segmented control
     
@@ -100,22 +104,41 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         }()
         print (Realm.Configuration.defaultConfiguration.fileURL!)
         
-        // Mask Corner Radius for segmented control View
+        // Delegate for the client textfield
+        
+        clientTextField.delegate = self
+        
+        // Customizing customer TextField
+        
+        clientTextField.attributedPlaceholder = NSAttributedString(
+            string: "Kunde eingeben",
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemOrange.withAlphaComponent(0.9)]
+        )
+        
+            // Mask Corner Radius for segmented control View
         
                 menuButtonView.layer.cornerRadius = 25
                 menuButton.tintColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
         
-            addContactButtonView.layer.cornerRadius = 25
-            addContactButton.tintColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+                addContactButtonView.layer.cornerRadius = 25
+                addContactButton.tintColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
         
-        addressBookButtonView.layer.cornerRadius = 25
-        addressBookButton.tintColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+                addressBookButtonView.layer.cornerRadius = 25
+                addressBookButton.tintColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+        
+                settingsButtonView.layer.cornerRadius = 25
+                settingsButton.tintColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
         
                 segmentedControlView.clipsToBounds = true
                 segmentedControlView.layer.cornerRadius = 15
                 segmentedControlView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
         
-                // Customizing the Maptype Selector
+            // MASK Corner Radius for Textfield View
+        
+                clientTextFieldView.layer.cornerRadius = 20
+                clientTextFieldView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+        
+            // Customizing the Maptype Selector
         
                 mapTypeSelector.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi / 2))
         
@@ -125,7 +148,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         
                 wayBackButton.sendActions(for: .touchUpInside)
         
-                // Saving NSUserDefault Keys
+            // Saving NSUserDefault Keys
         
                 startTime = userDefaults.object(forKey: START_TIME_KEY) as? Date
                 stopTime = userDefaults.object(forKey: STOP_TIME_KEY) as? Date
@@ -183,6 +206,24 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         mapView.setUserTrackingMode(.followWithHeading, animated: true)
         
     }
+    
+    // MARK: Hickup workaround code to hide keyboard when return is pressed
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super .viewWillDisappear(true)
+        self.view.endEditing(true)
+    }
+
+    // MARK: Functions for keyboard actions
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+            textField.resignFirstResponder()
+            return true
+        }
+    
+    func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+            self.view.endEditing(true)
+        }
     
     
     override func viewDidAppear(_ animated: Bool) {
@@ -416,6 +457,8 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         
         stopwatchResetButton.fadeIn(duration: 0.5)
         
+        clientTextFieldView.fadeOut(duration: 0.5)
+        
         // Testing disabling the screen sleep mode while recording a ride
         
         UIApplication.shared.isIdleTimerDisabled = true
@@ -455,9 +498,16 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         alert.addAction(UIAlertAction(title: "Fortsetzen", style: .cancel))
         alert.addAction(UIAlertAction(title: "Ohne speichern beenden", style: .destructive, handler: { [self]_ in
             
+            
             TopNotchView.topNotchViewfadeOut(duration: 1.0)
             timeElapsed.fadeOut(duration: 1.0)
             distanceDriven.fadeOut(duration: 1.0)
+            
+            clientTextFieldView.fadeIn(duration: 1.0)
+            
+            // Resetting client Text field for a new ride
+            
+            clientTextField.text = ""
             
             stopwatchResetButton.fadeOut(duration: 0.5)
             
@@ -546,6 +596,8 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
                 startButton.setImage(UIImage(named: "GreenButtonHighRes.png"), for: .normal)
                 startButton.ButtonViewfadeIn(duration: 0.5)
                 
+                clientTextFieldView.fadeIn(duration: 1.0)
+                
                 // Testing disabling the screen sleep mode while recording a ride (Reenabling sleep when stop is pressed)
                 
                 UIApplication.shared.isIdleTimerDisabled = false
@@ -568,9 +620,12 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
                 currentRides.timeElapsed = timeElapsed.text
                 currentRides.distanceDriven = distanceDriven.text
                 currentRides.date = dateFormatter.string(from: date)
+                currentRides.currentClientName = clientTextField.text
                
                 
                 saveRealmObject(currentRides: currentRides)
+                
+                clientTextField.text = ""
                 
                 // Stopping Location Updates to save battery
                 

@@ -16,7 +16,9 @@ class clientsTableViewCell: UITableViewCell {
     @IBOutlet weak var clientPhoneLabel: UILabel!
     @IBOutlet weak var clientCityLabel: UILabel!
     @IBOutlet weak var clientStreetLabel: UILabel!
+    @IBOutlet weak var clientsContactPersonLabel: UILabel!
     
-    @IBOutlet weak var selectButton: UIButton!
+    @IBOutlet weak var routeButton: UIButton!
+    @IBOutlet weak var phoneButton: UIButton!
     
 }
