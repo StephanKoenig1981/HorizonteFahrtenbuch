@@ -271,6 +271,9 @@
                                             <buttonConfiguration key="configuration" style="plain" image="map.fill" catalog="system">
                                                 <color key="baseForegroundColor" systemColor="systemOrangeColor"/>
                                             </buttonConfiguration>
+                                            <connections>
+                                                <action selector="routeButtonPressed:" destination="WeZ-ig-gme" eventType="touchUpInside" id="RMe-lw-JWR"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ldw-DQ-yI6">
                                             <rect key="frame" x="308" y="168" width="49" height="35"/>

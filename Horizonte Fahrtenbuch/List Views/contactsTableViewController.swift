@@ -79,7 +79,7 @@ class contactsTableViewController: UITableViewController {
         
         // Adding the disclosure Indicator
         
-        //cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+        cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
 
 
         return cell
@@ -99,7 +99,7 @@ class contactsTableViewController: UITableViewController {
        
     }
     
-    @IBAction func clientSeclectButtonPressed(_ sender: Any) {
+    @IBAction func routeButtonPressed(_ sender: Any) {
     
     }
 }
