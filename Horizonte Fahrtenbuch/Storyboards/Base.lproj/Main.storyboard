@@ -576,7 +576,7 @@
                                     <view alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bcE-r6-LV8">
                                         <rect key="frame" x="0.0" y="693" width="393" height="77"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Kunde eingeben" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Ism-S4-Ixt">
+                                            <textField opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Kunde eingeben" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Ism-S4-Ixt">
                                                 <rect key="frame" x="8" y="12" width="377" height="35"/>
                                                 <color key="textColor" red="0.61176470589999998" green="0.78039215689999997" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
