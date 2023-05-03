@@ -27,12 +27,12 @@ class pastRidesTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         
         setupUI()
         
         pastRidesTableView.rowHeight = 144
-    
+        
         
         // Set results notification block
         self.notificationToken = results.observe { (changes: RealmCollectionChange) in
@@ -50,7 +50,7 @@ class pastRidesTableViewController: UITableViewController {
                 self.pastRidesTableView.endUpdates()
                 
                 /*let topIndexPath = IndexPath(row: 0, section: 0)
-                self.pastRidesTableView.insertRows(at: [topIndexPath], with: .automatic)*/
+                 self.pastRidesTableView.insertRows(at: [topIndexPath], with: .automatic)*/
                 
             case .error(let err):
                 // An error occurred while opening the Realm file on the background worker thread
@@ -60,18 +60,18 @@ class pastRidesTableViewController: UITableViewController {
     }
     
     // MARK: Setting Up User Interface
-        func setupUI() {
-            pastRidesTableView.register(pastRidesTableViewCell.self, forCellReuseIdentifier: "latestRideCell")
-
-            self.title = "Abgeschlossene Fahrten"
-        }
-
+    func setupUI() {
+        pastRidesTableView.register(pastRidesTableViewCell.self, forCellReuseIdentifier: "latestRideCell")
+        
+        self.title = "Abgeschlossene Fahrten"
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let count = realm.objects(currentRide.self).count
         
         return count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = pastRidesTableView.dequeueReusableCell(withIdentifier: "latestRidesCell", for: indexPath) as! pastRidesTableViewCell
         
@@ -79,14 +79,20 @@ class pastRidesTableViewController: UITableViewController {
         
         cell.date?.text = object.date?.description
         
-        // For later purposes
         
-        // cell.rideClientLabel?.text = object.client?.description
         
         cell.durationLabel?.text = object.timeElapsed?.description
         cell.distanceLabel?.text = object.distanceDriven?.description
-        cell.rideClientLabel?.text = object.currentClientName?.description
-        cell.textLabel?.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+        
+        if object.currentClientName?.description == nil {
+            cell.rideClientLabel?.text = "Keine Angabe"
+            cell.rideClientLabel?.textColor = UIColor.systemBlue
+        } else {
+    
+            cell.rideClientLabel?.text = object.currentClientName?.description
+            cell.rideClientLabel?.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+}
+       
         
         // Adding the disclosure Indicator Currently inactive for later purposes
         
