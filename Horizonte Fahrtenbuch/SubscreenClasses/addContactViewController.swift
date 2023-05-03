@@ -65,20 +65,103 @@ class addContactViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func saveButtonPressed(_ sender: Any) {
         
-        // MARK: Initializing Realm
+        if clientTextfield.text == "" {
+            let alert = UIAlertController(title: "Pflichtfeld", message: "Bitte fülle alle benötigten Felder aus.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                 
-        let client = clients()
-        
-        client.client = clientTextfield.text
-        client.clientContactPerson = clientContactPersonTextfield.text
-        client.street = streetTextfield.text
-        client.postalCode = postalCodeTextfield.text
-        client.city = cityTextfield.text
-        client.phone = phoneTextfield.text
-        
-        saveRealmObject(client: client)
-        
-        self.dismiss(animated: true)
+                switch action.style{
+                    
+                    case .default:
+                    print("default")
+                    
+                    case .cancel:
+                    print("cancel")
+                    
+                    case .destructive:
+                    print("destructive")
+                    
+                @unknown default:
+                    print("Unknown Fault")
+                }
+            }))
+            self.present(alert, animated: true, completion: nil)
+        } else if streetTextfield.text == "" {
+            let alert = UIAlertController(title: "Pflichtfeld", message: "Bitte fülle alle benötigten Felder aus.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                
+                switch action.style{
+                    
+                    case .default:
+                    print("default")
+                    
+                    case .cancel:
+                    print("cancel")
+                    
+                    case .destructive:
+                    print("destructive")
+                    
+                @unknown default:
+                    print("Unknown Fault")
+                }
+            }))
+            self.present(alert, animated: true, completion: nil)
+        } else if postalCodeTextfield.text == "" {
+            let alert = UIAlertController(title: "Pflichtfeld", message: "Bitte fülle alle benötigten Felder aus.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                
+                switch action.style{
+                    
+                    case .default:
+                    print("default")
+                    
+                    case .cancel:
+                    print("cancel")
+                    
+                    case .destructive:
+                    print("destructive")
+                    
+                @unknown default:
+                    print("Unknown Fault")
+                }
+            }))
+            self.present(alert, animated: true, completion: nil)
+        } else if cityTextfield.text == "" {
+            let alert = UIAlertController(title: "Pflichtfeld", message: "Bitte fülle alle benötigten Felder aus.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                
+                switch action.style{
+                    
+                    case .default:
+                    print("default")
+                    
+                    case .cancel:
+                    print("cancel")
+                    
+                    case .destructive:
+                    print("destructive")
+                    
+                @unknown default:
+                    print("Unknown Fault")
+                }
+            }))
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            
+            // MARK: Initializing Realm
+            
+            let client = clients()
+            
+            client.client = clientTextfield.text
+            client.clientContactPerson = clientContactPersonTextfield.text
+            client.street = streetTextfield.text
+            client.postalCode = postalCodeTextfield.text
+            client.city = cityTextfield.text
+            client.phone = phoneTextfield.text
+            
+            saveRealmObject(client: client)
+            
+            self.dismiss(animated: true)
+        }
     }
     
     // MARK: Function for finally saving client to database
