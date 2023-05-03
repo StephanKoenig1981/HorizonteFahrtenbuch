@@ -104,6 +104,8 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         }()
         print (Realm.Configuration.defaultConfiguration.fileURL!)
         
+        // MARK: Client TextField
+        
         // Delegate for the client textfield
         
         clientTextField.delegate = self
