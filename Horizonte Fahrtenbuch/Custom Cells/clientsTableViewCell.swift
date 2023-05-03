@@ -7,7 +7,17 @@
 
 import UIKit
 
+
 class clientsTableViewCell: UITableViewCell {
+    
+    //create your closure here
+             var buttonPressed : (() -> ()) = {}
+
+            @IBAction func phoneButtonAction(_ sender: UIButton) {
+        //Call your closure here
+                buttonPressed()
+            }
+    
     
     @IBOutlet weak var background: UIView!
 
@@ -22,3 +32,4 @@ class clientsTableViewCell: UITableViewCell {
     @IBOutlet weak var phoneButton: UIButton!
     
 }
+

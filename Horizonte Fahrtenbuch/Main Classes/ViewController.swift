@@ -66,17 +66,23 @@ extension UIView {
             self.alpha = 1.0
         })
     }
+    
+    func textFieldViewfadeIn(duration: TimeInterval = 1.0) {
+        UIView.animate(withDuration: duration, animations: {
+            self.alpha = 0.9
+        })
+    }
 
 /**
  Fade out a view with a duration
  
  - parameter duration: custom animation duration
  */
-func fadeOut(duration: TimeInterval = 1.0) {
-    UIView.animate(withDuration: duration, animations: {
-        self.alpha = 0.0
-    })
-  }
+    func fadeOut(duration: TimeInterval = 1.0) {
+        UIView.animate(withDuration: duration, animations: {
+            self.alpha = 0.0
+        })
+    }
     
     func topNotchViewfadeOut(duration: TimeInterval = 1.0) {
         UIView.animate(withDuration: duration, animations: {

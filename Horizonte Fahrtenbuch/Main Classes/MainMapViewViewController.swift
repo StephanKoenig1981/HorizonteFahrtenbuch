@@ -117,6 +117,8 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemOrange.withAlphaComponent(0.9)]
         )
         
+        
+        
             // Mask Corner Radius for segmented control View
         
                 menuButtonView.layer.cornerRadius = 25
@@ -493,6 +495,10 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
             wayBackButton.setTitleColor(.systemOrange, for: .normal)
         } else {
             wayBackButton.setTitle(clientTextField.text, for: .normal)
+            wayBackButton.configuration?.titleAlignment = .center
+            wayBackButton.configuration?.titleLineBreakMode = .byTruncatingTail
+            
+            
         }
         
         print (traveledDistance)
@@ -511,7 +517,8 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
             timeElapsed.fadeOut(duration: 1.0)
             distanceDriven.fadeOut(duration: 1.0)
             
-            clientTextFieldView.fadeIn(duration: 1.0)
+            clientTextFieldView.textFieldViewfadeIn(duration: 1.0)
+            clientTextField.textFieldViewfadeIn(duration: 1.0)
             
             // Resetting client Text field for a new ride
             

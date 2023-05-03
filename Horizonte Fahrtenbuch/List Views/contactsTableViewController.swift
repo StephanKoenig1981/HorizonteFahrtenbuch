@@ -80,6 +80,18 @@ class contactsTableViewController: UITableViewController {
         // Adding the disclosure Indicator
         
         // cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+        
+        // MARK: Action for making a phone call
+        
+           cell.buttonPressed = {
+               
+               guard let url = URL(string: "telprompt://\((object.phone?.description)!)"),
+                   UIApplication.shared.canOpenURL(url) else {
+                   return
+               }
+               UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                  print (indexPath)
+                   }
 
 
         return cell
