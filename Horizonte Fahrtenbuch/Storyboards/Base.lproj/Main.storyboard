@@ -169,7 +169,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distanz" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mqN-zD-y5O">
-                                            <rect key="frame" x="140" y="102" width="58.666666666666657" height="21"/>
+                                            <rect key="frame" x="140" y="102" width="59" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="pM8-gH-8PM"/>
                                             </constraints>
@@ -276,7 +276,7 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ldw-DQ-yI6">
-                                            <rect key="frame" x="308" y="168" width="49" height="35"/>
+                                            <rect key="frame" x="308" y="168" width="49" height="34"/>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="plain" image="phone.fill" catalog="system">
                                                 <color key="baseForegroundColor" systemColor="systemOrangeColor"/>
@@ -287,7 +287,7 @@
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="044 780 78 70" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xVB-pi-tNL">
-                                            <rect key="frame" x="35.999999999999993" y="176" width="115.33333333333331" height="21"/>
+                                            <rect key="frame" x="36.000000000000007" y="176" width="115.66666666666669" height="21"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                             <color key="textColor" systemColor="systemOrangeColor"/>
                                             <nil key="highlightedColor"/>
@@ -925,7 +925,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6lH-DS-qqE">
-                                        <rect key="frame" x="11" y="553" width="143" height="35"/>
+                                        <rect key="frame" x="11" y="553" width="170" height="35"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="Abbrechen" cornerStyle="capsule">
                                             <color key="baseBackgroundColor" systemColor="systemRedColor"/>
@@ -953,7 +953,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QKo-bn-LX7">
-                                        <rect key="frame" x="242" y="553" width="143" height="35"/>
+                                        <rect key="frame" x="215" y="553" width="170" height="35"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="Speichern" cornerStyle="capsule">
                                             <color key="baseBackgroundColor" red="0.52156862749999999" green="0.77647060160000003" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -1000,7 +1000,7 @@
                                     <constraint firstItem="Uu0-nZ-Jim" firstAttribute="leading" secondItem="BBM-OY-18l" secondAttribute="leading" constant="77" id="2e5-IG-NA0"/>
                                     <constraint firstItem="Uu0-nZ-Jim" firstAttribute="centerX" secondItem="QUV-ql-5RU" secondAttribute="centerX" id="2sx-Pu-eeh"/>
                                     <constraint firstItem="ZFV-yO-Y2a" firstAttribute="top" secondItem="OhX-vS-WdU" secondAttribute="bottom" constant="18.670000000000002" id="3UB-qd-cMP"/>
-                                    <constraint firstItem="QKo-bn-LX7" firstAttribute="leading" secondItem="6lH-DS-qqE" secondAttribute="trailing" constant="88" id="4P6-8T-dJX"/>
+                                    <constraint firstItem="QKo-bn-LX7" firstAttribute="leading" secondItem="6lH-DS-qqE" secondAttribute="trailing" constant="34" id="4P6-8T-dJX"/>
                                     <constraint firstItem="V7l-SG-NhB" firstAttribute="centerY" secondItem="pPg-b2-RgW" secondAttribute="centerY" id="4ax-Dg-Av3"/>
                                     <constraint firstItem="66M-Ci-w68" firstAttribute="top" secondItem="pPg-b2-RgW" secondAttribute="bottom" constant="21" id="5MF-VD-W88"/>
                                     <constraint firstItem="lmd-IB-buZ" firstAttribute="centerY" secondItem="66M-Ci-w68" secondAttribute="centerY" id="7iH-LP-4KO"/>
@@ -1048,7 +1048,7 @@
                                     <constraint firstAttribute="trailing" secondItem="Ayb-nD-olV" secondAttribute="trailing" constant="7" id="s0s-ca-JeC"/>
                                     <constraint firstItem="QKo-bn-LX7" firstAttribute="height" secondItem="6lH-DS-qqE" secondAttribute="height" id="sVl-hV-l0q"/>
                                     <constraint firstItem="OhX-vS-WdU" firstAttribute="top" secondItem="R83-hu-O91" secondAttribute="bottom" constant="22" id="uco-J4-XGa"/>
-                                    <constraint firstItem="6lH-DS-qqE" firstAttribute="centerX" secondItem="OhX-vS-WdU" secondAttribute="centerX" id="xuG-j5-HWq"/>
+                                    <constraint firstItem="6lH-DS-qqE" firstAttribute="centerX" secondItem="OhX-vS-WdU" secondAttribute="centerX" constant="13.5" id="xuG-j5-HWq"/>
                                     <constraint firstItem="pPg-b2-RgW" firstAttribute="top" secondItem="ZFV-yO-Y2a" secondAttribute="bottom" constant="21" id="yW2-cY-1TS"/>
                                 </constraints>
                             </view>
@@ -1074,7 +1074,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lqw-hK-dMS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="878.62595419847321" y="693.66197183098598"/>
+            <point key="canvasLocation" x="877.60000000000002" y="693.10344827586209"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="WAF-dI-pya">
