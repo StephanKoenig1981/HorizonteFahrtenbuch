@@ -92,7 +92,16 @@ class contactsTableViewController: UITableViewController {
                UIApplication.shared.open(url, options: [:], completionHandler: nil)
                   print (indexPath)
                    }
-
+    
+        // Disabling the phone button if no phone number is in the contact details.
+        
+        if object.phone?.description == "" {
+            cell.phoneButton.isEnabled = false
+            cell.phoneButton.tintColor = .systemGray
+        } else {
+            cell.phoneButton.isEnabled = true
+            cell.phoneButton.tintColor = .systemOrange
+        }
 
         return cell
     }
