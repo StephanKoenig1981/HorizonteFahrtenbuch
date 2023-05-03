@@ -272,6 +272,7 @@
                                                 <color key="baseForegroundColor" systemColor="systemOrangeColor"/>
                                             </buttonConfiguration>
                                             <connections>
+                                                <action selector="mapButtonPressed:" destination="gOO-3h-G2T" eventType="touchUpInside" id="yob-6d-mwq"/>
                                                 <action selector="routeButtonPressed:" destination="WeZ-ig-gme" eventType="touchUpInside" id="RMe-lw-JWR"/>
                                             </connections>
                                         </button>

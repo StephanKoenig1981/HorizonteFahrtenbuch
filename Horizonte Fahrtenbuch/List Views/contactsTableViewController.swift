@@ -90,8 +90,14 @@ class contactsTableViewController: UITableViewController {
                    return
                }
                UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                  print (indexPath)
+                  print ("phoneButton at Index", indexPath)
                    }
+        
+        // MARK: Action for Map Button
+        
+        cell.routeButtonPressed = {
+            print ("mapButtonPressed at Index", indexPath)
+        }
     
         // Disabling the phone button if no phone number is in the contact details.
         
