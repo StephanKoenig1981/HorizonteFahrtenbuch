@@ -11,12 +11,17 @@ import UIKit
 class clientsTableViewCell: UITableViewCell {
     
     //create your closure here
-             var buttonPressed : (() -> ()) = {}
+            var buttonPressed : (() -> ()) = {}
+            var routeButtonPressed : (() -> ()) = {}
 
             @IBAction func phoneButtonAction(_ sender: UIButton) {
         //Call your closure here
                 buttonPressed()
             }
+    
+        @IBAction func mapButtonPressed(_ sender: UIButton) {
+                routeButtonPressed()
+    }
     
     
     @IBOutlet weak var background: UIView!
