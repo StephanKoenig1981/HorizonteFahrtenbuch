@@ -485,7 +485,13 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         
         let distanceString = formatter.string(fromDistance: traveledDistance)
         distanceDriven.text = distanceString
-    
+        
+        if clientTextField.text == "" {
+            wayBackButton.setTitle("Kein Ziel", for: .normal)
+            wayBackButton.setTitleColor(.systemOrange, for: .normal)
+        } else {
+            wayBackButton.setTitle(clientTextField.text, for: .normal)
+        }
         
         print (traveledDistance)
     }
@@ -536,7 +542,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
             wayBackButtonView.topNotchViewfadeOut(duration: 1.0)
             wayBackButton.fadeOut(duration: 1.0)
             
-            wayBackButton.setTitle("Lieferfahrt", for: .normal)
+            wayBackButton.setTitle("Kein Ziel", for: .normal)
             wayBackButton.setTitleColor(UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0), for: .normal)
             isWayBack = false
             
@@ -644,7 +650,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
                 wayBackButtonView.topNotchViewfadeOut(duration: 1.0)
                 wayBackButton.fadeOut(duration: 1.0)
                 
-                wayBackButton.setTitle("Lieferfahrt", for: .normal)
+                wayBackButton.setTitle("", for: .normal)
                 wayBackButton.setTitleColor(UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0), for: .normal)
                 isWayBack = false
                 
@@ -726,7 +732,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         if isWayBack == false {
             isWayBack = true
             wayBackButton.fadeOut(duration: 2.5)
-            wayBackButton.setTitle("Lieferfahrt", for: .normal)
+            wayBackButton.setTitle(clientTextField?.text, for: .normal)
             wayBackButton.setTitleColor(UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0), for: .normal)
             wayBackButton.fadeIn(duration: 0.7)
         }
@@ -734,7 +740,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
             isWayBack = false
             wayBackButton.fadeOut(duration: 2.5)
             wayBackButton.setTitle("Rückfahrt", for: .normal)
-            wayBackButton.setTitleColor(UIColor.orange, for: .normal)
+            wayBackButton.setTitleColor(UIColor.systemCyan, for: .normal)
             wayBackButton.fadeIn(duration: 0.7)
             }
         }

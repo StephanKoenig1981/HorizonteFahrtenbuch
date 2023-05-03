@@ -84,7 +84,7 @@ class pastRidesTableViewController: UITableViewController {
         cell.durationLabel?.text = object.timeElapsed?.description
         cell.distanceLabel?.text = object.distanceDriven?.description
         
-        if object.currentClientName?.description == nil {
+        if object.currentClientName?.description == "" {
             cell.rideClientLabel?.text = "Keine Angabe"
             cell.rideClientLabel?.textColor = UIColor.systemBlue
         } else {
