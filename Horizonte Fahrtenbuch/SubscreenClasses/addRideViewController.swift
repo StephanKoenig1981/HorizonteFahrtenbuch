@@ -18,7 +18,7 @@ class addRideViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var distanceTextfield: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+
         
         // Disable Swipe Down gesture
         

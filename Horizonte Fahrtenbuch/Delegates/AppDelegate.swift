@@ -18,6 +18,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        // MARK: Set Color for all UI Bar button items
+        
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor:  UIColor.systemOrange]
+        
+        /*UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor:  UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)]*/
+        UIBarButtonItem.appearance().tintColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+        
         // MARK: Temporarily disabled constraint warnings in console
         
         UserDefaults.standard.set(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")

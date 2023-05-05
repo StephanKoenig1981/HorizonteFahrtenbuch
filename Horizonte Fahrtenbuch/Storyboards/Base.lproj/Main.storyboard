@@ -125,7 +125,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundImage" translatesAutoresizingMaskIntoConstraints="NO" id="yZV-2p-FaW">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundImage" translatesAutoresizingMaskIntoConstraints="NO" id="yZV-2p-FaW">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="t7y-zZ-L2B">
@@ -354,6 +354,13 @@
                                                 <color key="baseForegroundColor" systemColor="systemTealColor"/>
                                             </buttonConfiguration>
                                         </button>
+                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3rB-ZZ-Gca">
+                                            <rect key="frame" x="314" y="95" width="52" height="35"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" image="map.fill" catalog="system">
+                                                <color key="baseForegroundColor" systemColor="systemOrangeColor"/>
+                                            </buttonConfiguration>
+                                        </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kunden" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LvZ-f0-Aay">
                                             <rect key="frame" x="37" y="62" width="319" height="21"/>
                                             <constraints>
@@ -392,6 +399,7 @@
                                         </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="3rB-ZZ-Gca" firstAttribute="centerX" secondItem="XSM-B9-rEj" secondAttribute="centerX" id="07z-tt-ejG"/>
                                         <constraint firstItem="DZf-kR-A5w" firstAttribute="leading" secondItem="FbR-qS-uxf" secondAttribute="leadingMargin" constant="17" id="33T-M1-nd2"/>
                                         <constraint firstItem="XSM-B9-rEj" firstAttribute="leading" secondItem="zMg-JD-nfa" secondAttribute="trailing" constant="8" id="5fk-hB-dqb"/>
                                         <constraint firstItem="LvZ-f0-Aay" firstAttribute="trailing" secondItem="DZf-kR-A5w" secondAttribute="trailing" constant="179" id="C0M-z9-0Qe"/>
@@ -401,6 +409,8 @@
                                         <constraint firstItem="LvZ-f0-Aay" firstAttribute="top" secondItem="DZf-kR-A5w" secondAttribute="bottom" constant="17" id="LE2-X4-D4U"/>
                                         <constraint firstItem="DZf-kR-A5w" firstAttribute="top" secondItem="FbR-qS-uxf" secondAttribute="topMargin" constant="10" id="LJy-uf-Z7c"/>
                                         <constraint firstItem="JGS-pE-ffV" firstAttribute="trailing" secondItem="FbR-qS-uxf" secondAttribute="trailingMargin" id="Ozg-gY-nno"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="3rB-ZZ-Gca" secondAttribute="trailing" constant="7" id="PM5-Cc-D5G"/>
+                                        <constraint firstItem="3rB-ZZ-Gca" firstAttribute="centerY" secondItem="mqN-zD-y5O" secondAttribute="centerY" id="TZ4-dP-Hbu"/>
                                         <constraint firstItem="zMg-JD-nfa" firstAttribute="bottom" secondItem="DZf-kR-A5w" secondAttribute="bottom" id="Wf0-vv-ASz"/>
                                         <constraint firstItem="LvZ-f0-Aay" firstAttribute="top" secondItem="XSM-B9-rEj" secondAttribute="bottom" constant="13" id="Wvm-a1-uhg"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="mqN-zD-y5O" secondAttribute="bottom" constant="10" id="e9U-OP-TEc"/>
@@ -426,6 +436,7 @@
                                     <outlet property="durationLabel" destination="hz1-hc-3PA" id="Zkc-x6-mWo"/>
                                     <outlet property="gradientBackgroundView" destination="OMf-ia-pT2" id="BiF-PL-XHL"/>
                                     <outlet property="rideClientLabel" destination="LvZ-f0-Aay" id="N0a-YG-Z0h"/>
+                                    <outlet property="routeDetailButton" destination="3rB-ZZ-Gca" id="YSu-Te-Fsx"/>
                                     <outlet property="supplementDateLabel" destination="zMg-JD-nfa" id="p3E-bq-iDH"/>
                                 </connections>
                             </tableViewCell>
@@ -1049,7 +1060,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundImage" translatesAutoresizingMaskIntoConstraints="NO" id="MvN-F9-lGM">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundImage" translatesAutoresizingMaskIntoConstraints="NO" id="MvN-F9-lGM">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="TQW-76-bla">
@@ -1121,7 +1132,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BBM-OY-18l">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundImage" translatesAutoresizingMaskIntoConstraints="NO" id="oDn-ZS-6kJ">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundImage" translatesAutoresizingMaskIntoConstraints="NO" id="oDn-ZS-6kJ">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kunde hinzufügen" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QUV-ql-5RU">

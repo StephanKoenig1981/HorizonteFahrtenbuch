@@ -12,7 +12,6 @@ import RealmSwift
 class pastRidesTableViewController: UITableViewController {
     
     @IBOutlet var pastRidesTableView: UITableView!
-    
     @IBOutlet var pastRidesSearchBar: UITableView!
     
     // MARK: Initializing Realm
@@ -110,16 +109,22 @@ class pastRidesTableViewController: UITableViewController {
         
         // cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         
-        // Disabling the phone supplement Button if no phone number is in the contact details.
+        // Disabling the map supplement Button if no phone number is in the contact details.
         
         if object.isManuallySaved == false {
             cell.circleSign.isHidden = true
             cell.supplementDateLabel.isHidden = true
             cell.circleSign.isUserInteractionEnabled = false
+            
+            cell.routeDetailButton.tintColor = .systemOrange
+            
         } else if object.isManuallySaved == true{
             cell.circleSign.isHidden = false
             cell.supplementDateLabel.isHidden = false
             cell.circleSign.isUserInteractionEnabled = false
+            
+            cell.routeDetailButton.tintColor = .systemGray
+            cell.routeDetailButton.isEnabled = false
         }
 
 
