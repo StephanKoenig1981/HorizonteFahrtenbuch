@@ -15,6 +15,8 @@ class contactsTableViewController: UITableViewController {
     
     @IBOutlet var clientTableView: UITableView!
     
+    @IBOutlet weak var clientSearchBar: UISearchBar!
+    
     // MARK: Initializing Realm
     
     let realm = try! Realm()

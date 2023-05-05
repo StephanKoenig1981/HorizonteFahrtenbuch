@@ -13,6 +13,8 @@ class pastRidesTableViewController: UITableViewController {
     
     @IBOutlet var pastRidesTableView: UITableView!
     
+    @IBOutlet var pastRidesSearchBar: UITableView!
+    
     // MARK: Initializing Realm
     
     let realm = try! Realm()
@@ -27,6 +29,13 @@ class pastRidesTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if #available(iOS 13.0, *) {
+            self.isModalInPresentation = true
+        }
+        
+        let vc = UIViewController()
+        vc.presentationController?.presentedView?.gestureRecognizers?[0].isEnabled = false
         
         
         setupUI()
@@ -83,6 +92,7 @@ class pastRidesTableViewController: UITableViewController {
         
         cell.durationLabel?.text = object.timeElapsed?.description
         cell.distanceLabel?.text = object.distanceDriven?.description
+        cell.supplementDateLabel?.text = object.supplementDate?.description
         
         if object.currentClientName?.description == "" {
             cell.rideClientLabel?.text = "Keine Angabe"
@@ -97,6 +107,14 @@ class pastRidesTableViewController: UITableViewController {
         // Adding the disclosure Indicator Currently inactive for later purposes
         
         // cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+        
+        // Disabling the phone button if no phone number is in the contact details.
+        
+        /* object.isManuallySaved = false do {
+            cell.supplementDateLabel.isHidden = true
+        } else {
+            cell.supplementDateLabel.isHidden = false
+        }*/
 
 
         return cell
@@ -110,6 +128,9 @@ class pastRidesTableViewController: UITableViewController {
             }
         }
     
+    @IBAction func doneButtonPressed(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
     // MARK: Method for the Section Indicators
 
     /*override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

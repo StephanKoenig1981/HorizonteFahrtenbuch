@@ -636,7 +636,9 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
                 currentRides.distanceDriven = distanceDriven.text
                 currentRides.date = dateFormatter.string(from: date)
                 currentRides.currentClientName = clientTextField.text
-               
+                
+                
+                currentRides.isManuallySaved = false
                 
                 saveRealmObject(currentRides: currentRides)
                 

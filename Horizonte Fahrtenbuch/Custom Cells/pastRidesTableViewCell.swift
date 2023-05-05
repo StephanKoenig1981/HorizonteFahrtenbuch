@@ -16,5 +16,6 @@ class pastRidesTableViewCell: UITableViewCell {
     @IBOutlet weak var durationLabel: UILabel!
     
     @IBOutlet weak var rideClientLabel: UILabel!
+    @IBOutlet weak var supplementDateLabel: UILabel!
     
 }
