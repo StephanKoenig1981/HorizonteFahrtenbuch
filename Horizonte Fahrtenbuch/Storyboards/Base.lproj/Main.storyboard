@@ -200,6 +200,7 @@
                                 <connections>
                                     <action selector="cancelButtonPressed:" destination="koe-vG-8wD" eventType="touchUpInside" id="I6F-AO-b15"/>
                                     <action selector="cancelButtonPressed:" destination="SDW-bC-dEn" eventType="touchUpInside" id="z0b-77-aKi"/>
+                                    <action selector="cancellButtonPressed:" destination="koe-vG-8wD" eventType="touchUpInside" id="SSD-pe-F8g"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fRj-p1-D1F">
@@ -306,9 +307,8 @@
                                         <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JGS-pE-ffV">
                                             <rect key="frame" x="20" y="11" width="353" height="122"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="backgroundImage" highlightedImage="blurred-abstract-background" translatesAutoresizingMaskIntoConstraints="NO" id="OMf-ia-pT2">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundImage" highlightedImage="blurred-abstract-background" translatesAutoresizingMaskIntoConstraints="NO" id="OMf-ia-pT2">
                                                     <rect key="frame" x="0.0" y="0.0" width="353" height="122"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                             <integer key="value" value="20"/>
@@ -317,6 +317,12 @@
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" systemColor="secondaryLabelColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="OMf-ia-pT2" secondAttribute="bottom" id="83K-Th-c0O"/>
+                                                <constraint firstItem="OMf-ia-pT2" firstAttribute="top" secondItem="JGS-pE-ffV" secondAttribute="top" id="9qj-0M-nQp"/>
+                                                <constraint firstItem="OMf-ia-pT2" firstAttribute="leading" secondItem="JGS-pE-ffV" secondAttribute="leading" id="LGk-UY-wxi"/>
+                                                <constraint firstAttribute="trailing" secondItem="OMf-ia-pT2" secondAttribute="trailing" id="PQA-sj-rQB"/>
+                                            </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                     <integer key="value" value="20"/>
@@ -479,9 +485,8 @@
                                         <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="phJ-Hs-pdb">
                                             <rect key="frame" x="20" y="15" width="353" height="195"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="backgroundImage" translatesAutoresizingMaskIntoConstraints="NO" id="IzY-FA-fYD">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundImage" translatesAutoresizingMaskIntoConstraints="NO" id="IzY-FA-fYD">
                                                     <rect key="frame" x="0.0" y="0.0" width="353" height="195"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                             <integer key="value" value="20"/>
@@ -490,6 +495,12 @@
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" systemColor="secondaryLabelColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="IzY-FA-fYD" secondAttribute="trailing" id="2wz-19-0Pi"/>
+                                                <constraint firstAttribute="bottom" secondItem="IzY-FA-fYD" secondAttribute="bottom" id="GzY-dr-Hmd"/>
+                                                <constraint firstItem="IzY-FA-fYD" firstAttribute="leading" secondItem="phJ-Hs-pdb" secondAttribute="leading" id="Qrx-hK-6Gf"/>
+                                                <constraint firstItem="IzY-FA-fYD" firstAttribute="top" secondItem="phJ-Hs-pdb" secondAttribute="top" id="g3j-LU-Cgy"/>
+                                            </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                     <integer key="value" value="20"/>

@@ -153,7 +153,29 @@ class addRideViewController: UIViewController, UITextFieldDelegate {
             }
             print("Data Was Saved To Realm Database.")
     }
+    @IBAction func cancellButtonPressed(_ sender: Any) {
         
+        let alert = UIAlertController(title: "Bist du sicher?", message: "Bist du sicher, dass du abbrechen möchtest ohne die Fahrt zu speichern?", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Fortfahren", style: .cancel))
+        alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { action in
+            
+            switch action.style{
+                
+                case .default:
+                print("default")
+                
+                case .cancel:
+                self.dismiss(animated: true)
+                
+                case .destructive:
+                self.dismiss(animated: true)
+                
+            @unknown default:
+                print("Unknown Fault")
+            }
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
+}
 
 
