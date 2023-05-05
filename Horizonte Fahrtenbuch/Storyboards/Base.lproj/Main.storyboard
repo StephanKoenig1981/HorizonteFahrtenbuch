@@ -307,7 +307,7 @@
                                         <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JGS-pE-ffV">
                                             <rect key="frame" x="20" y="11" width="353" height="122"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundImage" highlightedImage="blurred-abstract-background" translatesAutoresizingMaskIntoConstraints="NO" id="OMf-ia-pT2">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundImageCard" highlightedImage="blurred-abstract-background" translatesAutoresizingMaskIntoConstraints="NO" id="OMf-ia-pT2">
                                                     <rect key="frame" x="0.0" y="0.0" width="353" height="122"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -496,7 +496,7 @@
                                         <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="phJ-Hs-pdb">
                                             <rect key="frame" x="20" y="15" width="353" height="195"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundImage" translatesAutoresizingMaskIntoConstraints="NO" id="IzY-FA-fYD">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundImageCard" translatesAutoresizingMaskIntoConstraints="NO" id="IzY-FA-fYD">
                                                     <rect key="frame" x="0.0" y="0.0" width="353" height="195"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -1445,7 +1445,8 @@
         <image name="Checkmark" width="2133.5" height="2133.5"/>
         <image name="GreenButtonHighRes" width="70" height="70"/>
         <image name="Logo" width="609" height="238.5"/>
-        <image name="backgroundImage" width="2000" height="1335"/>
+        <image name="backgroundImage" width="1335" height="2000"/>
+        <image name="backgroundImageCard" width="2000" height="1335"/>
         <image name="blurred-abstract-background" width="8200" height="5474"/>
         <image name="clipboard.fill" catalog="system" width="103" height="128"/>
         <image name="gear" catalog="system" width="128" height="122"/>
