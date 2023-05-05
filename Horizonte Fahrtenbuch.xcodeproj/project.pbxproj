@@ -38,6 +38,7 @@
 		08DBAB3429EDE50D0044981E /* Fahrtenbuch.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 08DBAB2F29EDE50C0044981E /* Fahrtenbuch.intentdefinition */; };
 		08DBAB3729EDE50D0044981E /* FahrtenbuchExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 08DBAB2229EDE50C0044981E /* FahrtenbuchExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		08DCB78829FD3D5700446CD0 /* clientsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DCB78729FD3D5700446CD0 /* clientsTableViewCell.swift */; };
+		08F9C3D32A05914900C7DB72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08DBAB3029EDE50D0044981E /* Assets.xcassets */; };
 		873451D4394E8C769C69F646 /* Pods_Horizonte_Fahrtenbuch_Horizonte_FahrtenbuchUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 360EC0F0CD38323951D9268F /* Pods_Horizonte_Fahrtenbuch_Horizonte_FahrtenbuchUITests.framework */; };
 		CA2CEDD0D75EDD01CF832F58 /* Pods_FahrtenbuchExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 870837D7BD008BF1B69D4996 /* Pods_FahrtenbuchExtension.framework */; };
 		CA4D0287B2B58A99B218F923 /* Pods_Horizonte_FahrtenbuchTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9B77C7E7F67112EF121F7E1 /* Pods_Horizonte_FahrtenbuchTests.framework */; };
@@ -490,6 +491,7 @@
 			files = (
 				0808420B29C8FBF20030BB7E /* LaunchScreen.storyboard in Resources */,
 				0808420829C8FBF20030BB7E /* Assets.xcassets in Resources */,
+				08F9C3D32A05914900C7DB72 /* Assets.xcassets in Resources */,
 				0808420329C8FBF10030BB7E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

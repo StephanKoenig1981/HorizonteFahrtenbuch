@@ -34,6 +34,7 @@ class pastRidesTableViewController: UITableViewController {
             self.isModalInPresentation = true
         }
         
+        
         let vc = UIViewController()
         vc.presentationController?.presentedView?.gestureRecognizers?[0].isEnabled = false
         
@@ -85,6 +86,7 @@ class pastRidesTableViewController: UITableViewController {
         let cell = pastRidesTableView.dequeueReusableCell(withIdentifier: "latestRidesCell", for: indexPath) as! pastRidesTableViewCell
         
         let object = results[indexPath.row]
+       
         
         cell.date?.text = object.date?.description
         
@@ -108,13 +110,17 @@ class pastRidesTableViewController: UITableViewController {
         
         // cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         
-        // Disabling the phone button if no phone number is in the contact details.
+        // Disabling the phone supplement Button if no phone number is in the contact details.
         
-        /* object.isManuallySaved = false do {
+        if object.isManuallySaved == false {
+            cell.circleSign.isHidden = true
             cell.supplementDateLabel.isHidden = true
-        } else {
+            cell.circleSign.isUserInteractionEnabled = false
+        } else if object.isManuallySaved == true{
+            cell.circleSign.isHidden = false
             cell.supplementDateLabel.isHidden = false
-        }*/
+            cell.circleSign.isUserInteractionEnabled = false
+        }
 
 
         return cell
@@ -131,10 +137,4 @@ class pastRidesTableViewController: UITableViewController {
     @IBAction func doneButtonPressed(_ sender: Any) {
         self.dismiss(animated: true)
     }
-    // MARK: Method for the Section Indicators
-
-    /*override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Fahrten"
-    }*/
-
 }

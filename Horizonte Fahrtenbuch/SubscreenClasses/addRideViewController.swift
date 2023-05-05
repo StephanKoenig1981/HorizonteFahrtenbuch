@@ -12,7 +12,6 @@ class addRideViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var datePicker: UIDatePicker!
     
-    @IBOutlet weak var dateTextfield: UITextField!
     @IBOutlet weak var clientTextfield: UITextField!
     @IBOutlet weak var durationTextfield: UITextField!
     
@@ -120,7 +119,8 @@ class addRideViewController: UIViewController, UITextFieldDelegate {
             
             let currentRides = currentRide()
             
-            let date = Date()
+            let date = datePicker.date
+            let supplementDate = Date()
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "d. MMM YY"
             dateFormatter.dateStyle = .long
@@ -130,8 +130,8 @@ class addRideViewController: UIViewController, UITextFieldDelegate {
             currentRides.timeElapsed = durationTextfield.text
             currentRides.currentClientName = clientTextfield.text
             currentRides.distanceDriven = distanceTextfield.text
-            currentRides.supplementDate = dateTextfield.text
-            //currentRides.date = dateFormatter.string(from: date)
+            currentRides.supplementDate = dateFormatter.string(from: supplementDate)
+            currentRides.date = dateFormatter.string(from: date)
             currentRides.isManuallySaved = true
             
             

@@ -17,5 +17,10 @@ class pastRidesTableViewCell: UITableViewCell {
     
     @IBOutlet weak var rideClientLabel: UILabel!
     @IBOutlet weak var supplementDateLabel: UILabel!
+    @IBOutlet weak var circleSign: UIButton!
+    
+    @IBOutlet weak var gradientBackgroundView: UIImageView!
     
 }
+
+

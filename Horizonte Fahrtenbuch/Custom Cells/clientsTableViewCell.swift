@@ -36,5 +36,7 @@ class clientsTableViewCell: UITableViewCell {
     @IBOutlet weak var routeButton: UIButton!
     @IBOutlet weak var phoneButton: UIButton!
     
+    @IBOutlet weak var gradientBackgroundView: UIImageView!
+    
 }
 
