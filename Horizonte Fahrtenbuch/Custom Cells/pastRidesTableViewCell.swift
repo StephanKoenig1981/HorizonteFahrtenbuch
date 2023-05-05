@@ -8,6 +8,13 @@
 import UIKit
 
 class pastRidesTableViewCell: UITableViewCell {
+    
+    //create your closure here
+            var routeDetailButtonPressed : (() -> ()) = {}
+    
+    @IBAction func routeDetailButtonPressed(_ sender: UIButton) {
+            routeDetailButtonPressed()
+}
 
     @IBOutlet weak var background: UIView!
     

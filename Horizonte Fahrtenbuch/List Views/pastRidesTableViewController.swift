@@ -116,17 +116,16 @@ class pastRidesTableViewController: UITableViewController {
             cell.supplementDateLabel.isHidden = true
             cell.circleSign.isUserInteractionEnabled = false
             
-            cell.routeDetailButton.tintColor = .systemOrange
+        
             
         } else if object.isManuallySaved == true{
             cell.circleSign.isHidden = false
             cell.supplementDateLabel.isHidden = false
             cell.circleSign.isUserInteractionEnabled = false
             
-            cell.routeDetailButton.tintColor = .systemGray
-            cell.routeDetailButton.isEnabled = false
+            
+            
         }
-
 
         return cell
     }
