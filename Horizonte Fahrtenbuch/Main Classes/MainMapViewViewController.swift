@@ -290,7 +290,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
             
             if let first = mapView.overlays.first {
                 let rect = mapView.overlays.reduce(first.boundingMapRect, {$0.union($1.boundingMapRect)})
-                mapView.setVisibleMapRect(rect, edgePadding: UIEdgeInsets(top: 50.0, left: 50.0, bottom: 50.0, right: 50.0), animated: true)
+                mapView.setVisibleMapRect(rect, edgePadding: UIEdgeInsets(top: 190.0, left: 80.0, bottom: 70.0, right: 70.0), animated: true)
             }
             
             // Change the stroke color depending on if it's on the way back or not. (Color is inverted since button was pressed programatically before.
