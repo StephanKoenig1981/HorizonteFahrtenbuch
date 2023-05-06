@@ -286,6 +286,13 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         if overlay is MKPolyline{
             let renderer = MKPolylineRenderer(overlay: overlay)
             
+            // MARK: Zoom to fit Polyline into screensize. Important for MKSnapshotter
+            
+            if let first = mapView.overlays.first {
+                let rect = mapView.overlays.reduce(first.boundingMapRect, {$0.union($1.boundingMapRect)})
+                mapView.setVisibleMapRect(rect, edgePadding: UIEdgeInsets(top: 50.0, left: 50.0, bottom: 50.0, right: 50.0), animated: true)
+            }
+            
             // Change the stroke color depending on if it's on the way back or not. (Color is inverted since button was pressed programatically before.
             
             if isWayBack == false {
