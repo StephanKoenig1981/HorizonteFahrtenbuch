@@ -428,6 +428,8 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
 
     @IBAction func start(_sender: UIButton) {
         
+        locationButton.isEnabled = false
+        
         if timerCounting
                 {
                     pauseStateLabel.fadeIn(duration: 2.0)
@@ -522,7 +524,8 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     // MARK: Stop Button Action
     
     @IBAction func stopButtonPressed(_ sender: Any) {
-        
+
+                
         let alert = UIAlertController(title: "Bist du sicher?", message: "Bist du sicher, dass du abbrechen möchtest ohne die Fahrt zu speichern?", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Fortsetzen", style: .cancel))
         alert.addAction(UIAlertAction(title: "Ohne speichern beenden", style: .destructive, handler: { [self]_ in
@@ -601,6 +604,9 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
             pauseStateLabel.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
             pauseStateLabel.fadeIn(duration: 2.0)
             
+            locationButton.isEnabled = true
+            locationButton.sendActions(for: .touchUpInside)
+            
             print ("Data was not saved to Realm")
 
         }))
@@ -627,6 +633,9 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
                 startButton.ButtonViewfadeIn(duration: 0.5)
                 
                 clientTextFieldView.fadeIn(duration: 1.0)
+                
+                locationButton.isEnabled = true
+                locationButton.sendActions(for: .touchUpInside)
                 
                 // Testing disabling the screen sleep mode while recording a ride (Reenabling sleep when stop is pressed)
                 
