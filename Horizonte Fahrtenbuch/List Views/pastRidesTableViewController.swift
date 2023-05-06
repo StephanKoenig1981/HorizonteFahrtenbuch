@@ -103,7 +103,8 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
         } else {
     
             cell.rideClientLabel?.text = object.currentClientName?.description
-            cell.rideClientLabel?.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+            cell.rideClientLabel?.textColor = .systemOrange
+            cell.date?.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
 }
        
         
