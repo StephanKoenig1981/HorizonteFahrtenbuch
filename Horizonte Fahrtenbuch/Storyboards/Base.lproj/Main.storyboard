@@ -297,18 +297,18 @@
                             </connections>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="latestRidesCell" rowHeight="144" id="jLR-lC-qxu" customClass="pastRidesTableViewCell" customModule="Horizonte_Fahrtenbuch" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="latestRidesCell" rowHeight="144" id="jLR-lC-qxu" customClass="pastRidesTableViewCell" customModule="Horizonte_Fahrtenbuch" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="94" width="393" height="144"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jLR-lC-qxu" id="FbR-qS-uxf">
-                                    <rect key="frame" x="0.0" y="0.0" width="393" height="144"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="362.66666666666669" height="144"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JGS-pE-ffV">
-                                            <rect key="frame" x="20" y="11" width="353" height="122"/>
+                                            <rect key="frame" x="20" y="11" width="334.66666666666669" height="122"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundImageCard" highlightedImage="blurred-abstract-background" translatesAutoresizingMaskIntoConstraints="NO" id="OMf-ia-pT2">
-                                                    <rect key="frame" x="0.0" y="0.0" width="353" height="122"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="334.66666666666669" height="122"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                             <integer key="value" value="20"/>
@@ -330,7 +330,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Datum" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DZf-kR-A5w">
-                                            <rect key="frame" x="37" y="21" width="140" height="24"/>
+                                            <rect key="frame" x="37.000000000000007" y="21" width="121.66666666666669" height="24"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="24" id="i0E-lO-vT5"/>
                                             </constraints>
@@ -339,13 +339,13 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Erfassung" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zMg-JD-nfa">
-                                            <rect key="frame" x="200" y="21" width="117" height="24"/>
+                                            <rect key="frame" x="181.66666666666666" y="21" width="116.99999999999997" height="24"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" systemColor="systemCyanColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XSM-B9-rEj">
-                                            <rect key="frame" x="325" y="17" width="31" height="32"/>
+                                            <rect key="frame" x="306.66666666666669" y="17" width="31" height="32"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="31" id="g9R-Rt-3rp"/>
                                             </constraints>
@@ -355,7 +355,7 @@
                                             </buttonConfiguration>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kunden" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LvZ-f0-Aay">
-                                            <rect key="frame" x="37" y="62" width="319" height="21"/>
+                                            <rect key="frame" x="37" y="62" width="300.66666666666669" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="Dmg-6e-gH0"/>
                                             </constraints>

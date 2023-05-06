@@ -9,7 +9,7 @@ import UIKit
 import RealmSwift
 
 
-class pastRidesTableViewController: UITableViewController {
+class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
     
     @IBOutlet var pastRidesTableView: UITableView!
     @IBOutlet var pastRidesSearchBar: UITableView!
@@ -20,6 +20,10 @@ class pastRidesTableViewController: UITableViewController {
     let results = try! Realm().objects(currentRide.self).sorted(byKeyPath: "date", ascending: false)
     
     var notificationToken: NotificationToken?
+    
+    // MARK: Array for filtered Data
+    
+    var pastRidesFilterArray = [currentRide()]
     
     // MARK: Variables
     
@@ -58,8 +62,6 @@ class pastRidesTableViewController: UITableViewController {
                 self.pastRidesTableView.reloadRows(at: modifications.map { IndexPath(row: $0, section: 0) }, with: .automatic)
                 self.pastRidesTableView.endUpdates()
                 
-                /*let topIndexPath = IndexPath(row: 0, section: 0)
-                 self.pastRidesTableView.insertRows(at: [topIndexPath], with: .automatic)*/
                 
             case .error(let err):
                 // An error occurred while opening the Realm file on the background worker thread
@@ -107,7 +109,7 @@ class pastRidesTableViewController: UITableViewController {
         
         // Adding the disclosure Indicator Currently inactive for later purposes
         
-        // cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+        cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         
         // Disabling the map supplement Button if no phone number is in the contact details.
         

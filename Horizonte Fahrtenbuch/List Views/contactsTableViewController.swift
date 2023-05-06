@@ -9,7 +9,7 @@ import UIKit
 import RealmSwift
 
 
-class contactsTableViewController: UITableViewController {
+class contactsTableViewController: UITableViewController, UISearchBarDelegate {
     
     // MARK: Outlets
     
@@ -22,6 +22,10 @@ class contactsTableViewController: UITableViewController {
     let realm = try! Realm()
     let results = try! Realm().objects(clients.self).sorted(byKeyPath: "client")
         var notificationToken: NotificationToken?
+    
+    // MARK: Array for filtered Data
+    
+    var clientsFilterArray = [clients()]
     
     
     override func viewDidLoad() {

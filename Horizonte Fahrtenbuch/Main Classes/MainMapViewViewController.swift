@@ -24,6 +24,10 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     
     var isWayBack:Bool = false
     
+    // MARK: Snapshot ImageView
+    
+    @IBOutlet weak var imageView: UIImageView!
+    
     
     // MARK: Variables for the Timer
     
@@ -276,6 +280,13 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
                 let polyline = MKPolyline(coordinates: &pointsToConnect, count: pointsToConnect.count)
                 
                 mapView.addOverlay(polyline)
+                
+                // MARK: Zoom to fit Polyline into screensize. Important for MKSnapshotter
+                
+                if let first = mapView.overlays.first {
+                    let rect = mapView.overlays.reduce(first.boundingMapRect, {$0.union($1.boundingMapRect)})
+                    mapView.setVisibleMapRect(rect, edgePadding: UIEdgeInsets(top: 190.0, left: 90.0, bottom: 70.0, right: 70.0), animated: true)
+                }
             }
         }
     }
@@ -283,15 +294,11 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     // MARK: Base setup for drawing the polyline
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        
+        
         if overlay is MKPolyline{
             let renderer = MKPolylineRenderer(overlay: overlay)
             
-            // MARK: Zoom to fit Polyline into screensize. Important for MKSnapshotter
-            
-            if let first = mapView.overlays.first {
-                let rect = mapView.overlays.reduce(first.boundingMapRect, {$0.union($1.boundingMapRect)})
-                mapView.setVisibleMapRect(rect, edgePadding: UIEdgeInsets(top: 190.0, left: 80.0, bottom: 70.0, right: 70.0), animated: true)
-            }
             
             // Change the stroke color depending on if it's on the way back or not. (Color is inverted since button was pressed programatically before.
             
@@ -305,6 +312,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         }
         return MKOverlayRenderer()
     }
+    
     
     // MARK: Stopwatch Functions and Update Traveled Distance
     
