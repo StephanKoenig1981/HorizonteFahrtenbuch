@@ -21,9 +21,7 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
     
     var notificationToken: NotificationToken?
     
-    // MARK: Array for filtered Data
     
-    var pastRidesFilterArray = [currentRide()]
     
     // MARK: Variables
     
@@ -43,6 +41,9 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
         
         
         setupUI()
+        
+        pastRidesSearchBar.delegate = self
+        pastRidesTableView.delegate = self
         
         pastRidesTableView.rowHeight = 144
         
