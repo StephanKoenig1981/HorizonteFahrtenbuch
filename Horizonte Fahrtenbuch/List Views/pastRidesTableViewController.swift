@@ -111,7 +111,7 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
         
         // Adding the disclosure Indicator Currently inactive for later purposes
         
-        cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+        // cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         
         // Disabling the map supplement Button if no phone number is in the contact details.
         

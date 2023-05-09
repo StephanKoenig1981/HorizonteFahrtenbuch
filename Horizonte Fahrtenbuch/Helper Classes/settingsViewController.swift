@@ -88,7 +88,7 @@ class settingsViewController: UIViewController {
     
     
     @IBAction func uploadPressed(_ sender: Any) {
-        backupRealmToiCloudDrive()
+        //backupRealmToiCloudDrive()
         }
     
     
