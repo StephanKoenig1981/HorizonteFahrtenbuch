@@ -451,7 +451,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="pastRidesSearchBar" destination="Kr2-aO-BNz" id="8BQ-yA-FKG"/>
+                        <outlet property="pastRidesSearchBar" destination="nTE-Li-Qzo" id="Obz-1F-i5s"/>
                         <outlet property="pastRidesTableView" destination="Kr2-aO-BNz" id="rbM-RU-9LX"/>
                     </connections>
                 </tableViewController>
