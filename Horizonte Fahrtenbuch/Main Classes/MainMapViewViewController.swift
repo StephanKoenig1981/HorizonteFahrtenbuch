@@ -428,6 +428,12 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
 
     @IBAction func start(_sender: UIButton) {
         
+        
+        // MARK: Haptic Feedback for start
+        
+        let generator = UINotificationFeedbackGenerator()
+                    generator.notificationOccurred(.success)
+        
         locationButton.isEnabled = false
         
         if timerCounting
@@ -523,7 +529,14 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     
     // MARK: Stop Button Action
     
+    
     @IBAction func stopButtonPressed(_ sender: Any) {
+        
+        // MARK: Haptic Feedback for start
+        
+        let generator = UINotificationFeedbackGenerator()
+                    generator.notificationOccurred(.success)
+
 
                 
         let alert = UIAlertController(title: "Bist du sicher?", message: "Bist du sicher, dass du abbrechen möchtest ohne die Fahrt zu speichern?", preferredStyle: .actionSheet)
