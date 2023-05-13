@@ -125,7 +125,7 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
             } else {
                 // Nur ausgewählte Elemente werden sortiert
                 filteredResults = realm.objects(currentRide.self)
-                filteredResults = filteredResults.filter("currentClientName CONTAINS[c] %@", searchTerm, searchTerm)
+                filteredResults = filteredResults.filter("currentClientName CONTAINS[c] %@", searchTerm)
                 filteredResults = filteredResults.sorted(byKeyPath: "date", ascending: false)
             }
             tableView.reloadData()
