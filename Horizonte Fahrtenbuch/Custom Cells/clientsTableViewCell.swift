@@ -23,6 +23,9 @@ class clientsTableViewCell: UITableViewCell {
                 routeButtonPressed()
     }
     
+    func configure(data: clients) {
+    }
+    
     
     @IBOutlet weak var background: UIView!
 

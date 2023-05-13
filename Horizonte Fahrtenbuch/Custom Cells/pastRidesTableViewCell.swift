@@ -15,6 +15,9 @@ class pastRidesTableViewCell: UITableViewCell {
     @IBAction func routeDetailButtonPressed(_ sender: UIButton) {
             routeDetailButtonPressed()
 }
+    
+    func configure(data: currentRide) {
+    }
 
     @IBOutlet weak var background: UIView!
     

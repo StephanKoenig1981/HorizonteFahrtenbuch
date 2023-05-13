@@ -281,6 +281,37 @@
             </objects>
             <point key="canvasLocation" x="1064.885496183206" y="-1338.0281690140846"/>
         </scene>
+        <!--Kundenstandort-->
+        <scene sceneID="yVJ-0v-JUe">
+            <objects>
+                <viewController storyboardIdentifier="clientDetailViewController" title="Kundenstandort" useStoryboardIdentifierAsRestorationIdentifier="YES" id="d0q-Wq-8fu" customClass="clientDetailViewController" customModule="Horizonte_Fahrtenbuch" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="O1T-Ae-0Z0">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BV4-Zs-pwE">
+                                <rect key="frame" x="16" y="56" width="361" height="786"/>
+                                <standardMapConfiguration key="preferredConfiguration"/>
+                            </mapView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Igw-hX-Xd2"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="BV4-Zs-pwE" firstAttribute="leading" secondItem="Igw-hX-Xd2" secondAttribute="leading" constant="16" id="RIU-oK-HyW"/>
+                            <constraint firstItem="Igw-hX-Xd2" firstAttribute="trailing" secondItem="BV4-Zs-pwE" secondAttribute="trailing" constant="16" id="UVc-Pg-UEr"/>
+                            <constraint firstItem="BV4-Zs-pwE" firstAttribute="top" secondItem="Igw-hX-Xd2" secondAttribute="top" id="lFP-0K-Nod"/>
+                            <constraint firstItem="BV4-Zs-pwE" firstAttribute="bottom" secondItem="Igw-hX-Xd2" secondAttribute="bottom" id="rd7-6r-7Qm"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Qkz-qI-a10"/>
+                    <connections>
+                        <outlet property="clientDetailMapView" destination="BV4-Zs-pwE" id="Zbe-hl-Eb8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mzi-7V-TUl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1805.3435114503816" y="-1338.0281690140846"/>
+        </scene>
         <!--Past Rides Table View Controller-->
         <scene sceneID="9n4-DJ-tjq">
             <objects>
@@ -526,6 +557,7 @@
                                             <connections>
                                                 <action selector="mapButtonPressed:" destination="gOO-3h-G2T" eventType="touchUpInside" id="yob-6d-mwq"/>
                                                 <action selector="routeButtonPressed:" destination="WeZ-ig-gme" eventType="touchUpInside" id="RMe-lw-JWR"/>
+                                                <segue destination="d0q-Wq-8fu" kind="show" identifier="clientDeailViewSegue" id="KOb-Gp-vlh"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ldw-DQ-yI6">
@@ -604,7 +636,7 @@
                                         <constraint firstItem="phJ-Hs-pdb" firstAttribute="top" secondItem="eyD-bw-OGC" secondAttribute="top" constant="15" id="yhD-e0-YaL"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <accessibility key="accessibilityConfiguration" identifier="clientCell"/>
+                                <accessibility key="accessibilityConfiguration" identifier="clientsTableViewCell"/>
                                 <connections>
                                     <outlet property="background" destination="phJ-Hs-pdb" id="aht-Qj-wtx"/>
                                     <outlet property="clientCityLabel" destination="EEW-nA-sHs" id="AQ2-iT-rsu"/>

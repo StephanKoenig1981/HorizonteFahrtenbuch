@@ -21,7 +21,13 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
     
     var notificationToken: NotificationToken?
     
+    // MARK: Array for filtered data and deinitialization of Notifications
     
+    var filteredResults: Results<currentRide>!
+    
+    deinit {
+        notificationToken?.invalidate()
+    }
     
     // MARK: Variables
     
@@ -31,6 +37,15 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // MARK: Tap Recoginzer
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard(_:)))
+            tableView.addGestureRecognizer(tapGesture)
+        
+        
+        filteredResults = realm.objects(currentRide.self)   // <-- initialize Filtered Results
+        // Register for changes in Realm Notifications
+        
         if #available(iOS 13.0, *) {
             self.isModalInPresentation = true
         }
@@ -39,11 +54,34 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
         let vc = UIViewController()
         vc.presentationController?.presentedView?.gestureRecognizers?[0].isEnabled = false
         
+        let objects = realm.objects(currentRide.self)
+        var filteredData = objects // Initally, the filtered data is the same as the original data.
+        
+        // Set results notification block
+        self.notificationToken = results.observe { (changes: RealmCollectionChange) in
+            switch changes {
+            case .initial:
+                // Results are now populated and can be accessed without blocking the UI
+                self.pastRidesTableView.reloadData()
+            case .update(_, let deletions, let insertions, let modifications):
+                // Query results have changed, so apply them to the TableView
+                self.pastRidesTableView.beginUpdates()
+                self.pastRidesTableView.insertRows(at: insertions.map { IndexPath(row: $0, section: 0) }, with: .automatic)
+                self.pastRidesTableView.deleteRows(at: deletions.map { IndexPath(row: $0, section: 0) }, with: .automatic)
+                self.pastRidesTableView.reloadRows(at: modifications.map { IndexPath(row: $0, section: 0) }, with: .automatic)
+                self.pastRidesTableView.endUpdates()
+            case .error(let err):
+                // An error occurred while opening the Realm file on the background worker thread
+                fatalError("\(err)")
+            }
+        }
+        
         
         setupUI()
         
         pastRidesSearchBar.delegate = self
         pastRidesTableView.delegate = self
+        pastRidesTableView.dataSource = self
         
         pastRidesTableView.rowHeight = 144
         
@@ -78,16 +116,33 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
         self.title = "Abgeschlossene Fahrten"
     }
     
+    // MARK: Filter Data Function
+    
+    func filterResults(searchTerm: String) {
+            if searchTerm.isEmpty {
+                // Ausgabe aller Elemente wird auch sortiert
+                filteredResults = realm.objects(currentRide.self).sorted(byKeyPath: "date", ascending: false)
+            } else {
+                // Nur ausgewählte Elemente werden sortiert
+                filteredResults = realm.objects(currentRide.self)
+                filteredResults = filteredResults.filter("currentClientName CONTAINS[c] %@", searchTerm, searchTerm)
+                filteredResults = filteredResults.sorted(byKeyPath: "date", ascending: false)
+            }
+            tableView.reloadData()
+    }
+    
+    // MARK: Define the number of rows beeing presented
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let count = realm.objects(currentRide.self).count
         
-        return count
+        
+        return filteredResults?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = pastRidesTableView.dequeueReusableCell(withIdentifier: "latestRidesCell", for: indexPath) as! pastRidesTableViewCell
         
-        let object = results[indexPath.row]
+        let object = filteredResults[indexPath.row]
        
         
         cell.date?.text = object.date?.description
@@ -130,17 +185,32 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
             
             
         }
+        
+        let data = filteredResults![indexPath.row]
+        cell.configure(data: data)
 
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-            if editingStyle == .delete {
-                realm.beginWrite()
-                realm.delete(results[indexPath.row])
-                try! realm.commitWrite()
-            }
+    @objc func hideKeyboard(_ sender: UITapGestureRecognizer) {
+        tableView.endEditing(true)
+    }
+    
+    
+    // MARK: SearchBar Function
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            filteredResults = realm.objects(currentRide.self)
+            tableView.reloadData()
+        } else {
+            filterResults(searchTerm: searchText)
         }
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        pastRidesSearchBar.resignFirstResponder()
+    }
     
     @IBAction func doneButtonPressed(_ sender: Any) {
         self.dismiss(animated: true)

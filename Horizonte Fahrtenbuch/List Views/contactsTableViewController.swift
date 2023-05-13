@@ -11,6 +11,7 @@ import RealmSwift
 
 class contactsTableViewController: UITableViewController, UISearchBarDelegate {
     
+    
     // MARK: Outlets
     
     @IBOutlet var clientTableView: UITableView!
@@ -21,17 +22,41 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate {
     
     let realm = try! Realm()
     let results = try! Realm().objects(clients.self).sorted(byKeyPath: "client")
-        var notificationToken: NotificationToken?
+    var notificationToken: NotificationToken?
     
-    // MARK: Array for filtered Data
+    // MARK: Array for filtered data and deinitialization of Notifications
     
-    var clientsFilterArray = [clients()]
+    var filteredResults: Results<clients>!
+    
+    deinit {
+        notificationToken?.invalidate()
+    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        // MARK: Tap Recoginzer
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard(_:)))
+            tableView.addGestureRecognizer(tapGesture)
+        
+        
+        filteredResults = realm.objects(clients.self)   // <-- initialize Filtered Results
+        // Register for changes in Realm Notifications
+       
+            
+        
+        
+        clientSearchBar.delegate = self
+        clientTableView.delegate = self
+        clientTableView.dataSource = self
+        
         setupUI()
+        
+        let objects = realm.objects(clients.self)
+        var filteredData = objects // Initally, the filtered data is the same as the original data.
         
         clientTableView.rowHeight = 225 // same as storyboard, but better to declare it here too
         
@@ -61,31 +86,46 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate {
 
             self.title = "Kunden"
         }
+    
+    // MARK: Filter Data Function
+    
+    func filterResults(searchTerm: String) {
+            if searchTerm.isEmpty {
+                // Ausgabe aller Elemente wird auch sortiert
+                filteredResults = realm.objects(clients.self).sorted(byKeyPath: "client", ascending: false)
+            } else {
+                // Nur ausgewählte Elemente werden sortiert
+                filteredResults = realm.objects(clients.self)
+                filteredResults = filteredResults.filter("client CONTAINS[c] %@ OR street CONTAINS[c] %@", searchTerm, searchTerm)
+                filteredResults = filteredResults.sorted(byKeyPath: "client", ascending: false)
+            }
+            tableView.reloadData()
+    }
+
+    // MARK: Define the number of rows beeing presented
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let count = realm.objects(clients.self).count
         
-        return count
+        return filteredResults?.count ?? 0
     }
+    
+    // MARK: Sort Entries alphabetically
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell  =  clientTableView.dequeueReusableCell(withIdentifier: "customClientCell", for: indexPath) as! clientsTableViewCell
+           
+           let object = filteredResults[indexPath.row]
+           
+           cell.clientNameLabel?.text = object.client?.description
+           cell.clientsContactPersonLabel?.text = object.clientContactPerson?.description
+           cell.clientStreetLabel?.text = object.street?.description
+           cell.clientPostalCodeLabel?.text = object.postalCode?.description
+           cell.clientCityLabel?.text = object.city?.description
+           
+           cell.clientPhoneLabel?.text = object.phone?.description
+           
+           cell.clientNameLabel.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
         
-        let object = results[indexPath.row]
-        
-        cell.clientNameLabel?.text = object.client?.description
-        cell.clientsContactPersonLabel?.text = object.clientContactPerson?.description
-        cell.clientStreetLabel?.text = object.street?.description
-        cell.clientPostalCodeLabel?.text = object.postalCode?.description
-        cell.clientCityLabel?.text = object.city?.description
-        
-        cell.clientPhoneLabel?.text = object.phone?.description
-        
-        cell.clientNameLabel.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
-        
-        // Adding the disclosure Indicator
-        
-        // cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         
         // MARK: Action for making a phone call
         
@@ -114,17 +154,45 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate {
             cell.phoneButton.isEnabled = true
             cell.phoneButton.tintColor = .systemOrange
         }
+        
+        let data = filteredResults![indexPath.row]
+        cell.configure(data: data)
 
         return cell
     }
+
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-            if editingStyle == .delete {
-                realm.beginWrite()
-                realm.delete(results[indexPath.row])
-                try! realm.commitWrite()
-            }
+    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        clientTableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+    }
+    
+    @objc func hideKeyboard(_ sender: UITapGestureRecognizer) {
+        tableView.endEditing(true)
+    }
+    
+    
+    // MARK: SearchBar Function
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            filteredResults = realm.objects(clients.self)
+            tableView.reloadData()
+        } else {
+            filterResults(searchTerm: searchText)
         }
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        clientSearchBar.resignFirstResponder()
+    }
+    
+    // MARK: Sorting data alphabetically
+    
+    
     
     // MARK: Action for selecting client
     
@@ -133,6 +201,8 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     @IBAction func routeButtonPressed(_ sender: Any) {
-    
+       /* let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyBoard.instantiateViewController(withIdentifier: "clientDetailViewController") as! clientDetailViewController
+                self.present(vc, animated: true, completion: nil)*/
     }
 }
