@@ -90,17 +90,18 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate {
     // MARK: Filter Data Function
     
     func filterResults(searchTerm: String) {
-            if searchTerm.isEmpty {
-                // Ausgabe aller Elemente wird auch sortiert
-                filteredResults = realm.objects(clients.self).sorted(byKeyPath: "client", ascending: false)
-            } else {
-                // Nur ausgewählte Elemente werden sortiert
-                filteredResults = realm.objects(clients.self)
-                filteredResults = filteredResults.filter("client CONTAINS[c] %@ OR street CONTAINS[c] %@", searchTerm, searchTerm)
-                filteredResults = filteredResults.sorted(byKeyPath: "client", ascending: false)
-            }
-            tableView.reloadData()
-    }
+                if searchTerm.isEmpty {
+                    // Ausgabe aller Elemente wird alphabetisch sortiert.
+                    filteredResults = realm.objects(clients.self).sorted(byKeyPath: "client", ascending: true)
+                } else {
+                    // Nur ausgewählte Elemente werden alphabetisch sortiert
+                    filteredResults = realm.objects(clients.self)
+                    filteredResults = filteredResults.filter("client CONTAINS[c] %@ OR street CONTAINS[c] %@", searchTerm, searchTerm)
+                    filteredResults = filteredResults.sorted(byKeyPath: "client", ascending: true)
+                }
+                tableView.reloadData()
+        }
+
 
     // MARK: Define the number of rows beeing presented
 
@@ -114,7 +115,7 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell  =  clientTableView.dequeueReusableCell(withIdentifier: "customClientCell", for: indexPath) as! clientsTableViewCell
            
-           let object = filteredResults[indexPath.row]
+           let object = filteredResults.sorted(byKeyPath: "client", ascending: true)[indexPath.row]
            
            cell.clientNameLabel?.text = object.client?.description
            cell.clientsContactPersonLabel?.text = object.clientContactPerson?.description
