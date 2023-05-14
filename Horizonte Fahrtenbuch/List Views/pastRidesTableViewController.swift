@@ -135,14 +135,27 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        
         return filteredResults?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = pastRidesTableView.dequeueReusableCell(withIdentifier: "latestRidesCell", for: indexPath) as! pastRidesTableViewCell
         
-        let object = filteredResults.sorted(byKeyPath: "date", ascending: true)[indexPath.row]
+        dateFormatter.locale = Locale(identifier: "de_DE") // Setzen Sie hier Ihr gewünschtes lokale und Zeitzone
+        dateFormatter.timeZone = TimeZone.current
+        dateFormatter.dateFormat = "dd.MM.yyyy"
+
+        let objects = filteredResults.sorted {
+            guard let firstDate = dateFormatter.date(from: $0.date!),
+                  let secondDate = dateFormatter.date(from: $1.date!) else {
+                      return false
+                  }
+            return firstDate > secondDate
+        }
+
+        
+        let object = filteredResults[indexPath.row]
+        
        
         
         cell.date?.text = object.date?.description
