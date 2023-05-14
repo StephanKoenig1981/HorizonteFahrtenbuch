@@ -286,11 +286,11 @@
             <objects>
                 <viewController storyboardIdentifier="clientDetailViewController" title="Kundenstandort" useStoryboardIdentifierAsRestorationIdentifier="YES" id="d0q-Wq-8fu" customClass="clientDetailViewController" customModule="Horizonte_Fahrtenbuch" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="O1T-Ae-0Z0">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BV4-Zs-pwE">
-                                <rect key="frame" x="16" y="56" width="361" height="786"/>
+                                <rect key="frame" x="16" y="59" width="361" height="759"/>
                                 <standardMapConfiguration key="preferredConfiguration"/>
                             </mapView>
                         </subviews>
@@ -557,7 +557,6 @@
                                             <connections>
                                                 <action selector="mapButtonPressed:" destination="gOO-3h-G2T" eventType="touchUpInside" id="yob-6d-mwq"/>
                                                 <action selector="routeButtonPressed:" destination="WeZ-ig-gme" eventType="touchUpInside" id="RMe-lw-JWR"/>
-                                                <segue destination="d0q-Wq-8fu" kind="show" identifier="clientDeailViewSegue" id="KOb-Gp-vlh"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ldw-DQ-yI6">

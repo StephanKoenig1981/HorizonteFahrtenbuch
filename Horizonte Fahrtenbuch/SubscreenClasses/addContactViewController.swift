@@ -157,6 +157,7 @@ class addContactViewController: UIViewController, UITextFieldDelegate {
             client.postalCode = postalCodeTextfield.text
             client.city = cityTextfield.text
             client.phone = phoneTextfield.text
+            client.uniqueKey = UUID().uuidString
             
             saveRealmObject(client: client)
             

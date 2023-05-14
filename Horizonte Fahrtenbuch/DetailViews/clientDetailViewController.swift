@@ -7,17 +7,35 @@
 
 import UIKit
 import RealmSwift
+import CoreLocation
 import MapKit
 
-class clientDetailViewController: UIViewController {
+class clientDetailViewController: UIViewController, CLLocationManagerDelegate {
+    
+    var locationManager = CLLocationManager()
+    var clientName: String?
+    var clientStreet: String?
+    var clientCity: String?
+    var latitude: Double = 0
+    var longitude: Double = 0
+    
 
     @IBOutlet weak var clientDetailMapView: MKMapView!
     
     override func viewDidLoad() {
-        super.viewDidLoad()
+            super.viewDidLoad()
         
-        clientDetailMapView.layer.cornerRadius = 20
+            clientDetailMapView.layer.cornerRadius = 20
 
-        // Do any additional setup after loading the view.
+            let initialLocation = CLLocation(latitude: latitude, longitude: longitude)
+            let regionRadius: CLLocationDistance = 1000
+            let region = MKCoordinateRegion(center: initialLocation.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
+            clientDetailMapView.setRegion(region, animated: true)
+            
+            let annotation = CustomAnnotation(coordinate: CLLocationCoordinate2D(latitude: self.latitude, longitude: self.longitude), title: self.clientName, subtitle: "\(self.clientStreet ?? ""), \(self.clientCity ?? "")")
+            clientDetailMapView.addAnnotation(annotation)
+        }
+
+        //...
     }
-}
+

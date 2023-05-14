@@ -7,9 +7,10 @@
 
 import UIKit
 import RealmSwift
+import CoreLocation
 
 
-class contactsTableViewController: UITableViewController, UISearchBarDelegate {
+class contactsTableViewController: UITableViewController, UISearchBarDelegate, CLLocationManagerDelegate {
     
     
     // MARK: Outlets
@@ -144,7 +145,49 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate {
         
         cell.routeButtonPressed = {
             print ("mapButtonPressed at Index", indexPath)
+            let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "clientDetailViewController") as! clientDetailViewController
+            
+            let realm = try! Realm()
+            let objects: Results<clients> = realm.objects(clients.self).sorted(byKeyPath: "client", ascending: true)
+            
+            // Get the client for the selected row
+            guard indexPath.row < objects.count else {
+                return
+            }
+            let selectedClient = objects[indexPath.row]
+            
+            // Get the address and name for the selected client
+            if let street = selectedClient.street?.description, let city = selectedClient.city?.description {
+                // Construct the address as correctly as possible
+                var address = ""
+                if let zipCode = selectedClient.postalCode?.description {
+                    address = "\(street), \(zipCode) \(city)"
+                } else {
+                    address = "\(street), \(city)"
+                }
+                let name = selectedClient.client?.description ?? ""
+                
+                // Use the selected address to get the location and assign it to the appropriate client detail view controller
+                self.getLocationFromAddress(address: address) { (location, error) in
+                    guard let location = location else {
+                        return
+                    }
+                    detailVC.latitude = location.latitude
+                    detailVC.longitude = location.longitude
+                    detailVC.clientName = name // set the name of the client in the detailVC
+                    
+                    // Find the index of the selected client and display their address in the console
+                    if let index = objects.index(matching: NSPredicate(format: "uniqueKey = %@", selectedClient.uniqueKey)) {
+                        print("Selected client address: \(address), Index: \(index)")
+                        print(objects)
+                    }
+                    
+                    self.navigationController?.pushViewController(detailVC, animated: true)
+                }
+            }
         }
+
+
     
         // Disabling the phone button if no phone number is in the contact details.
         
@@ -155,6 +198,14 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate {
             cell.phoneButton.isEnabled = true
             cell.phoneButton.tintColor = .systemOrange
         }
+        
+        // Generate Adress
+        
+        let street = object.street?.description
+        let city = object.city?.description ?? "" // Hier wird eine leere Zeichenfolge verwendet, wenn das Objekt keinen City-Wert hat.
+        let address = "\(street), \(city)"
+        
+        // Sorting Data
         
         let data = filteredResults![indexPath.row]
         cell.configure(data: data)
@@ -191,7 +242,21 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate {
         clientSearchBar.resignFirstResponder()
     }
     
-    // MARK: Sorting data alphabetically
+    // MARK: Geocoding Address
+    
+    func getLocationFromAddress(address: String, completionHandler: @escaping (CLLocationCoordinate2D?, NSError?) -> Void) {
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(address) { (placemarks, error) in
+            if error == nil {
+                if let placemark = placemarks?[0] {
+                    let location = placemark.location!
+                    completionHandler(location.coordinate, nil)
+                }
+            } else {
+                completionHandler(nil, error as NSError?)
+            }
+        }
+    }
     
     
     
@@ -202,8 +267,6 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     @IBAction func routeButtonPressed(_ sender: Any) {
-       /* let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyBoard.instantiateViewController(withIdentifier: "clientDetailViewController") as! clientDetailViewController
-                self.present(vc, animated: true, completion: nil)*/
+        
     }
 }
