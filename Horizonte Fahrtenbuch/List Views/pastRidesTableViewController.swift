@@ -121,12 +121,12 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
     func filterResults(searchTerm: String) {
             if searchTerm.isEmpty {
                 // Ausgabe aller Elemente wird auch sortiert
-                filteredResults = realm.objects(currentRide.self).sorted(byKeyPath: "date", ascending: false)
+                filteredResults = realm.objects(currentRide.self).sorted(byKeyPath: "date", ascending: true)
             } else {
                 // Nur ausgewählte Elemente werden sortiert
                 filteredResults = realm.objects(currentRide.self)
                 filteredResults = filteredResults.filter("currentClientName CONTAINS[c] %@", searchTerm)
-                filteredResults = filteredResults.sorted(byKeyPath: "date", ascending: false)
+                filteredResults = filteredResults.sorted(byKeyPath: "date", ascending: true)
             }
             tableView.reloadData()
     }
@@ -142,7 +142,7 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = pastRidesTableView.dequeueReusableCell(withIdentifier: "latestRidesCell", for: indexPath) as! pastRidesTableViewCell
         
-        let object = filteredResults[indexPath.row]
+        let object = filteredResults.sorted(byKeyPath: "date", ascending: true)[indexPath.row]
        
         
         cell.date?.text = object.date?.description
