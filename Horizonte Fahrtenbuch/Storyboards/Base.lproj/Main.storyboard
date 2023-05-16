@@ -117,6 +117,36 @@
             </objects>
             <point key="canvasLocation" x="138.1679389312977" y="-2.1126760563380285"/>
         </scene>
+        <!--Route Detail View Controller-->
+        <scene sceneID="rFy-d2-GLe">
+            <objects>
+                <viewController storyboardIdentifier="routeDetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rjW-uF-j4q" customClass="routeDetailViewController" customModule="Horizonte_Fahrtenbuch" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="k0I-Cm-B7N">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AxM-Tk-gD8">
+                                <rect key="frame" x="16" y="59" width="361" height="759"/>
+                                <standardMapConfiguration key="preferredConfiguration"/>
+                            </mapView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="zVh-lz-p3u"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="AxM-Tk-gD8" firstAttribute="bottom" secondItem="zVh-lz-p3u" secondAttribute="bottom" id="lWw-g4-GX6"/>
+                            <constraint firstItem="AxM-Tk-gD8" firstAttribute="top" secondItem="zVh-lz-p3u" secondAttribute="top" id="sLS-o1-RYo"/>
+                            <constraint firstItem="AxM-Tk-gD8" firstAttribute="leading" secondItem="zVh-lz-p3u" secondAttribute="leading" constant="16" id="uYd-G5-Z5C"/>
+                            <constraint firstItem="zVh-lz-p3u" firstAttribute="trailing" secondItem="AxM-Tk-gD8" secondAttribute="trailing" constant="16" id="w8o-8B-jF5"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="routeDetailMapView" destination="AxM-Tk-gD8" id="kIm-ze-SAD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S1k-3K-wNE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="138.1679389312977" y="-1338.0281690140846"/>
+        </scene>
         <!--Add Ride View Controller-->
         <scene sceneID="8wh-kX-sWk">
             <objects>
@@ -360,6 +390,16 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </view>
+                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D7f-y6-hLh">
+                                            <rect key="frame" x="314" y="92" width="52" height="35"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" image="map.fill" catalog="system">
+                                                <color key="baseForegroundColor" systemColor="systemOrangeColor"/>
+                                            </buttonConfiguration>
+                                            <connections>
+                                                <action selector="routeDetailButtonPressed:" destination="jLR-lC-qxu" eventType="touchUpInside" id="WTs-rk-fCF"/>
+                                            </connections>
+                                        </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Datum" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DZf-kR-A5w">
                                             <rect key="frame" x="37" y="21" width="140" height="24"/>
                                             <constraints>
@@ -425,9 +465,11 @@
                                     <constraints>
                                         <constraint firstItem="DZf-kR-A5w" firstAttribute="leading" secondItem="FbR-qS-uxf" secondAttribute="leadingMargin" constant="17" id="33T-M1-nd2"/>
                                         <constraint firstItem="XSM-B9-rEj" firstAttribute="leading" secondItem="zMg-JD-nfa" secondAttribute="trailing" constant="8" id="5fk-hB-dqb"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="D7f-y6-hLh" secondAttribute="trailing" constant="7" id="9gJ-rc-VDd"/>
                                         <constraint firstItem="LvZ-f0-Aay" firstAttribute="trailing" secondItem="DZf-kR-A5w" secondAttribute="trailing" constant="179" id="C0M-z9-0Qe"/>
                                         <constraint firstItem="mqN-zD-y5O" firstAttribute="leading" secondItem="bhr-ui-Q7w" secondAttribute="trailing" constant="13" id="Cfh-DD-lQp"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="bhr-ui-Q7w" secondAttribute="bottom" constant="10" id="DCG-y8-yhw"/>
+                                        <constraint firstItem="D7f-y6-hLh" firstAttribute="top" secondItem="LvZ-f0-Aay" secondAttribute="bottom" constant="9" id="FgL-rc-M5y"/>
                                         <constraint firstItem="bhr-ui-Q7w" firstAttribute="leading" secondItem="hz1-hc-3PA" secondAttribute="trailing" constant="6" id="GyI-f2-HaC"/>
                                         <constraint firstItem="LvZ-f0-Aay" firstAttribute="top" secondItem="DZf-kR-A5w" secondAttribute="bottom" constant="17" id="LE2-X4-D4U"/>
                                         <constraint firstItem="DZf-kR-A5w" firstAttribute="top" secondItem="FbR-qS-uxf" secondAttribute="topMargin" constant="10" id="LJy-uf-Z7c"/>
@@ -440,6 +482,7 @@
                                         <constraint firstItem="JGS-pE-ffV" firstAttribute="leading" secondItem="FbR-qS-uxf" secondAttribute="leadingMargin" id="jAk-dX-hJw"/>
                                         <constraint firstItem="LvZ-f0-Aay" firstAttribute="leading" secondItem="DZf-kR-A5w" secondAttribute="leading" id="k1a-dQ-Luo"/>
                                         <constraint firstItem="hz1-hc-3PA" firstAttribute="baseline" secondItem="bhr-ui-Q7w" secondAttribute="baseline" id="kWq-ta-YSC"/>
+                                        <constraint firstItem="D7f-y6-hLh" firstAttribute="centerX" secondItem="XSM-B9-rEj" secondAttribute="centerX" id="lsx-eq-tkD"/>
                                         <constraint firstItem="hz1-hc-3PA" firstAttribute="leading" secondItem="DZf-kR-A5w" secondAttribute="leading" id="mMu-1V-MCv"/>
                                         <constraint firstItem="JGS-pE-ffV" firstAttribute="bottom" secondItem="FbR-qS-uxf" secondAttribute="bottomMargin" id="ner-U5-C5c"/>
                                         <constraint firstItem="zMg-JD-nfa" firstAttribute="leading" secondItem="DZf-kR-A5w" secondAttribute="trailing" constant="23" id="oIs-xI-WiB"/>

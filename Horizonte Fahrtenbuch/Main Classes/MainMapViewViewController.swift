@@ -654,7 +654,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
                 
                 UIApplication.shared.isIdleTimerDisabled = false
                 
-                // MARK: Initializing Realm
+                // MARK: Initializing Realm and store properties to the database
                 
                 lazy var realm:Realm = {
                     return try! Realm()
@@ -671,10 +671,10 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
                 
                 let polyline = MKPolyline(coordinates: coordinates, count: coordinates.count)
                 
-                print("Coordinates before encoding:")
-                print(coordinates)
+                //print("Coordinates before encoding:")
+                //print(coordinates)
                 
-                let encodedPolyline = try? NSKeyedArchiver.archivedData(withRootObject: polyline, requiringSecureCoding: false)
+                let encodedPolyline = try? JSONEncoder().encode(PolylineData(polyline))
                 
                 currentRides.timeElapsed = timeElapsed.text
                 currentRides.distanceDriven = distanceDriven.text
@@ -807,6 +807,33 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     }
     
     @IBAction func addressBookButtonPressed(_ sender: Any) {
+    }
+    
+    struct PolylineData: Encodable {
+        let points: [PointData]
+        
+        func encode(to encoder: Encoder) throws {
+            var container = encoder.singleValueContainer()
+            try container.encode(points)
+        }
+        
+        struct PointData: Codable {
+            var longitude: Double
+            var latitude: Double
+            
+            init(_ coordinate: CLLocationCoordinate2D) {
+                self.longitude = coordinate.longitude
+                self.latitude = coordinate.latitude
+            }
+        }
+        
+        init(_ polyline: MKPolyline) {
+            self.points = (0 ..< polyline.pointCount).map {
+                let mapPoint = polyline.points()[$0]
+                let coordinate = mapPoint.coordinate
+                return PointData(coordinate)
+            }
+        }
     }
     
 }

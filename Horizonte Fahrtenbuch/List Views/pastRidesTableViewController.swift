@@ -199,6 +199,22 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
             
         }
         
+        cell.routeDetailButtonPressed = {
+            
+            print ("routeButton pressed at Index", indexPath)
+            let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "routeDetailViewController") as! routeDetailViewController
+            
+            // Pass the encodedPolyline object to the detailVC
+            
+            let realm = try! Realm()
+            let currentRide = realm.objects(currentRide.self)[indexPath.row]
+
+            detailVC.encodedPolyline = currentRide.encodedPolyline
+
+            
+            self.navigationController?.pushViewController(detailVC, animated: true)
+        }
+        
         let data = filteredResults![indexPath.row]
         cell.configure(data: data)
 
