@@ -674,13 +674,18 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
                 //print("Coordinates before encoding:")
                 //print(coordinates)
                 
-                let encodedPolyline = try? JSONEncoder().encode(PolylineData(polyline))
+                if let encodedPolyline = try? JSONEncoder().encode(PolylineData(polyline)) {
+                    if let jsonString = String(data: encodedPolyline, encoding: .utf8) {
+                        currentRides.encodedPolyline = encodedPolyline
+                        print(jsonString)
+                    }
+                }
                 
                 currentRides.timeElapsed = timeElapsed.text
                 currentRides.distanceDriven = distanceDriven.text
                 currentRides.date = dateFormatter.string(from: date)
                 currentRides.currentClientName = clientTextField.text
-                currentRides.encodedPolyline = encodedPolyline
+                //currentRides.encodedPolyline = encodedPolyline
                 
                 
                 currentRides.isManuallySaved = false
