@@ -669,10 +669,18 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
                 
                 dateFormatter.string(from: date)
                 
+                let polyline = MKPolyline(coordinates: coordinates, count: coordinates.count)
+                
+                print("Coordinates before encoding:")
+                print(coordinates)
+                
+                let encodedPolyline = try? NSKeyedArchiver.archivedData(withRootObject: polyline, requiringSecureCoding: false)
+                
                 currentRides.timeElapsed = timeElapsed.text
                 currentRides.distanceDriven = distanceDriven.text
                 currentRides.date = dateFormatter.string(from: date)
                 currentRides.currentClientName = clientTextField.text
+                currentRides.encodedPolyline = encodedPolyline
                 
                 
                 currentRides.isManuallySaved = false

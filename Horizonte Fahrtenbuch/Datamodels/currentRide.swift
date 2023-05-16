@@ -20,4 +20,6 @@ class currentRide: Object {
     @objc dynamic var supplementDate: String?
     @objc dynamic var isManuallySaved: Bool = false
     
+    @objc dynamic var encodedPolyline: Data?
+    
 }
