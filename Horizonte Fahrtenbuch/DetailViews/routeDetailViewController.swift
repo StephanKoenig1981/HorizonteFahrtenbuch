@@ -54,7 +54,7 @@ extension routeDetailViewController: MKMapViewDelegate {
         if let polyline = overlay as? MKPolyline {
             let renderer = MKPolylineRenderer(polyline: polyline)
             renderer.strokeColor = UIColor.systemOrange
-            renderer.lineWidth = 6.0
+            renderer.lineWidth = 4.0
             return renderer
         }
         return MKOverlayRenderer()
