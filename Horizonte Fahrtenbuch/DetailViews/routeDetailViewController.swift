@@ -5,21 +5,19 @@
 //  Created by Stephan König on 16.05.23.
 //
 
-import UIKit
+import CoreLocation
 import MapKit
 
 class routeDetailViewController: UIViewController {
-
+    
     var encodedPolyline: Data?
     @IBOutlet weak var mapView: MKMapView!
-    
     @IBOutlet weak var routeDetailMapView: MKMapView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         routeDetailMapView.delegate = self
-        routeDetailMapView.layer.cornerRadius = 20
         
         // Check if the encodedPolyline is not nil
         guard let encodedPolyline = encodedPolyline else {
@@ -27,30 +25,24 @@ class routeDetailViewController: UIViewController {
             return
         }
         
-        // Decode the encodedPolyline data into a Polyline object
-        guard let polyline = try? JSONDecoder().decode(Polyline.self, from: encodedPolyline) else {
+        // Decode the encodedPolyline data into an array of CLLocationCoordinate2D points
+        guard let coordinatesJSON = try? JSONDecoder().decode([[String: Double]].self, from: encodedPolyline) else {
             print("Failed to decode the encodedPolyline")
             return
         }
         
-        // Create an array of CLLocationCoordinate2D points from the polyline object
+        // Create an array of CLLocationCoordinate2D points from the coordinates JSON array
         var points: [CLLocationCoordinate2D] = []
-        for coordinate in polyline.coordinates {
-            let point = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        for coordinateJSON in coordinatesJSON {
+            let point = CLLocationCoordinate2D(latitude: coordinateJSON["latitude"]!, longitude: coordinateJSON["longitude"]!)
             points.append(point)
         }
+        
+        print("Decoded coordinates: \(points)") // Add this line to print the decoded coordinates
         
         // Create an MKPolyline from the points array and add it to the map
         let polyLine = MKPolyline(coordinates: points, count: points.count)
         routeDetailMapView.addOverlay(polyLine)
-        
-        // Set the map region to fit the polyline
-        if let firstPoint = points.first, let lastPoint = points.last {
-            let startRegion = MKCoordinateRegion(center: firstPoint, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-            let endRegion = MKCoordinateRegion(center: lastPoint, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-            let region = MKCoordinateRegion(center: firstPoint, latitudinalMeters: startRegion.span.latitudeDelta * 2.5 + endRegion.span.latitudeDelta * 2.5, longitudinalMeters: startRegion.span.longitudeDelta * 2.5 + endRegion.span.longitudeDelta * 2.5)
-            routeDetailMapView.setRegion(region, animated: true)
-        }
     }
 }
 
@@ -66,11 +58,3 @@ extension routeDetailViewController: MKMapViewDelegate {
     }
 }
 
-struct Polyline: Codable {
-    var coordinates: [Coordinate]
-    
-    struct Coordinate: Codable {
-        var latitude: Double
-        var longitude: Double
-    }
-}

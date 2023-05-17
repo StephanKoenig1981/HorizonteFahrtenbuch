@@ -140,7 +140,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="routeDetailMapView" destination="AxM-Tk-gD8" id="aFH-aT-PVe"/>
+                        <outlet property="routeDetailMapView" destination="AxM-Tk-gD8" id="MPs-gh-Bgs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S1k-3K-wNE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
