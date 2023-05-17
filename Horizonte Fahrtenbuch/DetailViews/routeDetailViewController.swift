@@ -18,6 +18,7 @@ class routeDetailViewController: UIViewController {
         super.viewDidLoad()
         
         routeDetailMapView.delegate = self
+        routeDetailMapView.layer.cornerRadius = 20
         
         // Check if the encodedPolyline is not nil
         guard let encodedPolyline = encodedPolyline else {
@@ -43,6 +44,8 @@ class routeDetailViewController: UIViewController {
         // Create an MKPolyline from the points array and add it to the map
         let polyLine = MKPolyline(coordinates: points, count: points.count)
         routeDetailMapView.addOverlay(polyLine)
+        
+        routeDetailMapView.setVisibleMapRect(polyLine.boundingMapRect, edgePadding: UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 50), animated: true)
     }
 }
 
@@ -50,8 +53,8 @@ extension routeDetailViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if let polyline = overlay as? MKPolyline {
             let renderer = MKPolylineRenderer(polyline: polyline)
-            renderer.strokeColor = UIColor.blue
-            renderer.lineWidth = 3.0
+            renderer.strokeColor = UIColor.systemOrange
+            renderer.lineWidth = 6.0
             return renderer
         }
         return MKOverlayRenderer()
