@@ -119,16 +119,16 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
     // MARK: Filter Data Function
     
     func filterResults(searchTerm: String) {
-            if searchTerm.isEmpty {
-                // Ausgabe aller Elemente wird auch sortiert
-                filteredResults = realm.objects(currentRide.self).sorted(byKeyPath: "date", ascending: true)
-            } else {
-                // Nur ausgewählte Elemente werden sortiert
-                filteredResults = realm.objects(currentRide.self)
-                filteredResults = filteredResults.filter("currentClientName CONTAINS[c] %@", searchTerm)
-                filteredResults = filteredResults.sorted(byKeyPath: "date", ascending: true)
-            }
-            tableView.reloadData()
+        if searchTerm.isEmpty {
+            // Ausgabe aller Elemente wird auch sortiert
+            filteredResults = realm.objects(currentRide.self).sorted(byKeyPath: "date", ascending: true)
+        } else {
+            // Nur ausgewählte Elemente werden sortiert
+            filteredResults = realm.objects(currentRide.self)
+            filteredResults = filteredResults.filter("currentClientName CONTAINS[c] %@", searchTerm)
+            filteredResults = filteredResults.sorted(byKeyPath: "date", ascending: true)
+        }
+        tableView.reloadData()
     }
     
     // MARK: Define the number of rows beeing presented
@@ -207,20 +207,19 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
             cell.routeDetailButton.tintColor = .systemOrange
         }
         
-        cell.routeDetailButtonPressed = {
-            
-            print ("routeButton pressed at Index", indexPath)
-            let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "routeDetailViewController") as! routeDetailViewController
-            
-            // Pass the encodedPolyline object to the detailVC
-            
-            let realm = try! Realm()
-            let currentRide = realm.objects(currentRide.self)[indexPath.row]
+        cell.routeDetailButtonPressed = { [weak self] in
+          guard let self = self else { return }
+          print ("routeButton pressed at Index", indexPath)
 
-            detailVC.encodedPolyline = currentRide.encodedPolyline
-
+          let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "routeDetailViewController") as! routeDetailViewController
             
-            self.navigationController?.pushViewController(detailVC, animated: true)
+          // Determine the index path of the selected cell within the filtered results
+          let filteredIndex = indexPath.row
+          // Use the filtered index path to obtain the currentRide object from the filtered results
+          let currentRide = self.filteredResults[filteredIndex]
+          detailVC.encodedPolyline = currentRide.encodedPolyline
+             
+          self.navigationController?.pushViewController(detailVC, animated: true)
         }
         
         let data = filteredResults![indexPath.row]
