@@ -500,6 +500,7 @@
                                     <outlet property="durationLabel" destination="hz1-hc-3PA" id="Zkc-x6-mWo"/>
                                     <outlet property="gradientBackgroundView" destination="OMf-ia-pT2" id="BiF-PL-XHL"/>
                                     <outlet property="rideClientLabel" destination="LvZ-f0-Aay" id="N0a-YG-Z0h"/>
+                                    <outlet property="routeDetailButton" destination="D7f-y6-hLh" id="9lf-W4-vEg"/>
                                     <outlet property="supplementDateLabel" destination="zMg-JD-nfa" id="p3E-bq-iDH"/>
                                 </connections>
                             </tableViewCell>

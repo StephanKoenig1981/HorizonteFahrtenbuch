@@ -195,8 +195,16 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
             cell.supplementDateLabel.isHidden = false
             cell.circleSign.isUserInteractionEnabled = false
             
-            
-            
+        }
+        
+        // Disabling the routeDetailButton button if no phone number is in the contact details.
+        
+        if object.isManuallySaved == true {
+            cell.routeDetailButton.isEnabled = false
+            cell.routeDetailButton.tintColor = .systemGray
+        } else {
+            cell.routeDetailButton.isEnabled = true
+            cell.routeDetailButton.tintColor = .systemOrange
         }
         
         cell.routeDetailButtonPressed = {
