@@ -46,6 +46,7 @@ class routeDetailViewController: UIViewController {
         routeDetailMapView.addOverlay(polyLine)
         
         routeDetailMapView.setVisibleMapRect(polyLine.boundingMapRect, edgePadding: UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 50), animated: true)
+        
     }
 }
 

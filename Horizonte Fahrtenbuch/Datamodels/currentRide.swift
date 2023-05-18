@@ -7,9 +7,7 @@
 
 import Foundation
 import RealmSwift
-import CoreLocation
 
-// MARK: THIS CLASS MODEL IS TESTING ONLY
 
 class currentRide: Object {
     
