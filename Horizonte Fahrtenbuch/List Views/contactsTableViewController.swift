@@ -144,6 +144,8 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
         // MARK: Action for Map Button
         
         cell.routeButtonPressed = {
+            
+            
             print ("mapButtonPressed at Index", indexPath)
             let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "clientDetailViewController") as! clientDetailViewController
             
@@ -154,7 +156,7 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
             guard indexPath.row < objects.count else {
                 return
             }
-            let selectedClient = objects[indexPath.row]
+            let selectedClient = self.filteredResults[indexPath.row]
             
             // Get the address and name for the selected client
             if let street = selectedClient.street?.description, let city = selectedClient.city?.description {

@@ -491,7 +491,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         UIApplication.shared.isIdleTimerDisabled = true
         
         locationManager.startUpdatingLocation()
-        locationManager.distanceFilter = 5
+        locationManager.distanceFilter = 500
         
         timeElapsed.fadeOut(duration: 1.0)
         timeElapsed.textColor = UIColor.orange
