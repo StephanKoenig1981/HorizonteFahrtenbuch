@@ -156,7 +156,7 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
             guard indexPath.row < objects.count else {
                 return
             }
-            let selectedClient = self.results[indexPath.row]
+            let selectedClient = self.filteredResults.sorted(byKeyPath: "client", ascending: true)[indexPath.row]
             
             // Get the address and name for the selected client
             if let street = selectedClient.street?.description, let city = selectedClient.city?.description {
