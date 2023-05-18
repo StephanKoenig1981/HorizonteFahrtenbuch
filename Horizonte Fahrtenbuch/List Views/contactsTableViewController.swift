@@ -156,7 +156,7 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
             guard indexPath.row < objects.count else {
                 return
             }
-            let selectedClient = self.filteredResults[indexPath.row]
+            let selectedClient = self.results[indexPath.row]
             
             // Get the address and name for the selected client
             if let street = selectedClient.street?.description, let city = selectedClient.city?.description {
@@ -209,7 +209,7 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
         
         // Sorting Data
         
-        let data = filteredResults![indexPath.row]
+        let data = filteredResults[indexPath.row]
         cell.configure(data: data)
 
         return cell
