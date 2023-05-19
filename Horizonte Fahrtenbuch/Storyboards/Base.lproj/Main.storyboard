@@ -126,21 +126,87 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AxM-Tk-gD8">
-                                <rect key="frame" x="16" y="59" width="361" height="759"/>
+                                <rect key="frame" x="16" y="59" width="361" height="570"/>
                                 <standardMapConfiguration key="preferredConfiguration"/>
                             </mapView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kundenname" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v7D-XR-igx">
+                                <rect key="frame" x="16" y="642" width="361" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                <color key="textColor" systemColor="systemOrangeColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gefahrene Zeit:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bfd-1o-jMX">
+                                <rect key="frame" x="16" y="688" width="164" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                <color key="textColor" red="0.61176470589999998" green="0.78039215689999997" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gefahrene Distanz:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ybu-lN-HRn">
+                                <rect key="frame" x="16" y="731" width="204" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                <color key="textColor" red="0.61176470589999998" green="0.78039215689999997" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GLr-W0-KPS">
+                                <rect key="frame" x="246" y="688" width="131" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="131" id="rf3-48-K0a"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                <color key="textColor" red="0.61176470589999998" green="0.78039215689999997" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0 Km" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gel-mp-yuP">
+                                <rect key="frame" x="246" y="731" width="131" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                <color key="textColor" red="0.61176470589999998" green="0.78039215689999997" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="x83-Q4-kDc">
+                                <rect key="frame" x="16" y="777" width="361" height="32"/>
+                                <segments>
+                                    <segment title="Normal"/>
+                                    <segment title="Gedimmt"/>
+                                    <segment title="Satellit"/>
+                                </segments>
+                                <color key="selectedSegmentTintColor" red="0.61176470589999998" green="0.78039215689999997" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <connections>
+                                    <action selector="mapTypeSelector:" destination="rjW-uF-j4q" eventType="valueChanged" id="GSn-DE-jO0"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="zVh-lz-p3u"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="AxM-Tk-gD8" firstAttribute="bottom" secondItem="zVh-lz-p3u" secondAttribute="bottom" id="lWw-g4-GX6"/>
+                            <constraint firstItem="x83-Q4-kDc" firstAttribute="bottom" secondItem="zVh-lz-p3u" secondAttribute="bottom" constant="-10" id="3t4-ao-GOQ"/>
+                            <constraint firstItem="zVh-lz-p3u" firstAttribute="trailing" secondItem="x83-Q4-kDc" secondAttribute="trailing" constant="16" id="6e9-ye-par"/>
+                            <constraint firstItem="Bfd-1o-jMX" firstAttribute="leading" secondItem="Ybu-lN-HRn" secondAttribute="leading" id="7OS-CI-nF9"/>
+                            <constraint firstItem="GLr-W0-KPS" firstAttribute="leading" secondItem="Bfd-1o-jMX" secondAttribute="trailing" constant="66" id="C9q-i2-ZBh"/>
+                            <constraint firstItem="Ybu-lN-HRn" firstAttribute="top" secondItem="Bfd-1o-jMX" secondAttribute="bottom" constant="19" id="DnY-kb-Tsn"/>
+                            <constraint firstItem="Ybu-lN-HRn" firstAttribute="baseline" secondItem="gel-mp-yuP" secondAttribute="baseline" id="HeJ-wn-jf8"/>
+                            <constraint firstItem="Bfd-1o-jMX" firstAttribute="trailing" secondItem="Ybu-lN-HRn" secondAttribute="trailing" constant="-40" id="WS6-Mx-inG"/>
+                            <constraint firstItem="Bfd-1o-jMX" firstAttribute="leading" secondItem="v7D-XR-igx" secondAttribute="leading" id="cTx-9A-Nlu"/>
+                            <constraint firstItem="Bfd-1o-jMX" firstAttribute="top" secondItem="v7D-XR-igx" secondAttribute="bottom" constant="22" id="fTH-oY-rsl"/>
+                            <constraint firstItem="v7D-XR-igx" firstAttribute="leading" secondItem="zVh-lz-p3u" secondAttribute="leading" constant="16" id="jTM-IM-gG3"/>
+                            <constraint firstItem="Bfd-1o-jMX" firstAttribute="baseline" secondItem="GLr-W0-KPS" secondAttribute="baseline" id="keY-Pv-3vg"/>
+                            <constraint firstItem="AxM-Tk-gD8" firstAttribute="bottom" secondItem="zVh-lz-p3u" secondAttribute="bottom" constant="-189" id="lWw-g4-GX6"/>
+                            <constraint firstItem="x83-Q4-kDc" firstAttribute="leading" secondItem="zVh-lz-p3u" secondAttribute="leading" constant="16" id="mYl-bv-HU5"/>
+                            <constraint firstItem="GLr-W0-KPS" firstAttribute="trailing" secondItem="v7D-XR-igx" secondAttribute="trailing" id="mqn-8G-f2x"/>
                             <constraint firstItem="AxM-Tk-gD8" firstAttribute="top" secondItem="zVh-lz-p3u" secondAttribute="top" id="sLS-o1-RYo"/>
+                            <constraint firstItem="v7D-XR-igx" firstAttribute="top" secondItem="AxM-Tk-gD8" secondAttribute="bottom" constant="13" id="taz-Db-IyP"/>
+                            <constraint firstItem="GLr-W0-KPS" firstAttribute="leading" secondItem="gel-mp-yuP" secondAttribute="leading" id="uOK-JK-MwW"/>
                             <constraint firstItem="AxM-Tk-gD8" firstAttribute="leading" secondItem="zVh-lz-p3u" secondAttribute="leading" constant="16" id="uYd-G5-Z5C"/>
                             <constraint firstItem="zVh-lz-p3u" firstAttribute="trailing" secondItem="AxM-Tk-gD8" secondAttribute="trailing" constant="16" id="w8o-8B-jF5"/>
+                            <constraint firstItem="zVh-lz-p3u" firstAttribute="trailing" secondItem="v7D-XR-igx" secondAttribute="trailing" constant="16" id="yDk-iB-x6c"/>
+                            <constraint firstItem="GLr-W0-KPS" firstAttribute="trailing" secondItem="gel-mp-yuP" secondAttribute="trailing" id="yUA-41-HEC"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="clientNameLabel" destination="v7D-XR-igx" id="hx3-0b-51D"/>
+                        <outlet property="drivenDistanceLabel" destination="gel-mp-yuP" id="dy2-UF-ovN"/>
+                        <outlet property="mapTypeSegmentedControl" destination="x83-Q4-kDc" id="wb4-dj-Y24"/>
                         <outlet property="routeDetailMapView" destination="AxM-Tk-gD8" id="MPs-gh-Bgs"/>
+                        <outlet property="timeElapsedLabel" destination="GLr-W0-KPS" id="lYj-S0-L4a"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S1k-3K-wNE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -323,19 +389,34 @@
                                 <rect key="frame" x="16" y="59" width="361" height="759"/>
                                 <standardMapConfiguration key="preferredConfiguration"/>
                             </mapView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="mgn-Qb-ZUH">
+                                <rect key="frame" x="26" y="774" width="342" height="32"/>
+                                <segments>
+                                    <segment title="Normal"/>
+                                    <segment title="Gedimmt"/>
+                                    <segment title="Satellit"/>
+                                </segments>
+                                <connections>
+                                    <action selector="mapTypeSegmentedControl:" destination="d0q-Wq-8fu" eventType="valueChanged" id="dmY-PA-c1k"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Igw-hX-Xd2"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="mgn-Qb-ZUH" secondAttribute="trailing" constant="9" id="Qng-PR-QQp"/>
                             <constraint firstItem="BV4-Zs-pwE" firstAttribute="leading" secondItem="Igw-hX-Xd2" secondAttribute="leading" constant="16" id="RIU-oK-HyW"/>
                             <constraint firstItem="Igw-hX-Xd2" firstAttribute="trailing" secondItem="BV4-Zs-pwE" secondAttribute="trailing" constant="16" id="UVc-Pg-UEr"/>
+                            <constraint firstItem="mgn-Qb-ZUH" firstAttribute="leading" secondItem="O1T-Ae-0Z0" secondAttribute="leadingMargin" constant="10" id="hvF-NI-iPZ"/>
                             <constraint firstItem="BV4-Zs-pwE" firstAttribute="top" secondItem="Igw-hX-Xd2" secondAttribute="top" id="lFP-0K-Nod"/>
                             <constraint firstItem="BV4-Zs-pwE" firstAttribute="bottom" secondItem="Igw-hX-Xd2" secondAttribute="bottom" id="rd7-6r-7Qm"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="mgn-Qb-ZUH" secondAttribute="bottom" constant="13" id="wqm-L9-1Ym"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Qkz-qI-a10"/>
                     <connections>
                         <outlet property="clientDetailMapView" destination="BV4-Zs-pwE" id="Zbe-hl-Eb8"/>
+                        <outlet property="mapTypeSegmentedControl" destination="mgn-Qb-ZUH" id="WHl-rU-L7G"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mzi-7V-TUl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

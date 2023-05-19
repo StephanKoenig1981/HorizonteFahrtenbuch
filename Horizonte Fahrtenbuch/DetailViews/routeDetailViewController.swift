@@ -11,14 +11,31 @@ import MapKit
 class routeDetailViewController: UIViewController {
     
     var encodedPolyline: Data?
-    @IBOutlet weak var mapView: MKMapView!
+    var clientName: String?
+    var timeElapsed: String?
+    var distanceDriven: String?
+    
+    
     @IBOutlet weak var routeDetailMapView: MKMapView!
+    
+    @IBOutlet weak var clientNameLabel: UILabel!
+    @IBOutlet weak var drivenDistanceLabel: UILabel!
+    @IBOutlet weak var timeElapsedLabel: UILabel!
+    
+    @IBOutlet weak var mapTypeSegmentedControl: UISegmentedControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         routeDetailMapView.delegate = self
         routeDetailMapView.layer.cornerRadius = 20
+        
+        // Customizing the Maptype Selector
+    
+        mapTypeSegmentedControl.selectedSegmentTintColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+        let titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        mapTypeSegmentedControl.setTitleTextAttributes(titleTextAttributes, for:.selected)
+    
         
         // Check if the encodedPolyline is not nil
         guard let encodedPolyline = encodedPolyline else {
@@ -47,7 +64,36 @@ class routeDetailViewController: UIViewController {
         
         routeDetailMapView.setVisibleMapRect(polyLine.boundingMapRect, edgePadding: UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 50), animated: true)
         
+        clientNameLabel.text = clientName?.description
+        drivenDistanceLabel.text = distanceDriven?.description
+        timeElapsedLabel.text = timeElapsed?.description
+        
+        if clientName?.description == "" {
+            clientNameLabel.text = "Keine Angabe"
+            clientNameLabel.textColor = UIColor.systemBlue
+        }
+        
         self.title = "Gefahrene Route"
+    }
+    @IBAction func mapTypeSelector(_ sender: Any) {
+        
+        switch ((sender as AnyObject).selectedSegmentIndex) {
+        case 0:
+            routeDetailMapView.fadeOut(duration: 0.7)
+            routeDetailMapView.mapType = .standard
+            routeDetailMapView.fadeIn(duration: 0.7)
+        case 1:
+            routeDetailMapView.fadeOut(duration: 0.7)
+            routeDetailMapView.mapType = .mutedStandard
+            routeDetailMapView.fadeIn(duration: 0.7)
+        case 2:
+            routeDetailMapView.fadeOut(duration: 0.7)
+            routeDetailMapView.mapType = .satellite
+            routeDetailMapView.fadeIn(duration: 0.7)
+        default:
+            routeDetailMapView.mapType = .standard
+        }
+        
     }
 }
 

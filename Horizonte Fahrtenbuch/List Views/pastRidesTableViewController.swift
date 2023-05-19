@@ -195,6 +195,9 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
           // Use the filtered index path to obtain the currentRide object from the filtered results
           let currentRide = self.filteredResults[filteredIndex]
           detailVC.encodedPolyline = currentRide.encodedPolyline
+          detailVC.clientName = currentRide.currentClientName
+          detailVC.timeElapsed = currentRide.timeElapsed
+          detailVC.distanceDriven = currentRide.distanceDriven
              
           self.navigationController?.pushViewController(detailVC, animated: true)
         }

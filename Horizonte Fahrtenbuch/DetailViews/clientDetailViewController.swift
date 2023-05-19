@@ -19,6 +19,7 @@ class clientDetailViewController: UIViewController, CLLocationManagerDelegate, M
     var latitude: Double = 0
     var longitude: Double = 0
     
+    @IBOutlet weak var mapTypeSegmentedControl: UISegmentedControl!
     
     @IBOutlet weak var clientDetailMapView: MKMapView!
     
@@ -38,6 +39,12 @@ class clientDetailViewController: UIViewController, CLLocationManagerDelegate, M
         clientDetailMapView.addAnnotation(annotation)
         
         self.title = "Kundenstandort"
+        
+        // Customizing the Maptype Selector
+    
+        mapTypeSegmentedControl.selectedSegmentTintColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+        let titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        mapTypeSegmentedControl.setTitleTextAttributes(titleTextAttributes, for:.selected)
         
     }
     
@@ -60,6 +67,24 @@ class clientDetailViewController: UIViewController, CLLocationManagerDelegate, M
         annotationView?.glyphText = customAnnotation.title
         
         return annotationView
+    }
+    @IBAction func mapTypeSegmentedControl(_ sender: Any) {
+        switch ((sender as AnyObject).selectedSegmentIndex) {
+        case 0:
+            clientDetailMapView.fadeOut(duration: 0.7)
+            clientDetailMapView.mapType = .standard
+            clientDetailMapView.fadeIn(duration: 0.7)
+        case 1:
+            clientDetailMapView.fadeOut(duration: 0.7)
+            clientDetailMapView.mapType = .mutedStandard
+            clientDetailMapView.fadeIn(duration: 0.7)
+        case 2:
+            clientDetailMapView.fadeOut(duration: 0.7)
+            clientDetailMapView.mapType = .satellite
+            clientDetailMapView.fadeIn(duration: 0.7)
+        default:
+            clientDetailMapView.mapType = .standard
+        }
     }
 }
     

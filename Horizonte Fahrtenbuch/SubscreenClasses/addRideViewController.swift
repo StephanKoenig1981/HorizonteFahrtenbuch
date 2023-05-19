@@ -53,7 +53,7 @@ class addRideViewController: UIViewController, UITextFieldDelegate {
     @IBAction func saveButtonPressed(_ sender: Any) {
         
         if clientTextfield.text == "" {
-            let alert = UIAlertController(title: "Pflichtfeld", message: "Bitte fülle alle benötigten Felder aus.", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Pflichtfeld", message: "Bitte fülle alle Felder aus.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                 
                 switch action.style{
