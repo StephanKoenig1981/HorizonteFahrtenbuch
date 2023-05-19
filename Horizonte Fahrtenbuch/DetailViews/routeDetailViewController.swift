@@ -29,6 +29,8 @@ class routeDetailViewController: UIViewController {
         
         routeDetailMapView.delegate = self
         routeDetailMapView.layer.cornerRadius = 20
+        routeDetailMapView.showsScale = true
+        routeDetailMapView.showsUserLocation = false
         
         // Customizing the Maptype Selector
     
