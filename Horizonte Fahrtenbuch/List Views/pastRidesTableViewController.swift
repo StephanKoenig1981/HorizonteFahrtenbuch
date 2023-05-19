@@ -84,29 +84,6 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
         pastRidesTableView.dataSource = self
         
         pastRidesTableView.rowHeight = 144
-        
-        
-        // Set results notification block
-        self.notificationToken = results.observe { (changes: RealmCollectionChange) in
-            switch changes {
-            case .initial:
-                // Results are now populated and can be accessed without blocking the UI
-                self.pastRidesTableView.reloadData()
-            case .update(_, let deletions, let insertions, let modifications):
-                // Query results have changed, so apply them to the TableView
-                
-                self.pastRidesTableView.beginUpdates()
-                self.pastRidesTableView.insertRows(at: insertions.map { IndexPath(row: $0, section: 0) }, with: .automatic)
-                self.pastRidesTableView.deleteRows(at: deletions.map { IndexPath(row: $0, section: 0) }, with: .automatic)
-                self.pastRidesTableView.reloadRows(at: modifications.map { IndexPath(row: $0, section: 0) }, with: .automatic)
-                self.pastRidesTableView.endUpdates()
-                
-                
-            case .error(let err):
-                // An error occurred while opening the Realm file on the background worker thread
-                fatalError("\(err)")
-            }
-        }
     }
     
     // MARK: Setting Up User Interface
