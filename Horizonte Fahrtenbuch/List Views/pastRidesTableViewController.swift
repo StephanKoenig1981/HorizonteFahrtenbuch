@@ -57,26 +57,6 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
         let objects = realm.objects(currentRide.self)
         var filteredData = objects // Initally, the filtered data is the same as the original data.
         
-        // Set results notification block
-        self.notificationToken = results.observe { (changes: RealmCollectionChange) in
-            switch changes {
-            case .initial:
-                // Results are now populated and can be accessed without blocking the UI
-                self.pastRidesTableView.reloadData()
-            case .update(_, let deletions, let insertions, let modifications):
-                // Query results have changed, so apply them to the TableView
-                self.pastRidesTableView.beginUpdates()
-                self.pastRidesTableView.insertRows(at: insertions.map { IndexPath(row: $0, section: 0) }, with: .automatic)
-                self.pastRidesTableView.deleteRows(at: deletions.map { IndexPath(row: $0, section: 0) }, with: .automatic)
-                self.pastRidesTableView.reloadRows(at: modifications.map { IndexPath(row: $0, section: 0) }, with: .automatic)
-                self.pastRidesTableView.endUpdates()
-            case .error(let err):
-                // An error occurred while opening the Realm file on the background worker thread
-                fatalError("\(err)")
-            }
-        }
-        
-        
         setupUI()
         
         pastRidesSearchBar.delegate = self
@@ -206,6 +186,20 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
         cell.configure(data: data)
 
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard editingStyle == .delete else { return }
+        
+        // Delete the corresponding object from the data source
+        let objectToDelete = filteredResults[indexPath.row]
+        try! realm.write {
+            realm.delete(objectToDelete)
+        }
+        
+        // Animate the deletion on the table view
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+        tableView.reloadData()
     }
     
     @objc func hideKeyboard(_ sender: UITapGestureRecognizer) {

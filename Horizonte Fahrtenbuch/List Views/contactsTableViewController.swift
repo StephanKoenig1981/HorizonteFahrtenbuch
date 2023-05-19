@@ -61,24 +61,6 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
         
         clientTableView.rowHeight = 225 // same as storyboard, but better to declare it here too
         
-        // Set results notification block
-        self.notificationToken = results.observe { (changes: RealmCollectionChange) in
-            switch changes {
-            case .initial:
-                // Results are now populated and can be accessed without blocking the UI
-                self.clientTableView.reloadData()
-            case .update(_, let deletions, let insertions, let modifications):
-                // Query results have changed, so apply them to the TableView
-                self.clientTableView.beginUpdates()
-                self.clientTableView.insertRows(at: insertions.map { IndexPath(row: $0, section: 0) }, with: .automatic)
-                self.clientTableView.deleteRows(at: deletions.map { IndexPath(row: $0, section: 0) }, with: .automatic)
-                self.clientTableView.reloadRows(at: modifications.map { IndexPath(row: $0, section: 0) }, with: .automatic)
-                self.clientTableView.endUpdates()
-            case .error(let err):
-                // An error occurred while opening the Realm file on the background worker thread
-                fatalError("\(err)")
-            }
-        }
     }
     
     // MARK: Setting Up User Interface
@@ -216,8 +198,18 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
     }
 
     
-    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        clientTableView.deselectRow(at: indexPath, animated: true)
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard editingStyle == .delete else { return }
+        
+        // Delete the corresponding object from the data source
+        let objectToDelete = filteredResults[indexPath.row]
+        try! realm.write {
+            realm.delete(objectToDelete)
+        }
+        
+        // Animate the deletion on the table view
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+        tableView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
