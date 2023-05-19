@@ -47,6 +47,7 @@ class routeDetailViewController: UIViewController {
         
         routeDetailMapView.setVisibleMapRect(polyLine.boundingMapRect, edgePadding: UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 50), animated: true)
         
+        self.title = "Gefahrene Route"
     }
 }
 
