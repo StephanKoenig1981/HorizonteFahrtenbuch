@@ -200,16 +200,30 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
+
+        // Create alert controller to confirm deletion
+        let alertController = UIAlertController(title: "Kundeneintrag löschen", message: "Bist du sicher, dass du den Kundeneintrag löschen möchtest?", preferredStyle: .actionSheet)
         
-        // Delete the corresponding object from the data source
-        let objectToDelete = filteredResults[indexPath.row]
-        try! realm.write {
-            realm.delete(objectToDelete)
+        // Add cancel action to alert controller
+        let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        // Add delete action to alert controller
+        let deleteAction = UIAlertAction(title: "Löschen", style: .destructive) { (action) in
+            // Delete the corresponding object from the data source
+            let objectToDelete = self.filteredResults[indexPath.row]
+            try! self.realm.write {
+                self.realm.delete(objectToDelete)
+            }
+            
+            // Animate the deletion on the table view
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            tableView.reloadData()
         }
+        alertController.addAction(deleteAction)
         
-        // Animate the deletion on the table view
-        tableView.deleteRows(at: [indexPath], with: .automatic)
-        tableView.reloadData()
+        // Present the alert controller
+        present(alertController, animated: true, completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
