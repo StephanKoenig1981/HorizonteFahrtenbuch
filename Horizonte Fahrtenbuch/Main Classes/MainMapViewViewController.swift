@@ -402,16 +402,22 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     
     
     @objc func updateDistanceLabel() {
-
-        formatter.units = .metric
-        formatter.unitStyle = .default
-        
-        let distanceString = formatter.string(fromDistance: traveledDistance)
-        distanceDriven.text = distanceString
-        
-        self.distanceDriven.text = "\(distanceString)"
-        
-    }
+            
+            formatter.units = .metric
+            formatter.unitStyle = .full
+            
+            let distanceString: String
+            
+            if traveledDistance < 1000 {
+                let kmDistance = traveledDistance / 1000.0
+                distanceString = String(format: "%.1f Km", kmDistance)
+            } else {
+                let kmDistance = traveledDistance / 1000.0
+                distanceString = String(format: "%.1f Km", kmDistance)
+            }
+            
+            distanceDriven.text = distanceString
+        }
     
     // MARK: Function for finally saving client to database
     
@@ -428,6 +434,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
 
     @IBAction func start(_sender: UIButton) {
         
+        mapView.isZoomEnabled = false
         
         // MARK: Haptic Feedback for start
         
@@ -508,7 +515,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         startButton.ButtonViewfadeIn(duration: 0.5)
         
         formatter.units = .metric
-        formatter.unitStyle = .default
+        formatter.unitStyle = .full
         
         let distanceString = formatter.string(fromDistance: traveledDistance)
         distanceDriven.text = distanceString
@@ -531,6 +538,8 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     
     
     @IBAction func stopButtonPressed(_ sender: Any) {
+        
+        mapView.isZoomEnabled = true
         
         // MARK: Haptic Feedback for start
         
@@ -598,7 +607,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
             
             startLocation = nil
             traveledDistance -= self.traveledDistance
-            distanceDriven.text = "0 m"
+            distanceDriven.text = "0.0 Km"
             
             // Reset Timer to Zero
             
@@ -725,7 +734,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
                 
                 startLocation = nil
                 traveledDistance -= self.traveledDistance
-                distanceDriven.text = "0 m"
+                distanceDriven.text = "0.0 Km"
                 
                 // Reset Timer to Zero
                 
