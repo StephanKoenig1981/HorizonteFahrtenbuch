@@ -227,4 +227,10 @@ class statsViewController: UIViewController, UITableViewDelegate, UITableViewDat
             present(alert, animated: true, completion: nil)
         }
     }
+    
+    // MARK: Set the gap between rows:
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 90.0 // Set the height of the cell to be 10 points more than what you have specified in the Storyboard or programmatically
+    }
 }
