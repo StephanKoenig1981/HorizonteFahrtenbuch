@@ -18,7 +18,7 @@ class addRideViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var distanceTextfield: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         
         // Disable Swipe Down gesture
         
@@ -29,24 +29,24 @@ class addRideViewController: UIViewController, UITextFieldDelegate {
         let vc = UIViewController()
         vc.presentationController?.presentedView?.gestureRecognizers?[0].isEnabled = false
         
-            // Delegates for Textfields
+        // Delegates for Textfields
         
-            clientTextfield.delegate = self
-            durationTextfield.delegate = self
-            distanceTextfield.delegate = self
-            
+        clientTextfield.delegate = self
+        durationTextfield.delegate = self
+        distanceTextfield.delegate = self
+        
     }
     
     // MARK: Functions for keyboard actions
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-            textField.resignFirstResponder()
-            return true
-        }
+        textField.resignFirstResponder()
+        return true
+    }
     
     func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-            self.view.endEditing(true)
-        }
+        self.view.endEditing(true)
+    }
     
     @IBAction func cancelButtonPressed(_ sender: Any) {
     }
@@ -58,13 +58,13 @@ class addRideViewController: UIViewController, UITextFieldDelegate {
                 
                 switch action.style{
                     
-                    case .default:
+                case .default:
                     print("default")
                     
-                    case .cancel:
+                case .cancel:
                     print("cancel")
                     
-                    case .destructive:
+                case .destructive:
                     print("destructive")
                     
                 @unknown default:
@@ -78,13 +78,13 @@ class addRideViewController: UIViewController, UITextFieldDelegate {
                 
                 switch action.style{
                     
-                    case .default:
+                case .default:
                     print("default")
                     
-                    case .cancel:
+                case .cancel:
                     print("cancel")
                     
-                    case .destructive:
+                case .destructive:
                     print("destructive")
                     
                 @unknown default:
@@ -98,13 +98,13 @@ class addRideViewController: UIViewController, UITextFieldDelegate {
                 
                 switch action.style{
                     
-                    case .default:
+                case .default:
                     print("default")
                     
-                    case .cancel:
+                case .cancel:
                     print("cancel")
                     
-                    case .destructive:
+                case .destructive:
                     print("destructive")
                     
                 @unknown default:
@@ -144,14 +144,15 @@ class addRideViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    
     // MARK: Function for finally saving client to database
     
     func saveRealmObject(currentRides: currentRide) {
-            let realm = try? Realm()
-            try? realm?.write {
-                realm?.add(currentRides)
-            }
-            print("Data Was Saved To Realm Database.")
+        let realm = try? Realm()
+        try? realm?.write {
+            realm?.add(currentRides)
+        }
+        print("Data Was Saved To Realm Database.")
     }
     @IBAction func cancellButtonPressed(_ sender: Any) {
         
@@ -161,13 +162,13 @@ class addRideViewController: UIViewController, UITextFieldDelegate {
             
             switch action.style{
                 
-                case .default:
+            case .default:
                 print("default")
                 
-                case .cancel:
+            case .cancel:
                 self.dismiss(animated: true)
                 
-                case .destructive:
+            case .destructive:
                 self.dismiss(animated: true)
                 
             @unknown default:

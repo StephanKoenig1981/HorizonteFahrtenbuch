@@ -434,7 +434,12 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
 
     @IBAction func start(_sender: UIButton) {
         
+        // Disabling scrolling, zooming, pitching and rotating when start was pressed.
+        
         mapView.isZoomEnabled = false
+        mapView.isScrollEnabled = false
+        mapView.isRotateEnabled = false
+        mapView.isPitchEnabled = false
         
         // MARK: Haptic Feedback for start
         
@@ -539,7 +544,12 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     
     @IBAction func stopButtonPressed(_ sender: Any) {
         
+        // Reeanbling scrolling, zooming, pitching and rotating when stop was pressed.
+        
         mapView.isZoomEnabled = true
+        mapView.isScrollEnabled = true
+        mapView.isRotateEnabled = true
+        mapView.isPitchEnabled = true
         
         // MARK: Haptic Feedback for start
         

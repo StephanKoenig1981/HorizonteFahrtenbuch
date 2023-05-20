@@ -8,21 +8,39 @@
 import UIKit
 import RealmSwift
 
-class statsViewController: UIViewController{
+class statsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
     
     @IBOutlet weak var totalTimeElapsedLabel: UILabel!
     @IBOutlet weak var totalDistanceDrivenLabel: UILabel!
     
+    @IBOutlet weak var closeMonthButton: UIButton!
     @IBOutlet weak var pastMonthsSummaryTableView: UITableView!
+    
+    @IBOutlet weak var sendReportButton: UIButton!
+    
+    var hasData: Bool = false
+    let placeholderLabel = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // MARK: Setting Delegates
+        
+        pastMonthsSummaryTableView.delegate = self
+        pastMonthsSummaryTableView.dataSource = self
+        
         // MARK: Customizing UI
         
-        pastMonthsSummaryTableView.layer.cornerRadius = 20
         pastMonthsSummaryTableView.backgroundColor = UIColor.clear
+        pastMonthsSummaryTableView.rowHeight = 80
+        
+        // MARK: Setting placeholder text for the tableView beeing empty
+        
+        placeholderLabel.text = "Es wurden noch keine Monate abgeschlossen."
+        placeholderLabel.textAlignment = .center
+        placeholderLabel.textColor = .gray
+        pastMonthsSummaryTableView.backgroundView = placeholderLabel
         
         // MARK: Showing total time elapsed
         
@@ -77,5 +95,136 @@ class statsViewController: UIViewController{
         
         // Finally, update your UI with the total distance driven
         totalDistanceDrivenLabel.text = String(format: "%.2f Km", totalDistanceDriven)
+    }
+    
+    @IBAction func closeMonthAction(_ sender: Any) {
+        
+        // Create an alert controller
+        let alertController = UIAlertController(
+            title: "ACHTUNG",
+            message: "Wenn du den aktuellen Monat abschliesst, werden die Fahrten gelöscht und in den vergangen Fahrten als Total gespeichert. \n\n Es werden keine detaillierten Routenansichten oder spezifische Kundennamen mehr sichtbar sein.",
+            preferredStyle: .actionSheet
+        )
+        
+        // Add an action to confirm deletion
+        let confirmAction = UIAlertAction(
+            title: "Bestätigen",
+            style: .destructive,
+            handler: { _ in
+                // First, we need to write the time elapsed and distance driven values to the pastMonthRides model object before we delete all objects from the database
+                let realm = try! Realm()
+
+                // Get the current month name and year
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "MMMM yyyy"
+                let monthName = dateFormatter.string(from: Date())
+
+                // Calculate the total time elapsed and distance driven for the current month
+                let totalDistance = self.totalDistanceDrivenLabel.text
+                let totalTimeElapsed = self.totalTimeElapsedLabel.text
+
+                // Create a new pastMonthRides object and set the values
+                let pastMonthRide = pastMonthRides()
+                pastMonthRide.date = Date()
+                pastMonthRide.totalDistace = totalDistance
+                pastMonthRide.totalTimeElapsed = totalTimeElapsed
+
+                // Write the object to the database
+                try! realm.write {
+                    realm.add(pastMonthRide)
+                }
+
+                // Now we can delete all currentRide objects from the database
+                try! realm.write {
+                    realm.delete(realm.objects(currentRide.self))
+                }
+
+                self.totalTimeElapsedLabel.text = "00:00:00"
+                self.totalDistanceDrivenLabel.text = "0.0 Km"
+                
+                self.pastMonthsSummaryTableView.reloadData()
+                
+                //self.dismiss(animated: true)
+            }
+        )
+        
+        // Add a cancel action to dismiss the alert
+        let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil)
+        
+        alertController.addAction(confirmAction)
+        alertController.addAction(cancelAction)
+        
+        // Present the alert
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    // MARK: TableViewFuncitons
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        let realm = try! Realm()
+        
+        let objects = realm.objects(pastMonthRides.self).sorted(byKeyPath: "date", ascending: true)
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "de_DE") // Setzen Sie hier Ihr gewünschtes lokale und Zeitzone
+        dateFormatter.timeZone = TimeZone.current
+        dateFormatter.dateFormat = "MMMM yyyy"
+        
+        return objects.count
+    }
+    
+    // MARK: TableViewFunction to populate with data
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = pastMonthsSummaryTableView.dequeueReusableCell(withIdentifier: "pastMonthRidesCell", for: indexPath) as! pastMonthRidesCell
+        
+        let realm = try! Realm()
+        let objects = realm.objects(pastMonthRides.self).sorted(byKeyPath: "date", ascending: true)
+        
+        let object = objects[indexPath.row] // Get the correct object for this row
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "de_DE") // Setzen Sie hier Ihr gewünschtes lokale und Zeitzone
+        dateFormatter.timeZone = TimeZone.current
+        dateFormatter.dateFormat = "MMMM yyyy"
+        
+        cell.monthLabel?.text = dateFormatter.string(from: object.date) // Use the date formatter to set the label text
+        cell.distanceLabel.text = object.totalDistace?.description
+        cell.timeLabel.text = object.totalTimeElapsed?.description
+        
+        if !hasData {
+               placeholderLabel.isHidden = true
+        } else {
+            placeholderLabel.isHidden = false
+        }
+
+        
+        return cell
+    }
+    
+    // MARK: TableViewFunction to delete rows.
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let realm = try! Realm()
+            let objects = realm.objects(pastMonthRides.self).sorted(byKeyPath: "date", ascending: true)
+            let object = objects[indexPath.row]
+            
+            let alert = UIAlertController(title: "Monatseintrag löschen", message: "Möchtest du diesen Eintrag wirklich löschen?", preferredStyle: .actionSheet)
+            
+            alert.addAction(UIAlertAction(title: "Löschen", style: .destructive, handler: { _ in
+                // If the user confirms, delete the row
+                try! realm.write {
+                    realm.delete(object)
+                }
+                
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil))
+            
+            present(alert, animated: true, completion: nil)
+        }
     }
 }

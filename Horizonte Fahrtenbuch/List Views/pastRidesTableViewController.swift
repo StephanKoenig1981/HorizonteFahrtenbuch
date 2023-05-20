@@ -24,6 +24,8 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
     // MARK: Array for filtered data and deinitialization of Notifications
     
     var filteredResults: Results<currentRide>!
+    var hasData: Bool = false
+    let placeholderLabel = UILabel()
     
     deinit {
         notificationToken?.invalidate()
@@ -64,13 +66,25 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
         pastRidesTableView.dataSource = self
         
         pastRidesTableView.rowHeight = 144
+        
+        // MARK: Setting placeholder text for the tableView beeing empty
+        
+        placeholderLabel.text = "Es wurden noch keine Fahrten aufgezeichnet."
+        placeholderLabel.textAlignment = .center
+        placeholderLabel.textColor = .gray
+        pastRidesTableView.backgroundView = placeholderLabel
     }
     
     // MARK: Setting Up User Interface
     func setupUI() {
         pastRidesTableView.register(pastRidesTableViewCell.self, forCellReuseIdentifier: "latestRideCell")
         
-        self.title = "Abgeschlossene Fahrten"
+        // Get the current month name and year
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM yyyy"
+        let monthName = dateFormatter.string(from: Date())
+        
+        self.title = monthName
     }
     
     // MARK: Filter Data Function
@@ -180,6 +194,12 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
           detailVC.distanceDriven = currentRide.distanceDriven
              
           self.navigationController?.pushViewController(detailVC, animated: true)
+        }
+        
+        if !hasData {
+               placeholderLabel.isHidden = true
+        } else {
+            placeholderLabel.isHidden = false
         }
         
         let data = filteredResults![indexPath.row]

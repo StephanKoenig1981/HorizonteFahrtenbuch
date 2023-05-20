@@ -25,6 +25,9 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
     let results = try! Realm().objects(clients.self).sorted(byKeyPath: "client")
     var notificationToken: NotificationToken?
     
+    var hasData: Bool = false
+    let placeholderLabel = UILabel()
+    
     // MARK: Array for filtered data and deinitialization of Notifications
     
     var filteredResults: Results<clients>!
@@ -60,6 +63,13 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
         var filteredData = objects // Initally, the filtered data is the same as the original data.
         
         clientTableView.rowHeight = 225 // same as storyboard, but better to declare it here too
+        
+        // MARK: Setting placeholder text for the tableView beeing empty
+        
+        placeholderLabel.text = "Es wurden noch keine Kontakte gespeichert."
+        placeholderLabel.textAlignment = .center
+        placeholderLabel.textColor = .gray
+        clientTableView.backgroundView = placeholderLabel
         
     }
     
@@ -188,6 +198,14 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
         let street = object.street?.description
         let city = object.city?.description ?? "" // Hier wird eine leere Zeichenfolge verwendet, wenn das Objekt keinen City-Wert hat.
         let address = "\(street), \(city)"
+        
+        // Check if the TableView is provided with data, else show placeholder text.
+        
+        if !hasData {
+               placeholderLabel.isHidden = true
+        } else {
+            placeholderLabel.isHidden = false
+        }
         
         // Sorting Data
         

@@ -9,7 +9,7 @@ import Foundation
 import RealmSwift
 
 class pastMonthRides: Object {
-    @objc dynamic var date: String?
+    @objc dynamic var date = Date()
     @objc dynamic var totalDistace: String?
     @objc dynamic var totalTimeElapsed: String?
 }
