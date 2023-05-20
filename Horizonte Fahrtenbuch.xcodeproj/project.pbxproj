@@ -22,10 +22,12 @@
 		0830F3942A116E8200B061A3 /* customAnnotations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0830F3932A116E8200B061A3 /* customAnnotations.swift */; };
 		084F85E32A0EC61900D1045D /* clientDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084F85E22A0EC61900D1045D /* clientDetailViewController.swift */; };
 		085302EA890B64D14B6F50BE /* Pods_Horizonte_Fahrtenbuch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84216B73CC3E28BAAA96BB3B /* Pods_Horizonte_Fahrtenbuch.framework */; };
+		085DAE992A18FAE60028450A /* statsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DAE982A18FAE60028450A /* statsViewController.swift */; };
+		085DAE9B2A1901FD0028450A /* pastMonthRidesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DAE9A2A1901FD0028450A /* pastMonthRidesCell.swift */; };
+		085DAE9D2A1909AC0028450A /* pastMonthRides.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DAE9C2A1909AC0028450A /* pastMonthRides.swift */; };
 		0863585A29F30C4100FA36D1 /* addContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0863585929F30C4100FA36D1 /* addContactViewController.swift */; };
 		087696C429F9C8D700246942 /* pastRidesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087696C329F9C8D700246942 /* pastRidesTableViewCell.swift */; };
 		087F308029CD07C0009E52FC /* MainMapViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F307F29CD07C0009E52FC /* MainMapViewViewController.swift */; };
-		088D667429F066AC009E50CF /* statsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0816062A29F0432900B6F4A3 /* statsViewController.swift */; };
 		08988D522A05165500425F0A /* addRideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08988D512A05165500425F0A /* addRideViewController.swift */; };
 		08A9CC4629F3217A00D3D3A6 /* clients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A9CC4529F3217A00D3D3A6 /* clients.swift */; };
 		08C9BFBA29F5CB040005DDA4 /* contactsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C9BFB929F5CB040005DDA4 /* contactsTableViewController.swift */; };
@@ -99,12 +101,14 @@
 		0808421F29C8FBF20030BB7E /* Horizonte_FahrtenbuchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Horizonte_FahrtenbuchUITests.swift; sourceTree = "<group>"; };
 		0808422129C8FBF20030BB7E /* Horizonte_FahrtenbuchUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Horizonte_FahrtenbuchUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		080DEDEF29F33A1800E51F8D /* currentRide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = currentRide.swift; sourceTree = "<group>"; };
-		0816062A29F0432900B6F4A3 /* statsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = statsViewController.swift; sourceTree = "<group>"; };
 		082C98D029F6E4BA00296204 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
 		082C98D129F6E4BA00296204 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		082C98D229F6E9FC00296204 /* pastRidesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pastRidesTableViewController.swift; sourceTree = "<group>"; };
 		0830F3932A116E8200B061A3 /* customAnnotations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = customAnnotations.swift; sourceTree = "<group>"; };
 		084F85E22A0EC61900D1045D /* clientDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = clientDetailViewController.swift; sourceTree = "<group>"; };
+		085DAE982A18FAE60028450A /* statsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = statsViewController.swift; sourceTree = "<group>"; };
+		085DAE9A2A1901FD0028450A /* pastMonthRidesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pastMonthRidesCell.swift; sourceTree = "<group>"; };
+		085DAE9C2A1909AC0028450A /* pastMonthRides.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pastMonthRides.swift; sourceTree = "<group>"; };
 		0863585929F30C4100FA36D1 /* addContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addContactViewController.swift; sourceTree = "<group>"; };
 		087696C329F9C8D700246942 /* pastRidesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pastRidesTableViewCell.swift; sourceTree = "<group>"; };
 		087F307C29CCFC29009E52FC /* Horizonte Fahrtenbuch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Horizonte Fahrtenbuch.entitlements"; sourceTree = "<group>"; };
@@ -240,9 +244,9 @@
 		0816062929F0430C00B6F4A3 /* DetailViews */ = {
 			isa = PBXGroup;
 			children = (
-				0816062A29F0432900B6F4A3 /* statsViewController.swift */,
 				084F85E22A0EC61900D1045D /* clientDetailViewController.swift */,
 				08CDD3D72A1406EF00D44868 /* routeDetailViewController.swift */,
+				085DAE982A18FAE60028450A /* statsViewController.swift */,
 			);
 			path = DetailViews;
 			sourceTree = "<group>";
@@ -261,6 +265,7 @@
 			children = (
 				087696C329F9C8D700246942 /* pastRidesTableViewCell.swift */,
 				08DCB78729FD3D5700446CD0 /* clientsTableViewCell.swift */,
+				085DAE9A2A1901FD0028450A /* pastMonthRidesCell.swift */,
 			);
 			path = "Custom Cells";
 			sourceTree = "<group>";
@@ -297,6 +302,7 @@
 			children = (
 				08A9CC4529F3217A00D3D3A6 /* clients.swift */,
 				080DEDEF29F33A1800E51F8D /* currentRide.swift */,
+				085DAE9C2A1909AC0028450A /* pastMonthRides.swift */,
 			);
 			path = Datamodels;
 			sourceTree = "<group>";
@@ -657,7 +663,9 @@
 				08DCB78829FD3D5700446CD0 /* clientsTableViewCell.swift in Sources */,
 				087F308029CD07C0009E52FC /* MainMapViewViewController.swift in Sources */,
 				0808420029C8FBF10030BB7E /* ViewController.swift in Sources */,
+				085DAE9D2A1909AC0028450A /* pastMonthRides.swift in Sources */,
 				0808420629C8FBF10030BB7E /* Horizonte_Fahrtenbuch.xcdatamodeld in Sources */,
+				085DAE9B2A1901FD0028450A /* pastMonthRidesCell.swift in Sources */,
 				08DBAB3429EDE50D0044981E /* Fahrtenbuch.intentdefinition in Sources */,
 				08CDD3D82A1406EF00D44868 /* routeDetailViewController.swift in Sources */,
 				080841FC29C8FBF10030BB7E /* AppDelegate.swift in Sources */,
@@ -670,8 +678,8 @@
 				0830F3942A116E8200B061A3 /* customAnnotations.swift in Sources */,
 				08A9CC4629F3217A00D3D3A6 /* clients.swift in Sources */,
 				08988D522A05165500425F0A /* addRideViewController.swift in Sources */,
+				085DAE992A18FAE60028450A /* statsViewController.swift in Sources */,
 				080841FE29C8FBF10030BB7E /* SceneDelegate.swift in Sources */,
-				088D667429F066AC009E50CF /* statsViewController.swift in Sources */,
 				084F85E32A0EC61900D1045D /* clientDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
