@@ -171,14 +171,17 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
         
         var emailText =  "  Grüezi Herr Zürcher,\n\n Untestehend erhalten Sie die aktuelle Fahrtenliste für den Monat \(monthName).\n\nMit besten Grüssen,\n\nStephan König\n\n\n "
         for ride in currentRides {
+            emailText += "\n"
             emailText += "  Datum: \(ride.date ?? "")\n"
             emailText += "  Kunde: \(ride.currentClientName ?? "")\n"
             emailText += "  Gefahrene Distanz: \(ride.distanceDriven ?? "")\n"
             emailText += "  Gefahrene Zeit: \(ride.timeElapsed ?? "")\n"
-            emailText += "\n"
+            //emailText += "\n"
+            emailText += "_______________________\n"
         }
         
         if let hours = totalTimeElapsedLabel.text, let distance = totalDistanceDrivenLabel.text {
+            emailText += "\n"
             emailText += "Total Stunden: \(hours)\n"
             emailText += "Total Distanz: \(distance)\n"
         }
