@@ -15,6 +15,7 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
     @IBOutlet weak var totalTimeElapsedLabel: UILabel!
     @IBOutlet weak var totalDistanceDrivenLabel: UILabel!
     
+    @IBOutlet weak var upperCellBackgroundView: UIImageView!
     @IBOutlet weak var closeMonthButton: UIButton!
     @IBOutlet weak var pastMonthsSummaryTableView: UITableView!
     
@@ -35,6 +36,7 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
         
         pastMonthsSummaryTableView.backgroundColor = UIColor.clear
         pastMonthsSummaryTableView.rowHeight = 80
+        upperCellBackgroundView.layer.cornerRadius = 20
         
         // MARK: Setting placeholder text for the tableView beeing empty
         
