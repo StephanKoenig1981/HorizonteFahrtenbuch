@@ -169,13 +169,13 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
         dateFormatter.dateFormat = "MMMM yyyy"
         let monthName = dateFormatter.string(from: Date())
         
-        var emailText =  "  Grüezi Herr Zürcher,\n\n Untenstehend erhalten Sie die aktuelle Fahrtenliste für den Monat \(monthName).\n\nMit besten Grüssen,\n\nStephan König\n\n\n "
+        var emailText =  "  Grüezi Herr Zürcher,\n\n Untenstehend erhalten Sie die aktuelle Fahrtenliste für den Monat \(monthName).\n\nMit besten Grüssen,\n\nStephan König\n\n\nFahrtenliste:\n"
         for ride in currentRides {
             emailText += "\n"
-            emailText += "  Datum: \(ride.date ?? "")\n"
-            emailText += "  Kunde: \(ride.currentClientName ?? "")\n"
-            emailText += "  Gefahrene Distanz: \(ride.distanceDriven ?? "")\n"
-            emailText += "  Gefahrene Zeit: \(ride.timeElapsed ?? "")\n"
+            emailText += "  Datum:  \(ride.date ?? "")\n"
+            emailText += "  Kunde:  \(ride.currentClientName ?? "")\n"
+            emailText += "  Gefahrene Distanz:  \(ride.distanceDriven ?? "")\n"
+            emailText += "  Gefahrene Zeit:     \(ride.timeElapsed ?? "")\n"
             //emailText += "\n"
             emailText += "_______________________\n"
         }
@@ -184,6 +184,8 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
             emailText += "\n"
             emailText += "Total Stunden: \(hours)\n"
             emailText += "Total Distanz: \(distance)\n"
+            emailText += "_______________________\n"
+            emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App generiert."
         }
         
         if MFMailComposeViewController.canSendMail() {
