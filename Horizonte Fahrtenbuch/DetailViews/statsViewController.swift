@@ -169,7 +169,7 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
         dateFormatter.dateFormat = "MMMM yyyy"
         let monthName = dateFormatter.string(from: Date())
         
-        var emailText =  "  Grüezi Herr Zürcher,\n\n Untestehend erhalten Sie die aktuelle Fahrtenliste für den Monat \(monthName).\n\nMit besten Grüssen,\n\nStephan König\n\n\n "
+        var emailText =  "  Grüezi Herr Zürcher,\n\n Untenstehend erhalten Sie die aktuelle Fahrtenliste für den Monat \(monthName).\n\nMit besten Grüssen,\n\nStephan König\n\n\n "
         for ride in currentRides {
             emailText += "\n"
             emailText += "  Datum: \(ride.date ?? "")\n"
@@ -190,7 +190,7 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
             let mailComposer = MFMailComposeViewController()
             mailComposer.mailComposeDelegate = self
             mailComposer.setToRecipients(["druck@horizonte.ch"])
-            mailComposer.setSubject("Fahrtenbuch Stephan König")
+            mailComposer.setSubject("Fahrtenbuch Stephan König für \(monthName)")
             mailComposer.setMessageBody(emailText, isHTML: false)
             present(mailComposer, animated: true, completion: nil)
         } else {
