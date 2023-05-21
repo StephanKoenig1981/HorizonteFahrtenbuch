@@ -7,8 +7,9 @@
 
 import UIKit
 import RealmSwift
+import MessageUI
 
-class statsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class statsViewController: UIViewController, MFMailComposeViewControllerDelegate, UITableViewDelegate, UITableViewDataSource{
     
     
     @IBOutlet weak var totalTimeElapsedLabel: UILabel!
@@ -157,6 +158,45 @@ class statsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // Present the alert
         present(alertController, animated: true, completion: nil)
     }
+    
+    @IBAction func sendReportButtonPressed(_ sender: Any) {
+        let realm = try! Realm()
+        let currentRides = realm.objects(currentRide.self)
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM yyyy"
+        let monthName = dateFormatter.string(from: Date())
+        
+        var emailText =  "  Grüezi Herr Zürcher,\n\n Untestehend erhalten Sie die aktuelle Fahrtenliste für den Monat \(monthName).\n\nMit besten Grüssen,\n\nStephan König\n\n\n "
+        for ride in currentRides {
+            emailText += "  Datum: \(ride.date ?? "")\n"
+            emailText += "  Kunde: \(ride.currentClientName ?? "")\n"
+            emailText += "  Gefahrene Distanz: \(ride.distanceDriven ?? "")\n"
+            emailText += "  Gefahrene Zeit: \(ride.timeElapsed ?? "")\n"
+            emailText += "\n"
+        }
+        
+        if let hours = totalTimeElapsedLabel.text, let distance = totalDistanceDrivenLabel.text {
+            emailText += "Total Stunden: \(hours)\n"
+            emailText += "Total Distanz: \(distance)\n"
+        }
+        
+        if MFMailComposeViewController.canSendMail() {
+            let mailComposer = MFMailComposeViewController()
+            mailComposer.mailComposeDelegate = self
+            mailComposer.setToRecipients(["druck@horizonte.ch"])
+            mailComposer.setSubject("Fahrtenbuch Stephan König")
+            mailComposer.setMessageBody(emailText, isHTML: false)
+            present(mailComposer, animated: true, completion: nil)
+        } else {
+            print("Cannot send mails")
+        }
+    }
+
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
     
     // MARK: TableViewFuncitons
     

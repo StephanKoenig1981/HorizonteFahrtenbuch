@@ -1259,8 +1259,8 @@
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0 Km" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="phg-Yd-uEw">
-                                <rect key="frame" x="250" y="281.33333333333331" width="127" height="20.333333333333314"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00 Km" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="phg-Yd-uEw">
+                                <rect key="frame" x="250" y="280.66666666666669" width="127" height="21"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -1373,6 +1373,7 @@
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="saveButtonPressed:" destination="SDW-bC-dEn" eventType="touchUpInside" id="dCT-A3-WzG"/>
+                                    <action selector="sendReportButtonPressed:" destination="PbW-AL-iuj" eventType="touchUpInside" id="OwV-Qq-gOl"/>
                                 </connections>
                             </button>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j8a-O1-DBc">
