@@ -169,7 +169,16 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
         dateFormatter.dateFormat = "MMMM yyyy"
         let monthName = dateFormatter.string(from: Date())
         
-        var emailText =  "  Grüezi Herr Zürcher,\n\n Untenstehend erhalten Sie die aktuelle Fahrtenliste für den Monat \(monthName).\n\nMit besten Grüssen,\n\nStephan König\n\n\nFahrtenliste:\n"
+        var emailText =  "  Grüezi Herr Zürcher,\n\n Untenstehend erhalten Sie die aktuelle Fahrtenliste für den Monat \(monthName).\n\nMit besten Grüssen,\n\nStephan König\n\n\nFahrtenliste:\n_______________________\n"
+        
+        if let hours = totalTimeElapsedLabel.text, let distance = totalDistanceDrivenLabel.text {
+            emailText += "\n"
+            emailText += "Total Stunden: \(hours)\n"
+            emailText += "Total Distanz: \(distance)\n"
+            emailText += "_______________________\n"
+            
+        }
+        
         for ride in currentRides {
             emailText += "\n"
             emailText += "  Datum:  \(ride.date ?? "")\n"
@@ -177,16 +186,9 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
             emailText += "  Gefahrene Distanz:  \(ride.distanceDriven ?? "")\n"
             emailText += "  Gefahrene Zeit:     \(ride.timeElapsed ?? "")\n"
             //emailText += "\n"
-            emailText += "_______________________\n"
+            emailText += "_______________________\n\n"
         }
-        
-        if let hours = totalTimeElapsedLabel.text, let distance = totalDistanceDrivenLabel.text {
-            emailText += "\n"
-            emailText += "Total Stunden: \(hours)\n"
-            emailText += "Total Distanz: \(distance)\n"
-            emailText += "_______________________\n"
-            emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App generiert."
-        }
+        emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V1.6.0 generiert."
         
         if MFMailComposeViewController.canSendMail() {
             let mailComposer = MFMailComposeViewController()
