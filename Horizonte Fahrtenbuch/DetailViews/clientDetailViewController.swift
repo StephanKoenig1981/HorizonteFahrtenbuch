@@ -19,6 +19,12 @@ class clientDetailViewController: UIViewController, CLLocationManagerDelegate, M
     var latitude: Double = 0
     var longitude: Double = 0
     
+    @IBOutlet weak var distanceDescriptionLabel: UILabel!
+    @IBOutlet weak var etaDescriptionLabel: UILabel!
+    @IBOutlet weak var etaLabel: UILabel!
+    @IBOutlet weak var distanceLabel: UILabel!
+    
+    
     @IBOutlet weak var mapTypeSegmentedControl: UISegmentedControl!
     
     @IBOutlet weak var clientDetailMapView: MKMapView!
@@ -46,6 +52,25 @@ class clientDetailViewController: UIViewController, CLLocationManagerDelegate, M
         let titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
         mapTypeSegmentedControl.setTitleTextAttributes(titleTextAttributes, for:.selected)
         
+        // MARK: Setting up the location Manager for directions
+        
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        
+        // Clearing the distance and ETA Labels
+        
+        etaLabel.text = "--:-- Min."
+        distanceLabel.text = "-.- Km"
+        
+        
+    }
+    
+    
+    // TESTING
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        locationManager.stopUpdatingLocation()
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -68,6 +93,46 @@ class clientDetailViewController: UIViewController, CLLocationManagerDelegate, M
         
         return annotationView
     }
+    
+    // MARK: MKDirections
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let userLocation = locations.last else { return }
+        
+        let sourceCoord = userLocation.coordinate
+        let destinationCoord = CLLocationCoordinate2D(latitude: self.latitude, longitude: self.longitude)
+
+        let sourcePlacemark = MKPlacemark(coordinate: sourceCoord)
+        let destinationPlacemark = MKPlacemark(coordinate: destinationCoord)
+        
+        let sourceMapItem = MKMapItem(placemark: sourcePlacemark)
+        let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
+        
+        let directionsRequest = MKDirections.Request()
+        directionsRequest.source = sourceMapItem
+        directionsRequest.destination = destinationMapItem
+        
+        directionsRequest.transportType = .automobile
+        directionsRequest.requestsAlternateRoutes = true
+        directionsRequest.destination = destinationMapItem
+        
+    }
+    
+    // MARK: Overlay renderer
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        guard let polyline = overlay as? MKPolyline else {
+            return MKOverlayRenderer(overlay: overlay)
+        }
+        
+        let renderer = MKPolylineRenderer(polyline: polyline)
+        renderer.strokeColor = UIColor.systemOrange
+        renderer.lineWidth = 4.0
+        return renderer
+    }
+    
+    // MARK: IBActions
+    
     @IBAction func mapTypeSegmentedControl(_ sender: Any) {
         switch ((sender as AnyObject).selectedSegmentIndex) {
         case 0:
@@ -85,6 +150,55 @@ class clientDetailViewController: UIViewController, CLLocationManagerDelegate, M
         default:
             clientDetailMapView.mapType = .standard
         }
+    }
+    @IBAction func routeButtonPressed(_ sender: Any) {
+        let sourceCoord = CLLocationCoordinate2D(latitude: locationManager.location?.coordinate.latitude ?? 0.0,
+                                                     longitude: locationManager.location?.coordinate.longitude ?? 0.0)
+            let destinationCoord = CLLocationCoordinate2D(latitude: self.latitude, longitude: self.longitude)
+
+            let sourcePlacemark = MKPlacemark(coordinate: sourceCoord)
+            let destinationPlacemark = MKPlacemark(coordinate: destinationCoord)
+
+            let sourceMapItem = MKMapItem(placemark: sourcePlacemark)
+            let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
+
+            let directionsRequest = MKDirections.Request()
+            directionsRequest.source = sourceMapItem
+            directionsRequest.destination = destinationMapItem
+            directionsRequest.transportType = .automobile
+            directionsRequest.requestsAlternateRoutes = true
+            
+            let directions = MKDirections(request: directionsRequest)
+            directions.calculate(completionHandler: { response, error in
+            guard let unwrappedResponse = response, let route = unwrappedResponse.routes.first else { return }
+            self.clientDetailMapView.addOverlay(route.polyline, level: .aboveRoads)
+            
+                let padding: CGFloat = 25
+                        let edgePadding = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
+                        let boundingMapRect = route.polyline.boundingMapRect
+                        let paddedMapRect = boundingMapRect.insetBy(dx: -padding, dy: -padding)
+                        self.clientDetailMapView.setVisibleMapRect(paddedMapRect, edgePadding: edgePadding, animated: true)
+                
+                // Update the labels with the estimated travel time and distance...
+                       let distance = route.distance / 1000
+                       let eta = route.expectedTravelTime
+                       self.distanceLabel.text = String(format: "%.1f Km", distance)
+                       self.etaLabel.text = TimeInterval(eta).formatted()
+        })
+        clientDetailMapView.showsUserLocation = true
+        
+    }
+}
+
+// MARK: Extension for calculating ETA
+
+extension TimeInterval {
+    func formatted() -> String {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.hour, .minute]
+        formatter.unitsStyle = .short
+        formatter.zeroFormattingBehavior = .dropAll
+        return formatter.string(from: self) ?? "N/A"
     }
 }
     

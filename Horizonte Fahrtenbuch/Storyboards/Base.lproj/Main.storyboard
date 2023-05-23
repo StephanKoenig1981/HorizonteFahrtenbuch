@@ -400,11 +400,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BV4-Zs-pwE">
-                                <rect key="frame" x="16" y="59" width="361" height="759"/>
+                                <rect key="frame" x="16" y="59" width="361" height="632"/>
                                 <standardMapConfiguration key="preferredConfiguration"/>
                             </mapView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="mgn-Qb-ZUH">
-                                <rect key="frame" x="26" y="774" width="342" height="32"/>
+                                <rect key="frame" x="16" y="774" width="361" height="32"/>
                                 <segments>
                                     <segment title="Normal"/>
                                     <segment title="Gedimmt"/>
@@ -414,22 +414,91 @@
                                     <action selector="mapTypeSegmentedControl:" destination="d0q-Wq-8fu" eventType="valueChanged" id="dmY-PA-c1k"/>
                                 </connections>
                             </segmentedControl>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.45000000000000001" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundImageCard" translatesAutoresizingMaskIntoConstraints="NO" id="qtW-Df-5sA">
+                                <rect key="frame" x="16" y="699" width="361" height="67"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="67" id="ZeH-hP-792"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9dI-XJ-PZj">
+                                <rect key="frame" x="26" y="714" width="122" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Route" cornerStyle="capsule">
+                                    <color key="baseBackgroundColor" red="0.52156862749999999" green="0.77647060160000003" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="routeButtonPressed:" destination="d0q-Wq-8fu" eventType="touchUpInside" id="9rQ-24-e9Q"/>
+                                    <action selector="saveButtonPressed:" destination="SDW-bC-dEn" eventType="touchUpInside" id="QHb-aH-SN9"/>
+                                    <action selector="saveButtonPressed:" destination="koe-vG-8wD" eventType="touchUpInside" id="ddE-xH-qKX"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distanz:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dBd-mh-oq6">
+                                <rect key="frame" x="175" y="736" width="62" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aT9-BT-wON">
+                                <rect key="frame" x="282" y="707" width="80" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="dDj-P3-2Ja"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12.9 Km" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="slS-mV-t9U">
+                                <rect key="frame" x="282" y="736" width="80" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ETA:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MRu-25-ioH">
+                                <rect key="frame" x="175" y="707" width="35" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Igw-hX-Xd2"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="mgn-Qb-ZUH" secondAttribute="trailing" constant="9" id="Qng-PR-QQp"/>
+                            <constraint firstItem="MRu-25-ioH" firstAttribute="leading" secondItem="dBd-mh-oq6" secondAttribute="leading" id="Ejm-LK-jt6"/>
+                            <constraint firstItem="dBd-mh-oq6" firstAttribute="top" secondItem="MRu-25-ioH" secondAttribute="bottom" constant="8" id="GtX-6I-Khv"/>
+                            <constraint firstItem="9dI-XJ-PZj" firstAttribute="leading" secondItem="Igw-hX-Xd2" secondAttribute="leading" constant="26" id="IUa-kT-YOy"/>
+                            <constraint firstItem="Igw-hX-Xd2" firstAttribute="trailing" secondItem="aT9-BT-wON" secondAttribute="trailing" constant="31" id="M89-cH-80D"/>
+                            <constraint firstItem="qtW-Df-5sA" firstAttribute="leading" secondItem="mgn-Qb-ZUH" secondAttribute="leading" id="MCr-RH-zab"/>
+                            <constraint firstItem="aT9-BT-wON" firstAttribute="trailing" secondItem="slS-mV-t9U" secondAttribute="trailing" id="MaY-8e-PO0"/>
+                            <constraint firstItem="slS-mV-t9U" firstAttribute="leading" secondItem="dBd-mh-oq6" secondAttribute="trailing" constant="45" id="Olw-jW-dvd"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="mgn-Qb-ZUH" secondAttribute="trailing" id="Qng-PR-QQp"/>
                             <constraint firstItem="BV4-Zs-pwE" firstAttribute="leading" secondItem="Igw-hX-Xd2" secondAttribute="leading" constant="16" id="RIU-oK-HyW"/>
+                            <constraint firstItem="qtW-Df-5sA" firstAttribute="top" secondItem="BV4-Zs-pwE" secondAttribute="bottom" constant="8" id="SYn-2K-w1Y"/>
                             <constraint firstItem="Igw-hX-Xd2" firstAttribute="trailing" secondItem="BV4-Zs-pwE" secondAttribute="trailing" constant="16" id="UVc-Pg-UEr"/>
-                            <constraint firstItem="mgn-Qb-ZUH" firstAttribute="leading" secondItem="O1T-Ae-0Z0" secondAttribute="leadingMargin" constant="10" id="hvF-NI-iPZ"/>
+                            <constraint firstItem="MRu-25-ioH" firstAttribute="baseline" secondItem="aT9-BT-wON" secondAttribute="baseline" id="cMk-5T-NOI"/>
+                            <constraint firstItem="qtW-Df-5sA" firstAttribute="trailing" secondItem="mgn-Qb-ZUH" secondAttribute="trailing" id="fON-uv-gb9"/>
+                            <constraint firstItem="mgn-Qb-ZUH" firstAttribute="leading" secondItem="O1T-Ae-0Z0" secondAttribute="leadingMargin" id="hvF-NI-iPZ"/>
+                            <constraint firstItem="9dI-XJ-PZj" firstAttribute="top" secondItem="BV4-Zs-pwE" secondAttribute="bottom" constant="23" id="im2-KJ-4R0"/>
                             <constraint firstItem="BV4-Zs-pwE" firstAttribute="top" secondItem="Igw-hX-Xd2" secondAttribute="top" id="lFP-0K-Nod"/>
-                            <constraint firstItem="BV4-Zs-pwE" firstAttribute="bottom" secondItem="Igw-hX-Xd2" secondAttribute="bottom" id="rd7-6r-7Qm"/>
+                            <constraint firstItem="MRu-25-ioH" firstAttribute="leading" secondItem="9dI-XJ-PZj" secondAttribute="trailing" constant="27" id="ncb-rx-EJ1"/>
+                            <constraint firstItem="dBd-mh-oq6" firstAttribute="baseline" secondItem="slS-mV-t9U" secondAttribute="baseline" id="puh-AJ-guB"/>
+                            <constraint firstItem="aT9-BT-wON" firstAttribute="leading" secondItem="slS-mV-t9U" secondAttribute="leading" id="rSw-qK-FfR"/>
+                            <constraint firstItem="BV4-Zs-pwE" firstAttribute="bottom" secondItem="Igw-hX-Xd2" secondAttribute="bottom" constant="-127" id="rd7-6r-7Qm"/>
+                            <constraint firstItem="MRu-25-ioH" firstAttribute="top" secondItem="BV4-Zs-pwE" secondAttribute="bottom" constant="16" id="swZ-Mg-K9v"/>
                             <constraint firstAttribute="bottomMargin" secondItem="mgn-Qb-ZUH" secondAttribute="bottom" constant="13" id="wqm-L9-1Ym"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Qkz-qI-a10"/>
                     <connections>
                         <outlet property="clientDetailMapView" destination="BV4-Zs-pwE" id="Zbe-hl-Eb8"/>
+                        <outlet property="distanceDescriptionLabel" destination="dBd-mh-oq6" id="NFF-Ob-fjU"/>
+                        <outlet property="distanceLabel" destination="slS-mV-t9U" id="QGU-0I-JBB"/>
+                        <outlet property="etaDescriptionLabel" destination="MRu-25-ioH" id="FZt-Uu-lZq"/>
+                        <outlet property="etaLabel" destination="aT9-BT-wON" id="evt-Z1-zxs"/>
                         <outlet property="mapTypeSegmentedControl" destination="mgn-Qb-ZUH" id="WHl-rU-L7G"/>
                     </connections>
                 </viewController>
