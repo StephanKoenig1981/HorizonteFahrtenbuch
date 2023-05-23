@@ -55,27 +55,14 @@ class clientDetailViewController: UIViewController, CLLocationManagerDelegate, M
         // MARK: Setting up the location Manager for directions
         
         locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
         
         // Clearing the distance and ETA Labels
         
         etaLabel.text = "--:-- Min."
         distanceLabel.text = "-.- Km"
-        
-        
+    
     }
     
-    
-    // TESTING
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        locationManager.stopUpdatingLocation()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        locationManager.stopUpdatingLocation()
-    }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         guard let customAnnotation = annotation as? CustomAnnotation else { return nil }
