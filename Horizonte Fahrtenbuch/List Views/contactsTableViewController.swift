@@ -229,7 +229,7 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
         // Add delete action to alert controller
         let deleteAction = UIAlertAction(title: "Löschen", style: .destructive) { (action) in
             // Delete the corresponding object from the data source
-            let objectToDelete = self.filteredResults[indexPath.row]
+            let objectToDelete = self.filteredResults.sorted(byKeyPath: "client", ascending: true)[indexPath.row]
             try! self.realm.write {
                 self.realm.delete(objectToDelete)
             }

@@ -881,6 +881,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Horizonte Fahrtenbuch/Horizonte Fahrtenbuch.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2DK4UX7R4C;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Horizonte Fahrtenbuch/Info.plist";
@@ -922,6 +923,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Horizonte Fahrtenbuch/Horizonte Fahrtenbuch.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2DK4UX7R4C;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Horizonte Fahrtenbuch/Info.plist";
@@ -1041,6 +1043,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2DK4UX7R4C;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Fahrtenbuch/Info.plist;
@@ -1070,6 +1073,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2DK4UX7R4C;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Fahrtenbuch/Info.plist;
