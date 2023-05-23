@@ -73,6 +73,10 @@ class clientDetailViewController: UIViewController, CLLocationManagerDelegate, M
         locationManager.stopUpdatingLocation()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        locationManager.stopUpdatingLocation()
+    }
+    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         guard let customAnnotation = annotation as? CustomAnnotation else { return nil }
         
