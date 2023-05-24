@@ -85,6 +85,9 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     @IBOutlet weak var clientTextFieldView: UIView!
     @IBOutlet weak var clientTextField: UITextField!
     
+    @IBOutlet weak var personalDetailButton: UIButton!
+    @IBOutlet weak var personalDetailView: UIView!
+    
     // MARK: Outlets for the Segmented control view and segmented control
     
     @IBOutlet weak var segmentedControlView: UIView!
@@ -136,6 +139,9 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         
                 settingsButtonView.layer.cornerRadius = 25
                 settingsButton.tintColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+        
+                personalDetailView.layer.cornerRadius = 25
+                personalDetailButton.tintColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
         
                 segmentedControlView.clipsToBounds = true
                 segmentedControlView.layer.cornerRadius = 15

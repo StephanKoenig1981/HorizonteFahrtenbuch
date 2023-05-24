@@ -164,12 +164,16 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
     @IBAction func sendReportButtonPressed(_ sender: Any) {
         let realm = try! Realm()
         let currentRides = realm.objects(currentRide.self)
+        let personalDetails = realm.objects(personalDetails.self).last
+        
+        let yourName = personalDetails?.yourName
+        let bossName = personalDetails?.bossName
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMMM yyyy"
         let monthName = dateFormatter.string(from: Date())
         
-        var emailText =  "  Grüezi Herr Zürcher,\n\n Untenstehend erhalten Sie die aktuelle Fahrtenliste für den Monat \(monthName).\n\nMit besten Grüssen,\n\nStephan König\n\n\nFahrtenliste:\n_______________________\n"
+        var emailText =  "  Grüezi \(bossName ?? ""),\n\n Untenstehend erhalten Sie die aktuelle Fahrtenliste für den Monat \(monthName).\n\nMit besten Grüssen,\n\n\(yourName ?? "")\n\n\nFahrtenliste:\n_______________________\n"
         
         if let hours = totalTimeElapsedLabel.text, let distance = totalDistanceDrivenLabel.text {
             emailText += "\n"
@@ -188,13 +192,13 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
             //emailText += "\n"
             emailText += "_______________________\n\n"
         }
-        emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V1.7.6 generiert."
+        emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V1.7.7 generiert."
         
         if MFMailComposeViewController.canSendMail() {
             let mailComposer = MFMailComposeViewController()
             mailComposer.mailComposeDelegate = self
             mailComposer.setToRecipients(["druck@horizonte.ch"])
-            mailComposer.setSubject("Fahrtenbuch Stephan König für \(monthName)")
+            mailComposer.setSubject("Fahrtenbuch \(yourName ?? "") für \(monthName)")
             mailComposer.setMessageBody(emailText, isHTML: false)
             present(mailComposer, animated: true, completion: nil)
         } else {

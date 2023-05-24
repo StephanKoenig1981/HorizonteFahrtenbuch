@@ -29,6 +29,8 @@
 		087F308029CD07C0009E52FC /* MainMapViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F307F29CD07C0009E52FC /* MainMapViewViewController.swift */; };
 		08988D522A05165500425F0A /* addRideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08988D512A05165500425F0A /* addRideViewController.swift */; };
 		08A9CC4629F3217A00D3D3A6 /* clients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A9CC4529F3217A00D3D3A6 /* clients.swift */; };
+		08B0BDC42A1EB3E200E3D675 /* personalDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B0BDC32A1EB3E200E3D675 /* personalDetailsViewController.swift */; };
+		08B0BDC62A1EB4F700E3D675 /* personalDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B0BDC52A1EB4F700E3D675 /* personalDetails.swift */; };
 		08C9BFBA29F5CB040005DDA4 /* contactsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C9BFB929F5CB040005DDA4 /* contactsTableViewController.swift */; };
 		08CDD3D82A1406EF00D44868 /* routeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CDD3D72A1406EF00D44868 /* routeDetailViewController.swift */; };
 		08D09BD82A01AFAD00ED0C09 /* settingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D09BD72A01AFAD00ED0C09 /* settingsViewController.swift */; };
@@ -116,6 +118,8 @@
 		087F307F29CD07C0009E52FC /* MainMapViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapViewViewController.swift; sourceTree = "<group>"; };
 		08988D512A05165500425F0A /* addRideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addRideViewController.swift; sourceTree = "<group>"; };
 		08A9CC4529F3217A00D3D3A6 /* clients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = clients.swift; sourceTree = "<group>"; };
+		08B0BDC32A1EB3E200E3D675 /* personalDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = personalDetailsViewController.swift; sourceTree = "<group>"; };
+		08B0BDC52A1EB4F700E3D675 /* personalDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = personalDetails.swift; sourceTree = "<group>"; };
 		08C9BFB929F5CB040005DDA4 /* contactsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = contactsTableViewController.swift; sourceTree = "<group>"; };
 		08CDD3D72A1406EF00D44868 /* routeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = routeDetailViewController.swift; sourceTree = "<group>"; };
 		08D09BD72A01AFAD00ED0C09 /* settingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = settingsViewController.swift; sourceTree = "<group>"; };
@@ -303,6 +307,7 @@
 				08A9CC4529F3217A00D3D3A6 /* clients.swift */,
 				080DEDEF29F33A1800E51F8D /* currentRide.swift */,
 				085DAE9C2A1909AC0028450A /* pastMonthRides.swift */,
+				08B0BDC52A1EB4F700E3D675 /* personalDetails.swift */,
 			);
 			path = Datamodels;
 			sourceTree = "<group>";
@@ -321,6 +326,7 @@
 			children = (
 				08D09BD72A01AFAD00ED0C09 /* settingsViewController.swift */,
 				0830F3932A116E8200B061A3 /* customAnnotations.swift */,
+				08B0BDC32A1EB3E200E3D675 /* personalDetailsViewController.swift */,
 			);
 			path = "Helper Classes";
 			sourceTree = "<group>";
@@ -660,6 +666,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08B0BDC62A1EB4F700E3D675 /* personalDetails.swift in Sources */,
 				08DCB78829FD3D5700446CD0 /* clientsTableViewCell.swift in Sources */,
 				087F308029CD07C0009E52FC /* MainMapViewViewController.swift in Sources */,
 				0808420029C8FBF10030BB7E /* ViewController.swift in Sources */,
@@ -669,6 +676,7 @@
 				08DBAB3429EDE50D0044981E /* Fahrtenbuch.intentdefinition in Sources */,
 				08CDD3D82A1406EF00D44868 /* routeDetailViewController.swift in Sources */,
 				080841FC29C8FBF10030BB7E /* AppDelegate.swift in Sources */,
+				08B0BDC42A1EB3E200E3D675 /* personalDetailsViewController.swift in Sources */,
 				08D09BD82A01AFAD00ED0C09 /* settingsViewController.swift in Sources */,
 				080DEDF029F33A1800E51F8D /* currentRide.swift in Sources */,
 				0863585A29F30C4100FA36D1 /* addContactViewController.swift in Sources */,
@@ -900,7 +908,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.7.6;
+				MARKETING_VERSION = 1.7.7;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.horizonte.ch.Horizonte-Fahrtenbuch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -942,7 +950,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.7.6;
+				MARKETING_VERSION = 1.7.7;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.horizonte.ch.Horizonte-Fahrtenbuch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1055,7 +1063,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.7.6;
+				MARKETING_VERSION = 1.7.7;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.horizonte.ch.Horizonte-Fahrtenbuch.Fahrtenbuch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1085,7 +1093,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.7.6;
+				MARKETING_VERSION = 1.7.7;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.horizonte.ch.Horizonte-Fahrtenbuch.Fahrtenbuch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
