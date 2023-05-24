@@ -168,6 +168,7 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
         
         let yourName = personalDetails?.yourName
         let bossName = personalDetails?.bossName
+        let email = personalDetails?.email
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMMM yyyy"
@@ -192,12 +193,12 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
             //emailText += "\n"
             emailText += "_______________________\n\n"
         }
-        emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V1.7.7 generiert."
+        emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V1.7.8 generiert."
         
         if MFMailComposeViewController.canSendMail() {
             let mailComposer = MFMailComposeViewController()
             mailComposer.mailComposeDelegate = self
-            mailComposer.setToRecipients(["druck@horizonte.ch"])
+            mailComposer.setToRecipients(["\(email ?? "")"])
             mailComposer.setSubject("Fahrtenbuch \(yourName ?? "") für \(monthName)")
             mailComposer.setMessageBody(emailText, isHTML: false)
             present(mailComposer, animated: true, completion: nil)

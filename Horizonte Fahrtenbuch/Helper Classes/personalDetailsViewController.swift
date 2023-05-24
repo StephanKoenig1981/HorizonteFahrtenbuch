@@ -12,8 +12,10 @@ class personalDetailsViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var yourNameTextfield: UITextField!
     @IBOutlet weak var bossNameTextfield: UITextField!
+    @IBOutlet weak var emailTextfield: UITextField!
+    
     @IBOutlet weak var logoView: UIImageView!
-    @IBOutlet weak var saveSuccessTextfield: UITextView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,29 +27,31 @@ class personalDetailsViewController: UIViewController, UITextFieldDelegate {
                 // Populate the text fields with the last saved data
                 yourNameTextfield.text = lastSavedModel?.yourName
                 bossNameTextfield.text = lastSavedModel?.bossName
+                emailTextfield.text = lastSavedModel?.email
     }
     
     @IBAction func saveButtonPressed(_ sender: Any) {
         // Get the text from the text fields
         guard let yourName = yourNameTextfield.text,
-              let bossName = bossNameTextfield.text
+              let bossName = bossNameTextfield.text,
+              let email = emailTextfield.text
         else {
             return // Exit if there's no text in either of the fields
         }
         
         // Set up the Realm database
         let realm = try! Realm()
-        let personalDetails = personalDetails()
+        let lastSavedModel = realm.objects(personalDetails.self).last ?? personalDetails()
+           
+           
+           try! realm.write {
+               lastSavedModel.yourName = yourName
+               lastSavedModel.bossName = bossName
+               lastSavedModel.email = email
+               realm.add(lastSavedModel, update: .modified)
+           }
+
         
-        personalDetails.yourName = yourName
-        personalDetails.bossName = bossName
-        
-        // Save the data to the Realm database
-        try! realm.write {
-            realm.add(personalDetails)
-        }
-        
-        saveSuccessTextfield.fadeIn(duration: 0.7)
         logoView.fadeIn(duration: 0.7)
         
         
