@@ -35,6 +35,7 @@ class clientDetailViewController: UIViewController, CLLocationManagerDelegate, M
         clientDetailMapView.delegate = self
         
         clientDetailMapView.layer.cornerRadius = 20
+        clientDetailMapView.showsScale = true
         
         let initialLocation = CLLocation(latitude: latitude, longitude: longitude)
         let regionRadius: CLLocationDistance = 500
