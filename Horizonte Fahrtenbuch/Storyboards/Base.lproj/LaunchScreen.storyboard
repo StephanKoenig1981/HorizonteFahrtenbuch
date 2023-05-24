@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -16,17 +17,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="uT9-gW-sb0">
-                                <rect key="frame" x="35" y="336" width="323" height="180"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="Odc-Id-7XI">
+                                <rect key="frame" x="8" y="303" width="377" height="246"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="uT9-gW-sb0" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="277" id="Lti-i6-53x"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="uT9-gW-sb0" secondAttribute="trailing" constant="35" id="RTb-dG-KEb"/>
-                            <constraint firstItem="uT9-gW-sb0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="35" id="Wr3-sN-eb3"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="uT9-gW-sb0" secondAttribute="bottom" constant="302" id="jBp-jn-WOR"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Odc-Id-7XI" secondAttribute="trailing" constant="8" id="MRq-fR-umW"/>
+                            <constraint firstItem="Odc-Id-7XI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="MnC-4k-8jL"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Odc-Id-7XI" secondAttribute="bottom" constant="269" id="b6P-uY-EOk"/>
+                            <constraint firstItem="Odc-Id-7XI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="244" id="nQi-qa-O6X"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -36,7 +37,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Logo" width="609" height="238.5"/>
+        <image name="Logo" width="1071" height="1069"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

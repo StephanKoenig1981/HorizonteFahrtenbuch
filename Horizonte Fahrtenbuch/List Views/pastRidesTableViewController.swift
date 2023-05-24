@@ -75,6 +75,13 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
         pastRidesTableView.backgroundView = placeholderLabel
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        // Add a background view to the table view
+          let backgroundImage = UIImage(named: "purpleGradient.png")
+          let imageView = UIImageView(image: backgroundImage)
+          self.tableView.backgroundView = imageView
+    }
+    
     // MARK: Setting Up User Interface
     func setupUI() {
         pastRidesTableView.register(pastRidesTableViewCell.self, forCellReuseIdentifier: "latestRideCell")

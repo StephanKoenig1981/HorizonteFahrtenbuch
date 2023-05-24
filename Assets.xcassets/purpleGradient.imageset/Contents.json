@@ -1,11 +1,11 @@
 {
   "images" : [
     {
+      "filename" : "purpleGradient.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "LogoTransparent.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

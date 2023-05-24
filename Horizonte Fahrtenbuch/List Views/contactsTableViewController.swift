@@ -94,6 +94,13 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
                 }
                 tableView.reloadData()
         }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        // Add a background view to the table view
+          let backgroundImage = UIImage(named: "purpleGradient.png")
+          let imageView = UIImageView(image: backgroundImage)
+          self.tableView.backgroundView = imageView
+    }
 
 
     // MARK: Define the number of rows beeing presented
