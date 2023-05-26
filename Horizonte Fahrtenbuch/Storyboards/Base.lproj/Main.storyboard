@@ -1532,6 +1532,17 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U7K-Wk-cD6">
+                                <rect key="frame" x="303" y="5" width="73" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Archiv">
+                                    <color key="baseForegroundColor" red="0.61176470589999998" green="0.78039215689999997" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <segue destination="33C-9P-Pzo" kind="show" id="6HV-Dq-FNx"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="BuY-mt-n2g"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1594,7 +1605,7 @@
             <objects>
                 <tableViewController id="WHt-4L-20w" customClass="archivedRidesTableViewController" customModule="Horizonte_Fahrtenbuch" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="63A-iT-xpU">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="minimal" placeholder="Fahrt suchen" id="AlN-RD-bSG">
@@ -1606,7 +1617,7 @@
                             </connections>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="latestRidesCell" rowHeight="144" id="juO-LH-SN8" customClass="archivedRidesTableviewCell" customModule="Horizonte_Fahrtenbuch" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="archivedRidesCell" rowHeight="144" id="juO-LH-SN8" customClass="archivedRidesTableviewCell" customModule="Horizonte_Fahrtenbuch" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="94" width="393" height="144"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="juO-LH-SN8" id="iuU-F6-C3L">
@@ -1740,7 +1751,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <accessibility key="accessibilityConfiguration" identifier="ridesCell"/>
+                                <accessibility key="accessibilityConfiguration" identifier="archivedRidesCell"/>
                                 <connections>
                                     <outlet property="background" destination="jeE-uC-rpT" id="cWx-WD-VR0"/>
                                     <outlet property="circleSign" destination="vaU-qV-54t" id="Hu7-zy-h2a"/>
@@ -1759,14 +1770,21 @@
                             <outlet property="delegate" destination="WHt-4L-20w" id="2AZ-X3-2Nt"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="H1T-9s-7U8"/>
+                    <navigationItem key="navigationItem" id="H1T-9s-7U8">
+                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="done" id="jOO-S9-wyA">
+                            <connections>
+                                <action selector="doneButtonPressed:" destination="WHt-4L-20w" id="ct8-Zs-PIw"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
-                        <outlet property="archivedRidesTableView" destination="63A-iT-xpU" id="8Go-0Q-dbE"/>
+                        <outlet property="archivedRidesSearchBar" destination="AlN-RD-bSG" id="49y-41-TDJ"/>
+                        <outlet property="archivedRidesTableView" destination="63A-iT-xpU" id="ltb-Ir-68x"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZzY-JN-uII" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3452.6717557251909" y="-2.1126760563380285"/>
+            <point key="canvasLocation" x="3618" y="-2"/>
         </scene>
         <!--Add Contact View Controller-->
         <scene sceneID="K0A-oB-ode">
@@ -2220,23 +2238,23 @@
             <point key="canvasLocation" x="127.48091603053435" y="-704.22535211267609"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="nbM-FR-8gU">
+        <scene sceneID="Q6M-pK-hPV">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ar5-WE-lmq" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="33C-9P-Pzo" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="vdh-zX-dCI"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="KWa-vt-LDU">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                    <navigationItem key="navigationItem" id="5Pi-kE-hvJ"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qyi-cG-8V6">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="WHt-4L-20w" kind="relationship" relationship="rootViewController" id="zQT-Cr-6Fe"/>
+                        <segue destination="WHt-4L-20w" kind="relationship" relationship="rootViewController" id="3Xc-ui-3lK"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mbT-A9-YSh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fbZ-fU-NLI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2525.9541984732823" y="-2.1126760563380285"/>
+            <point key="canvasLocation" x="2732" y="-2"/>
         </scene>
     </scenes>
     <resources>
