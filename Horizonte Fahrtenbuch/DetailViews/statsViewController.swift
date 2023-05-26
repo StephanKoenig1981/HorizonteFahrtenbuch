@@ -40,7 +40,7 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
         
         // MARK: Setting placeholder text for the tableView beeing empty
         
-        placeholderLabel.text = "Es wurden noch keine Monate abgeschlossen."
+        placeholderLabel.text = "Keine abgeschlossenen Monate."
         placeholderLabel.textAlignment = .center
         placeholderLabel.textColor = .gray
         pastMonthsSummaryTableView.backgroundView = placeholderLabel
@@ -105,7 +105,7 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
         // Create an alert controller
         let alertController = UIAlertController(
             title: "ACHTUNG",
-            message: "Wenn du den aktuellen Monat abschliesst, werden die Fahrten gelöscht und in den vergangen Fahrten als Total gespeichert. \n\n Es werden keine detaillierten Routenansichten oder spezifische Kundennamen mehr sichtbar sein.",
+            message: "Wenn du den aktuellen Monat abschliesst, werden die Fahrten gelöscht und in den vergangen Fahrten als Total gespeichert. \n\n Die Fahrten des aktuellen Monats werden zurückgesetzt und ins Archiv verschoben.",
             preferredStyle: .actionSheet
         )
         
@@ -201,7 +201,7 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
             //emailText += "\n"
             emailText += "_______________________\n\n"
         }
-        emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V1.7.9 generiert."
+        emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V1.8.0 generiert."
         
         if MFMailComposeViewController.canSendMail() {
             let mailComposer = MFMailComposeViewController()

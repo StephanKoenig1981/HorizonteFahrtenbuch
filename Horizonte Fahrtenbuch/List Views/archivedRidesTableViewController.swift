@@ -13,6 +13,7 @@ class archivedRidesTableViewController: UITableViewController, UISearchBarDelega
     
     @IBOutlet weak var archivedRidesSearchBar: UISearchBar!
     @IBOutlet var archivedRidesTableView: UITableView!
+    @IBOutlet weak var deleteAllButton: UIBarButtonItem!
     
     // MARK: Initializing Realm
     
@@ -39,6 +40,7 @@ class archivedRidesTableViewController: UITableViewController, UISearchBarDelega
         super.viewDidLoad()
         
         self.title = "Archivierte Fahrten"
+        
         filteredResults = realm.objects(archivedRides.self)   // <-- initialize Filtered Results
         // Register for changes in Realm Notifications
         
@@ -46,6 +48,12 @@ class archivedRidesTableViewController: UITableViewController, UISearchBarDelega
             self.isModalInPresentation = true
         }
         
+        let count = realm.objects(archivedRides.self).count
+           if count == 0 {
+               deleteAllButton.isEnabled = false
+               return
+           }
+
         
         let vc = UIViewController()
         vc.presentationController?.presentedView?.gestureRecognizers?[0].isEnabled = false
@@ -85,7 +93,7 @@ class archivedRidesTableViewController: UITableViewController, UISearchBarDelega
         dateFormatter.dateFormat = "MMMM yyyy"
         let monthName = dateFormatter.string(from: Date())
         
-        self.title = monthName
+        self.title = "Archivierte Fahrten"
     }
     
     // MARK: Filter Data Function
@@ -256,5 +264,27 @@ class archivedRidesTableViewController: UITableViewController, UISearchBarDelega
     }
     @IBAction func doneButtonPressed(_ sender: Any) {
         self.dismiss(animated: true)
+    }
+    
+    @IBAction func deleteAllButtonPressed(_ sender: Any) {
+        
+        
+        let alert = UIAlertController(title: "ACHTUNG", message: "Möchtest du wirklich alle Fahrteneinträge im Archiv löschen?\n\nDiese können NICHT wiederhergestellt werden!", preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "Abbrechen", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Alle löschen", style: .destructive, handler: { (action: UIAlertAction!) in
+            let realm = try! Realm()
+            
+            if let realm = try? Realm() {
+                let archivedRidesObject = realm.objects(archivedRides.self)
+                try! realm.write {
+                    realm.delete(archivedRidesObject)
+                }
+                self.deleteAllButton.isEnabled = false
+                self.archivedRidesTableView.reloadData()
+            }
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
     }
 }

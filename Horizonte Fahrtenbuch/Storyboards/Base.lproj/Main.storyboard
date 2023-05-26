@@ -1526,17 +1526,20 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </navigationBarAppearance>
                             </navigationBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V1.7.9" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfl-98-Qbj">
-                                <rect key="frame" x="132" y="811" width="129" height="11"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V1.8.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfl-98-Qbj">
+                                <rect key="frame" x="131" y="811" width="131" height="11"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U7K-Wk-cD6">
-                                <rect key="frame" x="303" y="5" width="73" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U7K-Wk-cD6">
+                                <rect key="frame" x="208" y="5" width="169" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="169" id="5Bm-mE-Yqj"/>
+                                    <constraint firstAttribute="height" constant="35" id="vaq-pF-Vsm"/>
+                                </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Archiv">
+                                <buttonConfiguration key="configuration" style="plain" title="Archivierte Fahrten">
                                     <color key="baseForegroundColor" red="0.61176470589999998" green="0.78039215689999997" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -1570,6 +1573,7 @@
                             <constraint firstItem="Gy0-G1-tdg" firstAttribute="trailing" secondItem="phg-Yd-uEw" secondAttribute="trailing" id="XVi-ne-ghx"/>
                             <constraint firstItem="ybi-Jm-NsG" firstAttribute="baseline" secondItem="Egc-km-liW" secondAttribute="baseline" id="Xix-JK-CXf"/>
                             <constraint firstItem="MvN-F9-lGM" firstAttribute="top" secondItem="F7i-pj-jJS" secondAttribute="top" id="ZTi-qQ-eY6"/>
+                            <constraint firstItem="BuY-mt-n2g" firstAttribute="trailing" secondItem="U7K-Wk-cD6" secondAttribute="trailing" constant="16" id="bHe-5Y-Sc3"/>
                             <constraint firstItem="ybi-Jm-NsG" firstAttribute="leading" secondItem="GNn-fS-Pxo" secondAttribute="leading" constant="-22" id="cfp-JV-dG3"/>
                             <constraint firstItem="gFT-fB-35Z" firstAttribute="leading" secondItem="BuY-mt-n2g" secondAttribute="leading" constant="76" id="dsC-PY-m8q"/>
                             <constraint firstItem="Gy0-G1-tdg" firstAttribute="trailing" secondItem="UL0-d2-Sjo" secondAttribute="trailing" constant="-21" id="ehw-S0-TYS"/>
@@ -1579,6 +1583,7 @@
                             <constraint firstItem="ybi-Jm-NsG" firstAttribute="leading" secondItem="cj0-9q-evt" secondAttribute="leading" id="ltV-ww-xAG"/>
                             <constraint firstItem="cj0-9q-evt" firstAttribute="top" secondItem="QGx-cV-Obh" secondAttribute="bottom" constant="21" id="m3o-RY-WLH"/>
                             <constraint firstItem="QGx-cV-Obh" firstAttribute="top" secondItem="ybi-Jm-NsG" secondAttribute="bottom" constant="11.999999999999943" id="n0U-lm-LkU"/>
+                            <constraint firstItem="U7K-Wk-cD6" firstAttribute="top" secondItem="BuY-mt-n2g" secondAttribute="top" constant="5" id="o8o-1S-ijX"/>
                             <constraint firstItem="0vf-4V-OHg" firstAttribute="leading" secondItem="BuY-mt-n2g" secondAttribute="leading" constant="16" id="oHx-92-y4R"/>
                             <constraint firstItem="UL0-d2-Sjo" firstAttribute="leading" secondItem="BuY-mt-n2g" secondAttribute="leading" constant="16" id="pIG-IJ-EpW"/>
                             <constraint firstItem="gFT-fB-35Z" firstAttribute="top" secondItem="BuY-mt-n2g" secondAttribute="top" constant="51" id="pyA-eW-wJd"/>
@@ -1776,10 +1781,17 @@
                                 <action selector="doneButtonPressed:" destination="WHt-4L-20w" id="ct8-Zs-PIw"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="trash" id="tVP-4l-wTs">
+                            <color key="tintColor" red="0.61176470589999998" green="0.78039215689999997" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <connections>
+                                <action selector="deleteAllButtonPressed:" destination="WHt-4L-20w" id="hcU-bu-92z"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="archivedRidesSearchBar" destination="AlN-RD-bSG" id="49y-41-TDJ"/>
                         <outlet property="archivedRidesTableView" destination="63A-iT-xpU" id="ltb-Ir-68x"/>
+                        <outlet property="deleteAllButton" destination="tVP-4l-wTs" id="W4M-ft-gW6"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZzY-JN-uII" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
