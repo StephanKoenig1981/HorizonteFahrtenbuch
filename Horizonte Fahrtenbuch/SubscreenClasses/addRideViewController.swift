@@ -19,6 +19,8 @@ class addRideViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        datePicker.setValue(UIColor.white, forKeyPath: "textColor")
+        datePicker.tintColor = UIColor.systemPurple
         
         // Disable Swipe Down gesture
         
