@@ -235,6 +235,11 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
 
+        // Haptic Feedback
+        
+        let generator = UINotificationFeedbackGenerator()
+                    generator.notificationOccurred(.error)
+        
         // Create alert controller to confirm deletion
         let alertController = UIAlertController(title: "Fahrteneintrag löschen", message: "Bist du sicher, dass du den Fahrteneintrag löschen möchtest?", preferredStyle: .actionSheet)
         

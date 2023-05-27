@@ -239,6 +239,9 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
+        
+        let generator = UINotificationFeedbackGenerator()
+                    generator.notificationOccurred(.error)
 
         // Create alert controller to confirm deletion
         let alertController = UIAlertController(title: "Kundeneintrag löschen", message: "Bist du sicher, dass du den Kundeneintrag löschen möchtest?", preferredStyle: .actionSheet)

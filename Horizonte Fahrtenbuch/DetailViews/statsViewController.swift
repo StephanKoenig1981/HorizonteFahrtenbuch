@@ -102,6 +102,11 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
     
     @IBAction func closeMonthAction(_ sender: Any) {
         
+        // Haptic feedback
+        
+        let generator = UINotificationFeedbackGenerator()
+                    generator.notificationOccurred(.error)
+        
         // Create an alert controller
         let alertController = UIAlertController(
             title: "ACHTUNG",
