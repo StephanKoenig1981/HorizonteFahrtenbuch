@@ -165,7 +165,7 @@ class clientDetailViewController: UIViewController, CLLocationManagerDelegate, M
             guard let unwrappedResponse = response, let route = unwrappedResponse.routes.first else { return }
             self.clientDetailMapView.addOverlay(route.polyline, level: .aboveRoads)
             
-                let padding: CGFloat = 25
+                let padding: CGFloat = 40
                         let edgePadding = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
                         let boundingMapRect = route.polyline.boundingMapRect
                         let paddedMapRect = boundingMapRect.insetBy(dx: -padding, dy: -padding)
@@ -187,10 +187,10 @@ class clientDetailViewController: UIViewController, CLLocationManagerDelegate, M
 extension TimeInterval {
     func formatted() -> String {
         let formatter = DateComponentsFormatter()
-        formatter.allowedUnits = [.hour, .minute]
-        formatter.unitsStyle = .short
-        formatter.zeroFormattingBehavior = .dropAll
-        return formatter.string(from: self) ?? "N/A"
+        formatter.allowedUnits = [.hour, .minute, .second]
+        formatter.zeroFormattingBehavior = .pad
+               formatter.unitsStyle = .positional
+               return formatter.string(from: self) ?? "00:00:00"
     }
 }
     
