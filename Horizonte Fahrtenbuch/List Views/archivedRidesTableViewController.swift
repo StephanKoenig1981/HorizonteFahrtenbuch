@@ -39,6 +39,20 @@ class archivedRidesTableViewController: UITableViewController, UISearchBarDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Fix color for UISearchbar
+        
+        if let textfield = archivedRidesSearchBar.value(forKey: "searchField") as? UITextField {
+
+            textfield.attributedPlaceholder = NSAttributedString(string: textfield.placeholder ?? "", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
+
+            if let leftView = textfield.leftView as? UIImageView {
+                leftView.image = leftView.image?.withRenderingMode(.alwaysTemplate)
+                leftView.tintColor = UIColor.lightGray
+            }
+        }
+        
+        archivedRidesSearchBar.overrideUserInterfaceStyle = .dark
+        
         self.title = "Archivierte Fahrten"
         
         filteredResults = realm.objects(archivedRides.self)   // <-- initialize Filtered Results
@@ -53,7 +67,7 @@ class archivedRidesTableViewController: UITableViewController, UISearchBarDelega
                deleteAllButton.isEnabled = false
                return
            }
-
+        
         
         let vc = UIViewController()
         vc.presentationController?.presentedView?.gestureRecognizers?[0].isEnabled = false
@@ -125,13 +139,15 @@ class archivedRidesTableViewController: UITableViewController, UISearchBarDelega
         dateFormatter.timeZone = TimeZone.current
         dateFormatter.dateFormat = "dd.MM.yyyy"
 
-        let objects = filteredResults.sorted {
+        // Commenting out for testing purposes
+        
+        /*let objects = filteredResults.sorted {
             guard let firstDate = dateFormatter.date(from: $0.date!),
                   let secondDate = dateFormatter.date(from: $1.date!) else {
                       return false
                   }
             return firstDate > secondDate
-        }
+        }*/
 
         
         let object = filteredResults[indexPath.row]
@@ -181,6 +197,7 @@ class archivedRidesTableViewController: UITableViewController, UISearchBarDelega
     if object.isManuallySaved == true {
         cell.routeDetailButton.isEnabled = false
         cell.routeDetailButton.tintColor = .systemGray
+        cell.routeDetailButton.overrideUserInterfaceStyle = .dark
     } else {
         cell.routeDetailButton.isEnabled = true
         cell.routeDetailButton.tintColor = .systemOrange

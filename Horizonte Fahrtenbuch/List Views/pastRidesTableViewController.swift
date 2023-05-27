@@ -39,6 +39,20 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Fix color for UISearchbar
+        
+        if let textfield = pastRidesSearchBar.value(forKey: "searchField") as? UITextField {
+
+            textfield.attributedPlaceholder = NSAttributedString(string: textfield.placeholder ?? "", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
+
+            if let leftView = textfield.leftView as? UIImageView {
+                leftView.image = leftView.image?.withRenderingMode(.alwaysTemplate)
+                leftView.tintColor = UIColor.lightGray
+            }
+        }
+        
+        pastRidesSearchBar.overrideUserInterfaceStyle = .dark
+        
         // MARK: Tap Recoginzer
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard(_:)))
@@ -123,13 +137,15 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
         dateFormatter.timeZone = TimeZone.current
         dateFormatter.dateFormat = "dd.MM.yyyy"
 
-        let objects = filteredResults.sorted {
+        // Commenting out for testing
+        
+        /*let objects = filteredResults.sorted {
             guard let firstDate = dateFormatter.date(from: $0.date!),
                   let secondDate = dateFormatter.date(from: $1.date!) else {
                       return false
                   }
             return firstDate > secondDate
-        }
+        }*/
 
         
         let object = filteredResults[indexPath.row]
@@ -180,6 +196,7 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
         if object.isManuallySaved == true {
             cell.routeDetailButton.isEnabled = false
             cell.routeDetailButton.tintColor = .systemGray
+            cell.routeDetailButton.overrideUserInterfaceStyle = .dark
         } else {
             cell.routeDetailButton.isEnabled = true
             cell.routeDetailButton.tintColor = .systemOrange

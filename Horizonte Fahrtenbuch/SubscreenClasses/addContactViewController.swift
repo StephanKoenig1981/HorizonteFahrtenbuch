@@ -40,6 +40,14 @@ class addContactViewController: UIViewController, UITextFieldDelegate {
             postalCodeTextfield.delegate = self
             cityTextfield.delegate = self
             phoneTextfield.delegate = self
+        
+        clientTextfield.attributedPlaceholder = NSAttributedString(string: "Kunde", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        clientContactPersonTextfield.attributedPlaceholder = NSAttributedString(string: "Ansprechperson", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        streetTextfield.attributedPlaceholder = NSAttributedString(string: "Strasse", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        postalCodeTextfield.attributedPlaceholder = NSAttributedString(string: "PLZ", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        cityTextfield.attributedPlaceholder = NSAttributedString(string: "Ort", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        phoneTextfield.attributedPlaceholder = NSAttributedString(string: "Telefon", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+
     }
     
     // MARK: Hickup workaround code to hide keyboard when return is pressed

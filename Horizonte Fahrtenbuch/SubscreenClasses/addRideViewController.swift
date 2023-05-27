@@ -19,8 +19,14 @@ class addRideViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        datePicker.overrideUserInterfaceStyle = .dark
+        
         datePicker.setValue(UIColor.white, forKeyPath: "textColor")
         datePicker.tintColor = UIColor.systemPurple
+        
+        clientTextfield.attributedPlaceholder = NSAttributedString(string: "Kunde", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        durationTextfield.attributedPlaceholder = NSAttributedString(string: "00:00:00", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        distanceTextfield.attributedPlaceholder = NSAttributedString(string: "24.0 Km", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         
         // Disable Swipe Down gesture
         

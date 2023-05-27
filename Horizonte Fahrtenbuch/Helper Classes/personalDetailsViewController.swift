@@ -20,6 +20,11 @@ class personalDetailsViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        yourNameTextfield.attributedPlaceholder = NSAttributedString(string: "Kunde", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        bossNameTextfield.attributedPlaceholder = NSAttributedString(string: "Ansprechperson", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        emailTextfield.attributedPlaceholder = NSAttributedString(string: "Strasse", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        
+        
         // Set up the Realm database and retrieve the last saved data
                 let realm = try! Realm()
                 let lastSavedModel = realm.objects(personalDetails.self).last

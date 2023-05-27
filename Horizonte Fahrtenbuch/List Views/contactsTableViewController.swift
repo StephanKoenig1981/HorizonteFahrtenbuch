@@ -40,6 +40,19 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Fix color for UISearchbar
+        
+        if let textfield = clientSearchBar.value(forKey: "searchField") as? UITextField {
+
+            textfield.attributedPlaceholder = NSAttributedString(string: textfield.placeholder ?? "", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
+
+            if let leftView = textfield.leftView as? UIImageView {
+                leftView.image = leftView.image?.withRenderingMode(.alwaysTemplate)
+                leftView.tintColor = UIColor.lightGray
+            }
+        }
+        
+        clientSearchBar.overrideUserInterfaceStyle = .dark
         
         // MARK: Tap Recoginzer
         
@@ -195,6 +208,7 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
         if object.phone?.description == "" {
             cell.phoneButton.isEnabled = false
             cell.phoneButton.tintColor = .systemGray
+            cell.phoneButton.overrideUserInterfaceStyle = .dark
         } else {
             cell.phoneButton.isEnabled = true
             cell.phoneButton.tintColor = .systemOrange
