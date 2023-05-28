@@ -73,6 +73,16 @@ class archivedRidesTableViewController: UITableViewController, UISearchBarDelega
         vc.presentationController?.presentedView?.gestureRecognizers?[0].isEnabled = false
         
         let objects = realm.objects(currentRide.self)
+        
+        // If date is a string, you can convert it to a Date first
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let sortedObjects = filteredResults.sorted(by: { (obj1, obj2) -> Bool in
+            guard let date1 = obj1.date, let date2 = obj2.date else { return false }
+            guard let dateObj1 = dateFormatter.date(from: date1), let dateObj2 = dateFormatter.date(from: date2) else { return false }
+            return dateObj1 < dateObj2
+        })
+        
         var filteredData = objects // Initally, the filtered data is the same as the original data.
         
         setupUI()
@@ -139,20 +149,9 @@ class archivedRidesTableViewController: UITableViewController, UISearchBarDelega
         dateFormatter.timeZone = TimeZone.current
         dateFormatter.dateFormat = "dd.MM.yyyy"
 
-        // Commenting out for testing purposes
         
-        /*let objects = filteredResults.sorted {
-            guard let firstDate = dateFormatter.date(from: $0.date!),
-                  let secondDate = dateFormatter.date(from: $1.date!) else {
-                      return false
-                  }
-            return firstDate > secondDate
-        }*/
-
+        let object = filteredResults.sorted(byKeyPath: "date", ascending: true)[indexPath.row]
         
-        let object = filteredResults[indexPath.row]
-        
-       
         
         cell.date?.text = object.date?.description
         
@@ -212,7 +211,7 @@ class archivedRidesTableViewController: UITableViewController, UISearchBarDelega
       // Determine the index path of the selected cell within the filtered results
       let filteredIndex = indexPath.row
       // Use the filtered index path to obtain the currentRide object from the filtered results
-      let currentRide = self.filteredResults[filteredIndex]
+      let currentRide = self.filteredResults.sorted(byKeyPath: "date", ascending: true)[filteredIndex]
       detailVC.encodedPolyline = currentRide.encodedPolyline
       detailVC.clientName = currentRide.currentClientName
       detailVC.timeElapsed = currentRide.timeElapsed
@@ -251,7 +250,7 @@ class archivedRidesTableViewController: UITableViewController, UISearchBarDelega
         // Add delete action to alert controller
         let deleteAction = UIAlertAction(title: "Löschen", style: .destructive) { (action) in
             // Delete the corresponding object from the data source
-            let objectToDelete = self.filteredResults[indexPath.row]
+            let objectToDelete = self.filteredResults.sorted(byKeyPath: "date", ascending: true)[indexPath.row]
             try! self.realm.write {
                 self.realm.delete(objectToDelete)
             }

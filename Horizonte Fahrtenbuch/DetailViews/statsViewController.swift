@@ -176,7 +176,7 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
     
     @IBAction func sendReportButtonPressed(_ sender: Any) {
         let realm = try! Realm()
-        let currentRides = realm.objects(currentRide.self)
+        let currentRides = realm.objects(currentRide.self).sorted(byKeyPath: "date", ascending: true)
         let personalDetails = realm.objects(personalDetails.self).last
         
         let yourName = personalDetails?.yourName
@@ -206,7 +206,7 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
             //emailText += "\n"
             emailText += "_______________________\n\n"
         }
-        emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V1.8.1 generiert."
+        emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V1.8.2 generiert."
         
         if MFMailComposeViewController.canSendMail() {
             let mailComposer = MFMailComposeViewController()

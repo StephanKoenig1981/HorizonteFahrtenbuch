@@ -17,7 +17,7 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
     // MARK: Initializing Realm
     
     let realm = try! Realm()
-    let results = try! Realm().objects(currentRide.self).sorted(byKeyPath: "date", ascending: false)
+    let results = try! Realm().objects(currentRide.self).sorted(byKeyPath: "date", ascending: true)
     
     var notificationToken: NotificationToken?
     
@@ -71,6 +71,16 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
         vc.presentationController?.presentedView?.gestureRecognizers?[0].isEnabled = false
         
         let objects = realm.objects(currentRide.self)
+        
+        // If date is a string, you can convert it to a Date first
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let sortedObjects = filteredResults.sorted(by: { (obj1, obj2) -> Bool in
+            guard let date1 = obj1.date, let date2 = obj2.date else { return false }
+            guard let dateObj1 = dateFormatter.date(from: date1), let dateObj2 = dateFormatter.date(from: date2) else { return false }
+            return dateObj1 < dateObj2
+        })
+        
         var filteredData = objects // Initally, the filtered data is the same as the original data.
         
         setupUI()
@@ -136,21 +146,8 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
         dateFormatter.locale = Locale(identifier: "de_DE") // Setzen Sie hier Ihr gewünschtes lokale und Zeitzone
         dateFormatter.timeZone = TimeZone.current
         dateFormatter.dateFormat = "dd.MM.yyyy"
-
-        // Commenting out for testing
         
-        /*let objects = filteredResults.sorted {
-            guard let firstDate = dateFormatter.date(from: $0.date!),
-                  let secondDate = dateFormatter.date(from: $1.date!) else {
-                      return false
-                  }
-            return firstDate > secondDate
-        }*/
-
-        
-        let object = filteredResults[indexPath.row]
-        
-       
+        let object = filteredResults.sorted(byKeyPath: "date", ascending: true)[indexPath.row]
         
         cell.date?.text = object.date?.description
         
@@ -169,11 +166,7 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
             cell.rideClientLabel?.textColor = .systemOrange
             cell.date?.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
 }
-       
-        
-        // Adding the disclosure Indicator Currently inactive for later purposes
-        
-        // cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+
         
         // Disabling the map supplement Button if no phone number is in the contact details.
         
@@ -211,7 +204,7 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
           // Determine the index path of the selected cell within the filtered results
           let filteredIndex = indexPath.row
           // Use the filtered index path to obtain the currentRide object from the filtered results
-          let currentRide = self.filteredResults[filteredIndex]
+          let currentRide = self.filteredResults.sorted(byKeyPath: "date", ascending: true)[filteredIndex]
           detailVC.encodedPolyline = currentRide.encodedPolyline
           detailVC.clientName = currentRide.currentClientName
           detailVC.timeElapsed = currentRide.timeElapsed
@@ -250,7 +243,7 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
         // Add delete action to alert controller
         let deleteAction = UIAlertAction(title: "Löschen", style: .destructive) { (action) in
             // Delete the corresponding object from the data source
-            let objectToDelete = self.filteredResults[indexPath.row]
+            let objectToDelete = self.filteredResults.sorted(byKeyPath: "date", ascending: true)[indexPath.row]
             try! self.realm.write {
                 self.realm.delete(objectToDelete)
             }
