@@ -14,6 +14,7 @@ class personalDetailsViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var bossNameTextfield: UITextField!
     @IBOutlet weak var emailTextfield: UITextField!
     
+    @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var logoView: UIImageView!
     
     

@@ -2170,8 +2170,11 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="Checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="EBg-ei-tIG">
-                                <rect key="frame" x="141" y="525" width="110" height="68"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="EBg-ei-tIG">
+                                <rect key="frame" x="141" y="525" width="111" height="68"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="68" id="LE6-3W-Cfa"/>
+                                </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="E-Mail des Betriebs:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="px2-Qf-ags">
                                 <rect key="frame" x="16" y="355" width="153" height="21"/>
@@ -2197,12 +2200,12 @@
                         <constraints>
                             <constraint firstItem="9Un-dL-vSx" firstAttribute="trailing" secondItem="A8q-qE-bHb" secondAttribute="trailing" id="4I7-dz-2kw"/>
                             <constraint firstItem="0fV-eC-g1x" firstAttribute="centerX" secondItem="zy7-wO-CkB" secondAttribute="centerX" id="5Rq-kz-JQt"/>
+                            <constraint firstItem="EBg-ei-tIG" firstAttribute="top" secondItem="7qV-KY-iwx" secondAttribute="bottom" constant="87" id="8On-QS-j5S"/>
                             <constraint firstItem="FKW-fk-Cmx" firstAttribute="bottom" secondItem="4p6-Nh-qrN" secondAttribute="bottom" constant="20" id="EcE-6v-aRv"/>
                             <constraint firstItem="9Un-dL-vSx" firstAttribute="trailing" secondItem="7ng-sS-auk" secondAttribute="trailing" id="Ewx-7R-8nW"/>
                             <constraint firstItem="emD-cc-oQY" firstAttribute="leading" secondItem="KZg-xm-MWt" secondAttribute="leading" id="LqH-RR-j2Y"/>
                             <constraint firstItem="9Un-dL-vSx" firstAttribute="leading" secondItem="7ng-sS-auk" secondAttribute="leading" id="M8U-La-9kX"/>
                             <constraint firstItem="0fV-eC-g1x" firstAttribute="centerX" secondItem="A8q-qE-bHb" secondAttribute="centerX" id="Q4c-tZ-38V"/>
-                            <constraint firstItem="4p6-Nh-qrN" firstAttribute="centerX" secondItem="EBg-ei-tIG" secondAttribute="centerX" id="VLz-6s-trf"/>
                             <constraint firstItem="FKW-fk-Cmx" firstAttribute="trailing" secondItem="9Un-dL-vSx" secondAttribute="trailing" constant="8" id="VUi-cD-2zn"/>
                             <constraint firstItem="KZg-xm-MWt" firstAttribute="centerY" secondItem="7ng-sS-auk" secondAttribute="centerY" id="YRz-g9-bcU"/>
                             <constraint firstItem="7ng-sS-auk" firstAttribute="leading" secondItem="KZg-xm-MWt" secondAttribute="trailing" constant="23" id="ZJu-qL-II6"/>
@@ -2226,10 +2229,12 @@
                             <constraint firstItem="px2-Qf-ags" firstAttribute="leading" secondItem="KZg-xm-MWt" secondAttribute="leading" id="pn1-vP-iAC"/>
                             <constraint firstAttribute="trailing" secondItem="zy7-wO-CkB" secondAttribute="trailing" id="pyJ-JS-g3Q"/>
                             <constraint firstItem="0fV-eC-g1x" firstAttribute="top" secondItem="FKW-fk-Cmx" secondAttribute="top" constant="55" id="q3j-Qd-11a"/>
+                            <constraint firstItem="EBg-ei-tIG" firstAttribute="centerX" secondItem="ge2-gX-sIp" secondAttribute="centerX" id="q5g-tJ-1j1"/>
                             <constraint firstItem="wh6-ZU-pOm" firstAttribute="leading" secondItem="7ng-sS-auk" secondAttribute="leading" id="ty1-bx-Jjt"/>
                             <constraint firstItem="wh6-ZU-pOm" firstAttribute="top" secondItem="7ng-sS-auk" secondAttribute="bottom" constant="10" id="uSh-Zv-AAb"/>
                             <constraint firstAttribute="bottom" secondItem="zy7-wO-CkB" secondAttribute="bottom" id="xjI-78-eUM"/>
                             <constraint firstItem="zy7-wO-CkB" firstAttribute="leading" secondItem="PqN-pZ-5VL" secondAttribute="leading" id="yAR-jL-Cfr"/>
+                            <constraint firstItem="EBg-ei-tIG" firstAttribute="leading" secondItem="FKW-fk-Cmx" secondAttribute="leading" constant="141" id="yDJ-9R-laI"/>
                             <constraint firstItem="4p6-Nh-qrN" firstAttribute="centerX" secondItem="7qV-KY-iwx" secondAttribute="centerX" id="yIJ-60-A5t"/>
                         </constraints>
                     </view>
@@ -2238,6 +2243,7 @@
                         <outlet property="bossNameTextfield" destination="7ng-sS-auk" id="pww-aU-y6C"/>
                         <outlet property="emailTextfield" destination="wh6-ZU-pOm" id="RLa-S3-24A"/>
                         <outlet property="logoView" destination="EBg-ei-tIG" id="7HV-3q-Slf"/>
+                        <outlet property="textView" destination="ge2-gX-sIp" id="0iV-oa-av6"/>
                         <outlet property="yourNameTextfield" destination="9Un-dL-vSx" id="IPS-kz-sbl"/>
                     </connections>
                 </viewController>
