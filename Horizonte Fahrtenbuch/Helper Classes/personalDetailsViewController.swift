@@ -21,9 +21,9 @@ class personalDetailsViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        yourNameTextfield.attributedPlaceholder = NSAttributedString(string: "Kunde", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-        bossNameTextfield.attributedPlaceholder = NSAttributedString(string: "Ansprechperson", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-        emailTextfield.attributedPlaceholder = NSAttributedString(string: "Strasse", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        yourNameTextfield.attributedPlaceholder = NSAttributedString(string: "Dein Name", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        bossNameTextfield.attributedPlaceholder = NSAttributedString(string: "Name des Chefs", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        emailTextfield.attributedPlaceholder = NSAttributedString(string: "beispiel@xyz.ch", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         
         
         // Set up the Realm database and retrieve the last saved data
