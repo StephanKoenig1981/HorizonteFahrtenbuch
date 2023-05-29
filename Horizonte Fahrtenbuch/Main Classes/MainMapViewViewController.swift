@@ -20,6 +20,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     // MARK: Variables for Location determination
     
     var coordinates :[CLLocationCoordinate2D] = []
+    var returnTripPoints: (start: CLLocationCoordinate2D, end: CLLocationCoordinate2D) = (CLLocationCoordinate2D(), CLLocationCoordinate2D())
     var index = 0
     
     var isWayBack:Bool = false
@@ -61,6 +62,9 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     var traveledDistance:Double = 0
     
     var startDate: Date!
+    
+    var startAnnotation = MKPointAnnotation()
+    let geocoder = CLGeocoder()
     
     // MARK: Outlets for Buttons and Views
     
@@ -204,6 +208,8 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         TopNotchView.layer.cornerRadius = 10
         wayBackButtonView.layer.cornerRadius = 10
         
+        wayBackButton.isUserInteractionEnabled = true
+        
         mapView.delegate = self
         mapView.clipsToBounds = true
         
@@ -271,8 +277,12 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
             }
             lastLocation = locations.last
         
-            //Track Route
+            //Track Route (Check if the current location fix is accurate enough (within 10 meters))
         
+        guard let currentLocation = locations.last else { return }
+        
+        if currentLocation.horizontalAccuracy < 10.00 {
+            
             for location in locations {
             
                 coordinates.append (location.coordinate)
@@ -280,7 +290,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
                 let numberOfLocations = coordinates.count
                 print (" :-) \(numberOfLocations)")
             
-            if numberOfLocations > 5{
+            if numberOfLocations > 1{
                 var pointsToConnect = [coordinates[numberOfLocations - 1], coordinates[numberOfLocations - 2]]
                 
                 let polyline = MKPolyline(coordinates: &pointsToConnect, count: pointsToConnect.count)
@@ -292,6 +302,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
                 if let first = mapView.overlays.first {
                     let rect = mapView.overlays.reduce(first.boundingMapRect, {$0.union($1.boundingMapRect)})
                     mapView.setVisibleMapRect(rect, edgePadding: UIEdgeInsets(top: 190.0, left: 90.0, bottom: 70.0, right: 70.0), animated: true)
+                    }
                 }
             }
         }
@@ -434,11 +445,44 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
             }
             print("Data Was Saved To Realm Database.")
     }
+    
+    func addAnnotationAtCurrentLocation() {
+        if let userLocation = mapView.userLocation.location {
+            // Add a pin annotation to the user's current location
+            startAnnotation.coordinate = userLocation.coordinate
+            startAnnotation.title = "Start"
+            mapView.addAnnotation(startAnnotation)
+            mapView.showAnnotations([startAnnotation], animated: true)
+        } else {
+            // If the user's location is not yet available, try again later.
+            // You could also prompt the user to enable location services.
+            print("User location not available yet.")
+        }
+    }
 
     
     // MARK: Start Button Action
 
     @IBAction func start(_sender: UIButton) {
+        
+        // Add a pin annotation for the start position
+        
+        geocoder.reverseGeocodeLocation(mapView.userLocation.location!, completionHandler: {(placemarks, error) in
+               if error == nil {
+                   if let firstLocation = placemarks?[0].location {
+                       self.startAnnotation.coordinate = firstLocation.coordinate
+                       self.startAnnotation.title = "Start"
+                       self.mapView.addAnnotation(self.startAnnotation)
+                       
+                       let region = MKCoordinateRegion(center: firstLocation.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
+                       self.mapView.setRegion(region, animated: true)
+                   }
+               }
+               else {
+                   print("Reverse geocoding error: \(error!.localizedDescription)")
+               }
+           })
+
         
         // Disabling scrolling, zooming, pitching and rotating when start was pressed.
         
@@ -549,7 +593,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     
     
     @IBAction func stopButtonPressed(_ sender: Any) {
-        
+                
         // Reeanbling scrolling, zooming, pitching and rotating when stop was pressed.
         
         mapView.isZoomEnabled = true
@@ -567,6 +611,12 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         let alert = UIAlertController(title: "Bist du sicher?", message: "Bist du sicher, dass du abbrechen möchtest ohne die Fahrt zu speichern?", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Fortsetzen", style: .cancel))
         alert.addAction(UIAlertAction(title: "Ohne speichern beenden", style: .destructive, handler: { [self]_ in
+            
+            // Remove the annotation pin
+            
+            if let annotation = mapView.annotations.first(where: { $0.title == "Start" }) {
+                   mapView.removeAnnotation(annotation)
+               }
             
             
             TopNotchView.topNotchViewfadeOut(duration: 1.0)
@@ -659,6 +709,12 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
                 self.dismiss(animated: true)
                 
                 case .destructive:
+                
+                // Remove the annotation pin
+                
+                if let annotation = mapView.annotations.first(where: { $0.title == "Start" }) {
+                       mapView.removeAnnotation(annotation)
+                   }
                 
                 TopNotchView.topNotchViewfadeOut(duration: 1.0)
                 timeElapsed.fadeOut(duration: 1.0)
@@ -810,9 +866,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
                 mapView.setUserTrackingMode(.followWithHeading, animated:true)
            }
     @IBAction func wayBackButtonPressed(_ sender: Any) {
-        
-        
-        
+  
         if isWayBack == false {
             isWayBack = true
             wayBackButton.fadeOut(duration: 2.5)
@@ -820,14 +874,16 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
             wayBackButton.setTitleColor(UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0), for: .normal)
             wayBackButton.fadeIn(duration: 0.7)
         }
+        
         else if isWayBack == true {
             isWayBack = false
             wayBackButton.fadeOut(duration: 2.5)
             wayBackButton.setTitle("Rückfahrt", for: .normal)
             wayBackButton.setTitleColor(UIColor.systemCyan, for: .normal)
             wayBackButton.fadeIn(duration: 0.7)
-            }
         }
+    }
+    
     @IBAction func menuButtonPressed(_ sender: Any) {
     }
     
@@ -863,7 +919,6 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
             }
         }
     }
-    
 }
 
 

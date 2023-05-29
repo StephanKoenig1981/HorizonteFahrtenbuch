@@ -58,6 +58,33 @@ class routeDetailViewController: UIViewController {
             points.append(point)
         }
         
+        // Add the first coordinate as a pin annotation
+        if let firstCoordinate = points.first {
+            let pin = MKPointAnnotation()
+            pin.coordinate = firstCoordinate
+            pin.title = "Start"
+            routeDetailMapView.addAnnotation(pin)
+            
+            // Set the pinTintColor to systemPurple
+            if let annotationView = routeDetailMapView.view(for: pin) {
+                annotationView.tintColor = UIColor.systemPurple
+            }
+        }
+        
+        // Add the last coordinate as a pin annotation
+        if let firstCoordinate = points.last {
+            let pin = MKPointAnnotation()
+            pin.coordinate = firstCoordinate
+            pin.title = "Ende"
+            routeDetailMapView.addAnnotation(pin)
+            
+            // Set the pinTintColor to systemPurple
+            if let annotationView = routeDetailMapView.view(for: pin) {
+                annotationView.tintColor = UIColor.systemPurple
+            }
+        }
+
+        
         print("Decoded coordinates: \(points)") // Add this line to print the decoded coordinates
         
         // Create an MKPolyline from the points array and add it to the map
