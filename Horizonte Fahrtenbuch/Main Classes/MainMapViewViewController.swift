@@ -473,9 +473,6 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
                        self.startAnnotation.coordinate = firstLocation.coordinate
                        self.startAnnotation.title = "Start"
                        self.mapView.addAnnotation(self.startAnnotation)
-                       
-                       let region = MKCoordinateRegion(center: firstLocation.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
-                       self.mapView.setRegion(region, animated: true)
                    }
                }
                else {
