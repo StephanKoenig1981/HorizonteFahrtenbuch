@@ -37,6 +37,24 @@ class personalDetailsViewController: UIViewController, UITextFieldDelegate {
                 emailTextfield.text = lastSavedModel?.email
     }
     
+    func checkiCLoudAccess() {
+        // Request permission to access iCloud Drive
+              let fileManager = FileManager.default
+              let iCloudDocumentsURL = fileManager.url(forUbiquityContainerIdentifier: nil)?.appendingPathComponent("Documents")
+              if iCloudDocumentsURL != nil {
+                  print("iCloud Drive access granted.")
+              } else {
+                  let alert = UIAlertController(title: "iCloud Drive Access Required", message: "Please grant permission for this app to access iCloud Drive in the Settings app.", preferredStyle: .alert)
+                  alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                  alert.addAction(UIAlertAction(title: "Settings", style: .default, handler: { action in
+                      if let url = URL(string: UIApplication.openSettingsURLString) {
+                          UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                      }
+                  }))
+                  present(alert, animated: true, completion: nil)
+              }
+    }
+    
     @IBAction func saveButtonPressed(_ sender: Any) {
         // Get the text from the text fields
         guard let yourName = yourNameTextfield.text,
@@ -60,46 +78,92 @@ class personalDetailsViewController: UIViewController, UITextFieldDelegate {
 
         
         logoView.fadeIn(duration: 0.7)
-        
-        
     }
+    
+    // MARK: Saving database to iCLoud drive
+    
     @IBAction func saveDatabaseButtonPressed(_ sender: Any) {
         
-        let container = CKContainer(identifier: "iCloud.com.horizonte.ch.Horizonte-Fahrtenbuch")
+        checkiCLoudAccess()
         
-        // Request access to iCloud container
-        container.requestApplicationPermission(.userDiscoverability) { (status, error) in
-            if let error = error {
-                print("Error requesting permission: \(error.localizedDescription)")
-            } else {
-                switch status {
-                case .granted:
-                    // User granted access to iCloud
-                    print("User granted access to iCloud")
-                case .denied:
-                    // User denied access to iCloud
-                    print("User denied access to iCloud")
-                default:
-                    // Status is 'couldNotComplete' or 'initialState'
-                    print("Unable to determine iCloud access status")
+        let fileManager = FileManager.default
+        
+        let ubiquityContainerURL = "iCloud.com.horizonte.ch.Horizonte-Fahrtenbuch"
+
+               // Get the URL for the iCloud Drive Documents folder
+               if let iCloudDocumentsURL = fileManager.url(forUbiquityContainerIdentifier: ubiquityContainerURL)?.appendingPathComponent("Documents") {
+                   let sourceRealmURL = Realm.Configuration.defaultConfiguration.fileURL!
+
+                   // Check if the file already exists in iCloud Drive
+                   let targetRealmURL = iCloudDocumentsURL.appendingPathComponent("default.realm")
+                   if fileManager.fileExists(atPath: targetRealmURL.path) {
+                       do {
+                           try fileManager.removeItem(at: targetRealmURL)
+                       } catch {
+                           // Handle any errors here
+                           print(error.localizedDescription)
+                       }
+                   }
+
+                   // Upload the file to iCloud Drive
+                   do {
+                       try fileManager.copyItem(at: sourceRealmURL, to: targetRealmURL)
+
+                       // Show an alertView upon successful upload
+                       let alert = UIAlertController(title: "Erfolgreich", message: "Die Datenbank wurde erfolgreich nach iCloud Drive exportiert", preferredStyle: .alert)
+                       alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                       present(alert, animated: true, completion: nil)
+                   } catch {
+                       // Handle any errors here
+                       print(error.localizedDescription)
+                   }
+               }
+           }
+    
+    // MARK: Restoring from iCLoud drive
+    
+    @IBAction func restoreDatabaseButtonPressed(_ sender: Any) {
+        
+            checkiCLoudAccess()
+        
+            let fileManager = FileManager.default
+
+            // Get the URL for the iCloud Drive Documents folder
+        
+            let ubiquityContainerURL = "iCloud.com.horizonte.ch.Horizonte-Fahrtenbuch"
+        
+            if let iCloudDocumentsURL = fileManager.url(forUbiquityContainerIdentifier: ubiquityContainerURL)?.appendingPathComponent("Documents") {
+                let sourceRealmURL = iCloudDocumentsURL.appendingPathComponent("default.realm")
+
+                // Check if the file exists in iCloud Drive
+                if fileManager.fileExists(atPath: sourceRealmURL.path) {
+                    // Replace the current database with the one from iCloud Drive
+                    do {
+                        let realm = try Realm()
+                        try realm.writeCopy(toFile: Realm.Configuration.defaultConfiguration.fileURL!, encryptionKey: nil)
+
+                        // Show an alertView upon successful restore
+                        let alert = UIAlertController(title: "Wiederherstelluung erfolgreich", message: "Die Datenbank wurde erfolgreich aus iCloud Drive wiederhergestellt.", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                        present(alert, animated: true, completion: nil)
+                    } catch {
+                        // Handle any errors here
+                        print(error.localizedDescription)
+                        let alert = UIAlertController(title: "Wiederherstellung fehlgeschlagen", message: "Die Wiederherstellung aus iCloud Drive ist fehlgeschlagen", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                        present(alert, animated: true, completion: nil)
+                    }
+                } else {
+                    let alert = UIAlertController(title: "Datenbank nicht gefunden", message: "Die Datenbank konnte nicht auf iCloud Drive gefunden werden.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    present(alert, animated: true, completion: nil)
                 }
             }
         }
-        
-        let iCloudPath = FileManager.default.url(forUbiquityContainerIdentifier: "iCloud.com.horizonte.ch.Horizonte-Fahrtenbuch")?.appendingPathComponent("Documents/RealmBackup/")
-        
-        let fileManager = FileManager.default
-        do {
-            try fileManager.createDirectory(at: iCloudPath!, withIntermediateDirectories: true, attributes: nil)
-            let realmPath = Realm.Configuration.defaultConfiguration.fileURL!.path
-            let destinationPath = iCloudPath!.appendingPathComponent("default.realm")
-            try fileManager.copyItem(atPath: realmPath, toPath: destinationPath.path)
-            print("File uploaded to iCloud")
-        } catch {
-            print("Error uploading file to iCloud: \(error.localizedDescription)")
-        }
     }
-}
+
+    
+
  
 
 
