@@ -7,6 +7,7 @@
 
 import UIKit
 import RealmSwift
+import CloudKit
 
 class personalDetailsViewController: UIViewController, UITextFieldDelegate {
 
@@ -62,5 +63,43 @@ class personalDetailsViewController: UIViewController, UITextFieldDelegate {
         
         
     }
+    @IBAction func saveDatabaseButtonPressed(_ sender: Any) {
+        
+        let container = CKContainer(identifier: "iCloud.com.horizonte.ch.Horizonte-Fahrtenbuch")
+        
+        // Request access to iCloud container
+        container.requestApplicationPermission(.userDiscoverability) { (status, error) in
+            if let error = error {
+                print("Error requesting permission: \(error.localizedDescription)")
+            } else {
+                switch status {
+                case .granted:
+                    // User granted access to iCloud
+                    print("User granted access to iCloud")
+                case .denied:
+                    // User denied access to iCloud
+                    print("User denied access to iCloud")
+                default:
+                    // Status is 'couldNotComplete' or 'initialState'
+                    print("Unable to determine iCloud access status")
+                }
+            }
+        }
+        
+        let iCloudPath = FileManager.default.url(forUbiquityContainerIdentifier: "iCloud.com.horizonte.ch.Horizonte-Fahrtenbuch")?.appendingPathComponent("Documents/RealmBackup/")
+        
+        let fileManager = FileManager.default
+        do {
+            try fileManager.createDirectory(at: iCloudPath!, withIntermediateDirectories: true, attributes: nil)
+            let realmPath = Realm.Configuration.defaultConfiguration.fileURL!.path
+            let destinationPath = iCloudPath!.appendingPathComponent("default.realm")
+            try fileManager.copyItem(atPath: realmPath, toPath: destinationPath.path)
+            print("File uploaded to iCloud")
+        } catch {
+            print("Error uploading file to iCloud: \(error.localizedDescription)")
+        }
+    }
 }
+ 
+
 

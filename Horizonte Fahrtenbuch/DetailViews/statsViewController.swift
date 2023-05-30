@@ -110,7 +110,7 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
         // Create an alert controller
         let alertController = UIAlertController(
             title: "ACHTUNG",
-            message: "Wenn du den aktuellen Monat abschliesst, werden die Fahrten in den vergangen Fahrten als Total gespeichert. \n\n Die Liste der Fahrten des aktuellen Monats wird zurückgesetzt und die Fahrten ins Archiv verschoben.",
+            message: "Wenn du den aktuellen Monat abschliesst, werden die Fahrten in den vergangen Monaten als Total gespeichert. \n\n Die Liste der Fahrten des aktuellen Monats wird zurückgesetzt und die Fahrten ins Archiv verschoben.",
             preferredStyle: .actionSheet
         )
         
@@ -206,7 +206,7 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
             //emailText += "\n"
             emailText += "_______________________\n\n"
         }
-        emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V1.8.5 generiert."
+        emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V1.8.7 generiert."
         
         if MFMailComposeViewController.canSendMail() {
             let mailComposer = MFMailComposeViewController()
