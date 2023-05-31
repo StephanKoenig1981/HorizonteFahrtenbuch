@@ -8,9 +8,10 @@
 import UIKit
 import RealmSwift
 import CloudKit
+import FileProvider
 
 class personalDetailsViewController: UIViewController, UITextFieldDelegate {
-
+    
     @IBOutlet weak var yourNameTextfield: UITextField!
     @IBOutlet weak var bossNameTextfield: UITextField!
     @IBOutlet weak var emailTextfield: UITextField!
@@ -28,31 +29,31 @@ class personalDetailsViewController: UIViewController, UITextFieldDelegate {
         
         
         // Set up the Realm database and retrieve the last saved data
-                let realm = try! Realm()
-                let lastSavedModel = realm.objects(personalDetails.self).last
-                
-                // Populate the text fields with the last saved data
-                yourNameTextfield.text = lastSavedModel?.yourName
-                bossNameTextfield.text = lastSavedModel?.bossName
-                emailTextfield.text = lastSavedModel?.email
+        let realm = try! Realm()
+        let lastSavedModel = realm.objects(personalDetails.self).last
+        
+        // Populate the text fields with the last saved data
+        yourNameTextfield.text = lastSavedModel?.yourName
+        bossNameTextfield.text = lastSavedModel?.bossName
+        emailTextfield.text = lastSavedModel?.email
     }
     
     func checkiCLoudAccess() {
         // Request permission to access iCloud Drive
-              let fileManager = FileManager.default
-              let iCloudDocumentsURL = fileManager.url(forUbiquityContainerIdentifier: nil)?.appendingPathComponent("Documents")
-              if iCloudDocumentsURL != nil {
-                  print("iCloud Drive access granted.")
-              } else {
-                  let alert = UIAlertController(title: "iCloud Drive Access Required", message: "Please grant permission for this app to access iCloud Drive in the Settings app.", preferredStyle: .alert)
-                  alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                  alert.addAction(UIAlertAction(title: "Settings", style: .default, handler: { action in
-                      if let url = URL(string: UIApplication.openSettingsURLString) {
-                          UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                      }
-                  }))
-                  present(alert, animated: true, completion: nil)
-              }
+        let fileManager = FileManager.default
+        let iCloudDocumentsURL = fileManager.url(forUbiquityContainerIdentifier: nil)?.appendingPathComponent("Documents")
+        if iCloudDocumentsURL != nil {
+            print("iCloud Drive access granted.")
+        } else {
+            let alert = UIAlertController(title: "iCloud Drive Access Required", message: "Please grant permission for this app to access iCloud Drive in the Settings app.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "Settings", style: .default, handler: { action in
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
+            }))
+            present(alert, animated: true, completion: nil)
+        }
     }
     
     @IBAction func saveButtonPressed(_ sender: Any) {
@@ -67,101 +68,103 @@ class personalDetailsViewController: UIViewController, UITextFieldDelegate {
         // Set up the Realm database
         let realm = try! Realm()
         let lastSavedModel = realm.objects(personalDetails.self).last ?? personalDetails()
-           
-           
-           try! realm.write {
-               lastSavedModel.yourName = yourName
-               lastSavedModel.bossName = bossName
-               lastSavedModel.email = email
-               realm.add(lastSavedModel, update: .modified)
-           }
-
+        
+        
+        try! realm.write {
+            lastSavedModel.yourName = yourName
+            lastSavedModel.bossName = bossName
+            lastSavedModel.email = email
+            realm.add(lastSavedModel, update: .modified)
+        }
+        
         
         logoView.fadeIn(duration: 0.7)
+    }
+    
+    // Utility method to get URL of default.realm
+    func getDefaultRealmURL() -> URL? {
+        return Realm.Configuration.defaultConfiguration.fileURL
+    }
+    
+    // Function to get the URL for the iCloud Drive Documents folder
+    func getICloudDocumentsURL() -> URL? {
+        let fileManager = FileManager.default
+        if let iCloudContainerURL = fileManager.url(forUbiquityContainerIdentifier: nil)?.appendingPathComponent("Documents") {
+            return iCloudContainerURL
+        }
+        return nil
+    }
+    
+    // Restore the Realm database file from iCloud Drive
+    func restoreFromiCloudDrive() {
+        let documentPicker = UIDocumentPickerViewController(documentTypes: ["public.item"], in: .import)
+        documentPicker.delegate = self
+        self.present(documentPicker, animated: true, completion: nil)
+    }
+    
+    // Save the Realm database file to iCloud Drive
+    func saveDatabaseToICloud() {
+        guard let defaultRealmURL = getDefaultRealmURL() else {
+            print("Could not find default.realm")
+            return
+        }
+        
+        let realm = try! Realm()
+        guard !realm.isEmpty else {
+            print("Realm is empty, not copying to iCloud Drive")
+            return
+        }
+        
+        let documentPicker = UIDocumentPickerViewController(url: defaultRealmURL, in: .exportToService)
+        documentPicker.delegate = self
+        self.present(documentPicker, animated: true, completion: nil)
     }
     
     // MARK: Saving database to iCLoud drive
     
     @IBAction func saveDatabaseButtonPressed(_ sender: Any) {
+        saveDatabaseToICloud()
         
-        checkiCLoudAccess()
-        
-        let fileManager = FileManager.default
-        
-        let ubiquityContainerURL = "iCloud.com.horizonte.ch.Horizonte-Fahrtenbuch"
-
-               // Get the URL for the iCloud Drive Documents folder
-               if let iCloudDocumentsURL = fileManager.url(forUbiquityContainerIdentifier: ubiquityContainerURL)?.appendingPathComponent("Documents") {
-                   let sourceRealmURL = Realm.Configuration.defaultConfiguration.fileURL!
-
-                   // Check if the file already exists in iCloud Drive
-                   let targetRealmURL = iCloudDocumentsURL.appendingPathComponent("default.realm")
-                   if fileManager.fileExists(atPath: targetRealmURL.path) {
-                       do {
-                           try fileManager.removeItem(at: targetRealmURL)
-                       } catch {
-                           // Handle any errors here
-                           print(error.localizedDescription)
-                       }
-                   }
-
-                   // Upload the file to iCloud Drive
-                   do {
-                       try fileManager.copyItem(at: sourceRealmURL, to: targetRealmURL)
-
-                       // Show an alertView upon successful upload
-                       let alert = UIAlertController(title: "Erfolgreich", message: "Die Datenbank wurde erfolgreich nach iCloud Drive exportiert", preferredStyle: .alert)
-                       alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                       present(alert, animated: true, completion: nil)
-                   } catch {
-                       // Handle any errors here
-                       print(error.localizedDescription)
-                   }
-               }
-           }
+    }
     
     // MARK: Restoring from iCLoud drive
     
     @IBAction func restoreDatabaseButtonPressed(_ sender: Any) {
+        restoreFromiCloudDrive()
         
-            checkiCLoudAccess()
-        
-            let fileManager = FileManager.default
+    }
+}
 
-            // Get the URL for the iCloud Drive Documents folder
+extension personalDetailsViewController: UIDocumentPickerDelegate {
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        guard let selectedFileURL = urls.first else {
+            return
+        }
         
-            let ubiquityContainerURL = "iCloud.com.horizonte.ch.Horizonte-Fahrtenbuch"
+        let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         
-            if let iCloudDocumentsURL = fileManager.url(forUbiquityContainerIdentifier: ubiquityContainerURL)?.appendingPathComponent("Documents") {
-                let sourceRealmURL = iCloudDocumentsURL.appendingPathComponent("default.realm")
+        let sandboxFileURL = dir.appendingPathComponent("default.realm")
 
-                // Check if the file exists in iCloud Drive
-                if fileManager.fileExists(atPath: sourceRealmURL.path) {
-                    // Replace the current database with the one from iCloud Drive
-                    do {
-                        let realm = try Realm()
-                        try realm.writeCopy(toFile: Realm.Configuration.defaultConfiguration.fileURL!, encryptionKey: nil)
-
-                        // Show an alertView upon successful restore
-                        let alert = UIAlertController(title: "Wiederherstelluung erfolgreich", message: "Die Datenbank wurde erfolgreich aus iCloud Drive wiederhergestellt.", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                        present(alert, animated: true, completion: nil)
-                    } catch {
-                        // Handle any errors here
-                        print(error.localizedDescription)
-                        let alert = UIAlertController(title: "Wiederherstellung fehlgeschlagen", message: "Die Wiederherstellung aus iCloud Drive ist fehlgeschlagen", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                        present(alert, animated: true, completion: nil)
-                    }
-                } else {
-                    let alert = UIAlertController(title: "Datenbank nicht gefunden", message: "Die Datenbank konnte nicht auf iCloud Drive gefunden werden.", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                    present(alert, animated: true, completion: nil)
-                }
+        if FileManager.default.fileExists(atPath: sandboxFileURL.path) {
+            do {
+                try FileManager.default.removeItem(at: sandboxFileURL)
+                try FileManager.default.copyItem(at: selectedFileURL, to: sandboxFileURL)
+                // Successfully imported the new realm file from iCloud Drive.
+                // You might want to reload your data or refresh your UI here.
+            } catch {
+                // Handle the error
+            }
+        } else {
+            do {
+                try FileManager.default.copyItem(at: selectedFileURL, to: sandboxFileURL)
+                // Successfully imported the new realm file from iCloud Drive.
+                // You might want to reload your data or refresh your UI here.
+            } catch {
+                // Handle the error
             }
         }
     }
-
+}
     
 
  
