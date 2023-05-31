@@ -206,7 +206,7 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
             //emailText += "\n"
             emailText += "_______________________\n\n"
         }
-        emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V1.9.0 generiert."
+        emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V1.9.1 generiert."
         
         if MFMailComposeViewController.canSendMail() {
             let mailComposer = MFMailComposeViewController()

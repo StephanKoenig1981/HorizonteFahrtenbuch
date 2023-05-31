@@ -23,6 +23,8 @@ class personalDetailsViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        restoreDatabaseFromICloud()
+        
         yourNameTextfield.attributedPlaceholder = NSAttributedString(string: "Dein Name", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         bossNameTextfield.attributedPlaceholder = NSAttributedString(string: "Name des Chefs", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         emailTextfield.attributedPlaceholder = NSAttributedString(string: "beispiel@xyz.ch", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
@@ -37,6 +39,60 @@ class personalDetailsViewController: UIViewController, UITextFieldDelegate {
         bossNameTextfield.text = lastSavedModel?.bossName
         emailTextfield.text = lastSavedModel?.email
     }
+    
+    // Function to check if the local Realm file exists
+        func localRealmFileExists() -> Bool {
+            guard let defaultRealmURL = getDefaultRealmURL() else {
+                return false
+            }
+            return FileManager.default.fileExists(atPath: defaultRealmURL.path)
+        }
+    
+    // Function to restore the Realm database from iCloud Drive
+        func restoreDatabaseFromICloud() {
+            guard let iCloudDocumentsURL = getICloudDocumentsURL(),
+                  let defaultRealmURL = getDefaultRealmURL() else {
+                return
+            }
+            
+            let localRealmFileExists = self.localRealmFileExists()
+            
+            // Check if the local Realm file exists and iCloud Drive contains a newer version
+            if localRealmFileExists, let localRealmFileModificationDate = getModificationDateForFile(at: defaultRealmURL),
+               let iCloudRealmFileModificationDate = getModificationDateForFile(at: iCloudDocumentsURL.appendingPathComponent("default.realm")),
+               iCloudRealmFileModificationDate > localRealmFileModificationDate {
+                
+                do {
+                    try FileManager.default.removeItem(at: defaultRealmURL)
+                } catch {
+                    print("Error removing local Realm file: \(error)")
+                    return
+                }
+            }
+            
+            // Copy the Realm file from iCloud Drive if it exists
+            let iCloudRealmFileURL = iCloudDocumentsURL.appendingPathComponent("default.realm")
+            if FileManager.default.fileExists(atPath: iCloudRealmFileURL.path) {
+                do {
+                    try FileManager.default.copyItem(at: iCloudRealmFileURL, to: defaultRealmURL)
+                    print("Successfully restored Realm database from iCloud Drive")
+                } catch {
+                    print("Error restoring Realm database from iCloud Drive: \(error)")
+                }
+            }
+        }
+        
+        // Function to get the modification date of a file at a given URL
+        func getModificationDateForFile(at url: URL) -> Date? {
+            do {
+                let attributes = try FileManager.default.attributesOfItem(atPath: url.path)
+                return attributes[.modificationDate] as? Date
+            } catch {
+                print("Error getting modification date for file: \(error)")
+                return nil
+            }
+        }
+        
     
     func checkiCLoudAccess() {
         // Request permission to access iCloud Drive
@@ -96,11 +152,13 @@ class personalDetailsViewController: UIViewController, UITextFieldDelegate {
     }
     
     // Restore the Realm database file from iCloud Drive
+    
     func restoreFromiCloudDrive() {
-        let documentPicker = UIDocumentPickerViewController(documentTypes: ["public.item"], in: .import)
+        let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: [.item])
         documentPicker.delegate = self
         self.present(documentPicker, animated: true, completion: nil)
     }
+
     
     // Save the Realm database file to iCloud Drive
     func saveDatabaseToICloud() {
@@ -115,7 +173,7 @@ class personalDetailsViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
-        let documentPicker = UIDocumentPickerViewController(url: defaultRealmURL, in: .exportToService)
+        let documentPicker = UIDocumentPickerViewController(forExporting: [defaultRealmURL], asCopy: true)
         documentPicker.delegate = self
         self.present(documentPicker, animated: true, completion: nil)
     }
@@ -137,31 +195,30 @@ class personalDetailsViewController: UIViewController, UITextFieldDelegate {
 
 extension personalDetailsViewController: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-        guard let selectedFileURL = urls.first else {
+        guard let securityScopedURL = urls.first, securityScopedURL.startAccessingSecurityScopedResource() else {
             return
         }
         
-        let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        defer {
+            securityScopedURL.stopAccessingSecurityScopedResource()
+        }
         
-        let sandboxFileURL = dir.appendingPathComponent("default.realm")
-
-        if FileManager.default.fileExists(atPath: sandboxFileURL.path) {
-            do {
-                try FileManager.default.removeItem(at: sandboxFileURL)
-                try FileManager.default.copyItem(at: selectedFileURL, to: sandboxFileURL)
-                // Successfully imported the new realm file from iCloud Drive.
-                // You might want to reload your data or refresh your UI here.
-            } catch {
-                // Handle the error
+        do {
+            let fileManager = FileManager.default
+            let dir = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
+            let sandboxFileURL = dir.appendingPathComponent("default.realm")
+            
+            if fileManager.fileExists(atPath: sandboxFileURL.path) {
+                try fileManager.removeItem(at: sandboxFileURL)
             }
-        } else {
-            do {
-                try FileManager.default.copyItem(at: selectedFileURL, to: sandboxFileURL)
-                // Successfully imported the new realm file from iCloud Drive.
-                // You might want to reload your data or refresh your UI here.
-            } catch {
-                // Handle the error
-            }
+            
+            try fileManager.copyItem(at: securityScopedURL, to: sandboxFileURL)
+            
+            // Successfully imported the new realm file from iCloud Drive.
+            // You might want to reload your data or refresh your UI here.
+        } catch {
+            // Handle the error
+            print("Error restoring from iCloud Drive: \(error)")
         }
     }
 }
