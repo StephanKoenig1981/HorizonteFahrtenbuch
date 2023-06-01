@@ -885,6 +885,8 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     }
     
     @IBAction func addContactButtonPressed(_ sender: Any) {
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
     }
     
     @IBAction func addressBookButtonPressed(_ sender: Any) {
@@ -915,6 +917,27 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
                 return PointData(coordinate)
             }
         }
+    }
+    @IBAction func currentRidesButtonPressed(_ sender: Any) {
+        // Haptic feedback
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
+    }
+   
+    @IBAction func contactsButtonPressed(_ sender: Any) {
+        // Haptic feedback
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
+    }
+    @IBAction func statsButtonPressed(_ sender: Any) {
+        // Haptic feedback
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
+    }
+    @IBAction func personalDetailsButtonPressed(_ sender: Any) {
+        // Haptic feedback
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
     }
 }
 

@@ -162,6 +162,7 @@ class personalDetailsViewController: UIViewController, UITextFieldDelegate {
     
     // Save the Realm database file to iCloud Drive
     func saveDatabaseToICloud() {
+        
         guard let defaultRealmURL = getDefaultRealmURL() else {
             print("Could not find default.realm")
             return
@@ -181,6 +182,10 @@ class personalDetailsViewController: UIViewController, UITextFieldDelegate {
     // MARK: Saving database to iCLoud drive
     
     @IBAction func saveDatabaseButtonPressed(_ sender: Any) {
+        // Haptic feedback
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.error)
+        
         saveDatabaseToICloud()
         
     }
@@ -188,6 +193,10 @@ class personalDetailsViewController: UIViewController, UITextFieldDelegate {
     // MARK: Restoring from iCLoud drive
     
     @IBAction func restoreDatabaseButtonPressed(_ sender: Any) {
+        // Haptic feedback
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.error)
+        
         restoreFromiCloudDrive()
         
     }

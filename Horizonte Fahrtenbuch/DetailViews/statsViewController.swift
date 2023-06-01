@@ -103,9 +103,8 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
     @IBAction func closeMonthAction(_ sender: Any) {
         
         // Haptic feedback
-        
         let generator = UINotificationFeedbackGenerator()
-                    generator.notificationOccurred(.error)
+        generator.notificationOccurred(.error)
         
         // Create an alert controller
         let alertController = UIAlertController(
@@ -121,46 +120,38 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
             handler: { _ in
                 // First, we need to write the time elapsed and distance driven values to the pastMonthRides model object before we delete all objects from the database
                 let realm = try! Realm()
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "MMMM yyyy"
-                let monthName = dateFormatter.string(from: Date())
-
+                
                 let totalDistance = self.totalDistanceDrivenLabel.text
                 let totalTimeElapsed = self.totalTimeElapsedLabel.text
-
+                
                 try! realm.write {
                     let pastMonthRide = pastMonthRides()
                     pastMonthRide.date = Date()
                     pastMonthRide.totalDistace = totalDistance
                     pastMonthRide.totalTimeElapsed = totalTimeElapsed
-
+                    
                     // Use Realm's create(_:value:update:) method to create new instances of your objects
                     // Here, we use the value argument to pass in the properties of the current ride and assign them to the properties of the new archived ride
-                    let currentRideObject = realm.objects(currentRide.self).first
-                    if let currentRide = currentRideObject {
-                        let archivedRide = realm.create(archivedRides.self, value: [
-                            "date": currentRide.date,
-                            "distanceDriven": currentRide.distanceDriven,
-                            "timeElapsed": currentRide.timeElapsed,
-                            "currentClientName": currentRide.currentClientName,
-                            "supplementDate": currentRide.supplementDate,
-                            "isManuallySaved": currentRide.isManuallySaved,
-                            "encodedPolyline": currentRide.encodedPolyline
-                        ])
-
-                        realm.add(pastMonthRide)
-                        realm.delete(currentRide)
+                    let currentRides = realm.objects(currentRide.self)
+                    for currentRide in currentRides {
+                        let archivedRide = realm.create(archivedRides.self)
+                        archivedRide.date = currentRide.date
+                        archivedRide.distanceDriven = currentRide.distanceDriven
+                        archivedRide.timeElapsed = currentRide.timeElapsed
+                        archivedRide.currentClientName = currentRide.currentClientName
+                        archivedRide.supplementDate = currentRide.supplementDate
+                        archivedRide.isManuallySaved = currentRide.isManuallySaved
+                        archivedRide.encodedPolyline = currentRide.encodedPolyline
                     }
+                    
+                    realm.add(pastMonthRide)
+                    realm.delete(currentRides)
                 }
-
+                
                 // Update the UI
                 self.totalTimeElapsedLabel.text = "00:00:00"
                 self.totalDistanceDrivenLabel.text = "0.0 Km"
-
-                
                 self.pastMonthsSummaryTableView.reloadData()
-                
-                
             }
         )
         

@@ -289,6 +289,9 @@ class archivedRidesTableViewController: UITableViewController, UISearchBarDelega
     
     @IBAction func deleteAllButtonPressed(_ sender: Any) {
         
+        // Haptic feedback
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.error)
         
         let alert = UIAlertController(title: "ACHTUNG", message: "Möchtest du wirklich alle Fahrteneinträge im Archiv löschen?\n\nDiese können NICHT wiederhergestellt werden!", preferredStyle: .actionSheet)
         
