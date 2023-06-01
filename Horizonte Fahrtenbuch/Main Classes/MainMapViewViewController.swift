@@ -858,6 +858,10 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     
     @IBAction func locationButtonPressed(_ sender: Any) {
         
+        // Haptic feedback
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.warning)
+        
         // Re-Enable heading mode
                 
                 mapView.setUserTrackingMode(.followWithHeading, animated:true)
