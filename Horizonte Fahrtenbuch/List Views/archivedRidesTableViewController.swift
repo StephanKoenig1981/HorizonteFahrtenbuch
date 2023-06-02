@@ -74,17 +74,6 @@ class archivedRidesTableViewController: UITableViewController, UISearchBarDelega
         
         let objects = realm.objects(currentRide.self)
         
-        // If date is a string, you can convert it to a Date first
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let sortedObjects = filteredResults.sorted(by: { (obj1, obj2) -> Bool in
-            guard let date1 = obj1.date, let date2 = obj2.date else { return false }
-            guard let dateObj1 = dateFormatter.date(from: date1), let dateObj2 = dateFormatter.date(from: date2) else { return false }
-            return dateObj1 < dateObj2
-        })
-        
-        var filteredData = objects // Initally, the filtered data is the same as the original data.
-        
         setupUI()
         
         archivedRidesSearchBar.delegate = self
@@ -115,7 +104,7 @@ class archivedRidesTableViewController: UITableViewController, UISearchBarDelega
         // Get the current month name and year
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMMM yyyy"
-        let monthName = dateFormatter.string(from: Date())
+       
         
         self.title = "Archivierte Fahrten"
     }
@@ -302,7 +291,7 @@ class archivedRidesTableViewController: UITableViewController, UISearchBarDelega
         
         alert.addAction(UIAlertAction(title: "Abbrechen", style: .default, handler: nil))
         alert.addAction(UIAlertAction(title: "Alle löschen", style: .destructive, handler: { (action: UIAlertAction!) in
-            let realm = try! Realm()
+            
             
             if let realm = try? Realm() {
                 let archivedRidesObject = realm.objects(archivedRides.self)
