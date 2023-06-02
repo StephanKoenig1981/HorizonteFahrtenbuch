@@ -17,7 +17,7 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
     // MARK: Initializing Realm
     
     let realm = try! Realm()
-    let results = try! Realm().objects(currentRide.self).sorted(byKeyPath: "date", ascending: true)
+    let results = try! Realm().objects(currentRide.self).sorted(byKeyPath: "dateActual", ascending: true)
     
     var notificationToken: NotificationToken?
     
@@ -81,7 +81,7 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
             return dateObj1 < dateObj2
         })
         
-        var filteredData = objects // Initally, the filtered data is the same as the original data.
+        var filteredData = objects.sorted(byKeyPath: "dateActual", ascending: true) // Initally, the filtered data is the same as the original data.
         
         setupUI()
         
@@ -123,12 +123,12 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
     func filterResults(searchTerm: String) {
         if searchTerm.isEmpty {
             // Ausgabe aller Elemente wird auch sortiert
-            filteredResults = realm.objects(currentRide.self).sorted(byKeyPath: "date", ascending: true)
+            filteredResults = realm.objects(currentRide.self).sorted(byKeyPath: "dateActual", ascending: true)
         } else {
             // Nur ausgewählte Elemente werden sortiert
-            filteredResults = realm.objects(currentRide.self)
+            filteredResults = realm.objects(currentRide.self).sorted(byKeyPath: "dateActual", ascending: true)
             filteredResults = filteredResults.filter("currentClientName CONTAINS[c] %@", searchTerm)
-            filteredResults = filteredResults.sorted(byKeyPath: "date", ascending: true)
+            filteredResults = filteredResults.sorted(byKeyPath: "dateActual", ascending: true)
         }
         tableView.reloadData()
     }
@@ -147,9 +147,14 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
         dateFormatter.timeZone = TimeZone.current
         dateFormatter.dateFormat = "dd.MM.yyyy"
         
-        let object = filteredResults.sorted(byKeyPath: "date", ascending: true)[indexPath.row]
+        let object = filteredResults.sorted(byKeyPath: "dateActual", ascending: true)[indexPath.row]
         
-        cell.date?.text = object.date?.description
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "de_DE")
+        dateFormatter.dateFormat = "d. MMMM yyyy"
+        if let dateActual = object.dateActual {
+            cell.date?.text = dateFormatter.string(from: dateActual)
+        }
         
         
         
@@ -204,7 +209,7 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
           // Determine the index path of the selected cell within the filtered results
           let filteredIndex = indexPath.row
           // Use the filtered index path to obtain the currentRide object from the filtered results
-          let currentRide = self.filteredResults.sorted(byKeyPath: "date", ascending: true)[filteredIndex]
+          let currentRide = self.filteredResults.sorted(byKeyPath: "dateActual", ascending: true)[filteredIndex]
           detailVC.encodedPolyline = currentRide.encodedPolyline
           detailVC.clientName = currentRide.currentClientName
           detailVC.timeElapsed = currentRide.timeElapsed
@@ -243,7 +248,7 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
         // Add delete action to alert controller
         let deleteAction = UIAlertAction(title: "Löschen", style: .destructive) { (action) in
             // Delete the corresponding object from the data source
-            let objectToDelete = self.filteredResults.sorted(byKeyPath: "date", ascending: true)[indexPath.row]
+            let objectToDelete = self.filteredResults.sorted(byKeyPath: "dateActual", ascending: true)[indexPath.row]
             try! self.realm.write {
                 self.realm.delete(objectToDelete)
             }

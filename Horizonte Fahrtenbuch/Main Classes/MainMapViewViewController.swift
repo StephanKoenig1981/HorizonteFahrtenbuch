@@ -759,7 +759,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
                 
                 currentRides.timeElapsed = timeElapsed.text
                 currentRides.distanceDriven = distanceDriven.text
-                currentRides.date = dateFormatter.string(from: date)
+                currentRides.dateActual = date
                 currentRides.currentClientName = clientTextField.text
                 //currentRides.encodedPolyline = encodedPolyline
                 

@@ -133,7 +133,7 @@ class addRideViewController: UIViewController, UITextFieldDelegate {
             dateFormatter.dateFormat = "d. MMM YY"
             dateFormatter.dateStyle = .long
             
-            dateFormatter.string(from: date)
+            currentRides.dateActual = datePicker.date
             
             currentRides.timeElapsed = durationTextfield.text
             currentRides.currentClientName = clientTextfield.text

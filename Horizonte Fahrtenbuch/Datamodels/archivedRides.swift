@@ -12,6 +12,9 @@ import RealmSwift
 class archivedRides: Object {
     
     @objc dynamic var date: String?
+    
+    @objc dynamic var dateActual: Date?
+    
     @objc dynamic var distanceDriven: String?
     @objc dynamic var timeElapsed: String?
     @objc dynamic var currentClientName: String?

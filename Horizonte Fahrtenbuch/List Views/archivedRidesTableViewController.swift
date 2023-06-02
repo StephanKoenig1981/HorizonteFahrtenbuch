@@ -55,7 +55,7 @@ class archivedRidesTableViewController: UITableViewController, UISearchBarDelega
         
         self.title = "Archivierte Fahrten"
         
-        filteredResults = realm.objects(archivedRides.self)   // <-- initialize Filtered Results
+        filteredResults = realm.objects(archivedRides.self).sorted(byKeyPath: "dateActual", ascending: true)
         // Register for changes in Realm Notifications
         
         if #available(iOS 13.0, *) {
@@ -125,12 +125,12 @@ class archivedRidesTableViewController: UITableViewController, UISearchBarDelega
     func filterResults(searchTerm: String) {
         if searchTerm.isEmpty {
             // Ausgabe aller Elemente wird auch sortiert
-            filteredResults = realm.objects(archivedRides.self).sorted(byKeyPath: "date", ascending: true)
+            filteredResults = realm.objects(archivedRides.self).sorted(byKeyPath: "dateActual", ascending: true)
         } else {
             // Nur ausgewählte Elemente werden sortiert
-            filteredResults = realm.objects(archivedRides.self)
-            filteredResults = filteredResults.filter("currentClientName CONTAINS[c] %@", searchTerm)
-            filteredResults = filteredResults.sorted(byKeyPath: "date", ascending: true)
+            filteredResults = realm.objects(archivedRides.self).sorted(byKeyPath: "dateActual", ascending: true)
+            filteredResults = realm.objects(archivedRides.self).filter("currentClientName CONTAINS[c] %@", searchTerm).sorted(byKeyPath: "dateActual", ascending: true)
+            filteredResults = filteredResults.sorted(byKeyPath: "dateActual", ascending: true)
         }
         tableView.reloadData()
     }
@@ -150,10 +150,15 @@ class archivedRidesTableViewController: UITableViewController, UISearchBarDelega
         dateFormatter.dateFormat = "dd.MM.yyyy"
 
         
-        let object = filteredResults.sorted(byKeyPath: "date", ascending: true)[indexPath.row]
+        let object = filteredResults[indexPath.row]
         
         
-        cell.date?.text = object.date?.description
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "de_DE")
+        dateFormatter.dateFormat = "d. MMMM yyyy"
+        if let dateActual = object.dateActual {
+            cell.date?.text = dateFormatter.string(from: dateActual)
+        }
         
         
         
@@ -211,7 +216,7 @@ class archivedRidesTableViewController: UITableViewController, UISearchBarDelega
       // Determine the index path of the selected cell within the filtered results
       let filteredIndex = indexPath.row
       // Use the filtered index path to obtain the currentRide object from the filtered results
-      let currentRide = self.filteredResults.sorted(byKeyPath: "date", ascending: true)[filteredIndex]
+      let currentRide = self.filteredResults.sorted(byKeyPath: "dateActual", ascending: true)[filteredIndex]
       detailVC.encodedPolyline = currentRide.encodedPolyline
       detailVC.clientName = currentRide.currentClientName
       detailVC.timeElapsed = currentRide.timeElapsed
@@ -250,7 +255,7 @@ class archivedRidesTableViewController: UITableViewController, UISearchBarDelega
         // Add delete action to alert controller
         let deleteAction = UIAlertAction(title: "Löschen", style: .destructive) { (action) in
             // Delete the corresponding object from the data source
-            let objectToDelete = self.filteredResults.sorted(byKeyPath: "date", ascending: true)[indexPath.row]
+            let objectToDelete = self.filteredResults.sorted(byKeyPath: "dateActual", ascending: true)[indexPath.row]
             try! self.realm.write {
                 self.realm.delete(objectToDelete)
             }

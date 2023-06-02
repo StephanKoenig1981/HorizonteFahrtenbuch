@@ -135,7 +135,7 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
                     let currentRides = realm.objects(currentRide.self)
                     for currentRide in currentRides {
                         let archivedRide = realm.create(archivedRides.self)
-                        archivedRide.date = currentRide.date
+                        archivedRide.dateActual = currentRide.dateActual
                         archivedRide.distanceDriven = currentRide.distanceDriven
                         archivedRide.timeElapsed = currentRide.timeElapsed
                         archivedRide.currentClientName = currentRide.currentClientName
@@ -167,7 +167,7 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
     
     @IBAction func sendReportButtonPressed(_ sender: Any) {
         let realm = try! Realm()
-        let currentRides = realm.objects(currentRide.self).sorted(byKeyPath: "date", ascending: true)
+        let currentRides = realm.objects(currentRide.self).sorted(byKeyPath: "dateActual", ascending: true)
         let personalDetails = realm.objects(personalDetails.self).last
         
         let yourName = personalDetails?.yourName
@@ -190,7 +190,12 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
         
         for ride in currentRides {
             emailText += "\n"
-            emailText += "  Datum:  \(ride.date ?? "")\n"
+            let dateFormatter = DateFormatter()
+            dateFormatter.locale = Locale(identifier: "de_DE")
+            dateFormatter.dateFormat = "d. MMMM yyyy"
+
+            let dateString = ride.dateActual != nil ? dateFormatter.string(from: ride.dateActual!) : "No date"
+            emailText += "  Datum:  \(dateString)\n"
             emailText += "  Kunde:  \(ride.currentClientName ?? "")\n"
             emailText += "  Gefahrene Distanz:  \(ride.distanceDriven ?? "")\n"
             emailText += "  Gefahrene Zeit:     \(ride.timeElapsed ?? "")\n"
@@ -225,7 +230,7 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
         let objects = realm.objects(pastMonthRides.self).sorted(byKeyPath: "date", ascending: true)
         
         let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "de_DE") // Setzen Sie hier Ihr gewünschtes lokale und Zeitzone
+        dateFormatter.locale = Locale(identifier: "de_DE")
         dateFormatter.timeZone = TimeZone.current
         dateFormatter.dateFormat = "MMMM yyyy"
         
