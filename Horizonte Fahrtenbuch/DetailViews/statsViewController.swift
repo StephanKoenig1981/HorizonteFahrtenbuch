@@ -100,6 +100,65 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
         totalDistanceDrivenLabel.text = String(format: "%.2f Km", totalDistanceDriven)
     }
     
+    // MARK: Function for calculating daily totals
+    
+    func calculateSumOfTimeAndDistanceForEachDate() -> [(date: Date, totalDistance: String, totalTime: Int)] {
+        let realm = try! Realm()
+        let rides = realm.objects(currentRide.self)
+
+        var dateDistanceTimeDict = [Date: (totalDistance: Double, totalTime: Int)]()
+
+        for ride in rides {
+            guard let date = ride.dateActual else {
+                continue
+            }
+
+            let calendar = Calendar.current
+            let components = calendar.dateComponents([.year, .month, .day], from: date)
+            guard let dateOnly = calendar.date(from: components) else {
+                continue
+            }
+
+            var totalDistanceForDate = 0.0
+            var totalTimeForDate = 0
+
+            if let distanceString = ride.distanceDriven {
+                let distance = Double(distanceString.components(separatedBy: CharacterSet.decimalDigits.union([".", ","]).inverted).joined()) ?? 0.0
+                totalDistanceForDate += distance
+            }
+
+            if let timeElapsed = ride.timeElapsed {
+                let components = timeElapsed.split(separator: ":")
+                if components.count == 3,
+                    let hours = Int(components[0]),
+                    let minutes = Int(components[1]),
+                    let seconds = Int(components[2]) {
+                    totalTimeForDate += hours * 3600 + minutes * 60 + seconds
+                }
+            }
+
+            if let existingValue = dateDistanceTimeDict[dateOnly] {
+                dateDistanceTimeDict[dateOnly] = (existingValue.totalDistance + totalDistanceForDate, existingValue.totalTime + totalTimeForDate)
+            } else {
+                dateDistanceTimeDict[dateOnly] = (totalDistanceForDate, totalTimeForDate)
+            }
+        }
+
+        let sortedDict = dateDistanceTimeDict.sorted { $0.key < $1.key }
+        return sortedDict.map { (date: $0.key, totalDistance: String(format: "%.1f Km", $0.value.totalDistance), totalTime: $0.value.totalTime) }
+    }
+    
+    // MARK: Time formatter function
+    
+    func timeFormatted(_ totalSeconds: Int) -> String {
+        let hours: Int = totalSeconds / 3600
+        let minutes: Int = (totalSeconds % 3600) / 60
+        let seconds: Int = totalSeconds % 60
+        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+    }
+    
+    // MARK: IBActions
+    
     @IBAction func closeMonthAction(_ sender: Any) {
         
         // Haptic feedback
@@ -167,53 +226,77 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
     
     @IBAction func sendReportButtonPressed(_ sender: Any) {
         let realm = try! Realm()
-        let currentRides = realm.objects(currentRide.self).sorted(byKeyPath: "dateActual", ascending: true)
-        let personalDetails = realm.objects(personalDetails.self).last
+         let currentRides = realm.objects(currentRide.self).sorted(byKeyPath: "dateActual", ascending: true)
+         let personalDetails = realm.objects(personalDetails.self).last
+
+         let yourName = personalDetails?.yourName
+         let bossName = personalDetails?.bossName
+         let email = personalDetails?.email
+
+         let dateFormatter = DateFormatter()
+         dateFormatter.dateFormat = "MMMM yyyy"
+         let monthName = dateFormatter.string(from: Date())
         
-        let yourName = personalDetails?.yourName
-        let bossName = personalDetails?.bossName
-        let email = personalDetails?.email
+         var emailText =  "  Grüezi \(bossName ?? ""),<br><br> Untenstehend erhalten Sie die aktuelle Fahrtenliste für den Monat \(monthName).<br><br>Mit besten Grüssen,<br><br>\(yourName ?? "")<br><br><span style=\"color: #9CC769; font-weight: bold;\">Monatstotal:</span></b><br>_______________________<br>"
+
+         if let hours = totalTimeElapsedLabel.text, let distance = totalDistanceDrivenLabel.text {
+             emailText += "<br>"
+             emailText += "<b>Total Stunden: \(hours)</b><br>"
+             emailText += "<b>Total Distanz: \(distance)</b><br>"
+             emailText += "_______________________<br>"
+             emailText += "<br><br>"
+             
+             
+         }
+
+        emailText += "<span style=\"color: #9CC769; font-weight: bold;\">Tagestotale:</span><br>"
+        emailText += "_______________________"
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMMM yyyy"
-        let monthName = dateFormatter.string(from: Date())
-        
-        var emailText =  "  Grüezi \(bossName ?? ""),\n\n Untenstehend erhalten Sie die aktuelle Fahrtenliste für den Monat \(monthName).\n\nMit besten Grüssen,\n\n\(yourName ?? "")\n\n\nFahrtenliste:\n_______________________\n"
-        
-        if let hours = totalTimeElapsedLabel.text, let distance = totalDistanceDrivenLabel.text {
-            emailText += "\n"
-            emailText += "Total Stunden: \(hours)\n"
-            emailText += "Total Distanz: \(distance)\n"
-            emailText += "_______________________\n"
-            
-        }
-        
-        for ride in currentRides {
-            emailText += "\n"
-            let dateFormatter = DateFormatter()
+        let dateDistanceTimeArray = calculateSumOfTimeAndDistanceForEachDate()
+        for tuple in dateDistanceTimeArray {
+            emailText += "<br>"
             dateFormatter.locale = Locale(identifier: "de_DE")
             dateFormatter.dateFormat = "d. MMMM yyyy"
 
-            let dateString = ride.dateActual != nil ? dateFormatter.string(from: ride.dateActual!) : "No date"
-            emailText += "  Datum:  \(dateString)\n"
-            emailText += "  Kunde:  \(ride.currentClientName ?? "")\n"
-            emailText += "  Gefahrene Distanz:  \(ride.distanceDriven ?? "")\n"
-            emailText += "  Gefahrene Zeit:     \(ride.timeElapsed ?? "")\n"
-            //emailText += "\n"
-            emailText += "_______________________\n\n"
+            let dateString = dateFormatter.string(from: tuple.date)
+            emailText += "<br>"
+            emailText += "  Datum:  \(dateString)<br>"
+            emailText += "  Total gefahrene Distanz:  \(tuple.totalDistance)<br>"
+
+            let formattedTime = timeFormatted(tuple.totalTime)
+            emailText += "<b>  Total gefahrene Zeit:     \(formattedTime)</b><br>"
+            emailText += "_______________________<br>"
         }
-        emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V1.9.3 generiert."
         
-        if MFMailComposeViewController.canSendMail() {
-            let mailComposer = MFMailComposeViewController()
-            mailComposer.mailComposeDelegate = self
-            mailComposer.setToRecipients(["\(email ?? "")"])
-            mailComposer.setSubject("Fahrtenbuch \(yourName ?? "") für \(monthName)")
-            mailComposer.setMessageBody(emailText, isHTML: false)
-            present(mailComposer, animated: true, completion: nil)
-        } else {
-            print("Cannot send mails")
-        }
+        emailText += "<br><br>"
+        emailText += "<span style=\"color: #9CC769; font-weight: bold;\">Detaillierte Fahrtenliste:</span><br>"
+        emailText += "_______________________<br>"
+
+         for ride in currentRides {
+             emailText += "<br>"
+             dateFormatter.locale = Locale(identifier: "de_DE")
+             dateFormatter.dateFormat = "d. MMMM yyyy"
+
+             let dateString = ride.dateActual != nil ? dateFormatter.string(from: ride.dateActual!) : "No date"
+             emailText += "  Datum:  \(dateString)<br>"
+             emailText += "  Kunde:  \(ride.currentClientName ?? "")<br>"
+             emailText += "  Gefahrene Distanz:  \(ride.distanceDriven ?? "")<br>"
+             emailText += "<b>  Gefahrene Zeit:     \(ride.timeElapsed ?? "")</b><br>"
+             emailText += "_______________________<br><br>"
+         }
+         
+         emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V2.0.0 generiert. - © 2023 Stephan König"
+         
+         if MFMailComposeViewController.canSendMail() {
+             let mailComposer = MFMailComposeViewController()
+             mailComposer.mailComposeDelegate = self
+             mailComposer.setToRecipients(["\(email ?? "")"])
+             mailComposer.setSubject("Fahrtenbuch \(yourName ?? "") für \(monthName)")
+             mailComposer.setMessageBody(emailText, isHTML: true)
+             present(mailComposer, animated: true, completion: nil)
+         } else {
+             print("Cannot send mails")
+         }
     }
 
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
