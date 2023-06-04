@@ -101,9 +101,9 @@ class personalDetailsViewController: UIViewController, UITextFieldDelegate {
         if iCloudDocumentsURL != nil {
             print("iCloud Drive access granted.")
         } else {
-            let alert = UIAlertController(title: "iCloud Drive Access Required", message: "Please grant permission for this app to access iCloud Drive in the Settings app.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-            alert.addAction(UIAlertAction(title: "Settings", style: .default, handler: { action in
+            let alert = UIAlertController(title: "iCloud Drive Zugang benötigt", message: "Bitte erlaube der App den Zugriff auf iCloud Drive in der Einstellungen App", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "Einstellungen", style: .default, handler: { action in
                 if let url = URL(string: UIApplication.openSettingsURLString) {
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
                 }
@@ -182,6 +182,9 @@ class personalDetailsViewController: UIViewController, UITextFieldDelegate {
     // MARK: Saving database to iCLoud drive
     
     @IBAction func saveDatabaseButtonPressed(_ sender: Any) {
+        
+        checkiCLoudAccess()
+        
         // Haptic feedback
         let generator = UINotificationFeedbackGenerator()
         generator.notificationOccurred(.error)
@@ -193,6 +196,9 @@ class personalDetailsViewController: UIViewController, UITextFieldDelegate {
     // MARK: Restoring from iCLoud drive
     
     @IBAction func restoreDatabaseButtonPressed(_ sender: Any) {
+        
+        checkiCLoudAccess()
+        
         // Haptic feedback
         let generator = UINotificationFeedbackGenerator()
         generator.notificationOccurred(.error)

@@ -237,20 +237,20 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
          dateFormatter.dateFormat = "MMMM yyyy"
          let monthName = dateFormatter.string(from: Date())
         
-         var emailText =  "  Grüezi \(bossName ?? ""),<br><br> Untenstehend erhalten Sie die aktuelle Fahrtenliste für den Monat \(monthName).<br><br>Mit besten Grüssen,<br><br>\(yourName ?? "")<br><br><span style=\"color: #9CC769; font-weight: bold;\">Monatstotal:</span></b><br>_______________________<br>"
+         var emailText =  "  Grüezi \(bossName ?? ""),<br><br> Untenstehend erhalten Sie die aktuelle Fahrtenliste für den Monat \(monthName).<br><br>Mit besten Grüssen,<br><br>\(yourName ?? "")<br><br><span style=\"color: #9CC769; font-weight: bold;\">Monatstotal:</span></b><br>_________________________________<br>"
 
          if let hours = totalTimeElapsedLabel.text, let distance = totalDistanceDrivenLabel.text {
              emailText += "<br>"
-             emailText += "<b>Total Stunden: \(hours)</b><br>"
-             emailText += "<b>Total Distanz: \(distance)</b><br>"
-             emailText += "_______________________<br>"
+             emailText += "<b>Total Stunden: &nbsp \(hours)</b><br>"
+             emailText += "<b>Total Distanz: &nbsp &nbsp \(distance)</b><br>"
+             emailText += "_________________________________<br>"
              emailText += "<br><br>"
              
              
          }
 
         emailText += "<span style=\"color: #9CC769; font-weight: bold;\">Tagestotale:</span><br>"
-        emailText += "_______________________"
+        emailText += "_________________________________"
         
         let dateDistanceTimeArray = calculateSumOfTimeAndDistanceForEachDate()
         for tuple in dateDistanceTimeArray {
@@ -260,17 +260,17 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
 
             let dateString = dateFormatter.string(from: tuple.date)
             emailText += "<br>"
-            emailText += "  Datum:  \(dateString)<br>"
-            emailText += "  Total gefahrene Distanz:  \(tuple.totalDistance)<br>"
+            emailText += "<b>  Datum:  \(dateString)</b><br><br>"
+            emailText += "  Total gefahrene Distanz: &nbsp &nbsp\(tuple.totalDistance)<br>"
 
             let formattedTime = timeFormatted(tuple.totalTime)
-            emailText += "<b>  Total gefahrene Zeit:     \(formattedTime)</b><br>"
-            emailText += "_______________________<br>"
+            emailText += "<b>  Total gefahrene Zeit: &nbsp &nbsp &nbsp &nbsp\(formattedTime)</b><br>"
+            emailText += "_________________________________<br>"
         }
         
         emailText += "<br><br>"
         emailText += "<span style=\"color: #9CC769; font-weight: bold;\">Detaillierte Fahrtenliste:</span><br>"
-        emailText += "_______________________<br>"
+        emailText += "_________________________________<br>"
 
          for ride in currentRides {
              emailText += "<br>"
@@ -278,14 +278,14 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
              dateFormatter.dateFormat = "d. MMMM yyyy"
 
              let dateString = ride.dateActual != nil ? dateFormatter.string(from: ride.dateActual!) : "No date"
-             emailText += "  Datum:  \(dateString)<br>"
-             emailText += "  Kunde:  \(ride.currentClientName ?? "")<br>"
-             emailText += "  Gefahrene Distanz:  \(ride.distanceDriven ?? "")<br>"
-             emailText += "<b>  Gefahrene Zeit:     \(ride.timeElapsed ?? "")</b><br>"
-             emailText += "_______________________<br><br>"
+             emailText += "<b>  Datum:  \(dateString)</b><br><br>"
+             emailText += "  Kunde:  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp \(ride.currentClientName ?? "")<br>"
+             emailText += "  Gefahrene Distanz:  &nbsp &nbsp \(ride.distanceDriven ?? "")<br>"
+             emailText += "<b>  Gefahrene Zeit: &nbsp &nbsp &nbsp &nbsp &nbsp\(ride.timeElapsed ?? "")</b><br>"
+             emailText += "_________________________________<br><br>"
          }
          
-         emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V2.0.0 generiert. - © 2023 Stephan König"
+         emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V2.0.1 generiert. - © 2023 Stephan König"
          
          if MFMailComposeViewController.canSendMail() {
              let mailComposer = MFMailComposeViewController()

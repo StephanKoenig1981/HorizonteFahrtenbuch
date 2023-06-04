@@ -36,7 +36,6 @@
 		08B1A23C2A201898004291A8 /* archivedRidesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087319522A1FF195008B3704 /* archivedRidesTableViewController.swift */; };
 		08C9BFBA29F5CB040005DDA4 /* contactsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C9BFB929F5CB040005DDA4 /* contactsTableViewController.swift */; };
 		08CDD3D82A1406EF00D44868 /* routeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CDD3D72A1406EF00D44868 /* routeDetailViewController.swift */; };
-		08D09BD82A01AFAD00ED0C09 /* settingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D09BD72A01AFAD00ED0C09 /* settingsViewController.swift */; };
 		08DBAB2529EDE50C0044981E /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08DBAB2429EDE50C0044981E /* WidgetKit.framework */; };
 		08DBAB2729EDE50C0044981E /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08DBAB2629EDE50C0044981E /* SwiftUI.framework */; };
 		08DBAB2A29EDE50C0044981E /* FahrtenbuchBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DBAB2929EDE50C0044981E /* FahrtenbuchBundle.swift */; };
@@ -128,7 +127,6 @@
 		08B0BDC52A1EB4F700E3D675 /* personalDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = personalDetails.swift; sourceTree = "<group>"; };
 		08C9BFB929F5CB040005DDA4 /* contactsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = contactsTableViewController.swift; sourceTree = "<group>"; };
 		08CDD3D72A1406EF00D44868 /* routeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = routeDetailViewController.swift; sourceTree = "<group>"; };
-		08D09BD72A01AFAD00ED0C09 /* settingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = settingsViewController.swift; sourceTree = "<group>"; };
 		08DBAB2229EDE50C0044981E /* FahrtenbuchExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = FahrtenbuchExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		08DBAB2429EDE50C0044981E /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		08DBAB2629EDE50C0044981E /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -335,7 +333,6 @@
 		08D09BD62A01AF8900ED0C09 /* Helper Classes */ = {
 			isa = PBXGroup;
 			children = (
-				08D09BD72A01AFAD00ED0C09 /* settingsViewController.swift */,
 				0830F3932A116E8200B061A3 /* customAnnotations.swift */,
 				08B0BDC32A1EB3E200E3D675 /* personalDetailsViewController.swift */,
 			);
@@ -689,7 +686,6 @@
 				08CDD3D82A1406EF00D44868 /* routeDetailViewController.swift in Sources */,
 				080841FC29C8FBF10030BB7E /* AppDelegate.swift in Sources */,
 				08B0BDC42A1EB3E200E3D675 /* personalDetailsViewController.swift in Sources */,
-				08D09BD82A01AFAD00ED0C09 /* settingsViewController.swift in Sources */,
 				080DEDF029F33A1800E51F8D /* currentRide.swift in Sources */,
 				0863585A29F30C4100FA36D1 /* addContactViewController.swift in Sources */,
 				087319552A1FF593008B3704 /* archivedRides.swift in Sources */,
@@ -924,7 +920,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 2.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.horizonte.ch.Horizonte-Fahrtenbuch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -934,7 +930,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -969,7 +965,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 2.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.horizonte.ch.Horizonte-Fahrtenbuch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -979,7 +975,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -1090,7 +1086,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 2.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.horizonte.ch.Horizonte-Fahrtenbuch.Fahrtenbuch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1126,7 +1122,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 2.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.horizonte.ch.Horizonte-Fahrtenbuch.Fahrtenbuch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
