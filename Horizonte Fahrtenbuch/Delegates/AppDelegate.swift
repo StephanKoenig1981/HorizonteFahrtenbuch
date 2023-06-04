@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let config = Realm.Configuration(
                // Set the new schema version. This must be greater than the previously used
                // version (if you've never set a schema version before, the version is 0).
-               schemaVersion: 24,
+               schemaVersion: 26,
                // Set the block which will be called automatically when opening a Realm with
                // a schema version lower than the one set above
                migrationBlock: { migration, oldSchemaVersion in
@@ -44,21 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                        // Realm will automatically detect new properties and removed properties
                        // And will update the schema on disk automatically
                    }
-                   migration.enumerateObjects(ofType: currentRide.className()) { oldObject, newObject in
-                                   let dateFormatter = DateFormatter()
-                                   dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                                   let dateStr = oldObject!["date"] as! String
-                                   let date = dateFormatter.date(from: dateStr)
-                                   newObject!["dateActual"] = date
-                               }
-                   
-                   migration.enumerateObjects(ofType: archivedRides.className()) { oldObject, newObject in
-                                   let dateFormatter = DateFormatter()
-                                   dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                                   let dateStr = oldObject!["date"] as! String
-                                   let date = dateFormatter.date(from: dateStr)
-                                   newObject!["dateActual"] = date
-                               }
+               
            })
 
            // Tell Realm to use this new configuration object for the default Realm

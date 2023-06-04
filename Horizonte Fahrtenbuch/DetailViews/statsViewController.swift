@@ -201,6 +201,9 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
                         archivedRide.supplementDate = currentRide.supplementDate
                         archivedRide.isManuallySaved = currentRide.isManuallySaved
                         archivedRide.encodedPolyline = currentRide.encodedPolyline
+                        
+                        archivedRide.startTime = currentRide.startTime
+                        archivedRide.endTime = currentRide.endTime
                     }
                     
                     realm.add(pastMonthRide)
@@ -280,12 +283,17 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
              let dateString = ride.dateActual != nil ? dateFormatter.string(from: ride.dateActual!) : "No date"
              emailText += "<b>  Datum:  \(dateString)</b><br><br>"
              emailText += "  Kunde:  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp \(ride.currentClientName ?? "")<br>"
-             emailText += "  Gefahrene Distanz:  &nbsp &nbsp \(ride.distanceDriven ?? "")<br>"
-             emailText += "<b>  Gefahrene Zeit: &nbsp &nbsp &nbsp &nbsp &nbsp\(ride.timeElapsed ?? "")</b><br>"
+             dateFormatter.dateFormat = "HH:mm"
+                 let startTimeString = ride.startTime != nil ? dateFormatter.string(from: ride.startTime!) : "--:--"
+                 let endTimeString = ride.endTime != nil ? dateFormatter.string(from: ride.endTime!) : "--:--"
+
+                 emailText += "  Start- und Endzeit: &nbsp &nbsp &nbsp \(startTimeString) - \(endTimeString)<br>"
+             emailText += "  Gefahrene Distanz:  &nbsp &nbsp &nbsp\(ride.distanceDriven ?? "")<br>"
+             emailText += "<b>  Gefahrene Zeit: &nbsp &nbsp &nbsp &nbsp &nbsp \(ride.timeElapsed ?? "")</b><br>"
              emailText += "_________________________________<br><br>"
          }
          
-         emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V2.0.1 generiert. - © 2023 Stephan König"
+         emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V2.0.2 generiert. - © 2023 Stephan König"
          
          if MFMailComposeViewController.canSendMail() {
              let mailComposer = MFMailComposeViewController()

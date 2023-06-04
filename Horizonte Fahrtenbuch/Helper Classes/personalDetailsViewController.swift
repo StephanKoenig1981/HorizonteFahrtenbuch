@@ -112,6 +112,12 @@ class personalDetailsViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    // Handle cancel operation
+       func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+           print("User cancelled the document picker")
+           // Handle the cancellation if needed
+       }
+    
     @IBAction func saveButtonPressed(_ sender: Any) {
         // Get the text from the text fields
         guard let yourName = yourNameTextfield.text,

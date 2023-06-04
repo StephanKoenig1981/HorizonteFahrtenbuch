@@ -21,6 +21,9 @@ class archivedRides: Object {
     @objc dynamic var supplementDate: String?
     @objc dynamic var isManuallySaved: Bool = false
     
+    @objc dynamic var startTime: Date?
+    @objc dynamic var endTime: Date?
+    
     @objc dynamic var encodedPolyline: Data?
     
 }

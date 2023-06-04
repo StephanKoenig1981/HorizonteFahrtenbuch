@@ -763,6 +763,10 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
                 currentRides.currentClientName = clientTextField.text
                 //currentRides.encodedPolyline = encodedPolyline
                 
+                stopTime = Date()
+                
+                currentRides.startTime = startTime
+                currentRides.endTime = stopTime
                 
                 currentRides.isManuallySaved = false
                 

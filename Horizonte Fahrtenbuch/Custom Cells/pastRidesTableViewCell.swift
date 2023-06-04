@@ -33,6 +33,12 @@ class pastRidesTableViewCell: UITableViewCell {
     
     @IBOutlet weak var gradientBackgroundView: UIImageView!
     
+    @IBOutlet weak var startTime: UILabel!
+    @IBOutlet weak var endTime: UILabel!
+    @IBOutlet weak var timeConnectorLabel: UILabel!
+    
+    @IBOutlet weak var recordCircle: UIButton!
+    
 }
 
 

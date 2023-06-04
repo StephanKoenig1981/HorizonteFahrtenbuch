@@ -14,6 +14,7 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
     @IBOutlet var pastRidesTableView: UITableView!
     @IBOutlet var pastRidesSearchBar: UITableView!
     
+    
     // MARK: Initializing Realm
     
     let realm = try! Realm()
@@ -150,6 +151,16 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
         cell.distanceLabel?.text = object.distanceDriven?.description
         cell.supplementDateLabel?.text = object.supplementDate?.description
         
+        dateFormatter.dateFormat = "HH:mm"
+            
+            if let startTime = object.startTime {
+                cell.startTime?.text = dateFormatter.string(from: startTime)
+            }
+            
+            if let endTime = object.endTime {
+                cell.endTime?.text = dateFormatter.string(from: endTime)
+            }
+        
         if object.currentClientName?.description == "" {
             cell.rideClientLabel?.text = "Keine Angabe"
             cell.rideClientLabel?.textColor = UIColor.systemBlue
@@ -165,15 +176,25 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
         
         if object.isManuallySaved == false {
             cell.circleSign.isHidden = true
+            cell.recordCircle.isHidden = false
             cell.supplementDateLabel.isHidden = true
             cell.circleSign.isUserInteractionEnabled = false
+            cell.recordCircle.isUserInteractionEnabled = false
+            cell.startTime.isHidden = false
+            cell.endTime.isHidden = false
+            cell.timeConnectorLabel.isHidden = false
             
         
             
         } else if object.isManuallySaved == true{
             cell.circleSign.isHidden = false
+            cell.recordCircle.isHidden = true
             cell.supplementDateLabel.isHidden = false
             cell.circleSign.isUserInteractionEnabled = false
+            cell.recordCircle.isUserInteractionEnabled = false
+            cell.startTime.isHidden = true
+            cell.endTime.isHidden = true
+            cell.timeConnectorLabel.isHidden = true
             
         }
         
