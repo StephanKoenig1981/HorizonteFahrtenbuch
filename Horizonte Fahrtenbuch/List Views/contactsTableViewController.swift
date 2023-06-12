@@ -63,17 +63,12 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
         filteredResults = realm.objects(clients.self)   // <-- initialize Filtered Results
         // Register for changes in Realm Notifications
        
-            
-        
         
         clientSearchBar.delegate = self
         clientTableView.delegate = self
         clientTableView.dataSource = self
         
         setupUI()
-        
-        let objects = realm.objects(clients.self)
-        var filteredData = objects // Initally, the filtered data is the same as the original data.
         
         clientTableView.rowHeight = 225 // same as storyboard, but better to declare it here too
         
@@ -217,7 +212,7 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
         // Generate Adress
         
         let street = object.street?.description
-        let city = object.city?.description ?? "" // Hier wird eine leere Zeichenfolge verwendet, wenn das Objekt keinen City-Wert hat.
+        let city = object.city?.description ?? "" 
         let address = "\(street), \(city)"
         
         // Check if the TableView is provided with data, else show placeholder text.
@@ -236,6 +231,7 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
         return cell
     }
 
+    // MARK: Delete contacts from tableView
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }

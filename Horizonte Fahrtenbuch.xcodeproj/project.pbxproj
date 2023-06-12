@@ -18,6 +18,7 @@
 		0808422229C8FBF20030BB7E /* Horizonte_FahrtenbuchUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0808422129C8FBF20030BB7E /* Horizonte_FahrtenbuchUITestsLaunchTests.swift */; };
 		0809EB5829CD0A2500401FF3 /* Horizonte_FahrtenbuchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0808421529C8FBF20030BB7E /* Horizonte_FahrtenbuchTests.swift */; };
 		080DEDF029F33A1800E51F8D /* currentRide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080DEDEF29F33A1800E51F8D /* currentRide.swift */; };
+		0819182A2A37A150001D5C84 /* authenticationFailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081918292A37A150001D5C84 /* authenticationFailedViewController.swift */; };
 		082C98D329F6E9FC00296204 /* pastRidesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082C98D229F6E9FC00296204 /* pastRidesTableViewController.swift */; };
 		0830F3942A116E8200B061A3 /* customAnnotations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0830F3932A116E8200B061A3 /* customAnnotations.swift */; };
 		084F85E32A0EC61900D1045D /* clientDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084F85E22A0EC61900D1045D /* clientDetailViewController.swift */; };
@@ -105,6 +106,7 @@
 		0808421F29C8FBF20030BB7E /* Horizonte_FahrtenbuchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Horizonte_FahrtenbuchUITests.swift; sourceTree = "<group>"; };
 		0808422129C8FBF20030BB7E /* Horizonte_FahrtenbuchUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Horizonte_FahrtenbuchUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		080DEDEF29F33A1800E51F8D /* currentRide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = currentRide.swift; sourceTree = "<group>"; };
+		081918292A37A150001D5C84 /* authenticationFailedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = authenticationFailedViewController.swift; sourceTree = "<group>"; };
 		082C98D029F6E4BA00296204 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
 		082C98D129F6E4BA00296204 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		082C98D229F6E9FC00296204 /* pastRidesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pastRidesTableViewController.swift; sourceTree = "<group>"; };
@@ -335,6 +337,7 @@
 			children = (
 				0830F3932A116E8200B061A3 /* customAnnotations.swift */,
 				08B0BDC32A1EB3E200E3D675 /* personalDetailsViewController.swift */,
+				081918292A37A150001D5C84 /* authenticationFailedViewController.swift */,
 			);
 			path = "Helper Classes";
 			sourceTree = "<group>";
@@ -683,6 +686,7 @@
 				0808420629C8FBF10030BB7E /* Horizonte_Fahrtenbuch.xcdatamodeld in Sources */,
 				085DAE9B2A1901FD0028450A /* pastMonthRidesCell.swift in Sources */,
 				08DBAB3429EDE50D0044981E /* Fahrtenbuch.intentdefinition in Sources */,
+				0819182A2A37A150001D5C84 /* authenticationFailedViewController.swift in Sources */,
 				08CDD3D82A1406EF00D44868 /* routeDetailViewController.swift in Sources */,
 				080841FC29C8FBF10030BB7E /* AppDelegate.swift in Sources */,
 				08B0BDC42A1EB3E200E3D675 /* personalDetailsViewController.swift in Sources */,
@@ -898,16 +902,15 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Horizonte Fahrtenbuch/Horizonte Fahrtenbuch.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 2DK4UX7R4C;
+				DEVELOPMENT_TEAM = 2DK4UX7R4C;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Horizonte Fahrtenbuch/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Fahrtenbuch;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Möchtest du die App zukunftig mit FaceID oder TouchID schützen?";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Falls \"Immer\" gewählt wird, nutzt die App GPS auch dann wenn sie im Hintergrund ist.";
 				INFOPLIST_KEY_NSLocationUsageDescription = "";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Wir benötigen die GPS Daten um die Fahrten aufzeichnen zu können.";
@@ -920,11 +923,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.2;
+				MARKETING_VERSION = 2.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.horizonte.ch.Horizonte-Fahrtenbuch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = Production;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -943,16 +945,15 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Horizonte Fahrtenbuch/Horizonte Fahrtenbuch.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 2DK4UX7R4C;
+				DEVELOPMENT_TEAM = 2DK4UX7R4C;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Horizonte Fahrtenbuch/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Fahrtenbuch;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Möchtest du die App zukunftig mit FaceID oder TouchID schützen?";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Falls \"Immer\" gewählt wird, nutzt die App GPS auch dann wenn sie im Hintergrund ist.";
 				INFOPLIST_KEY_NSLocationUsageDescription = "";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Wir benötigen die GPS Daten um die Fahrten aufzeichnen zu können.";
@@ -965,11 +966,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.2;
+				MARKETING_VERSION = 2.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.horizonte.ch.Horizonte-Fahrtenbuch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = Production;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -1071,11 +1071,9 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = FahrtenbuchExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 2DK4UX7R4C;
+				DEVELOPMENT_TEAM = 2DK4UX7R4C;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Fahrtenbuch/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Fahrtenbuch;
@@ -1086,11 +1084,10 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.0.2;
+				MARKETING_VERSION = 2.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.horizonte.ch.Horizonte-Fahrtenbuch.Fahrtenbuch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = XCProduction;
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1107,11 +1104,9 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = FahrtenbuchExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 2DK4UX7R4C;
+				DEVELOPMENT_TEAM = 2DK4UX7R4C;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Fahrtenbuch/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Fahrtenbuch;
@@ -1122,11 +1117,10 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.0.2;
+				MARKETING_VERSION = 2.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.horizonte.ch.Horizonte-Fahrtenbuch.Fahrtenbuch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = XCProduction;
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;

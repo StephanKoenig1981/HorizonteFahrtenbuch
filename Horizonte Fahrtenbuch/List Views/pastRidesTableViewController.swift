@@ -43,9 +43,9 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
         // Fix color for UISearchbar
         
         if let textfield = pastRidesSearchBar.value(forKey: "searchField") as? UITextField {
-
+            
             textfield.attributedPlaceholder = NSAttributedString(string: textfield.placeholder ?? "", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
-
+            
             if let leftView = textfield.leftView as? UIImageView {
                 leftView.image = leftView.image?.withRenderingMode(.alwaysTemplate)
                 leftView.tintColor = UIColor.lightGray
@@ -57,7 +57,7 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
         // MARK: Tap Recoginzer
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard(_:)))
-            tableView.addGestureRecognizer(tapGesture)
+        tableView.addGestureRecognizer(tapGesture)
         
         
         filteredResults = realm.objects(currentRide.self)   // <-- initialize Filtered Results
@@ -90,9 +90,9 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         // Add a background view to the table view
-          let backgroundImage = UIImage(named: "purpleGradient.png")
-          let imageView = UIImageView(image: backgroundImage)
-          self.tableView.backgroundView = imageView
+        let backgroundImage = UIImage(named: "purpleGradient.png")
+        let imageView = UIImageView(image: backgroundImage)
+        self.tableView.backgroundView = imageView
     }
     
     // MARK: Setting Up User Interface
@@ -129,6 +129,8 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
         return filteredResults?.count ?? 0
     }
     
+    // MARK: TableView Function
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = pastRidesTableView.dequeueReusableCell(withIdentifier: "latestRidesCell", for: indexPath) as! pastRidesTableViewCell
         
@@ -152,25 +154,25 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
         cell.supplementDateLabel?.text = object.supplementDate?.description
         
         dateFormatter.dateFormat = "HH:mm"
-            
-            if let startTime = object.startTime {
-                cell.startTime?.text = dateFormatter.string(from: startTime)
-            }
-            
-            if let endTime = object.endTime {
-                cell.endTime?.text = dateFormatter.string(from: endTime)
-            }
+        
+        if let startTime = object.startTime {
+            cell.startTime?.text = dateFormatter.string(from: startTime)
+        }
+        
+        if let endTime = object.endTime {
+            cell.endTime?.text = dateFormatter.string(from: endTime)
+        }
         
         if object.currentClientName?.description == "" {
             cell.rideClientLabel?.text = "Keine Angabe"
             cell.rideClientLabel?.textColor = UIColor.systemBlue
         } else {
-    
+            
             cell.rideClientLabel?.text = object.currentClientName?.description
             cell.rideClientLabel?.textColor = .systemOrange
             cell.date?.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
-}
-
+        }
+        
         
         // Disabling the map supplement Button if no phone number is in the contact details.
         
@@ -184,7 +186,7 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
             cell.endTime.isHidden = false
             cell.timeConnectorLabel.isHidden = false
             
-        
+            
             
         } else if object.isManuallySaved == true{
             cell.circleSign.isHidden = false
@@ -210,42 +212,44 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
         }
         
         cell.routeDetailButtonPressed = { [weak self] in
-          guard let self = self else { return }
-          print ("routeButton pressed at Index", indexPath)
-
-          let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "routeDetailViewController") as! routeDetailViewController
+            guard let self = self else { return }
+            print ("routeButton pressed at Index", indexPath)
             
-          // Determine the index path of the selected cell within the filtered results
-          let filteredIndex = indexPath.row
-          // Use the filtered index path to obtain the currentRide object from the filtered results
-          let currentRide = self.filteredResults.sorted(byKeyPath: "dateActual", ascending: true)[filteredIndex]
-          detailVC.encodedPolyline = currentRide.encodedPolyline
-          detailVC.clientName = currentRide.currentClientName
-          detailVC.timeElapsed = currentRide.timeElapsed
-          detailVC.distanceDriven = currentRide.distanceDriven
-             
-          self.navigationController?.pushViewController(detailVC, animated: true)
+            let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "routeDetailViewController") as! routeDetailViewController
+            
+            // Determine the index path of the selected cell within the filtered results
+            let filteredIndex = indexPath.row
+            // Use the filtered index path to obtain the currentRide object from the filtered results
+            let currentRide = self.filteredResults.sorted(byKeyPath: "dateActual", ascending: true)[filteredIndex]
+            detailVC.encodedPolyline = currentRide.encodedPolyline
+            detailVC.clientName = currentRide.currentClientName
+            detailVC.timeElapsed = currentRide.timeElapsed
+            detailVC.distanceDriven = currentRide.distanceDriven
+            
+            self.navigationController?.pushViewController(detailVC, animated: true)
         }
         
         if !hasData {
-               placeholderLabel.isHidden = true
+            placeholderLabel.isHidden = true
         } else {
             placeholderLabel.isHidden = false
         }
         
         let data = filteredResults![indexPath.row]
         cell.configure(data: data)
-
+        
         return cell
     }
     
+    // MARK: Delete items from tableView
+    
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
-
+        
         // Haptic Feedback
         
         let generator = UINotificationFeedbackGenerator()
-                    generator.notificationOccurred(.error)
+        generator.notificationOccurred(.error)
         
         // Create alert controller to confirm deletion
         let alertController = UIAlertController(title: "Fahrteneintrag löschen", message: "Bist du sicher, dass du den Fahrteneintrag löschen möchtest?", preferredStyle: .actionSheet)
@@ -274,6 +278,60 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
     
     @objc func hideKeyboard(_ sender: UITapGestureRecognizer) {
         tableView.endEditing(true)
+    }
+    
+    // MARK: Archive rides from tableView
+    
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let archiveAction = UIContextualAction(style: .normal, title: "Archivieren") { (action, view, completionHandler) in
+            let currentRides = self.realm.objects(currentRide.self)
+            guard currentRides.count > indexPath.row else { return }
+            
+            let rideToArchive = self.filteredResults.sorted(byKeyPath: "dateActual", ascending: true)[indexPath.row]
+            
+            // Haptic Feedback
+            let generator = UINotificationFeedbackGenerator()
+            generator.notificationOccurred(.error)
+            
+            // Create alert controller to confirm archive
+            let alertController = UIAlertController(title: "Eintrag archivieren", message: "Bist du sicher, dass du diesen Fahrteneintrag archivieren möchtest?", preferredStyle: .actionSheet)
+            
+            // Add cancel action to alert controller
+            let cancelAction = UIAlertAction(title: "Abbrechen", style: .destructive) { _ in
+                completionHandler(false)
+            }
+            alertController.addAction(cancelAction)
+            
+            // Add archive action to alert controller
+            let confirmAction = UIAlertAction(title: "Archivieren", style: .default) { _ in
+                try! self.realm.write {
+                    // Create a new archived ride from current ride
+                    let archivedRide = archivedRides()
+                    archivedRide.dateActual = rideToArchive.dateActual
+                    archivedRide.distanceDriven = rideToArchive.distanceDriven
+                    archivedRide.timeElapsed = rideToArchive.timeElapsed
+                    archivedRide.currentClientName = rideToArchive.currentClientName
+                    archivedRide.supplementDate = rideToArchive.supplementDate
+                    archivedRide.isManuallySaved = rideToArchive.isManuallySaved
+                    archivedRide.encodedPolyline = rideToArchive.encodedPolyline
+                    archivedRide.startTime = rideToArchive.startTime
+                    archivedRide.endTime = rideToArchive.endTime
+                    
+                    self.realm.add(archivedRide)
+                    self.realm.delete(rideToArchive)
+                }
+                
+                tableView.reloadData()
+                completionHandler(true)
+            }
+            alertController.addAction(confirmAction)
+            
+            // Present the alert controller
+            self.present(alertController, animated: true, completion: nil)
+        }
+        
+        archiveAction.backgroundColor = .systemOrange
+        return UISwipeActionsConfiguration(actions: [archiveAction])
     }
     
     

@@ -9,6 +9,7 @@ import UIKit
 import RealmSwift
 import CloudKit
 import FileProvider
+import LocalAuthentication
 
 class personalDetailsViewController: UIViewController, UITextFieldDelegate {
     
@@ -19,9 +20,17 @@ class personalDetailsViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var logoView: UIImageView!
     
+    @IBOutlet weak var faceIDToggleSwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let userDefaults = UserDefaults.standard
+            let authenticationKey = "AuthenticationEnabled"
+            let authenticationEnabled = userDefaults.bool(forKey: authenticationKey)
+
+            faceIDToggleSwitch.setOn(authenticationEnabled, animated: false)
+        
         
         restoreDatabaseFromICloud()
         
@@ -41,58 +50,76 @@ class personalDetailsViewController: UIViewController, UITextFieldDelegate {
     }
     
     // Function to check if the local Realm file exists
-        func localRealmFileExists() -> Bool {
-            guard let defaultRealmURL = getDefaultRealmURL() else {
-                return false
-            }
-            return FileManager.default.fileExists(atPath: defaultRealmURL.path)
+    func localRealmFileExists() -> Bool {
+        guard let defaultRealmURL = getDefaultRealmURL() else {
+            return false
         }
+        return FileManager.default.fileExists(atPath: defaultRealmURL.path)
+    }
     
     // Function to restore the Realm database from iCloud Drive
-        func restoreDatabaseFromICloud() {
-            guard let iCloudDocumentsURL = getICloudDocumentsURL(),
-                  let defaultRealmURL = getDefaultRealmURL() else {
+    func restoreDatabaseFromICloud() {
+        guard let iCloudDocumentsURL = getICloudDocumentsURL(),
+              let defaultRealmURL = getDefaultRealmURL() else {
+            return
+        }
+        
+        let localRealmFileExists = self.localRealmFileExists()
+        
+        // Check if the local Realm file exists and iCloud Drive contains a newer version
+        if localRealmFileExists, let localRealmFileModificationDate = getModificationDateForFile(at: defaultRealmURL),
+           let iCloudRealmFileModificationDate = getModificationDateForFile(at: iCloudDocumentsURL.appendingPathComponent("default.realm")),
+           iCloudRealmFileModificationDate > localRealmFileModificationDate {
+            
+            do {
+                try FileManager.default.removeItem(at: defaultRealmURL)
+            } catch {
+                print("Error removing local Realm file: \(error)")
                 return
             }
-            
-            let localRealmFileExists = self.localRealmFileExists()
-            
-            // Check if the local Realm file exists and iCloud Drive contains a newer version
-            if localRealmFileExists, let localRealmFileModificationDate = getModificationDateForFile(at: defaultRealmURL),
-               let iCloudRealmFileModificationDate = getModificationDateForFile(at: iCloudDocumentsURL.appendingPathComponent("default.realm")),
-               iCloudRealmFileModificationDate > localRealmFileModificationDate {
-                
-                do {
-                    try FileManager.default.removeItem(at: defaultRealmURL)
-                } catch {
-                    print("Error removing local Realm file: \(error)")
-                    return
-                }
-            }
-            
-            // Copy the Realm file from iCloud Drive if it exists
-            let iCloudRealmFileURL = iCloudDocumentsURL.appendingPathComponent("default.realm")
-            if FileManager.default.fileExists(atPath: iCloudRealmFileURL.path) {
-                do {
-                    try FileManager.default.copyItem(at: iCloudRealmFileURL, to: defaultRealmURL)
-                    print("Successfully restored Realm database from iCloud Drive")
-                } catch {
-                    print("Error restoring Realm database from iCloud Drive: \(error)")
-                }
-            }
         }
         
-        // Function to get the modification date of a file at a given URL
-        func getModificationDateForFile(at url: URL) -> Date? {
+        // Copy the Realm file from iCloud Drive if it exists
+        let iCloudRealmFileURL = iCloudDocumentsURL.appendingPathComponent("default.realm")
+        if FileManager.default.fileExists(atPath: iCloudRealmFileURL.path) {
             do {
-                let attributes = try FileManager.default.attributesOfItem(atPath: url.path)
-                return attributes[.modificationDate] as? Date
+                try FileManager.default.copyItem(at: iCloudRealmFileURL, to: defaultRealmURL)
+                print("Successfully restored Realm database from iCloud Drive")
             } catch {
-                print("Error getting modification date for file: \(error)")
-                return nil
+                print("Error restoring Realm database from iCloud Drive: \(error)")
             }
         }
+    }
+    
+    // Function to get the modification date of a file at a given URL
+    func getModificationDateForFile(at url: URL) -> Date? {
+        do {
+            let attributes = try FileManager.default.attributesOfItem(atPath: url.path)
+            return attributes[.modificationDate] as? Date
+        } catch {
+            print("Error getting modification date for file: \(error)")
+            return nil
+        }
+    }
+    
+    // MARK: FaceID / TouchID
+    
+    func authenticateUser(completion: @escaping (Bool) -> Void) {
+        let context = LAContext()
+        var error: NSError?
         
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            let reason = "Identify yourself!"
+            
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
+                completion(success)
+            }
+        } else {
+            completion(false)
+        }
+    }
+    
+    // MARK: Check iCloud Access
     
     func checkiCLoudAccess() {
         // Request permission to access iCloud Drive
@@ -113,10 +140,10 @@ class personalDetailsViewController: UIViewController, UITextFieldDelegate {
     }
     
     // Handle cancel operation
-       func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
-           print("User cancelled the document picker")
-           // Handle the cancellation if needed
-       }
+    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+        print("User cancelled the document picker")
+        // Handle the cancellation if needed
+    }
     
     @IBAction func saveButtonPressed(_ sender: Any) {
         // Get the text from the text fields
@@ -164,7 +191,7 @@ class personalDetailsViewController: UIViewController, UITextFieldDelegate {
         documentPicker.delegate = self
         self.present(documentPicker, animated: true, completion: nil)
     }
-
+    
     
     // Save the Realm database file to iCloud Drive
     func saveDatabaseToICloud() {
@@ -212,6 +239,30 @@ class personalDetailsViewController: UIViewController, UITextFieldDelegate {
         restoreFromiCloudDrive()
         
     }
+    
+    // MARK: IBAction for FaceID / TouchID
+    
+    @IBAction func faceIDToggleSwitchChanged(_ sender: UISwitch) {
+        
+        // User defaults for FaceID / Touch ID toggle switch
+        let userDefaults = UserDefaults.standard
+        let authenticationKey = "AuthenticationEnabled"
+        
+        if sender.isOn {
+            authenticateUser { success in
+                DispatchQueue.main.async {
+                    if success {
+                        userDefaults.set(true, forKey: authenticationKey)
+                        self.faceIDToggleSwitch.setOn(true, animated: true)
+                    } else {
+                        self.faceIDToggleSwitch.setOn(false, animated: true)
+                    }
+                }
+            }
+        } else {
+            userDefaults.set(false, forKey: authenticationKey)
+        }
+    }
 }
 
 extension personalDetailsViewController: UIDocumentPickerDelegate {
@@ -240,10 +291,11 @@ extension personalDetailsViewController: UIDocumentPickerDelegate {
         } catch {
             // Handle the error
             print("Error restoring from iCloud Drive: \(error)")
+            }
         }
     }
-}
-    
+
+
 
  
 

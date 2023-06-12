@@ -72,7 +72,7 @@ class archivedRidesTableViewController: UITableViewController, UISearchBarDelega
         let vc = UIViewController()
         vc.presentationController?.presentedView?.gestureRecognizers?[0].isEnabled = false
         
-        let objects = realm.objects(currentRide.self)
+        
         
         setupUI()
         
@@ -130,6 +130,8 @@ class archivedRidesTableViewController: UITableViewController, UISearchBarDelega
         
         return filteredResults?.count ?? 0
     }
+    
+    // MARK: TableView Function
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = archivedRidesTableView.dequeueReusableCell(withIdentifier: "archivedRidesCell", for: indexPath) as! archivedRidesTableviewCell
@@ -246,6 +248,8 @@ class archivedRidesTableViewController: UITableViewController, UISearchBarDelega
     return cell
 }
     
+    // MARK: Deleting items from TableView
+    
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
         
@@ -277,6 +281,60 @@ class archivedRidesTableViewController: UITableViewController, UISearchBarDelega
         
         // Present the alert controller
         present(alertController, animated: true, completion: nil)
+    }
+    
+    // MARK: Restoring items from TableView
+    
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let restoreAction = UIContextualAction(style: .normal, title: "Wiederherstellen") { (action, view, completionHandler) in
+            let archivedRides = self.realm.objects(archivedRides.self)
+            guard archivedRides.count > indexPath.row else { return }
+
+            let rideToRestore = self.filteredResults.sorted(byKeyPath: "dateActual", ascending: true)[indexPath.row]
+
+            // Haptic Feedback
+            let generator = UINotificationFeedbackGenerator()
+            generator.notificationOccurred(.error)
+
+            // Create alert controller to confirm restoration
+            let alertController = UIAlertController(title: "Eintrag wiederherstellen", message: "Bist du sicher, dass du diesen Fahrteneintrag wiederherstellen möchtest?", preferredStyle: .actionSheet)
+
+            // Add cancel action to alert controller
+            let cancelAction = UIAlertAction(title: "Abbrechen", style: .destructive) { _ in
+                completionHandler(false)
+            }
+            alertController.addAction(cancelAction)
+
+            // Add restore action to alert controller
+            let confirmAction = UIAlertAction(title: "Wiederherstellen", style: .default) { _ in
+                try! self.realm.write {
+                    // Create a new current ride from archived ride
+                    let currentRide = currentRide()
+                    currentRide.dateActual = rideToRestore.dateActual
+                    currentRide.distanceDriven = rideToRestore.distanceDriven
+                    currentRide.timeElapsed = rideToRestore.timeElapsed
+                    currentRide.currentClientName = rideToRestore.currentClientName
+                    currentRide.supplementDate = rideToRestore.supplementDate
+                    currentRide.isManuallySaved = rideToRestore.isManuallySaved
+                    currentRide.encodedPolyline = rideToRestore.encodedPolyline
+                    currentRide.startTime = rideToRestore.startTime
+                    currentRide.endTime = rideToRestore.endTime
+                    
+                    self.realm.add(currentRide)
+                    self.realm.delete(rideToRestore)
+                }
+
+                tableView.reloadData()
+                completionHandler(true)
+            }
+            alertController.addAction(confirmAction)
+
+            // Present the alert controller
+            self.present(alertController, animated: true, completion: nil)
+        }
+
+        restoreAction.backgroundColor = .systemOrange
+        return UISwipeActionsConfiguration(actions: [restoreAction])
     }
     
     @objc func hideKeyboard(_ sender: UITapGestureRecognizer) {

@@ -263,7 +263,7 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
 
             let dateString = dateFormatter.string(from: tuple.date)
             emailText += "<br>"
-            emailText += "<b>  Datum:  \(dateString)</b><br><br>"
+            emailText += "<b>\(dateString)</b><br><br>"
             emailText += "  Total gefahrene Distanz: &nbsp &nbsp\(tuple.totalDistance)<br>"
 
             let formattedTime = timeFormatted(tuple.totalTime)
@@ -271,7 +271,7 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
             emailText += "_________________________________<br>"
         }
         
-        emailText += "<br><br>"
+        /*emailText += "<br><br>"
         emailText += "<span style=\"color: #9CC769; font-weight: bold;\">Detaillierte Fahrtenliste:</span><br>"
         emailText += "_________________________________<br>"
 
@@ -291,9 +291,10 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
              emailText += "  Gefahrene Distanz:  &nbsp &nbsp &nbsp\(ride.distanceDriven ?? "")<br>"
              emailText += "<b>  Gefahrene Zeit: &nbsp &nbsp &nbsp &nbsp &nbsp \(ride.timeElapsed ?? "")</b><br>"
              emailText += "_________________________________<br><br>"
-         }
+         }*/
          
-         emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V2.0.2 generiert. - © 2023 Stephan König"
+         emailText += "<br><br>"
+         emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V2.1.0 generiert. - © 2023 Stephan König"
          
          if MFMailComposeViewController.canSendMail() {
              let mailComposer = MFMailComposeViewController()

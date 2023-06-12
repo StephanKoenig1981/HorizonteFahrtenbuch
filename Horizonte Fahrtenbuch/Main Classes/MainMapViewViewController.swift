@@ -12,6 +12,7 @@ import CoreLocation
 import CoreMotion
 import Combine
 import ActivityKit
+import LocalAuthentication
 
 
 class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITextFieldDelegate {
@@ -106,6 +107,8 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
+        authenticateWithBiometrics()
         
         // Initialize Realm and print Realm Database file URL
         
@@ -249,6 +252,71 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     override func viewDidAppear(_ animated: Bool) {
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector:  #selector(updateDistanceLabel), userInfo: nil, repeats: true)
         distanceDriven.text = "\(traveledDistance)"
+    }
+    
+    // MARK: FaceID
+    
+    private func authenticateWithBiometrics() {
+        let userDefaults = UserDefaults.standard
+        let authenticationEnabled = userDefaults.bool(forKey: "AuthenticationEnabled")
+        
+        guard authenticationEnabled else {
+            // Authentication is not enabled, perform necessary actions for non-authenticated state
+            return
+        }
+        
+        let context = LAContext()
+        let reason = "Authentication required"
+        
+        context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { (success, error) in
+            if success {
+                // Authentication succeeded, continue with your app flow
+                DispatchQueue.main.async {
+                    // Update your UI or perform any necessary tasks after successful authentication
+                    // For example, transition to your main app content
+                }
+            } else {
+                if let error = error as NSError? {
+                    if error.code == LAError.authenticationFailed.rawValue {
+                        // Authentication with passcode failed, present the lock screen view
+                        DispatchQueue.main.async {
+                            self.performSegue(withIdentifier: "lockscreenSegue", sender: nil)
+                        }
+                    } else {
+                        // Authentication failed for another reason
+                        DispatchQueue.main.async {
+                            self.performSegue(withIdentifier: "lockscreenSegue", sender: nil)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    private func promptPasscodeAuthentication() {
+        let context = LAContext()
+        
+        if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: nil) {
+            context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: "Enter Passcode", reply: { (success, error) in
+                if success {
+                    // Passcode authentication succeeded, continue with your app flow
+                    DispatchQueue.main.async {
+                        // Update your UI or perform any necessary tasks after successful authentication
+                        // For example, transition to your main app content
+                    }
+                } else {
+                    // Passcode authentication failed, present the lock screen view
+                    DispatchQueue.main.async {
+                        self.performSegue(withIdentifier: "lockscreenSegue", sender: nil)
+                    }
+                }
+            })
+        } else {
+            // Passcode authentication not available, present the lock screen view
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "lockscreenSegue", sender: nil)
+            }
+        }
     }
     
     
@@ -948,6 +1016,8 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         generator.notificationOccurred(.success)
     }
 }
+
+
 
 
 

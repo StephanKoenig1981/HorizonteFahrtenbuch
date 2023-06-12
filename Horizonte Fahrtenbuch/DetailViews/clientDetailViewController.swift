@@ -45,10 +45,6 @@ class clientDetailViewController: UIViewController, CLLocationManagerDelegate, M
         let annotation = CustomAnnotation(coordinate: CLLocationCoordinate2D(latitude: self.latitude, longitude: self.longitude), title: self.clientName, subtitle: "\(self.clientStreet ?? ""), \(self.clientCity ?? "")")
         clientDetailMapView.addAnnotation(annotation)
         
-        let realm = try! Realm()
-        let currentRides = realm.objects(clients.self)
-
-        
         self.title = clientName
         
         // Customizing the Maptype Selector

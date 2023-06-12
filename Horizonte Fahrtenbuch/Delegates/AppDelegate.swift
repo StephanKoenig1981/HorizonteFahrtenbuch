@@ -80,21 +80,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: Deleting NSUserDefaults when App is killed
     
     func applicationWillTerminate (_ application: UIApplication) {
-        if let bundleID = Bundle.main.bundleIdentifier {
-            UserDefaults.standard.removePersistentDomain(forName: bundleID)
-        }
-        print ("All Keys Removed")
+        // Remove individual keys
+            UserDefaults.standard.removeObject(forKey: "startTime")
+            UserDefaults.standard.removeObject(forKey: "stopTime")
+            UserDefaults.standard.removeObject(forKey: "traveledDistance")
+            UserDefaults.standard.removeObject(forKey: "countingKey")
+        
+            // Add more keys to remove as needed
+            
+            print("Keys Removed")
     }
     
-    // MARK: Deleting NSUserDefaults when App is killed in case applicationWillTerminate was not called
     
-    func applicationWillResignActive (_ application: UIApplication) {
-        if let bundleID = Bundle.main.bundleIdentifier {
-            UserDefaults.standard.removePersistentDomain(forName: bundleID)
-        }
-        print ("All Keys Removed")
-    }
-
 
 
     // MARK: - Core Data stack
