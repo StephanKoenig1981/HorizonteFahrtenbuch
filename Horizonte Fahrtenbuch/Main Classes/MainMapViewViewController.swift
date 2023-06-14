@@ -293,32 +293,6 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         }
     }
     
-    private func promptPasscodeAuthentication() {
-        let context = LAContext()
-        
-        if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: nil) {
-            context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: "Enter Passcode", reply: { (success, error) in
-                if success {
-                    // Passcode authentication succeeded, continue with your app flow
-                    DispatchQueue.main.async {
-                        // Update your UI or perform any necessary tasks after successful authentication
-                        // For example, transition to your main app content
-                    }
-                } else {
-                    // Passcode authentication failed, present the lock screen view
-                    DispatchQueue.main.async {
-                        self.performSegue(withIdentifier: "lockscreenSegue", sender: nil)
-                    }
-                }
-            })
-        } else {
-            // Passcode authentication not available, present the lock screen view
-            DispatchQueue.main.async {
-                self.performSegue(withIdentifier: "lockscreenSegue", sender: nil)
-            }
-        }
-    }
-    
     
     // MARK: Travel distance and route polyline drawing function
     
