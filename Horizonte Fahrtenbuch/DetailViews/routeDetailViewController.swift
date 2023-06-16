@@ -34,8 +34,8 @@ class routeDetailViewController: UIViewController {
         
         // Customizing the Maptype Selector
     
-        mapTypeSegmentedControl.selectedSegmentTintColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
-        let titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        mapTypeSegmentedControl.selectedSegmentTintColor = UIColor.systemIndigo //init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+        let titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         mapTypeSegmentedControl.setTitleTextAttributes(titleTextAttributes, for:.selected)
     
         

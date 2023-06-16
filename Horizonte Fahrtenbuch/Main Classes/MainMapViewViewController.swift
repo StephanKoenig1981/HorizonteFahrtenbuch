@@ -136,19 +136,19 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
             // Mask Corner Radius for segmented control View
         
                 menuButtonView.layer.cornerRadius = 25
-                menuButton.tintColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+                menuButton.tintColor = UIColor.systemPurple //init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
         
                 addContactButtonView.layer.cornerRadius = 25
-                addContactButton.tintColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+                addContactButton.tintColor = UIColor.systemPurple //init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
         
                 addressBookButtonView.layer.cornerRadius = 25
-                addressBookButton.tintColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+                addressBookButton.tintColor = UIColor.systemPurple //init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
         
                 settingsButtonView.layer.cornerRadius = 25
-                settingsButton.tintColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+                settingsButton.tintColor = UIColor.systemPurple //init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
         
                 personalDetailView.layer.cornerRadius = 25
-                personalDetailButton.tintColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+        personalDetailButton.tintColor = UIColor.systemPurple //init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
         
                 segmentedControlView.clipsToBounds = true
                 segmentedControlView.layer.cornerRadius = 15
@@ -163,7 +163,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         
                 mapTypeSelector.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi / 2))
         
-                mapTypeSelector.selectedSegmentTintColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+                mapTypeSelector.selectedSegmentTintColor = UIColor.systemPurple //init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
                 let titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
                 mapTypeSelector.setTitleTextAttributes(titleTextAttributes, for:.selected)
         
@@ -407,8 +407,8 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         let time = secondsToHoursMinutesSeconds(val)
         let timeString = makeTimeString(hour: time.0, min: time.1, sec: time.2)
         timeElapsed.text = timeString
-        timeElapsed.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
-        distanceDriven.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+        timeElapsed.textColor = UIColor.systemPurple //init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+        distanceDriven.textColor = UIColor.systemPurple //init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
     }
     
     func secondsToHoursMinutesSeconds(_ ms: Int) -> (Int, Int, Int)
@@ -580,7 +580,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         wayBackButton.fadeIn(duration: 1.0)
         
         
-        wayBackButton.setTitleColor(UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0), for: .normal)
+        wayBackButton.setTitleColor(UIColor.systemPurple /*init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)*/, for: .normal)
         
         
         stopwatchResetButton.fadeIn(duration: 0.5)
@@ -688,10 +688,10 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
             timeElapsed.fadeOut(duration: 0.5)
             timeElapsed.text = "00:00:00"
             distanceDriven.text = "00.00 Km"
-            timeElapsed.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+            timeElapsed.textColor = UIColor.systemPurple //init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
             
             distanceDriven.fadeOut(duration: 0.5)
-            distanceDriven.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+            distanceDriven.textColor = UIColor.systemPurple //init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
             
             wayBackButtonView.topNotchViewfadeOut(duration: 1.0)
             wayBackButton.fadeOut(duration: 1.0)
@@ -824,11 +824,11 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
                 
                 timeElapsed.fadeOut(duration: 0.5)
                 timeElapsed.text = "00:00:00"
-                distanceDriven.text = "00.00 Km"
-                timeElapsed.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+                distanceDriven.text = "0.0 Km"
+                timeElapsed.textColor = UIColor.systemPurple //init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
                 
                 distanceDriven.fadeOut(duration: 0.5)
-                distanceDriven.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+                distanceDriven.textColor = UIColor.systemPurple //init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
                 
                 wayBackButtonView.topNotchViewfadeOut(duration: 1.0)
                 wayBackButton.fadeOut(duration: 1.0)
