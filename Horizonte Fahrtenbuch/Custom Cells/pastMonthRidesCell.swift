@@ -5,7 +5,7 @@
 //  Created by Stephan König on 20.05.23.
 //
 
-import Foundation
+
 import UIKit
 
 class pastMonthRidesCell: UITableViewCell {

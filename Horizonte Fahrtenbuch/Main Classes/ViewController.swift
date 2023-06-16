@@ -8,8 +8,6 @@
 import UIKit
 import MapKit
 import CoreLocation
-import HealthKit
-import CoreData
 import ActivityKit
 import SwiftUI
 
