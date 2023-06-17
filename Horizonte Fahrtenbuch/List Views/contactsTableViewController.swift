@@ -183,7 +183,7 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
                     }
                     detailVC.latitude = location.latitude
                     detailVC.longitude = location.longitude
-                    detailVC.clientName = name // set the name of the client in the detailVC
+                    detailVC.clientName = name
                     
                     // Find the index of the selected client and display their address in the console
                     if let index = objects.index(matching: NSPredicate(format: "uniqueKey = %@", selectedClient.uniqueKey)) {

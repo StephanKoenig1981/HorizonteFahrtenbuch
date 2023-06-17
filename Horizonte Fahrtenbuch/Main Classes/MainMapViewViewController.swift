@@ -146,7 +146,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
                 settingsButton.tintColor = UIColor.systemPurple //init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
         
                 personalDetailView.layer.cornerRadius = 25
-        personalDetailButton.tintColor = UIColor.systemPurple //init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+                personalDetailButton.tintColor = UIColor.systemPurple //init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
         
                 segmentedControlView.clipsToBounds = true
                 segmentedControlView.layer.cornerRadius = 15
