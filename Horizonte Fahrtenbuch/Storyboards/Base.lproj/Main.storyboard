@@ -1312,7 +1312,7 @@
                                                 <rect key="frame" x="2" y="8" width="47" height="34"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" image="gear.circle.fill" catalog="system"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="gear" catalog="system"/>
                                                 <connections>
                                                     <action selector="addContactButtonPressed:" destination="K7b-6J-Pvw" eventType="touchUpInside" id="hs7-qX-Vzl"/>
                                                     <action selector="addressBookButtonPressed:" destination="K7b-6J-Pvw" eventType="touchUpInside" id="cz3-iI-Qnm"/>
@@ -2532,7 +2532,7 @@
         <image name="backgroundImageCard" width="2000" height="1335"/>
         <image name="blurred-abstract-background" width="8200" height="5474"/>
         <image name="clipboard.fill" catalog="system" width="103" height="128"/>
-        <image name="gear.circle.fill" catalog="system" width="128" height="123"/>
+        <image name="gear" catalog="system" width="128" height="122"/>
         <image name="house.and.flag.circle.fill" catalog="system" width="128" height="123"/>
         <image name="location.circle.fill" catalog="system" width="128" height="123"/>
         <image name="map.fill" catalog="system" width="128" height="110"/>
