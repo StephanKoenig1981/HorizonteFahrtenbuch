@@ -35,7 +35,6 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
         // MARK: Customizing UI
         
         pastMonthsSummaryTableView.backgroundColor = UIColor.clear
-        pastMonthsSummaryTableView.rowHeight = 80
         upperCellBackgroundView.layer.cornerRadius = 20
         
         // MARK: Setting placeholder text for the tableView beeing empty
@@ -296,7 +295,7 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
          }*/
          
          emailText += "<br><br>"
-         emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V2.2.0 generiert. - © 2023 Stephan König"
+         emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V2.2.1 generiert. - © 2023 Stephan König"
          
          if MFMailComposeViewController.canSendMail() {
              let mailComposer = MFMailComposeViewController()
@@ -355,9 +354,19 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
         } else {
             placeholderLabel.isHidden = false
         }
+        
+        // Add spacing between cells
+        let spacing: CGFloat = 10
+        cell.contentView.frame = cell.contentView.frame.inset(by: UIEdgeInsets(top: spacing, left: 0, bottom: spacing, right: 0))
 
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // Add spacing between cells
+        let spacing: CGFloat = 10
+        cell.contentView.frame = cell.contentView.frame.inset(by: UIEdgeInsets(top: spacing, left: 0, bottom: spacing, right: 0))
     }
     
     // MARK: TableViewFunction to delete rows.
