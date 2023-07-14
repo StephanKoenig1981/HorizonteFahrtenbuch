@@ -46,10 +46,10 @@
 		08DBAB3729EDE50D0044981E /* FahrtenbuchExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 08DBAB2229EDE50C0044981E /* FahrtenbuchExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		08DCB78829FD3D5700446CD0 /* clientsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DCB78729FD3D5700446CD0 /* clientsTableViewCell.swift */; };
 		08F11B842A255D1B00B0C815 /* FahrtenbuchLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DBAB2B29EDE50C0044981E /* FahrtenbuchLiveActivity.swift */; };
-		2338BE3C5845AEC0B6ADC69C /* Pods_Horizonte_Fahrtenbuch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C848FDC0FF68E4B765A69CD /* Pods_Horizonte_Fahrtenbuch.framework */; };
-		6745699629127D3452F8BBA2 /* Pods_Horizonte_Fahrtenbuch_Horizonte_FahrtenbuchUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D75C47BDE498FF5CCFEEE4F /* Pods_Horizonte_Fahrtenbuch_Horizonte_FahrtenbuchUITests.framework */; };
-		6FAFB14A5E98646569268EEE /* Pods_FahrtenbuchExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82B3E5437E2A2B0817D5DD6 /* Pods_FahrtenbuchExtension.framework */; };
-		DD99F4773FFE7F74C77F69CF /* Pods_Horizonte_FahrtenbuchTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 192D3F445C65027F67F0CC9F /* Pods_Horizonte_FahrtenbuchTests.framework */; };
+		39FE49AFB05DC394984DF88F /* Pods_Horizonte_Fahrtenbuch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19A59152F6FF0DB2A3B5CB6B /* Pods_Horizonte_Fahrtenbuch.framework */; };
+		823BCBF351A732F9B63F4AE1 /* Pods_Horizonte_Fahrtenbuch_Horizonte_FahrtenbuchUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F222EC3163BC3D8DABA56A3C /* Pods_Horizonte_Fahrtenbuch_Horizonte_FahrtenbuchUITests.framework */; };
+		BA11C1ACBC68496F6D26646E /* Pods_Horizonte_FahrtenbuchTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B91F29D187B31EB294133853 /* Pods_Horizonte_FahrtenbuchTests.framework */; };
+		BDEA1257F24F5F2289E1A417 /* Pods_FahrtenbuchExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FB05C10C2EE8BFB030617BA /* Pods_FahrtenbuchExtension.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +91,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		047729AC6C4C543DD86E5C4E /* Pods-Horizonte Fahrtenbuch-Horizonte FahrtenbuchUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Horizonte Fahrtenbuch-Horizonte FahrtenbuchUITests.release.xcconfig"; path = "Target Support Files/Pods-Horizonte Fahrtenbuch-Horizonte FahrtenbuchUITests/Pods-Horizonte Fahrtenbuch-Horizonte FahrtenbuchUITests.release.xcconfig"; sourceTree = "<group>"; };
 		080841F829C8FBF10030BB7E /* Horizonte Fahrtenbuch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Horizonte Fahrtenbuch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		080841FB29C8FBF10030BB7E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		080841FD29C8FBF10030BB7E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -139,18 +140,17 @@
 		08DBAB3029EDE50D0044981E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		08DBAB3229EDE50D0044981E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08DCB78729FD3D5700446CD0 /* clientsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = clientsTableViewCell.swift; sourceTree = "<group>"; };
-		18667A0C9B1A3716D26B3CCF /* Pods-Horizonte FahrtenbuchTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Horizonte FahrtenbuchTests.debug.xcconfig"; path = "Target Support Files/Pods-Horizonte FahrtenbuchTests/Pods-Horizonte FahrtenbuchTests.debug.xcconfig"; sourceTree = "<group>"; };
-		192D3F445C65027F67F0CC9F /* Pods_Horizonte_FahrtenbuchTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Horizonte_FahrtenbuchTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1C20B81E7B517BFA2C81687E /* Pods-FahrtenbuchExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FahrtenbuchExtension.debug.xcconfig"; path = "Target Support Files/Pods-FahrtenbuchExtension/Pods-FahrtenbuchExtension.debug.xcconfig"; sourceTree = "<group>"; };
-		1C848FDC0FF68E4B765A69CD /* Pods_Horizonte_Fahrtenbuch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Horizonte_Fahrtenbuch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		65086183292423F166479513 /* Pods-FahrtenbuchExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FahrtenbuchExtension.release.xcconfig"; path = "Target Support Files/Pods-FahrtenbuchExtension/Pods-FahrtenbuchExtension.release.xcconfig"; sourceTree = "<group>"; };
-		68446DA76CDBD4A079B77486 /* Pods-Horizonte Fahrtenbuch-Horizonte FahrtenbuchUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Horizonte Fahrtenbuch-Horizonte FahrtenbuchUITests.release.xcconfig"; path = "Target Support Files/Pods-Horizonte Fahrtenbuch-Horizonte FahrtenbuchUITests/Pods-Horizonte Fahrtenbuch-Horizonte FahrtenbuchUITests.release.xcconfig"; sourceTree = "<group>"; };
-		69D39B89574879FB7725596F /* Pods-Horizonte Fahrtenbuch-Horizonte FahrtenbuchUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Horizonte Fahrtenbuch-Horizonte FahrtenbuchUITests.debug.xcconfig"; path = "Target Support Files/Pods-Horizonte Fahrtenbuch-Horizonte FahrtenbuchUITests/Pods-Horizonte Fahrtenbuch-Horizonte FahrtenbuchUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		7F4D82DB129606CB79F7C786 /* Pods-Horizonte Fahrtenbuch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Horizonte Fahrtenbuch.release.xcconfig"; path = "Target Support Files/Pods-Horizonte Fahrtenbuch/Pods-Horizonte Fahrtenbuch.release.xcconfig"; sourceTree = "<group>"; };
-		9D75C47BDE498FF5CCFEEE4F /* Pods_Horizonte_Fahrtenbuch_Horizonte_FahrtenbuchUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Horizonte_Fahrtenbuch_Horizonte_FahrtenbuchUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D14DF6FDC51E8B7C487ED0FF /* Pods-Horizonte FahrtenbuchTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Horizonte FahrtenbuchTests.release.xcconfig"; path = "Target Support Files/Pods-Horizonte FahrtenbuchTests/Pods-Horizonte FahrtenbuchTests.release.xcconfig"; sourceTree = "<group>"; };
-		D82B3E5437E2A2B0817D5DD6 /* Pods_FahrtenbuchExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FahrtenbuchExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EE22EA04E609E851B6082403 /* Pods-Horizonte Fahrtenbuch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Horizonte Fahrtenbuch.debug.xcconfig"; path = "Target Support Files/Pods-Horizonte Fahrtenbuch/Pods-Horizonte Fahrtenbuch.debug.xcconfig"; sourceTree = "<group>"; };
+		19A59152F6FF0DB2A3B5CB6B /* Pods_Horizonte_Fahrtenbuch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Horizonte_Fahrtenbuch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3FB05C10C2EE8BFB030617BA /* Pods_FahrtenbuchExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FahrtenbuchExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D365A7335DE68D2C28D4B29 /* Pods-Horizonte Fahrtenbuch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Horizonte Fahrtenbuch.debug.xcconfig"; path = "Target Support Files/Pods-Horizonte Fahrtenbuch/Pods-Horizonte Fahrtenbuch.debug.xcconfig"; sourceTree = "<group>"; };
+		7D16754433FDB4B29B00A13D /* Pods-Horizonte Fahrtenbuch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Horizonte Fahrtenbuch.release.xcconfig"; path = "Target Support Files/Pods-Horizonte Fahrtenbuch/Pods-Horizonte Fahrtenbuch.release.xcconfig"; sourceTree = "<group>"; };
+		886DC7DDFB8BAB6170C797DB /* Pods-Horizonte FahrtenbuchTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Horizonte FahrtenbuchTests.release.xcconfig"; path = "Target Support Files/Pods-Horizonte FahrtenbuchTests/Pods-Horizonte FahrtenbuchTests.release.xcconfig"; sourceTree = "<group>"; };
+		A0B07CD0D413AA73C46F9019 /* Pods-Horizonte FahrtenbuchTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Horizonte FahrtenbuchTests.debug.xcconfig"; path = "Target Support Files/Pods-Horizonte FahrtenbuchTests/Pods-Horizonte FahrtenbuchTests.debug.xcconfig"; sourceTree = "<group>"; };
+		ACD0E1FEECDADAD46AF76D45 /* Pods-FahrtenbuchExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FahrtenbuchExtension.debug.xcconfig"; path = "Target Support Files/Pods-FahrtenbuchExtension/Pods-FahrtenbuchExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		B2E223EBD96E677556726833 /* Pods-FahrtenbuchExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FahrtenbuchExtension.release.xcconfig"; path = "Target Support Files/Pods-FahrtenbuchExtension/Pods-FahrtenbuchExtension.release.xcconfig"; sourceTree = "<group>"; };
+		B91F29D187B31EB294133853 /* Pods_Horizonte_FahrtenbuchTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Horizonte_FahrtenbuchTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC3CC90B337408BE92878781 /* Pods-Horizonte Fahrtenbuch-Horizonte FahrtenbuchUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Horizonte Fahrtenbuch-Horizonte FahrtenbuchUITests.debug.xcconfig"; path = "Target Support Files/Pods-Horizonte Fahrtenbuch-Horizonte FahrtenbuchUITests/Pods-Horizonte Fahrtenbuch-Horizonte FahrtenbuchUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		F222EC3163BC3D8DABA56A3C /* Pods_Horizonte_Fahrtenbuch_Horizonte_FahrtenbuchUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Horizonte_Fahrtenbuch_Horizonte_FahrtenbuchUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,7 +158,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2338BE3C5845AEC0B6ADC69C /* Pods_Horizonte_Fahrtenbuch.framework in Frameworks */,
+				39FE49AFB05DC394984DF88F /* Pods_Horizonte_Fahrtenbuch.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,7 +166,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD99F4773FFE7F74C77F69CF /* Pods_Horizonte_FahrtenbuchTests.framework in Frameworks */,
+				BA11C1ACBC68496F6D26646E /* Pods_Horizonte_FahrtenbuchTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,7 +174,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6745699629127D3452F8BBA2 /* Pods_Horizonte_Fahrtenbuch_Horizonte_FahrtenbuchUITests.framework in Frameworks */,
+				823BCBF351A732F9B63F4AE1 /* Pods_Horizonte_Fahrtenbuch_Horizonte_FahrtenbuchUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,7 +184,7 @@
 			files = (
 				08DBAB2729EDE50C0044981E /* SwiftUI.framework in Frameworks */,
 				08DBAB2529EDE50C0044981E /* WidgetKit.framework in Frameworks */,
-				6FAFB14A5E98646569268EEE /* Pods_FahrtenbuchExtension.framework in Frameworks */,
+				BDEA1257F24F5F2289E1A417 /* Pods_FahrtenbuchExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,10 +347,10 @@
 			children = (
 				08DBAB2429EDE50C0044981E /* WidgetKit.framework */,
 				08DBAB2629EDE50C0044981E /* SwiftUI.framework */,
-				D82B3E5437E2A2B0817D5DD6 /* Pods_FahrtenbuchExtension.framework */,
-				1C848FDC0FF68E4B765A69CD /* Pods_Horizonte_Fahrtenbuch.framework */,
-				9D75C47BDE498FF5CCFEEE4F /* Pods_Horizonte_Fahrtenbuch_Horizonte_FahrtenbuchUITests.framework */,
-				192D3F445C65027F67F0CC9F /* Pods_Horizonte_FahrtenbuchTests.framework */,
+				3FB05C10C2EE8BFB030617BA /* Pods_FahrtenbuchExtension.framework */,
+				19A59152F6FF0DB2A3B5CB6B /* Pods_Horizonte_Fahrtenbuch.framework */,
+				F222EC3163BC3D8DABA56A3C /* Pods_Horizonte_Fahrtenbuch_Horizonte_FahrtenbuchUITests.framework */,
+				B91F29D187B31EB294133853 /* Pods_Horizonte_FahrtenbuchTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -371,14 +371,14 @@
 		C5D31A3C70CF61523A782BC1 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				1C20B81E7B517BFA2C81687E /* Pods-FahrtenbuchExtension.debug.xcconfig */,
-				65086183292423F166479513 /* Pods-FahrtenbuchExtension.release.xcconfig */,
-				EE22EA04E609E851B6082403 /* Pods-Horizonte Fahrtenbuch.debug.xcconfig */,
-				7F4D82DB129606CB79F7C786 /* Pods-Horizonte Fahrtenbuch.release.xcconfig */,
-				69D39B89574879FB7725596F /* Pods-Horizonte Fahrtenbuch-Horizonte FahrtenbuchUITests.debug.xcconfig */,
-				68446DA76CDBD4A079B77486 /* Pods-Horizonte Fahrtenbuch-Horizonte FahrtenbuchUITests.release.xcconfig */,
-				18667A0C9B1A3716D26B3CCF /* Pods-Horizonte FahrtenbuchTests.debug.xcconfig */,
-				D14DF6FDC51E8B7C487ED0FF /* Pods-Horizonte FahrtenbuchTests.release.xcconfig */,
+				ACD0E1FEECDADAD46AF76D45 /* Pods-FahrtenbuchExtension.debug.xcconfig */,
+				B2E223EBD96E677556726833 /* Pods-FahrtenbuchExtension.release.xcconfig */,
+				5D365A7335DE68D2C28D4B29 /* Pods-Horizonte Fahrtenbuch.debug.xcconfig */,
+				7D16754433FDB4B29B00A13D /* Pods-Horizonte Fahrtenbuch.release.xcconfig */,
+				EC3CC90B337408BE92878781 /* Pods-Horizonte Fahrtenbuch-Horizonte FahrtenbuchUITests.debug.xcconfig */,
+				047729AC6C4C543DD86E5C4E /* Pods-Horizonte Fahrtenbuch-Horizonte FahrtenbuchUITests.release.xcconfig */,
+				A0B07CD0D413AA73C46F9019 /* Pods-Horizonte FahrtenbuchTests.debug.xcconfig */,
+				886DC7DDFB8BAB6170C797DB /* Pods-Horizonte FahrtenbuchTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -390,12 +390,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0808422529C8FBF20030BB7E /* Build configuration list for PBXNativeTarget "Horizonte Fahrtenbuch" */;
 			buildPhases = (
-				84BE83D077F53FDD6E3E3058 /* [CP] Check Pods Manifest.lock */,
+				741548E7CC41619424F707E8 /* [CP] Check Pods Manifest.lock */,
 				080841F429C8FBF10030BB7E /* Sources */,
 				080841F529C8FBF10030BB7E /* Frameworks */,
 				080841F629C8FBF10030BB7E /* Resources */,
 				08DBAB3829EDE50D0044981E /* Embed Foundation Extensions */,
-				4C7077F9A511C34939433B7B /* [CP] Embed Pods Frameworks */,
+				5B8758EF45722F2443458ECF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -411,7 +411,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0808422829C8FBF20030BB7E /* Build configuration list for PBXNativeTarget "Horizonte FahrtenbuchTests" */;
 			buildPhases = (
-				11AE8B7B72EF332C8AEB8BA5 /* [CP] Check Pods Manifest.lock */,
+				9E88B21C642686A5D7B81420 /* [CP] Check Pods Manifest.lock */,
 				0808420D29C8FBF20030BB7E /* Sources */,
 				0808420E29C8FBF20030BB7E /* Frameworks */,
 				0808420F29C8FBF20030BB7E /* Resources */,
@@ -430,11 +430,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0808422B29C8FBF20030BB7E /* Build configuration list for PBXNativeTarget "Horizonte FahrtenbuchUITests" */;
 			buildPhases = (
-				8B58EBE124670C657CE90DFF /* [CP] Check Pods Manifest.lock */,
+				9A61771C1ADA47405C6E8ACF /* [CP] Check Pods Manifest.lock */,
 				0808421729C8FBF20030BB7E /* Sources */,
 				0808421829C8FBF20030BB7E /* Frameworks */,
 				0808421929C8FBF20030BB7E /* Resources */,
-				EEA6DEE76B39776FDFAADBFC /* [CP] Embed Pods Frameworks */,
+				5493DF51E2D710BB45CFA222 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -450,7 +450,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 08DBAB3B29EDE50D0044981E /* Build configuration list for PBXNativeTarget "FahrtenbuchExtension" */;
 			buildPhases = (
-				062B395E107ECD0470EB9BB9 /* [CP] Check Pods Manifest.lock */,
+				EA2468C6F6DBF5B4D037578C /* [CP] Check Pods Manifest.lock */,
 				08DBAB1E29EDE50C0044981E /* Sources */,
 				08DBAB1F29EDE50C0044981E /* Frameworks */,
 				08DBAB2029EDE50C0044981E /* Resources */,
@@ -548,51 +548,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		062B395E107ECD0470EB9BB9 /* [CP] Check Pods Manifest.lock */ = {
+		5493DF51E2D710BB45CFA222 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Horizonte Fahrtenbuch-Horizonte FahrtenbuchUITests/Pods-Horizonte Fahrtenbuch-Horizonte FahrtenbuchUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-FahrtenbuchExtension-checkManifestLockResult.txt",
+				"${PODS_ROOT}/Target Support Files/Pods-Horizonte Fahrtenbuch-Horizonte FahrtenbuchUITests/Pods-Horizonte Fahrtenbuch-Horizonte FahrtenbuchUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Horizonte Fahrtenbuch-Horizonte FahrtenbuchUITests/Pods-Horizonte Fahrtenbuch-Horizonte FahrtenbuchUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		11AE8B7B72EF332C8AEB8BA5 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Horizonte FahrtenbuchTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		4C7077F9A511C34939433B7B /* [CP] Embed Pods Frameworks */ = {
+		5B8758EF45722F2443458ECF /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -609,7 +582,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Horizonte Fahrtenbuch/Pods-Horizonte Fahrtenbuch-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		84BE83D077F53FDD6E3E3058 /* [CP] Check Pods Manifest.lock */ = {
+		741548E7CC41619424F707E8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -631,7 +604,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8B58EBE124670C657CE90DFF /* [CP] Check Pods Manifest.lock */ = {
+		9A61771C1ADA47405C6E8ACF /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -653,21 +626,48 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EEA6DEE76B39776FDFAADBFC /* [CP] Embed Pods Frameworks */ = {
+		9E88B21C642686A5D7B81420 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Horizonte Fahrtenbuch-Horizonte FahrtenbuchUITests/Pods-Horizonte Fahrtenbuch-Horizonte FahrtenbuchUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Horizonte Fahrtenbuch-Horizonte FahrtenbuchUITests/Pods-Horizonte Fahrtenbuch-Horizonte FahrtenbuchUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Horizonte FahrtenbuchTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Horizonte Fahrtenbuch-Horizonte FahrtenbuchUITests/Pods-Horizonte Fahrtenbuch-Horizonte FahrtenbuchUITests-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EA2468C6F6DBF5B4D037578C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FahrtenbuchExtension-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -895,7 +895,7 @@
 		};
 		0808422629C8FBF20030BB7E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EE22EA04E609E851B6082403 /* Pods-Horizonte Fahrtenbuch.debug.xcconfig */;
+			baseConfigurationReference = 5D365A7335DE68D2C28D4B29 /* Pods-Horizonte Fahrtenbuch.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -941,7 +941,7 @@
 		};
 		0808422729C8FBF20030BB7E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7F4D82DB129606CB79F7C786 /* Pods-Horizonte Fahrtenbuch.release.xcconfig */;
+			baseConfigurationReference = 7D16754433FDB4B29B00A13D /* Pods-Horizonte Fahrtenbuch.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -987,7 +987,7 @@
 		};
 		0808422929C8FBF20030BB7E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 18667A0C9B1A3716D26B3CCF /* Pods-Horizonte FahrtenbuchTests.debug.xcconfig */;
+			baseConfigurationReference = A0B07CD0D413AA73C46F9019 /* Pods-Horizonte FahrtenbuchTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1008,7 +1008,7 @@
 		};
 		0808422A29C8FBF20030BB7E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D14DF6FDC51E8B7C487ED0FF /* Pods-Horizonte FahrtenbuchTests.release.xcconfig */;
+			baseConfigurationReference = 886DC7DDFB8BAB6170C797DB /* Pods-Horizonte FahrtenbuchTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1029,7 +1029,7 @@
 		};
 		0808422C29C8FBF20030BB7E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 69D39B89574879FB7725596F /* Pods-Horizonte Fahrtenbuch-Horizonte FahrtenbuchUITests.debug.xcconfig */;
+			baseConfigurationReference = EC3CC90B337408BE92878781 /* Pods-Horizonte Fahrtenbuch-Horizonte FahrtenbuchUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -1050,7 +1050,7 @@
 		};
 		0808422D29C8FBF20030BB7E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 68446DA76CDBD4A079B77486 /* Pods-Horizonte Fahrtenbuch-Horizonte FahrtenbuchUITests.release.xcconfig */;
+			baseConfigurationReference = 047729AC6C4C543DD86E5C4E /* Pods-Horizonte Fahrtenbuch-Horizonte FahrtenbuchUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -1071,7 +1071,7 @@
 		};
 		08DBAB3929EDE50D0044981E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1C20B81E7B517BFA2C81687E /* Pods-FahrtenbuchExtension.debug.xcconfig */;
+			baseConfigurationReference = ACD0E1FEECDADAD46AF76D45 /* Pods-FahrtenbuchExtension.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
@@ -1107,7 +1107,7 @@
 		};
 		08DBAB3A29EDE50D0044981E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 65086183292423F166479513 /* Pods-FahrtenbuchExtension.release.xcconfig */;
+			baseConfigurationReference = B2E223EBD96E677556726833 /* Pods-FahrtenbuchExtension.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
