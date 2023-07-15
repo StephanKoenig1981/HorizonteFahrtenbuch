@@ -966,6 +966,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
             }
         }
     }
+    
     @IBAction func currentRidesButtonPressed(_ sender: Any) {
         // Haptic feedback
         let generator = UINotificationFeedbackGenerator()
@@ -977,11 +978,13 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         let generator = UINotificationFeedbackGenerator()
         generator.notificationOccurred(.success)
     }
+    
     @IBAction func statsButtonPressed(_ sender: Any) {
         // Haptic feedback
         let generator = UINotificationFeedbackGenerator()
         generator.notificationOccurred(.success)
     }
+    
     @IBAction func personalDetailsButtonPressed(_ sender: Any) {
         // Haptic feedback
         let generator = UINotificationFeedbackGenerator()
