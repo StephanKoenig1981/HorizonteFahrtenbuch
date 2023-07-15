@@ -910,6 +910,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
                 
                 mapView.setUserTrackingMode(.followWithHeading, animated:true)
            }
+    
     @IBAction func wayBackButtonPressed(_ sender: Any) {
   
         if isWayBack == false {
