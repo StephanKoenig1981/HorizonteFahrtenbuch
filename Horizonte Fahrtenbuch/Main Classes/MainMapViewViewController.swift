@@ -209,7 +209,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         TopNotchView.layer.cornerRadius = 10
         wayBackButtonView.layer.cornerRadius = 10
         
-        wayBackButton.isUserInteractionEnabled = true
+        wayBackButton.isUserInteractionEnabled = false
         
         mapView.delegate = self
         mapView.clipsToBounds = true
@@ -910,6 +910,8 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
                 
                 mapView.setUserTrackingMode(.followWithHeading, animated:true)
            }
+    
+    // MARK: Action for the wayback Button
     
     @IBAction func wayBackButtonPressed(_ sender: Any) {
   
