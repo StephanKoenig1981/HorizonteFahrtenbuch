@@ -1,0 +1,5 @@
+#import <Foundation/Foundation.h>
+@interface PodsDummy_Pods_Horizonte_Fahrtenbuch_Horizonte_FahrtenbuchUITests : NSObject
+@end
+@implementation PodsDummy_Pods_Horizonte_Fahrtenbuch_Horizonte_FahrtenbuchUITests
+@end

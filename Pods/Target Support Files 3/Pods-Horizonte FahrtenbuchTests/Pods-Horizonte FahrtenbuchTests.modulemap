@@ -1,0 +1,6 @@
+framework module Pods_Horizonte_FahrtenbuchTests {
+  umbrella header "Pods-Horizonte FahrtenbuchTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
