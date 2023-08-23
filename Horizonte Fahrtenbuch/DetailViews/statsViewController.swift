@@ -295,7 +295,7 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
          }*/
          
          emailText += "<br><br>"
-         emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V2.2.4 generiert. - © 2023 Stephan König"
+         emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V2.2.5 generiert. - © 2023 Stephan König"
          
          if MFMailComposeViewController.canSendMail() {
              let mailComposer = MFMailComposeViewController()
@@ -336,7 +336,7 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
         let cell = pastMonthsSummaryTableView.dequeueReusableCell(withIdentifier: "pastMonthRidesCell", for: indexPath) as! pastMonthRidesCell
         
         let realm = try! Realm()
-        let objects = realm.objects(pastMonthRides.self).sorted(byKeyPath: "date", ascending: true)
+        let objects = realm.objects(pastMonthRides.self).sorted(byKeyPath: "date", ascending: false)
         
         let object = objects[indexPath.row] // Get the correct object for this row
         
@@ -374,7 +374,7 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let realm = try! Realm()
-            let objects = realm.objects(pastMonthRides.self).sorted(byKeyPath: "date", ascending: true)
+            let objects = realm.objects(pastMonthRides.self).sorted(byKeyPath: "date", ascending: false)
             let object = objects[indexPath.row]
             
             let alert = UIAlertController(title: "Monatseintrag löschen", message: "Möchtest du diesen Eintrag wirklich löschen?", preferredStyle: .actionSheet)
