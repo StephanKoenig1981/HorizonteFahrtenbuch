@@ -555,7 +555,7 @@
                                     <constraint firstAttribute="height" constant="208" id="bCu-0v-eJx"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V2.2.7- © 2023 Stephan König" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="loR-iG-pV8">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V2.2.8- © 2023 Stephan König" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="loR-iG-pV8">
                                 <rect key="frame" x="76" y="818" width="239" height="11"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
@@ -1657,8 +1657,8 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </navigationBarAppearance>
                             </navigationBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V2.2.7 - © 2023 Stephan König" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfl-98-Qbj">
-                                <rect key="frame" x="76" y="811" width="241" height="11"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V2.2.8 - © 2023 Stephan König" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfl-98-Qbj">
+                                <rect key="frame" x="75.666666666666686" y="811" width="242" height="11"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -1805,8 +1805,8 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Erfassung" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l3E-hS-3Hv">
-                                            <rect key="frame" x="191" y="21" width="126" height="24"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <rect key="frame" x="182" y="21" width="135" height="24"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" systemColor="systemCyanColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -1898,7 +1898,7 @@
                                         <constraint firstItem="FOT-Xm-XK4" firstAttribute="centerX" secondItem="jeE-uC-rpT" secondAttribute="centerX" id="VVo-sc-p33"/>
                                         <constraint firstItem="zEf-Az-Sqk" firstAttribute="baseline" secondItem="xtI-AH-h4W" secondAttribute="baseline" constant="-1" id="XJX-x4-wmH"/>
                                         <constraint firstItem="jeE-uC-rpT" firstAttribute="leading" secondItem="iuU-F6-C3L" secondAttribute="leadingMargin" id="Ytx-w7-bFK"/>
-                                        <constraint firstItem="l3E-hS-3Hv" firstAttribute="leading" secondItem="xtI-AH-h4W" secondAttribute="trailing" constant="14" id="Zce-Le-n7V"/>
+                                        <constraint firstItem="l3E-hS-3Hv" firstAttribute="leading" secondItem="xtI-AH-h4W" secondAttribute="trailing" constant="5" id="Zce-Le-n7V"/>
                                         <constraint firstItem="vaU-qV-54t" firstAttribute="leading" secondItem="l3E-hS-3Hv" secondAttribute="trailing" constant="8" id="Zxk-MO-YYU"/>
                                         <constraint firstItem="Yx2-mt-Tap" firstAttribute="centerX" secondItem="vaU-qV-54t" secondAttribute="centerX" id="b93-Ra-5x6"/>
                                         <constraint firstItem="FOT-Xm-XK4" firstAttribute="top" secondItem="xtI-AH-h4W" secondAttribute="bottom" constant="17" id="beH-L6-1aW"/>
@@ -2356,8 +2356,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V2.2.7 - © 2023 Stephan König" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4p6-Nh-qrN">
-                                <rect key="frame" x="76" y="811" width="241" height="11"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V2.2.8 - © 2023 Stephan König" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4p6-Nh-qrN">
+                                <rect key="frame" x="75.666666666666686" y="811" width="242" height="11"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
