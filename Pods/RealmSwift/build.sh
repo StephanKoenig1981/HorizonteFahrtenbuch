@@ -1130,6 +1130,14 @@ case "$COMMAND" in
 
         s3cmd put --recursive --acl-public --access_key=${AWS_ACCESS_KEY_ID} --secret_key=${AWS_SECRET_ACCESS_KEY} objc_output/ s3://realm-sdks/docs/realm-sdks/objc/${VERSION}/
         s3cmd put --recursive --acl-public --access_key=${AWS_ACCESS_KEY_ID} --secret_key=${AWS_SECRET_ACCESS_KEY} objc_output/ s3://realm-sdks/docs/realm-sdks/objc/latest/
+        ;;
+
+    "publish-update-checker")
+        VERSION="$(sed -n 's/^VERSION=\(.*\)$/\1/p' "${source_root}/dependencies.list")"
+        PRERELEASE_REGEX='alpha|beta|rc|preview'
+        if [[ $VERSION =~ $PRERELEASE_REGEX ]]; then
+          exit 0
+        fi
 
         # update static.realm.io/update/cocoa
         printf "%s" "${VERSION}" > cocoa
@@ -1173,7 +1181,7 @@ x.y.z Release notes (yyyy-MM-dd)
 * APIs are backwards compatible with all previous releases in the 10.x.y series.
 * Carthage release for Swift is built with Xcode 14.3.1.
 * CocoaPods: 1.10 or later.
-* Xcode: 14.1-15 beta 4.
+* Xcode: 14.1-15 beta 7.
 
 ### Internal
 * Upgraded realm-core from ? to ?
