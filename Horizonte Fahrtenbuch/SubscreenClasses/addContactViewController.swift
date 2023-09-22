@@ -187,6 +187,10 @@ class addContactViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func cancelButtonPressed(_ sender: Any) {
         
+        // Haptic feedback
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.error)
+        
         let alert = UIAlertController(title: "Bist du sicher?", message: "Bist du sicher, dass du abbrechen möchtest ohne den Kontakt zu speichern?", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Fortfahren", style: .cancel))
         alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { action in

@@ -295,7 +295,7 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
          }*/
          
          emailText += "<br><br>"
-         emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V2.2.8 generiert. - © 2023 Stephan König"
+         emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V2.2.9 generiert. - © 2023 Stephan König"
          
          if MFMailComposeViewController.canSendMail() {
              let mailComposer = MFMailComposeViewController()
