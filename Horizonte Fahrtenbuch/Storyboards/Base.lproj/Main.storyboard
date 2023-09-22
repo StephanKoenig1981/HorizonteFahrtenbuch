@@ -537,15 +537,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="purpleGradient" translatesAutoresizingMaskIntoConstraints="NO" id="Vj9-8C-EVD">
-                                <rect key="frame" x="-21" y="0.0" width="13334" height="932"/>
+                                <rect key="frame" x="-21" y="0.0" width="10000" height="932"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Lock" translatesAutoresizingMaskIntoConstraints="NO" id="Wj4-RX-a5m">
-                                <rect key="frame" x="1" y="101" width="13333" height="208"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="208" id="bCu-0v-eJx"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V2.2.9- © 2023 Stephan König" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="loR-iG-pV8">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V2.3.0- © 2023 Stephan König" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="loR-iG-pV8">
                                 <rect key="frame" x="96" y="821" width="239" height="11"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
@@ -553,13 +547,19 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Anmeldung fehlgeschlagen" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hNt-6e-anz">
-                                <rect key="frame" x="16" y="390" width="13303" height="30"/>
+                                <rect key="frame" x="2" y="391" width="428" height="30"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <color key="textColor" systemColor="systemOrangeColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Lock" translatesAutoresizingMaskIntoConstraints="NO" id="Wj4-RX-a5m">
+                                <rect key="frame" x="20" y="95" width="392" height="208"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="208" id="YRT-Xd-a1s"/>
+                                </constraints>
+                            </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Die App wurde zur Sicherheit gesperrt und muss neu gestartet werden, um eine erneute Authentifizierung durchzuführen." textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yQc-PM-sOS">
-                                <rect key="frame" x="96" y="479" width="239" height="128"/>
+                                <rect key="frame" x="97" y="485" width="239" height="128"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="K5p-88-2OD"/>
@@ -572,28 +572,26 @@
                         <viewLayoutGuide key="safeArea" id="X0F-HM-A5x"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="yQc-PM-sOS" firstAttribute="top" secondItem="hNt-6e-anz" secondAttribute="bottom" constant="59" id="5rX-6n-Dbs"/>
-                            <constraint firstItem="Wj4-RX-a5m" firstAttribute="centerX" secondItem="hNt-6e-anz" secondAttribute="centerX" id="6Dx-z5-BQ9"/>
+                            <constraint firstItem="Wj4-RX-a5m" firstAttribute="centerX" secondItem="Ifu-eu-22O" secondAttribute="centerX" constant="1" id="9kr-TW-LgZ"/>
                             <constraint firstAttribute="trailing" secondItem="Vj9-8C-EVD" secondAttribute="trailing" id="Bsu-IJ-iqG"/>
-                            <constraint firstItem="Wj4-RX-a5m" firstAttribute="top" secondItem="X0F-HM-A5x" secondAttribute="top" constant="101" id="H8d-E5-b9n"/>
-                            <constraint firstItem="hNt-6e-anz" firstAttribute="centerX" secondItem="yQc-PM-sOS" secondAttribute="centerX" constant="6452" id="K8e-2k-Scm"/>
-                            <constraint firstItem="hNt-6e-anz" firstAttribute="top" secondItem="Wj4-RX-a5m" secondAttribute="bottom" constant="81" id="KQX-mX-XPu"/>
-                            <constraint firstItem="hNt-6e-anz" firstAttribute="leading" secondItem="Ifu-eu-22O" secondAttribute="leadingMargin" id="KQf-Bf-4Op"/>
-                            <constraint firstItem="yQc-PM-sOS" firstAttribute="trailing" secondItem="loR-iG-pV8" secondAttribute="trailing" id="Lc3-Xj-r4u"/>
-                            <constraint firstItem="X0F-HM-A5x" firstAttribute="trailing" secondItem="hNt-6e-anz" secondAttribute="trailing" constant="15" id="VtQ-0H-HW1"/>
+                            <constraint firstItem="yQc-PM-sOS" firstAttribute="top" secondItem="hNt-6e-anz" secondAttribute="bottom" constant="64" id="D7z-ju-N0s"/>
+                            <constraint firstItem="hNt-6e-anz" firstAttribute="trailing" secondItem="X0F-HM-A5x" secondAttribute="trailing" id="DK2-Ra-xDt"/>
+                            <constraint firstItem="hNt-6e-anz" firstAttribute="leading" secondItem="X0F-HM-A5x" secondAttribute="leading" constant="2" id="EiS-i9-GuP"/>
+                            <constraint firstItem="Wj4-RX-a5m" firstAttribute="leading" secondItem="X0F-HM-A5x" secondAttribute="leading" constant="20" id="JdM-aq-T8u"/>
+                            <constraint firstItem="yQc-PM-sOS" firstAttribute="trailing" secondItem="loR-iG-pV8" secondAttribute="trailing" constant="1" id="Lc3-Xj-r4u"/>
                             <constraint firstAttribute="bottom" secondItem="Vj9-8C-EVD" secondAttribute="bottom" id="Yh8-yj-x9k"/>
-                            <constraint firstItem="hNt-6e-anz" firstAttribute="leading" secondItem="X0F-HM-A5x" secondAttribute="leading" constant="16" id="cxq-Pc-RkA"/>
-                            <constraint firstItem="Wj4-RX-a5m" firstAttribute="leading" secondItem="X0F-HM-A5x" secondAttribute="leading" constant="1" id="f9U-bN-m7R"/>
+                            <constraint firstItem="Wj4-RX-a5m" firstAttribute="top" secondItem="X0F-HM-A5x" secondAttribute="top" constant="95" id="ZdX-O8-vk1"/>
+                            <constraint firstItem="hNt-6e-anz" firstAttribute="top" secondItem="Wj4-RX-a5m" secondAttribute="bottom" constant="88" id="jR6-Uo-dhx"/>
                             <constraint firstItem="Vj9-8C-EVD" firstAttribute="leading" secondItem="Ifu-eu-22O" secondAttribute="leading" id="mGn-cn-mvm"/>
                             <constraint firstItem="Vj9-8C-EVD" firstAttribute="top" secondItem="Ifu-eu-22O" secondAttribute="top" id="ptu-V1-cWw"/>
-                            <constraint firstItem="yQc-PM-sOS" firstAttribute="leading" secondItem="loR-iG-pV8" secondAttribute="leading" id="uTN-qk-gFz"/>
+                            <constraint firstItem="yQc-PM-sOS" firstAttribute="leading" secondItem="loR-iG-pV8" secondAttribute="leading" constant="1" id="uTN-qk-gFz"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Afy-16-yrv"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AEq-bY-13t" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2732.06106870229" y="-1338.0281690140846"/>
+            <point key="canvasLocation" x="2729.0076335877861" y="-1339.4366197183099"/>
         </scene>
         <!--Past Rides Table View Controller-->
         <scene sceneID="9n4-DJ-tjq">
@@ -1657,7 +1655,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </navigationBarAppearance>
                             </navigationBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V2.2.9 - © 2023 Stephan König" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfl-98-Qbj">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V2.3.0 - © 2023 Stephan König" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfl-98-Qbj">
                                 <rect key="frame" x="94" y="891" width="242" height="11"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2350,7 +2348,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V2.2.9 - © 2023 Stephan König" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4p6-Nh-qrN">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V2.3.0 - © 2023 Stephan König" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4p6-Nh-qrN">
                                 <rect key="frame" x="94" y="891" width="242" height="11"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
