@@ -1236,7 +1236,7 @@
                                         <rect key="frame" x="0.0" y="841.33333333333337" width="430" height="90.666666666666629"/>
                                         <subviews>
                                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gk4-wB-OuN">
-                                                <rect key="frame" x="288.66666666666669" y="6" width="67" height="50"/>
+                                                <rect key="frame" x="288.66666666666674" y="6" width="67" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="67" id="TMi-vB-tN3"/>
                                                     <constraint firstAttribute="height" constant="50" id="gvl-z8-d5x"/>
@@ -1279,7 +1279,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pausiert" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ru7-Qt-lnv">
-                                                <rect key="frame" x="8" y="18" width="142" height="26"/>
+                                                <rect key="frame" x="8" y="17" width="142" height="26"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="26" id="enS-8O-Is7"/>
                                                     <constraint firstAttribute="width" constant="142" id="py6-0c-vwG"/>
@@ -1295,10 +1295,10 @@
                                             <constraint firstAttribute="width" secondItem="TGn-q2-5b7" secondAttribute="height" multiplier="393:83" id="1XL-Tr-nal"/>
                                             <constraint firstItem="UWe-WQ-5qq" firstAttribute="leading" secondItem="azT-he-wRo" secondAttribute="trailing" constant="66" id="3Ar-d1-eY7"/>
                                             <constraint firstAttribute="bottom" secondItem="UWe-WQ-5qq" secondAttribute="bottom" constant="34.666666666666629" id="7E0-DN-zu8"/>
-                                            <constraint firstAttribute="bottom" secondItem="Gk4-wB-OuN" secondAttribute="bottom" constant="27" id="9d5-OG-pXb"/>
+                                            <constraint firstAttribute="bottom" secondItem="Gk4-wB-OuN" secondAttribute="bottom" constant="34.666666666666629" id="9d5-OG-pXb"/>
                                             <constraint firstItem="azT-he-wRo" firstAttribute="centerX" secondItem="TGn-q2-5b7" secondAttribute="centerX" id="Ch6-qN-ven"/>
                                             <constraint firstItem="UWe-WQ-5qq" firstAttribute="leading" secondItem="Gk4-wB-OuN" secondAttribute="trailing" constant="8.3300000000000001" id="Czv-NP-sz2"/>
-                                            <constraint firstItem="ru7-Qt-lnv" firstAttribute="top" secondItem="TGn-q2-5b7" secondAttribute="top" constant="18" id="H5F-Kh-TDH"/>
+                                            <constraint firstItem="ru7-Qt-lnv" firstAttribute="top" secondItem="TGn-q2-5b7" secondAttribute="top" constant="17" id="H5F-Kh-TDH"/>
                                             <constraint firstItem="ru7-Qt-lnv" firstAttribute="leading" secondItem="TGn-q2-5b7" secondAttribute="leading" constant="8" id="J4A-Y7-hGt"/>
                                             <constraint firstAttribute="bottom" secondItem="azT-he-wRo" secondAttribute="bottom" constant="18.666666666666629" id="Po1-NC-MNx"/>
                                             <constraint firstItem="azT-he-wRo" firstAttribute="top" secondItem="TGn-q2-5b7" secondAttribute="top" constant="-12" id="Ycq-Q8-QwS"/>
