@@ -39,6 +39,9 @@ class pastRidesTableViewCell: UITableViewCell {
     
     @IBOutlet weak var recordCircle: UIButton!
     
+    @IBOutlet weak var deliveryTime: UILabel!
+    @IBOutlet weak var deliveryCheckmark: UIButton!
+    
 }
 
 

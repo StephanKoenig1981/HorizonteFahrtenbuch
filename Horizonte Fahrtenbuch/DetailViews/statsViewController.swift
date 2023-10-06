@@ -203,6 +203,7 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
                         
                         archivedRide.startTime = currentRide.startTime
                         archivedRide.endTime = currentRide.endTime
+                        archivedRide.deliveryTime = currentRide.deliveryTime
                     }
                     
                     realm.add(pastMonthRide)
@@ -295,7 +296,7 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
          }*/
          
          emailText += "<br><br>"
-         emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V2.3.5 generiert. - © 2023 Stephan König"
+         emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V2.4.0 generiert. - © 2023 Stephan König"
          
          if MFMailComposeViewController.canSendMail() {
              let mailComposer = MFMailComposeViewController()

@@ -70,6 +70,12 @@ extension UIView {
             self.alpha = 0.9
         })
     }
+    
+    func fadeDelieryViewIn(duration: TimeInterval = 0.5) {
+        UIView.animate(withDuration: duration, animations: {
+            self.alpha = 0.7
+        })
+    }
 
 /**
  Fade out a view with a duration
@@ -89,6 +95,12 @@ extension UIView {
       }
     
     func ButtonViewfadeOut(duration: TimeInterval = 1.0) {
+        UIView.animate(withDuration: duration, animations: {
+            self.alpha = 0.0
+        })
+      }
+    
+    func fadeDeliveryViewOut(duration: TimeInterval = 1.0) {
         UIView.animate(withDuration: duration, animations: {
             self.alpha = 0.0
         })

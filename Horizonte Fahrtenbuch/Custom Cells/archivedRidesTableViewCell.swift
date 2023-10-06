@@ -39,4 +39,8 @@ class archivedRidesTableviewCell: UITableViewCell {
     
     @IBOutlet weak var recordCircle: UIButton!
     
+    @IBOutlet weak var deliveryTime: UILabel!
+    @IBOutlet weak var checkmark: UIButton!
+    
+    
 }

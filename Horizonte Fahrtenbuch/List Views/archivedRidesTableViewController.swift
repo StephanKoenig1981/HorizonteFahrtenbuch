@@ -158,6 +158,16 @@ class archivedRidesTableViewController: UITableViewController, UISearchBarDelega
         cell.supplementDateLabel?.text = object.supplementDate?.description
         
         dateFormatter.dateFormat = "HH:mm"
+        
+        if let deliveryTime = object.deliveryTime {
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "HH:mm"
+            
+            cell.deliveryTime?.text = dateFormatter.string(from: deliveryTime)
+        }
+        
+        dateFormatter.dateFormat = "HH:mm"
             
             if let startTime = object.startTime {
                 cell.startTime?.text = dateFormatter.string(from: startTime)
@@ -217,6 +227,16 @@ class archivedRidesTableViewController: UITableViewController, UISearchBarDelega
         cell.routeDetailButton.isEnabled = true
         cell.routeDetailButton.tintColor = .systemOrange
     }
+        
+        // Hiding the checkmark and delivery time label if no entry is in the database
+        
+        if object.deliveryTime == nil {
+            cell.deliveryTime.isHidden = true
+            cell.checkmark.isHidden = true
+        } else {
+            cell.deliveryTime.isHidden = false
+            cell.checkmark.isHidden = false
+        }
     
     cell.routeDetailButtonPressed = { [weak self] in
       guard let self = self else { return }

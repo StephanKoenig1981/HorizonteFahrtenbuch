@@ -23,6 +23,7 @@ class currentRide: Object {
     
     @objc dynamic var startTime: Date?
     @objc dynamic var endTime: Date?
+    @objc dynamic var deliveryTime: Date?
     
     @objc dynamic var encodedPolyline: Data?
     

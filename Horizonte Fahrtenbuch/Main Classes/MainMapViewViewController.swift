@@ -23,6 +23,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     var index = 0
     
     var isWayBack:Bool = false
+
     
     // MARK: Snapshot ImageView
     
@@ -32,6 +33,8 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     // MARK: Variables for the Timer
     
     var timer = Timer()
+    
+    var deliveryTime: Date?
     
     var timerCounting:Bool = false
     
@@ -91,6 +94,10 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     @IBOutlet weak var personalDetailButton: UIButton!
     @IBOutlet weak var personalDetailView: UIView!
     
+    @IBOutlet weak var settingsView: UIView!
+    @IBOutlet weak var deliveryButton: UIButton!
+    @IBOutlet weak var deliveryView: UIView!
+    
     // MARK: Outlets for the Segmented control view and segmented control
     
     @IBOutlet weak var segmentedControlView: UIView!
@@ -99,13 +106,13 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     // MARK: Outletts for Timer
     
     @IBOutlet weak var stopwatchResetButton: UIButton!
-
+    
     
     // MARK: Base functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         authenticateWithBiometrics()
         
         // Initialize Realm and print Realm Database file URL
@@ -131,74 +138,74 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         
         
         
-            // Mask Corner Radius for segmented control View
+        // Mask Corner Radius for segmented control View
         
-                menuButtonView.layer.cornerRadius = 25
-                menuButton.tintColor = UIColor.systemPurple //init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+        menuButtonView.layer.cornerRadius = 25
+        menuButton.tintColor = UIColor.systemPurple //init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
         
-                addContactButtonView.layer.cornerRadius = 25
-                addContactButton.tintColor = UIColor.systemPurple //init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+        addContactButtonView.layer.cornerRadius = 25
+        addContactButton.tintColor = UIColor.systemPurple //init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
         
-                addressBookButtonView.layer.cornerRadius = 25
-                addressBookButton.tintColor = UIColor.systemPurple //init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+        addressBookButtonView.layer.cornerRadius = 25
+        addressBookButton.tintColor = UIColor.systemPurple //init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
         
-                settingsButtonView.layer.cornerRadius = 25
-                settingsButton.tintColor = UIColor.systemPurple //init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+        settingsButtonView.layer.cornerRadius = 25
+        settingsButton.tintColor = UIColor.systemPurple //init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
         
-                personalDetailView.layer.cornerRadius = 25
-                personalDetailButton.tintColor = UIColor.systemPurple //init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+        personalDetailView.layer.cornerRadius = 25
+        personalDetailButton.tintColor = UIColor.systemPurple //init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
         
-                segmentedControlView.clipsToBounds = true
-                segmentedControlView.layer.cornerRadius = 15
-                segmentedControlView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
+        segmentedControlView.clipsToBounds = true
+        segmentedControlView.layer.cornerRadius = 15
+        segmentedControlView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
         
-            // MASK Corner Radius for Textfield View
+        // MASK Corner Radius for Textfield View
         
-                clientTextFieldView.layer.cornerRadius = 20
-                clientTextFieldView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+        clientTextFieldView.layer.cornerRadius = 20
+        clientTextFieldView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         
-            // Customizing the Maptype Selector
+        // Customizing the Maptype Selector
         
-                mapTypeSelector.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi / 2))
+        mapTypeSelector.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi / 2))
         
-                mapTypeSelector.selectedSegmentTintColor = UIColor.systemPurple //init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
-                let titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-                mapTypeSelector.setTitleTextAttributes(titleTextAttributes, for:.selected)
+        mapTypeSelector.selectedSegmentTintColor = UIColor.systemPurple //init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+        let titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        mapTypeSelector.setTitleTextAttributes(titleTextAttributes, for:.selected)
         
-                wayBackButton.sendActions(for: .touchUpInside)
+        wayBackButton.sendActions(for: .touchUpInside)
         
-            // Saving NSUserDefault Keys
+        // Saving NSUserDefault Keys
         
-                startTime = userDefaults.object(forKey: START_TIME_KEY) as? Date
-                stopTime = userDefaults.object(forKey: STOP_TIME_KEY) as? Date
-                timerCounting = userDefaults.bool(forKey: COUNTING_KEY)
-                traveledDistance = (userDefaults.double(forKey: TRAVELED_DISTANCE_KEY) as Double)
-                
-                pauseStateLabel.fadeIn(duration: 2.0)
-                pauseStateLabel.text = "Bereit"
-                pauseStateLabel.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+        startTime = userDefaults.object(forKey: START_TIME_KEY) as? Date
+        stopTime = userDefaults.object(forKey: STOP_TIME_KEY) as? Date
+        timerCounting = userDefaults.bool(forKey: COUNTING_KEY)
+        traveledDistance = (userDefaults.double(forKey: TRAVELED_DISTANCE_KEY) as Double)
         
-                if timerCounting
+        pauseStateLabel.fadeIn(duration: 2.0)
+        pauseStateLabel.text = "Bereit"
+        pauseStateLabel.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+        
+        if timerCounting
+        {
+            TopNotchView.topNotchViewfadeIn(duration: 0.5)
+            timeElapsed.fadeIn(duration: 0.5)
+            distanceDriven.fadeIn(duration: 0.5)
+            updateDistanceLabel()
+            startTimer()
+        }
+        else
+        {
+            stopTimer()
+            if let start = startTime
+            {
+                if let stop = stopTime
                 {
-                    TopNotchView.topNotchViewfadeIn(duration: 0.5)
-                    timeElapsed.fadeIn(duration: 0.5)
-                    distanceDriven.fadeIn(duration: 0.5)
-                    updateDistanceLabel()
-                    startTimer()
+                    let time = calcRestartTime(start: start, stop: stop)
+                    let diff = Date().timeIntervalSince(time)
+                    setTimeLabel(Int(diff))
                 }
-                else
-                {
-                    stopTimer()
-                    if let start = startTime
-                    {
-                        if let stop = stopTime
-                        {
-                            let time = calcRestartTime(start: start, stop: stop)
-                            let diff = Date().timeIntervalSince(time)
-                            setTimeLabel(Int(diff))
-                        }
-                    }
-                }
+            }
+        }
         
         locationManager.delegate = self
         
@@ -234,17 +241,17 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         super .viewWillDisappear(true)
         self.view.endEditing(true)
     }
-
+    
     // MARK: Functions for keyboard actions
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-            textField.resignFirstResponder()
-            return true
-        }
+        textField.resignFirstResponder()
+        return true
+    }
     
     func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-            self.view.endEditing(true)
-        }
+        self.view.endEditing(true)
+    }
     
     
     override func viewDidAppear(_ animated: Bool) {
@@ -296,52 +303,52 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-            // Allow Background Updates for proper polyline drawing when not in foreground
+        // Allow Background Updates for proper polyline drawing when not in foreground
         
-            locationManager.allowsBackgroundLocationUpdates = true
-            locationManager.pausesLocationUpdatesAutomatically = false
-            
-            // Track Distance
+        locationManager.allowsBackgroundLocationUpdates = true
+        locationManager.pausesLocationUpdatesAutomatically = false
         
-            if startDate == nil {
-                startDate = Date()
-            } else {
-                print("elapsedTime:", String(format: "%.0fs", Date().timeIntervalSince(startDate)))
-            }
-            if startLocation == nil {
-                startLocation = locations.first
-            } else if let location = locations.last {
-                traveledDistance += lastLocation.distance(from: location)
-                print("Traveled Distance:",  traveledDistance)
-                print("Straight Distance:", startLocation.distance(from: locations.last!))
-            }
-            lastLocation = locations.last
+        // Track Distance
         
-            //Track Route (Check if the current location fix is accurate enough (within 10 meters))
+        if startDate == nil {
+            startDate = Date()
+        } else {
+            print("elapsedTime:", String(format: "%.0fs", Date().timeIntervalSince(startDate)))
+        }
+        if startLocation == nil {
+            startLocation = locations.first
+        } else if let location = locations.last {
+            traveledDistance += lastLocation.distance(from: location)
+            print("Traveled Distance:",  traveledDistance)
+            print("Straight Distance:", startLocation.distance(from: locations.last!))
+        }
+        lastLocation = locations.last
+        
+        //Track Route (Check if the current location fix is accurate enough (within 10 meters))
         
         guard let currentLocation = locations.last else { return }
         
         if currentLocation.horizontalAccuracy < 10.00 {
             
             for location in locations {
-            
+                
                 coordinates.append (location.coordinate)
-            
+                
                 let numberOfLocations = coordinates.count
                 print (" :-) \(numberOfLocations)")
-            
-            if numberOfLocations > 1{
-                var pointsToConnect = [coordinates[numberOfLocations - 1], coordinates[numberOfLocations - 2]]
                 
-                let polyline = MKPolyline(coordinates: &pointsToConnect, count: pointsToConnect.count)
-                
-                mapView.addOverlay(polyline)
-                
-                // MARK: Zoom to fit Polyline into screensize. Important for MKSnapshotter
-                
-                if let first = mapView.overlays.first {
-                    let rect = mapView.overlays.reduce(first.boundingMapRect, {$0.union($1.boundingMapRect)})
-                    mapView.setVisibleMapRect(rect, edgePadding: UIEdgeInsets(top: 190.0, left: 90.0, bottom: 70.0, right: 70.0), animated: true)
+                if numberOfLocations > 1{
+                    var pointsToConnect = [coordinates[numberOfLocations - 1], coordinates[numberOfLocations - 2]]
+                    
+                    let polyline = MKPolyline(coordinates: &pointsToConnect, count: pointsToConnect.count)
+                    
+                    mapView.addOverlay(polyline)
+                    
+                    // MARK: Zoom to fit Polyline into screensize. Important for MKSnapshotter
+                    
+                    if let first = mapView.overlays.first {
+                        let rect = mapView.overlays.reduce(first.boundingMapRect, {$0.union($1.boundingMapRect)})
+                        mapView.setVisibleMapRect(rect, edgePadding: UIEdgeInsets(top: 190.0, left: 90.0, bottom: 70.0, right: 70.0), animated: true)
                     }
                 }
             }
@@ -374,17 +381,17 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     // MARK: Stopwatch Functions and Update Traveled Distance
     
     func startTimer()
-        {
-            scheduledTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(refreshValue), userInfo: nil, repeats: true)
-            setTimerCounting(true)
-            startButton.setImage(UIImage(named: "RedButtonHighRes.png"), for: .normal)
-        }
+    {
+        scheduledTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(refreshValue), userInfo: nil, repeats: true)
+        setTimerCounting(true)
+        startButton.setImage(UIImage(named: "RedButtonHighRes.png"), for: .normal)
+    }
     
     func calcRestartTime(start: Date, stop: Date) -> Date
-        {
-            let diff = start.timeIntervalSince(stop)
-            return Date().addingTimeInterval(diff)
-        }
+    {
+        let diff = start.timeIntervalSince(stop)
+        return Date().addingTimeInterval(diff)
+    }
     
     @objc func refreshValue()
     {
@@ -439,51 +446,51 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     }
     
     func setStartTime(date: Date?)
-        {
-            startTime = date
-            userDefaults.set(startTime, forKey: START_TIME_KEY)
-        }
-        
-        func setStopTime(date: Date?)
-        {
-            stopTime = date
-            userDefaults.set(stopTime, forKey: STOP_TIME_KEY)
-            userDefaults.set(traveledDistance, forKey: TRAVELED_DISTANCE_KEY)
-        }
-        
-        func setTimerCounting(_ val: Bool)
-        {
-            timerCounting = val
-            userDefaults.set(timerCounting, forKey: COUNTING_KEY)
-        }
+    {
+        startTime = date
+        userDefaults.set(startTime, forKey: START_TIME_KEY)
+    }
+    
+    func setStopTime(date: Date?)
+    {
+        stopTime = date
+        userDefaults.set(stopTime, forKey: STOP_TIME_KEY)
+        userDefaults.set(traveledDistance, forKey: TRAVELED_DISTANCE_KEY)
+    }
+    
+    func setTimerCounting(_ val: Bool)
+    {
+        timerCounting = val
+        userDefaults.set(timerCounting, forKey: COUNTING_KEY)
+    }
     
     
     @objc func updateDistanceLabel() {
-            
-            formatter.units = .metric
-            formatter.unitStyle = .full
-            
-            let distanceString: String
-            
-            if traveledDistance < 1000 {
-                let kmDistance = traveledDistance / 1000.0
-                distanceString = String(format: "%.1f Km", kmDistance)
-            } else {
-                let kmDistance = traveledDistance / 1000.0
-                distanceString = String(format: "%.1f Km", kmDistance)
-            }
-            
-            distanceDriven.text = distanceString
+        
+        formatter.units = .metric
+        formatter.unitStyle = .full
+        
+        let distanceString: String
+        
+        if traveledDistance < 1000 {
+            let kmDistance = traveledDistance / 1000.0
+            distanceString = String(format: "%.1f Km", kmDistance)
+        } else {
+            let kmDistance = traveledDistance / 1000.0
+            distanceString = String(format: "%.1f Km", kmDistance)
         }
+        
+        distanceDriven.text = distanceString
+    }
     
     // MARK: Function for finally saving client to database
     
     func saveRealmObject(currentRides:currentRide) {
-            let realm = try? Realm()
-            try? realm?.write {
-                realm?.add(currentRides)
-            }
-            print("Data Was Saved To Realm Database.")
+        let realm = try? Realm()
+        try? realm?.write {
+            realm?.add(currentRides)
+        }
+        print("Data Was Saved To Realm Database.")
     }
     
     func addAnnotationAtCurrentLocation() {
@@ -499,27 +506,27 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
             print("User location not available yet.")
         }
     }
-
+    
     
     // MARK: Start Button Action
-
+    
     @IBAction func start(_sender: UIButton) {
         
         // Add a pin annotation for the start position
         
         geocoder.reverseGeocodeLocation(mapView.userLocation.location!, completionHandler: {(placemarks, error) in
-               if error == nil {
-                   if let firstLocation = placemarks?[0].location {
-                       self.startAnnotation.coordinate = firstLocation.coordinate
-                       self.startAnnotation.title = "Start"
-                       self.mapView.addAnnotation(self.startAnnotation)
-                   }
-               }
-               else {
-                   print("Reverse geocoding error: \(error!.localizedDescription)")
-               }
-           })
-
+            if error == nil {
+                if let firstLocation = placemarks?[0].location {
+                    self.startAnnotation.coordinate = firstLocation.coordinate
+                    self.startAnnotation.title = "Start"
+                    self.mapView.addAnnotation(self.startAnnotation)
+                }
+            }
+            else {
+                print("Reverse geocoding error: \(error!.localizedDescription)")
+            }
+        })
+        
         
         // Disabling scrolling, zooming, pitching and rotating when start was pressed.
         
@@ -528,47 +535,52 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         mapView.isRotateEnabled = false
         mapView.isPitchEnabled = false
         
+        // Fade In delivery Button
+        
+        deliveryButton.fadeIn(duration: 0.5)
+        deliveryView.fadeDelieryViewIn(duration: 0.5)
+        
         // MARK: Haptic Feedback for start
         
         let generator = UINotificationFeedbackGenerator()
-                    generator.notificationOccurred(.success)
+        generator.notificationOccurred(.success)
         
         locationButton.isEnabled = false
         
         if timerCounting
-                {
-                    pauseStateLabel.fadeIn(duration: 2.0)
-                    pauseStateLabel.text = "Pausiert"
-                    pauseStateLabel.textColor = UIColor.orange
-                    pauseStateLabel.blink()
-                    setStopTime(date: Date())
-                    stopTimer()
-                }
-                else
-                {
-                    if let stop = stopTime
-                    {
-                        let restartTime = calcRestartTime(start: startTime!, stop: stop)
-                        setStopTime(date: nil)
-                        setStartTime(date: restartTime)
-                        
-                    }
-                    else
-                    {
-                        pauseStateLabel.fadeIn(duration: 2.0)
-                        
-                        pauseStateLabel.text = "Aufzeichnen"
-                        pauseStateLabel.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
-                        pauseStateLabel.blink()
-                        setStartTime(date: Date())
-                    }
-                    pauseStateLabel.fadeIn(duration: 2.0)
-                    
-                    pauseStateLabel.text = "Aufzeichnen"
-                    pauseStateLabel.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
-                    pauseStateLabel.blink()
-                    startTimer()
-                }
+        {
+            pauseStateLabel.fadeIn(duration: 2.0)
+            pauseStateLabel.text = "Pausiert"
+            pauseStateLabel.textColor = UIColor.orange
+            pauseStateLabel.blink()
+            setStopTime(date: Date())
+            stopTimer()
+        }
+        else
+        {
+            if let stop = stopTime
+            {
+                let restartTime = calcRestartTime(start: startTime!, stop: stop)
+                setStopTime(date: nil)
+                setStartTime(date: restartTime)
+                
+            }
+            else
+            {
+                pauseStateLabel.fadeIn(duration: 2.0)
+                
+                pauseStateLabel.text = "Aufzeichnen"
+                pauseStateLabel.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+                pauseStateLabel.blink()
+                setStartTime(date: Date())
+            }
+            pauseStateLabel.fadeIn(duration: 2.0)
+            
+            pauseStateLabel.text = "Aufzeichnen"
+            pauseStateLabel.textColor = UIColor.init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+            pauseStateLabel.blink()
+            startTimer()
+        }
         
         TopNotchView.topNotchViewfadeIn(duration: 1.0)
         timeElapsed.fadeIn(duration: 1.0)
@@ -630,7 +642,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     
     
     @IBAction func stopButtonPressed(_ sender: Any) {
-                
+        
         // Reeanbling scrolling, zooming, pitching and rotating when stop was pressed.
         
         mapView.isZoomEnabled = true
@@ -638,13 +650,14 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         mapView.isRotateEnabled = true
         mapView.isPitchEnabled = true
         
+        
         // MARK: Haptic Feedback for start
         
         let generator = UINotificationFeedbackGenerator()
-                    generator.notificationOccurred(.success)
-
-
-                
+        generator.notificationOccurred(.success)
+        
+        
+        
         let alert = UIAlertController(title: "Bist du sicher?", message: "Bist du sicher, dass du abbrechen möchtest ohne die Fahrt zu speichern?", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Fortsetzen", style: .cancel))
         alert.addAction(UIAlertAction(title: "Ohne speichern beenden", style: .destructive, handler: { [self]_ in
@@ -652,8 +665,16 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
             // Remove the annotation pin
             
             if let annotation = mapView.annotations.first(where: { $0.title == "Start" }) {
-                   mapView.removeAnnotation(annotation)
-               }
+                mapView.removeAnnotation(annotation)
+            }
+            
+            // Fade Delivery View Out and turn the button color back to systemOrange
+            
+            deliveryView.fadeDeliveryViewOut(duration: 0.5)
+            deliveryButton.fadeDeliveryViewOut(duration: 0.5)
+            
+            deliveryButton.setImage(UIImage(systemName: "car.rear.road.lane")?.withRenderingMode(.alwaysTemplate), for: .normal)
+            deliveryButton.tintColor = UIColor.systemOrange
             
             
             TopNotchView.topNotchViewfadeOut(duration: 1.0)
@@ -733,25 +754,35 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
             locationButton.sendActions(for: .touchUpInside)
             
             print ("Data was not saved to Realm")
-
+            
         }))
         alert.addAction(UIAlertAction(title: "Speichern und beenden", style: .destructive, handler: { [self] action in
             
             switch action.style{
                 
-                case .default:
+            case .default:
                 print("default")
                 
-                case .cancel:
+            case .cancel:
                 self.dismiss(animated: true)
                 
-                case .destructive:
+            case .destructive:
                 
                 // Remove the annotation pin
                 
                 if let annotation = mapView.annotations.first(where: { $0.title == "Start" }) {
-                       mapView.removeAnnotation(annotation)
-                   }
+                    mapView.removeAnnotation(annotation)
+                }
+                
+                // Fade Delivery View Out and turn it's color back to systemOrange
+                
+                deliveryView.fadeDeliveryViewOut(duration: 0.5)
+                
+                deliveryButton.fadeDeliveryViewOut(duration: 0.5)
+                deliveryButton.setImage(UIImage(systemName: "car.rear.road.lane")?.withRenderingMode(.alwaysTemplate), for: .normal)
+                deliveryButton.tintColor = UIColor.systemOrange
+                
+                
                 
                 TopNotchView.topNotchViewfadeOut(duration: 1.0)
                 timeElapsed.fadeOut(duration: 1.0)
@@ -797,6 +828,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
                     }
                 }
                 
+                currentRides.deliveryTime = deliveryTime
                 currentRides.timeElapsed = timeElapsed.text
                 currentRides.distanceDriven = distanceDriven.text
                 currentRides.dateActual = date
@@ -878,25 +910,25 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     // MARK: Function for the Map Type Selector
     
     // Function for the segmented controlled map type selector
-        
-        @IBAction func segmentedControlAction(sender: UISegmentedControl) {
-            switch (sender.selectedSegmentIndex) {
-            case 0:
-                mapView.fadeOut(duration: 0.7)
-                mapView.mapType = .standard
-                mapView.fadeIn(duration: 0.7)
-            case 1:
-                mapView.fadeOut(duration: 0.7)
-                mapView.mapType = .mutedStandard
-                mapView.fadeIn(duration: 0.7)
-            case 2:
-                mapView.fadeOut(duration: 0.7)
-                mapView.mapType = .satellite
-                mapView.fadeIn(duration: 0.7)
-            default:
-                mapView.mapType = .standard
-            }
+    
+    @IBAction func segmentedControlAction(sender: UISegmentedControl) {
+        switch (sender.selectedSegmentIndex) {
+        case 0:
+            mapView.fadeOut(duration: 0.7)
+            mapView.mapType = .standard
+            mapView.fadeIn(duration: 0.7)
+        case 1:
+            mapView.fadeOut(duration: 0.7)
+            mapView.mapType = .mutedStandard
+            mapView.fadeIn(duration: 0.7)
+        case 2:
+            mapView.fadeOut(duration: 0.7)
+            mapView.mapType = .satellite
+            mapView.fadeIn(duration: 0.7)
+        default:
+            mapView.mapType = .standard
         }
+    }
     
     // MARK: Function for Location and Heading Tracking
     
@@ -907,14 +939,14 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         generator.notificationOccurred(.warning)
         
         // Re-Enable heading mode
-                
-                mapView.setUserTrackingMode(.followWithHeading, animated:true)
-           }
+        
+        mapView.setUserTrackingMode(.followWithHeading, animated:true)
+    }
     
     // MARK: Action for the wayback Button
     
     @IBAction func wayBackButtonPressed(_ sender: Any) {
-  
+        
         if isWayBack == false {
             isWayBack = true
             wayBackButton.fadeOut(duration: 2.5)
@@ -975,7 +1007,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         let generator = UINotificationFeedbackGenerator()
         generator.notificationOccurred(.success)
     }
-   
+    
     @IBAction func contactsButtonPressed(_ sender: Any) {
         // Haptic feedback
         let generator = UINotificationFeedbackGenerator()
@@ -992,6 +1024,25 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         // Haptic feedback
         let generator = UINotificationFeedbackGenerator()
         generator.notificationOccurred(.success)
+    }
+    
+    @IBAction func deliveryButtonPressed(_ sender: UIButton) {
+        
+        
+        
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.error)
+    
+        
+        // Change the button color to systemGreen when pressed
+        
+        deliveryButton.tintColor = UIColor.systemGreen
+        
+        // Set the image using UIImage and specify rendering mode as .alwaysTemplate
+        
+        deliveryButton.setImage(UIImage(systemName: "checkmark.seal.fill")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        
+        deliveryTime = Date()
     }
 }
 

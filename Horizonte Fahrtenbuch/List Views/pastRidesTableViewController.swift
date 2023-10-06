@@ -96,6 +96,7 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     // MARK: Setting Up User Interface
+    
     func setupUI() {
         pastRidesTableView.register(pastRidesTableViewCell.self, forCellReuseIdentifier: "latestRideCell")
         
@@ -152,8 +153,17 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
         cell.durationLabel?.text = object.timeElapsed?.description
         cell.distanceLabel?.text = object.distanceDriven?.description
         cell.supplementDateLabel?.text = object.supplementDate?.description
+        //cell.deliveryTime?.text = object.deliveryTime?.description
         
         dateFormatter.dateFormat = "HH:mm"
+        
+        if let deliveryTime = object.deliveryTime {
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "HH:mm"
+            
+            cell.deliveryTime?.text = dateFormatter.string(from: deliveryTime)
+        }
         
         if let startTime = object.startTime {
             cell.startTime?.text = dateFormatter.string(from: startTime)
@@ -211,6 +221,16 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
             cell.routeDetailButton.tintColor = .systemOrange
         }
         
+        // Hiding the checkmark and delivery time label if no entry is in the database
+        
+        if object.deliveryTime == nil {
+            cell.deliveryTime.isHidden = true
+            cell.deliveryCheckmark.isHidden = true
+        } else {
+            cell.deliveryTime.isHidden = false
+            cell.deliveryCheckmark.isHidden = false
+        }
+        
         cell.routeDetailButtonPressed = { [weak self] in
             guard let self = self else { return }
             print ("routeButton pressed at Index", indexPath)
@@ -218,7 +238,9 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
             let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "routeDetailViewController") as! routeDetailViewController
             
             // Determine the index path of the selected cell within the filtered results
+            
             let filteredIndex = indexPath.row
+            
             // Use the filtered index path to obtain the currentRide object from the filtered results
             let currentRide = self.filteredResults.sorted(byKeyPath: "dateActual", ascending: true)[filteredIndex]
             detailVC.encodedPolyline = currentRide.encodedPolyline
@@ -316,6 +338,7 @@ class pastRidesTableViewController: UITableViewController, UISearchBarDelegate {
                     archivedRide.encodedPolyline = rideToArchive.encodedPolyline
                     archivedRide.startTime = rideToArchive.startTime
                     archivedRide.endTime = rideToArchive.endTime
+                    archivedRide.deliveryTime = rideToArchive.deliveryTime
                     
                     self.realm.add(archivedRide)
                     self.realm.delete(rideToArchive)
