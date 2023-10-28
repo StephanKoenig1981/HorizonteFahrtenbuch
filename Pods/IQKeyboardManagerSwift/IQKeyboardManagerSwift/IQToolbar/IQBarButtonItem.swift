@@ -109,8 +109,4 @@ import UIKit
             }
         }
     }
-
-    deinit {
-        target = nil
-    }
 }
