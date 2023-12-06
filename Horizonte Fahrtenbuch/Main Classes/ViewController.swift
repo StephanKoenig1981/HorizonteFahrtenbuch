@@ -199,13 +199,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     
-    // Function for HealthKit Access
-    
-    func authorizeHealthKit(completion: @escaping (Bool, Error?) -> Swift.Void) {
-        
-    }
-    
-    
     // MARK: IBActions
     
     @IBAction func GrantGPSAccesButtonPressed(_ sender: Any) {
