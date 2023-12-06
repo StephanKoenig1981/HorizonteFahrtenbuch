@@ -821,7 +821,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
                 let polyline = MKPolyline(coordinates: coordinates, count: coordinates.count)
                 
                 if let encodedPolyline = try? JSONEncoder().encode(PolylineData(polyline)) {
-                    if let jsonString = String(data: encodedPolyline, encoding: .utf8) {
+                    if String(data: encodedPolyline, encoding: .utf8) != nil {
                         currentRides.encodedPolyline = encodedPolyline
                         
                         print("Encoded polyline: \(String(data: encodedPolyline, encoding: .utf8) ?? "Error decoding polyline")")
