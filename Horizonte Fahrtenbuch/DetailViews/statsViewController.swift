@@ -228,6 +228,14 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
     }
     
     @IBAction func sendReportButtonPressed(_ sender: Any) {
+        
+        // Haptic Feedback
+        
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.error)
+        
+        // Realm
+        
         let realm = try! Realm()
          let currentRides = realm.objects(currentRide.self).sorted(byKeyPath: "dateActual", ascending: true)
          let personalDetails = realm.objects(personalDetails.self).last
@@ -296,7 +304,7 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
          }*/
          
          emailText += "<br><br>"
-         emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V2.4.4 generiert. - © 2023 Stephan König"
+         emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V2.4.5 generiert. - © 2023 Stephan König"
          
          if MFMailComposeViewController.canSendMail() {
              let mailComposer = MFMailComposeViewController()
