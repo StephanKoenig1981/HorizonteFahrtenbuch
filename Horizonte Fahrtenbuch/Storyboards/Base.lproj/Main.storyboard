@@ -539,8 +539,8 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="purpleGradient" translatesAutoresizingMaskIntoConstraints="NO" id="Vj9-8C-EVD">
                                 <rect key="frame" x="-21" y="0.0" width="10000" height="932"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V2.5.0 - © 2023 - 2024 Stephan König" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="loR-iG-pV8">
-                                <rect key="frame" x="96" y="821" width="274" height="11"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V2.5.1 - © 2023 - 2024 Stephan König" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="loR-iG-pV8">
+                                <rect key="frame" x="96" y="821" width="273" height="11"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -559,7 +559,7 @@
                                 </constraints>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Die App wurde zur Sicherheit gesperrt und muss neu gestartet werden, um eine erneute Authentifizierung durchzuführen." textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yQc-PM-sOS">
-                                <rect key="frame" x="97" y="485" width="274" height="128"/>
+                                <rect key="frame" x="97" y="485" width="273" height="128"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="K5p-88-2OD"/>
@@ -1051,7 +1051,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                                 <subviews>
                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsUserLocation="YES" showsScale="YES" translatesAutoresizingMaskIntoConstraints="NO" id="isM-cH-fZc">
-                                        <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="430" height="950"/>
                                         <standardMapConfiguration key="preferredConfiguration" elevationStyle="realistic" showsTraffic="YES">
                                             <pointOfInterestFilter key="pointOfInterestFilter">
                                                 <excludedCategories>
@@ -1370,8 +1370,33 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
+                                    <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Rw-z4-YYg">
+                                        <rect key="frame" x="9" y="431" width="51" height="51"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0k3-Oz-4AU">
+                                                <rect key="frame" x="2" y="8" width="47" height="34"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="tintColor" systemColor="systemGreenColor"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="phone" catalog="system"/>
+                                                <connections>
+                                                    <action selector="addContactButtonPressed:" destination="K7b-6J-Pvw" eventType="touchUpInside" id="Ob4-PZ-Mof"/>
+                                                    <action selector="addressBookButtonPressed:" destination="K7b-6J-Pvw" eventType="touchUpInside" id="9ZW-lD-nFt"/>
+                                                    <action selector="menuButtonPressed:" destination="K7b-6J-Pvw" eventType="touchUpInside" id="IAk-BB-ovj"/>
+                                                    <action selector="personalDetailsButtonPressed:" destination="K7b-6J-Pvw" eventType="touchUpInside" id="iGH-vt-h2j"/>
+                                                    <action selector="phoneButtonPressed:" destination="K7b-6J-Pvw" eventType="touchUpInside" id="BtM-rC-phj"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <integer key="value" value="25"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
                                     <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rRi-35-eub">
-                                        <rect key="frame" x="8" y="354" width="51" height="51"/>
+                                        <rect key="frame" x="8" y="372" width="51" height="51"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0gB-hN-wGv">
                                                 <rect key="frame" x="2" y="8" width="47" height="34"/>
@@ -1402,7 +1427,7 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstItem="rRi-35-eub" firstAttribute="top" secondItem="mi4-g7-G9h" secondAttribute="bottom" constant="8" id="0ya-xP-NDR"/>
+                                    <constraint firstItem="rRi-35-eub" firstAttribute="top" secondItem="mi4-g7-G9h" secondAttribute="bottom" constant="26" id="0ya-xP-NDR"/>
                                     <constraint firstItem="zRx-WB-SuS" firstAttribute="leading" secondItem="rln-FP-q4v" secondAttribute="leading" constant="99" id="2ik-Aw-f3J"/>
                                     <constraint firstItem="tb2-4Y-QLO" firstAttribute="top" secondItem="H1K-us-mHC" secondAttribute="bottom" constant="8" symbolic="YES" id="2yk-65-bIg"/>
                                     <constraint firstItem="isM-cH-fZc" firstAttribute="top" secondItem="rln-FP-q4v" secondAttribute="top" id="4Ca-2w-hsK"/>
@@ -1415,16 +1440,20 @@
                                     <constraint firstAttribute="trailing" secondItem="zRx-WB-SuS" secondAttribute="trailing" constant="98" id="Iuq-oy-UWn"/>
                                     <constraint firstAttribute="bottom" secondItem="TGn-q2-5b7" secondAttribute="bottom" id="NND-Jz-HrU"/>
                                     <constraint firstAttribute="trailing" secondItem="bcE-r6-LV8" secondAttribute="trailing" id="TJb-tK-GLu"/>
+                                    <constraint firstAttribute="bottom" secondItem="5Rw-z4-YYg" secondAttribute="bottom" constant="450" id="Vcz-wa-BjR"/>
                                     <constraint firstItem="rRi-35-eub" firstAttribute="leading" secondItem="rln-FP-q4v" secondAttribute="leading" constant="8" id="W5b-uC-oLZ"/>
                                     <constraint firstAttribute="trailing" secondItem="SYF-7v-vKo" secondAttribute="trailing" id="Zkg-Be-zHJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="5Rw-z4-YYg" secondAttribute="trailing" constant="370" id="a5V-f6-S7b"/>
                                     <constraint firstItem="mi4-g7-G9h" firstAttribute="top" secondItem="mAN-lf-jyj" secondAttribute="bottom" constant="8" symbolic="YES" id="afT-yc-BzX"/>
                                     <constraint firstItem="mAN-lf-jyj" firstAttribute="leading" secondItem="rln-FP-q4v" secondAttribute="leading" constant="8" id="eLQ-2T-eLm"/>
                                     <constraint firstItem="zRx-WB-SuS" firstAttribute="top" secondItem="rln-FP-q4v" secondAttribute="top" constant="153" id="iJq-oS-DTQ"/>
-                                    <constraint firstAttribute="bottom" secondItem="isM-cH-fZc" secondAttribute="bottom" id="jWc-QW-4qk"/>
+                                    <constraint firstAttribute="bottom" secondItem="isM-cH-fZc" secondAttribute="bottom" constant="-18" id="jWc-QW-4qk"/>
+                                    <constraint firstItem="5Rw-z4-YYg" firstAttribute="top" secondItem="rRi-35-eub" secondAttribute="bottom" constant="8" symbolic="YES" id="l51-iS-ldc"/>
                                     <constraint firstItem="H1K-us-mHC" firstAttribute="top" secondItem="rln-FP-q4v" secondAttribute="top" constant="60" id="lQ9-vs-TVf"/>
                                     <constraint firstItem="z6c-w4-Unb" firstAttribute="top" secondItem="tb2-4Y-QLO" secondAttribute="bottom" constant="8" symbolic="YES" id="pLG-Gq-4rh"/>
                                     <constraint firstAttribute="trailing" secondItem="isM-cH-fZc" secondAttribute="trailing" id="pRg-9p-rmB"/>
                                     <constraint firstItem="isM-cH-fZc" firstAttribute="leading" secondItem="rln-FP-q4v" secondAttribute="leading" id="qrz-FG-0M4"/>
+                                    <constraint firstItem="5Rw-z4-YYg" firstAttribute="leading" secondItem="rln-FP-q4v" secondAttribute="leading" constant="9" id="sHQ-sg-0oW"/>
                                     <constraint firstItem="SYF-7v-vKo" firstAttribute="centerY" secondItem="rln-FP-q4v" secondAttribute="centerY" id="v7u-Nw-YK3"/>
                                     <constraint firstItem="TGn-q2-5b7" firstAttribute="top" secondItem="bcE-r6-LV8" secondAttribute="bottom" constant="-1" id="wPK-YO-si5"/>
                                     <constraint firstItem="mAN-lf-jyj" firstAttribute="top" secondItem="z6c-w4-Unb" secondAttribute="bottom" constant="7" id="wgX-kp-DGe"/>
@@ -1504,6 +1533,8 @@
                         <outlet property="pauseStateLabel" destination="ru7-Qt-lnv" id="yja-zo-9Bc"/>
                         <outlet property="personalDetailButton" destination="9cR-ra-32N" id="NlT-sZ-IUD"/>
                         <outlet property="personalDetailView" destination="9cR-ra-32N" id="KBB-k2-D7e"/>
+                        <outlet property="phoneButton" destination="0k3-Oz-4AU" id="DSi-6V-e9v"/>
+                        <outlet property="phoneButtonView" destination="5Rw-z4-YYg" id="qGb-ao-7Dr"/>
                         <outlet property="segmentedControlView" destination="SYF-7v-vKo" id="IDV-sZ-gOX"/>
                         <outlet property="settingsButton" destination="o5v-2Y-iWX" id="zce-GP-Nrr"/>
                         <outlet property="settingsButtonView" destination="mAN-lf-jyj" id="sPi-X1-qj8"/>
@@ -1518,7 +1549,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dyS-eY-LO9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="903" y="-3"/>
+            <point key="canvasLocation" x="902.79069767441854" y="-3.218884120171674"/>
         </scene>
         <!--Stats View Controller-->
         <scene sceneID="zsp-eX-cBf">
@@ -1716,7 +1747,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </navigationBarAppearance>
                             </navigationBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V2.5.0 - © 2023 - 2024 Stephan König" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfl-98-Qbj">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V2.5.1 - © 2023 - 2024 Stephan König" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfl-98-Qbj">
                                 <rect key="frame" x="77.666666666666657" y="891" width="274.66666666666674" height="11"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2441,8 +2472,8 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V2.5.0 - © 2023 - 2024 Stephan König" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4p6-Nh-qrN">
-                                <rect key="frame" x="78" y="891" width="274" height="11"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V2.5.1 - © 2023 - 2024 Stephan König" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4p6-Nh-qrN">
+                                <rect key="frame" x="78.666666666666686" y="891" width="273" height="11"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -2635,6 +2666,7 @@
         <image name="menucard.fill" catalog="system" width="105" height="128"/>
         <image name="pencil.circle" catalog="system" width="128" height="123"/>
         <image name="person.crop.circle.fill.badge.plus" catalog="system" width="128" height="114"/>
+        <image name="phone" catalog="system" width="128" height="115"/>
         <image name="phone.fill" catalog="system" width="128" height="114"/>
         <image name="play.circle" catalog="system" width="128" height="123"/>
         <image name="purpleGradient" width="4000" height="6000"/>

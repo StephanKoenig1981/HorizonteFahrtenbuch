@@ -10,7 +10,7 @@ import RealmSwift
 import CoreLocation
 
 protocol ContactSelectionDelegate: AnyObject {
-    func didSelectContact(clientName: String)
+    func didSelectContact(clientName: String, phoneNumber: String)
 }
 
 
@@ -210,29 +210,37 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
             generator.notificationOccurred(.error)
             
             print("startRideButton pressed at Index", indexPath)
-               
-               if let clientName = object.client {
-                   print("Client Name: \(clientName)")
+            
+            // Check if client name and phone number are available
+            if let clientName = object.client, let phoneNumber = object.phone {
+                print("Client Name: \(clientName), Phone: \(phoneNumber)")
 
-                   // Create an alert
-                   let alert = UIAlertController(title: "Fahrt starten?", message: "Möchtest du wirklich diese Fahrt für \(clientName) starten?", preferredStyle: .actionSheet)
+                // Create an alert to confirm starting the ride
+                let alert = UIAlertController(title: "Fahrt starten?",
+                                              message: "Möchtest du wirklich diese Fahrt für \(clientName) starten?",
+                                              preferredStyle: .actionSheet)
 
-                   // Add Yes action
-                   let yesAction = UIAlertAction(title: "Ja", style: .default) { [weak self] _ in
-                       self?.dismiss(animated: true) {
-                           self?.delegate?.didSelectContact(clientName: clientName)
-                       }
-                   }
-                   alert.addAction(yesAction)
+                // Add a "Yes" action to the alert
+                let yesAction = UIAlertAction(title: "Ja", style: .default) { [weak self] _ in
+                    // Dismiss the current view controller and inform the delegate
+                    self?.dismiss(animated: true) {
+                        self?.delegate?.didSelectContact(clientName: clientName, phoneNumber: phoneNumber)
+                    }
+                }
+                alert.addAction(yesAction)
 
-                   // Add No action
-                   let noAction = UIAlertAction(title: "Abbrechen", style: .destructive, handler: nil)
-                   alert.addAction(noAction)
+                // Add a "No" action to the alert
+                let noAction = UIAlertAction(title: "Abbrechen", style: .destructive, handler: nil)
+                alert.addAction(noAction)
 
-                   // Present the alert
-                   self.present(alert, animated: true, completion: nil)
-               }
+                // Present the alert to the user
+                self.present(alert, animated: true, completion: nil)
+            } else {
+                // Handle the case where client name or phone number is not available
+                print("Client name or phone number is missing")
+            }
         }
+
 
 
     
