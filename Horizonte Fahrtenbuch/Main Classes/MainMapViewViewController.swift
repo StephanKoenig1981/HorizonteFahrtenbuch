@@ -63,6 +63,10 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     var startAnnotation = MKPointAnnotation()
     let geocoder = CLGeocoder()
     
+    // MARK: Variable for the client phone number
+    
+    var phoneNumber: String?
+    
     // MARK: Outlets for Buttons and Views
     
     @IBOutlet weak var mapView: MKMapView!
@@ -92,6 +96,9 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     @IBOutlet weak var settingsView: UIView!
     @IBOutlet weak var deliveryButton: UIButton!
     @IBOutlet weak var deliveryView: UIView!
+    
+    @IBOutlet weak var phoneButtonView: UIView!
+    @IBOutlet weak var phoneButton: UIButton!
     
     // MARK: Outlets for the Segmented control view and segmented control
     
@@ -684,6 +691,11 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
             deliveryView.fadeDeliveryViewOut(duration: 0.5)
             deliveryButton.fadeDeliveryViewOut(duration: 0.5)
             
+            // Fade Phone Button View out
+            
+            phoneButtonView.fadeDeliveryViewOut(duration: 0.5)
+            phoneButton.fadeDeliveryViewOut(duration: 0.5)
+            
             deliveryButton.setImage(UIImage(systemName: "car.rear.road.lane")?.withRenderingMode(.alwaysTemplate), for: .normal)
             deliveryButton.tintColor = UIColor.systemOrange
             
@@ -793,7 +805,10 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
                 deliveryButton.setImage(UIImage(systemName: "car.rear.road.lane")?.withRenderingMode(.alwaysTemplate), for: .normal)
                 deliveryButton.tintColor = UIColor.systemOrange
                 
+                // Fade Phone Button View out
                 
+                phoneButtonView.fadeDeliveryViewOut(duration: 0.5)
+                phoneButton.fadeDeliveryViewOut(duration: 0.5)
                 
                 TopNotchView.topNotchViewfadeOut(duration: 1.0)
                 timeElapsed.fadeOut(duration: 1.0)
@@ -916,6 +931,26 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
             }
         }))
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    // MARK: Function for fading in and out the phone view
+    
+    func fadePhoneViewIn(duration: TimeInterval = 0.5) {
+        UIView.animate(withDuration: duration) {
+            self.phoneButtonView.alpha = 0.7
+        }
+    }
+    
+    func fadePhoneViewOut(duration: TimeInterval = 0.5) {
+        UIView.animate(withDuration: duration) {
+            self.phoneButtonView.alpha = 0.0
+        }
+    }
+    
+    func fadePhoneButtonIn(duration: TimeInterval = 0.5) {
+        UIView.animate(withDuration: duration) {
+            self.phoneButton.alpha = 0.7
+        }
     }
     
     // MARK: Function for the Map Type Selector
@@ -1055,17 +1090,39 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         
         deliveryTime = Date()
     }
+    
+    @IBAction func phoneButtonPressed(_ sender: Any) {
+        guard let number = phoneNumber, !number.isEmpty, let url = URL(string: "tel://\(number)") else {
+                print("Invalid phone number")
+                return
+            }
+            
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            } else {
+                print("Cannot make a call on this device")
+            }
+    }
 }
 
 // MARK: Extensions
 
 extension MainMapViewViewController: ContactSelectionDelegate {
-    func didSelectContact(clientName: String) {
+    func didSelectContact(clientName: String, phoneNumber: String) {
         DispatchQueue.main.async {
-            print("Received Client Name: \(clientName)")
-            self.clientTextField.text = clientName
-            self.startProgrammatically()
-        }
+                self.clientTextField.text = clientName
+                self.phoneNumber = phoneNumber
+            
+                // If the phone number is not nil, fade the phone button view in
+            
+                if !phoneNumber.isEmpty {
+                        self.fadePhoneViewIn()
+                        self.fadePhoneButtonIn()
+                    }
+                // Programmatically press the start button to start the ride
+            
+                self.startProgrammatically()
+            }
     }
 
     func startProgrammatically() {
