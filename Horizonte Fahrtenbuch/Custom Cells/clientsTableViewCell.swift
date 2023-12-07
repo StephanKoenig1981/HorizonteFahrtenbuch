@@ -13,6 +13,7 @@ class clientsTableViewCell: UITableViewCell {
     //create your closure here
             var buttonPressed : (() -> ()) = {}
             var routeButtonPressed : (() -> ()) = {}
+            var startRideButtonPressed : (() -> ()) = {}
 
             @IBAction func phoneButtonAction(_ sender: UIButton) {
         //Call your closure here
@@ -22,6 +23,11 @@ class clientsTableViewCell: UITableViewCell {
         @IBAction func mapButtonPressed(_ sender: UIButton) {
                 routeButtonPressed()
     }
+    
+    @IBAction func startRideButtonPressed(_ sender: Any) {
+        startRideButtonPressed()
+    }
+    
     
     func configure(data: clients) {
     }

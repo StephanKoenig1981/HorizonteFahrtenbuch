@@ -24,12 +24,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     
     var isWayBack:Bool = false
 
-    
-    // MARK: Snapshot ImageView
-    
-    @IBOutlet weak var imageView: UIImageView!
-    
-    
+        
     // MARK: Variables for the Timer
     
     var timer = Timer()
@@ -233,6 +228,22 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         mapView.mapType = MKMapType(rawValue: 0)!
         mapView.setUserTrackingMode(.followWithHeading, animated: true)
         
+    }
+    
+    // MARK: Setting the delegate for ContactsTableViewController
+    
+    func start() {
+        let dummyButton = UIButton()
+        self.start(_sender: dummyButton)
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "addressBookSegue" { // Replace with your actual segue identifier
+            if let navigationController = segue.destination as? UINavigationController,
+               let contactsController = navigationController.viewControllers.first as? contactsTableViewController {
+                contactsController.delegate = self
+            }
+        }
     }
     
     // MARK: Hickup workaround code to hide keyboard when return is pressed
@@ -1044,6 +1055,23 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         
         deliveryTime = Date()
     }
+}
+
+// MARK: Extensions
+
+extension MainMapViewViewController: ContactSelectionDelegate {
+    func didSelectContact(clientName: String) {
+        DispatchQueue.main.async {
+            print("Received Client Name: \(clientName)")
+            self.clientTextField.text = clientName
+            self.startProgrammatically()
+        }
+    }
+
+    func startProgrammatically() {
+            let dummyButton = UIButton()
+            self.start(_sender: dummyButton) // Call the IBAction method
+        }
 }
 
 

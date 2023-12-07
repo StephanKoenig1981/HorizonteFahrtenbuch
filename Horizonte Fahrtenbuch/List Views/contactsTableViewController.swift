@@ -9,8 +9,14 @@ import UIKit
 import RealmSwift
 import CoreLocation
 
+protocol ContactSelectionDelegate: AnyObject {
+    func didSelectContact(clientName: String)
+}
+
 
 class contactsTableViewController: UITableViewController, UISearchBarDelegate, CLLocationManagerDelegate {
+    
+    weak var delegate: ContactSelectionDelegate?
     
     
     // MARK: Outlets
@@ -194,6 +200,38 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
                     self.navigationController?.pushViewController(detailVC, animated: true)
                 }
             }
+        }
+        
+        // MARK: Action for Start Ride Button Pressed
+        
+        cell.startRideButtonPressed = {
+            
+            let generator = UINotificationFeedbackGenerator()
+            generator.notificationOccurred(.error)
+            
+            print("startRideButton pressed at Index", indexPath)
+               
+               if let clientName = object.client {
+                   print("Client Name: \(clientName)")
+
+                   // Create an alert
+                   let alert = UIAlertController(title: "Fahrt starten?", message: "Möchtest du wirklich diese Fahrt für \(clientName) starten?", preferredStyle: .actionSheet)
+
+                   // Add Yes action
+                   let yesAction = UIAlertAction(title: "Ja", style: .default) { [weak self] _ in
+                       self?.dismiss(animated: true) {
+                           self?.delegate?.didSelectContact(clientName: clientName)
+                       }
+                   }
+                   alert.addAction(yesAction)
+
+                   // Add No action
+                   let noAction = UIAlertAction(title: "Abbrechen", style: .destructive, handler: nil)
+                   alert.addAction(noAction)
+
+                   // Present the alert
+                   self.present(alert, animated: true, completion: nil)
+               }
         }
 
 

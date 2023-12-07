@@ -539,7 +539,7 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="purpleGradient" translatesAutoresizingMaskIntoConstraints="NO" id="Vj9-8C-EVD">
                                 <rect key="frame" x="-21" y="0.0" width="10000" height="932"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V2.4.7 - © 2023 - 2024 Stephan König" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="loR-iG-pV8">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V2.5.0 - © 2023 - 2024 Stephan König" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="loR-iG-pV8">
                                 <rect key="frame" x="96" y="821" width="274" height="11"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
@@ -919,6 +919,15 @@
                                                 <action selector="routeButtonPressed:" destination="WeZ-ig-gme" eventType="touchUpInside" id="RMe-lw-JWR"/>
                                             </connections>
                                         </button>
+                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8IF-N5-dTL">
+                                            <rect key="frame" x="229" y="167" width="50" height="35"/>
+                                            <color key="tintColor" systemColor="systemGreenColor"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" image="play.circle" catalog="system" title=""/>
+                                            <connections>
+                                                <action selector="startRideButtonPressed:" destination="gOO-3h-G2T" eventType="touchUpInside" id="lyd-8Q-EPN"/>
+                                            </connections>
+                                        </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ldw-DQ-yI6">
                                             <rect key="frame" x="345" y="168" width="49" height="34"/>
                                             <state key="normal" title="Button"/>
@@ -983,14 +992,18 @@
                                         <constraint firstItem="HBw-Wo-BGy" firstAttribute="leading" secondItem="DQ3-Vt-qg2" secondAttribute="leading" id="TR9-7l-H4z"/>
                                         <constraint firstItem="DQ3-Vt-qg2" firstAttribute="leading" secondItem="xVB-pi-tNL" secondAttribute="leading" id="Tb9-3f-6eP"/>
                                         <constraint firstItem="tci-ud-0Er" firstAttribute="top" secondItem="DQ3-Vt-qg2" secondAttribute="bottom" constant="9" id="V4h-Aw-sP5"/>
+                                        <constraint firstItem="qWo-IJ-h9h" firstAttribute="leading" secondItem="8IF-N5-dTL" secondAttribute="trailing" constant="8" id="WS5-jR-Q5q"/>
                                         <constraint firstItem="EEW-nA-sHs" firstAttribute="top" secondItem="DQ3-Vt-qg2" secondAttribute="bottom" constant="8.3300000000000001" id="Wp5-K6-OCS"/>
                                         <constraint firstItem="ldw-DQ-yI6" firstAttribute="top" secondItem="HBw-Wo-BGy" secondAttribute="bottom" constant="76.333333333333329" id="Z27-dd-Kqi"/>
                                         <constraint firstItem="ldw-DQ-yI6" firstAttribute="leading" secondItem="qWo-IJ-h9h" secondAttribute="trailing" constant="6" id="ZKu-We-ct5"/>
+                                        <constraint firstItem="8IF-N5-dTL" firstAttribute="centerY" secondItem="ldw-DQ-yI6" secondAttribute="centerY" id="aBh-PN-gr9"/>
                                         <constraint firstItem="DQ3-Vt-qg2" firstAttribute="leading" secondItem="eyD-bw-OGC" secondAttribute="leadingMargin" constant="16" id="hLZ-An-DE5"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="xVB-pi-tNL" secondAttribute="bottom" constant="17" id="jfS-kn-MBd"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="qWo-IJ-h9h" secondAttribute="bottom" constant="11" id="kZr-ky-tWt"/>
                                         <constraint firstItem="EEW-nA-sHs" firstAttribute="top" secondItem="DQ3-Vt-qg2" secondAttribute="bottom" constant="8.3300000000000001" id="lJe-RW-rju"/>
+                                        <constraint firstItem="8IF-N5-dTL" firstAttribute="bottom" secondItem="ldw-DQ-yI6" secondAttribute="bottom" id="oRQ-n9-Nw4"/>
                                         <constraint firstItem="HBw-Wo-BGy" firstAttribute="centerX" secondItem="phJ-Hs-pdb" secondAttribute="centerX" id="oqv-Ae-S50"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="8IF-N5-dTL" secondAttribute="bottom" constant="12" id="t1f-6e-6A5"/>
                                         <constraint firstItem="xVB-pi-tNL" firstAttribute="top" secondItem="EEW-nA-sHs" secondAttribute="bottom" constant="25" id="wtg-kl-pLu"/>
                                         <constraint firstItem="phJ-Hs-pdb" firstAttribute="top" secondItem="eyD-bw-OGC" secondAttribute="top" constant="15" id="yhD-e0-YaL"/>
                                     </constraints>
@@ -1505,7 +1518,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dyS-eY-LO9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="880.46511627906978" y="-2.5751072961373391"/>
+            <point key="canvasLocation" x="903" y="-3"/>
         </scene>
         <!--Stats View Controller-->
         <scene sceneID="zsp-eX-cBf">
@@ -1533,13 +1546,13 @@
                                     <action selector="saveButtonPressed:" destination="SDW-bC-dEn" eventType="touchUpInside" id="YgJ-XY-rmp"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Übersicht aktueller Monat" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UL0-d2-Sjo">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Aktuelle Fahrtenperiode" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UL0-d2-Sjo">
                                 <rect key="frame" x="16" y="63" width="398" height="24"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                 <color key="textColor" systemColor="systemOrangeColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Vergangene Monate" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QGx-cV-Obh">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Abgeschlossene Fahrtenperioden" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QGx-cV-Obh">
                                 <rect key="frame" x="16" y="275.66666666666669" width="398" height="24"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                 <color key="textColor" systemColor="systemOrangeColor"/>
@@ -1703,7 +1716,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </navigationBarAppearance>
                             </navigationBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V2.4.7 - © 2023 - 2024 Stephan König" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfl-98-Qbj">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V2.5.0 - © 2023 - 2024 Stephan König" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfl-98-Qbj">
                                 <rect key="frame" x="77.666666666666657" y="891" width="274.66666666666674" height="11"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2428,7 +2441,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V2.4.7 - © 2023 - 2024 Stephan König" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4p6-Nh-qrN">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V2.5.0 - © 2023 - 2024 Stephan König" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4p6-Nh-qrN">
                                 <rect key="frame" x="78" y="891" width="274" height="11"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2623,6 +2636,7 @@
         <image name="pencil.circle" catalog="system" width="128" height="123"/>
         <image name="person.crop.circle.fill.badge.plus" catalog="system" width="128" height="114"/>
         <image name="phone.fill" catalog="system" width="128" height="114"/>
+        <image name="play.circle" catalog="system" width="128" height="123"/>
         <image name="purpleGradient" width="4000" height="6000"/>
         <image name="record.circle" catalog="system" width="128" height="123"/>
         <image name="stop.circle.fill" catalog="system" width="128" height="123"/>
