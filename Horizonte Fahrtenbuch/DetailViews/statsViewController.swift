@@ -345,34 +345,37 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
         let cell = pastMonthsSummaryTableView.dequeueReusableCell(withIdentifier: "pastMonthRidesCell", for: indexPath) as! pastMonthRidesCell
 
         let realm = try! Realm()
-        let objects = realm.objects(pastMonthRides.self).sorted(byKeyPath: "date", ascending: true) // Change to ascending order
+        let originalObjects = realm.objects(pastMonthRides.self)
+        let sortedObjects = originalObjects.sorted(byKeyPath: "date", ascending: false)
 
-        guard indexPath.row < objects.count else {
-            // Handle the case where the index path is out of bounds
-            // You can return an empty cell or handle it based on your logic
+        guard indexPath.row < sortedObjects.count else {
             return UITableViewCell()
         }
 
-        guard indexPath.row > 0 else {
-            // If it's the first row, there is no previous entry to compare, so set percentages to zero or any default value
-            configureCell(cell, with: objects[indexPath.row], hasData: hasData, isIncrease: nil, rowIndex: indexPath.row)
+        let currentObject = sortedObjects[indexPath.row]
+        
+        let originalIndex: Int
+        if let index = originalObjects.index(of: currentObject) {
+            originalIndex = index
+        } else {
+            return UITableViewCell() // Handle the case where the object is not found in the original array
+        }
+
+        guard originalIndex > 0 else {
+            configureCell(cell, with: currentObject, hasData: hasData, isIncrease: nil, rowIndex: indexPath.row)
             return cell
         }
 
-        let currentObject = objects[indexPath.row]
-        let previousObject = objects[indexPath.row - 1]
+        let previousObject = originalObjects[originalIndex - 1]
 
-        // Calculate percentage difference for distance and time
         let distanceDifference = calculatePercentageDifference(currentValue: currentObject.totalDistace ?? 0.0,
                                                                previousValue: previousObject.totalDistace ?? 0.0)
         let timeDifference = calculatePercentageDifference(currentValue: currentObject.totalTimeElapsed ?? 0.0,
                                                            previousValue: previousObject.totalTimeElapsed ?? 0.0)
 
-        // Update labels with formatted percentage difference (no decimals)
         cell.distancePercentageLabel.text = "\(Int(distanceDifference))%"
         cell.timePercentageLabel.text = "\(Int(timeDifference))%"
 
-        // Configure other cell properties
         configureCell(cell, with: currentObject, hasData: hasData, isIncrease: distanceDifference > 0, rowIndex: indexPath.row)
 
         return cell
