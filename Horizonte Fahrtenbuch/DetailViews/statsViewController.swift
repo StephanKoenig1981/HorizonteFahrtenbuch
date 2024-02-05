@@ -39,7 +39,7 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
         
         // MARK: Setting placeholder text for the tableView beeing empty
         
-        placeholderLabel.text = "Keine abgeschlossenen Monate."
+        //placeholderLabel.text = "Keine abgeschlossenen Monate."
         placeholderLabel.textAlignment = .center
         placeholderLabel.textColor = .gray
         pastMonthsSummaryTableView.backgroundView = placeholderLabel
@@ -304,7 +304,7 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
          }*/
          
          emailText += "<br><br>"
-         emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V2.5.6 generiert. - © 2023 - 2024 Stephan König"
+         emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V3.0.0 generiert. - © 2023 - 2024 Stephan König"
          
          if MFMailComposeViewController.canSendMail() {
              let mailComposer = MFMailComposeViewController()
@@ -343,65 +343,102 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = pastMonthsSummaryTableView.dequeueReusableCell(withIdentifier: "pastMonthRidesCell", for: indexPath) as! pastMonthRidesCell
-        
-        let realm = try! Realm()
-        let objects = realm.objects(pastMonthRides.self).sorted(byKeyPath: "date", ascending: false)
-        
-        let object = objects[indexPath.row] // Get the correct object for this row
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "de_DE") // Setzen Sie hier Ihr gewünschtes lokale und Zeitzone
-        dateFormatter.timeZone = TimeZone.current
-        dateFormatter.dateFormat = "MMMM yyyy"
-        
-        cell.monthLabel?.text = dateFormatter.string(from: object.date) // Use the date formatter to set the label text
-        cell.distanceLabel.text = object.totalDistace?.description
-        cell.timeLabel.text = object.totalTimeElapsed?.description
-        
-        if !hasData {
-               placeholderLabel.isHidden = true
-        } else {
-            placeholderLabel.isHidden = false
-        }
-        
-        // Add spacing between cells
-        let spacing: CGFloat = 10
-        cell.contentView.frame = cell.contentView.frame.inset(by: UIEdgeInsets(top: spacing, left: 0, bottom: spacing, right: 0))
 
+        let realm = try! Realm()
+        let originalObjects = realm.objects(pastMonthRides.self)
+        let sortedObjects = originalObjects.sorted(byKeyPath: "date", ascending: false)
+
+        guard indexPath.row < sortedObjects.count else {
+            return UITableViewCell()
+        }
+
+        let currentObject = sortedObjects[indexPath.row]
         
+        let originalIndex: Int
+        if let index = originalObjects.index(of: currentObject) {
+            originalIndex = index
+        } else {
+            return UITableViewCell() // Handle the case where the object is not found in the original array
+        }
+
+        guard originalIndex > 0 else {
+            configureCell(cell, with: currentObject, hasData: hasData, isIncrease: nil, rowIndex: indexPath.row)
+            return cell
+        }
+
+        let previousObject = originalObjects[originalIndex - 1]
+
+        let distanceDifference = calculatePercentageDifference(currentValue: currentObject.totalDistace ?? 0.0,
+                                                               previousValue: previousObject.totalDistace ?? 0.0)
+        let timeDifference = calculatePercentageDifference(currentValue: currentObject.totalTimeElapsed ?? 0.0,
+                                                           previousValue: previousObject.totalTimeElapsed ?? 0.0)
+
+        cell.distancePercentageLabel.text = "\(Int(distanceDifference))%"
+        cell.timePercentageLabel.text = "\(Int(timeDifference))%"
+
+        configureCell(cell, with: currentObject, hasData: hasData, isIncrease: distanceDifference > 0, rowIndex: indexPath.row)
+
         return cell
     }
     
+    func calculatePercentageDifference(currentValue: Any, previousValue: Any) -> Double {
+        guard let currentDouble = (currentValue as? NSString)?.doubleValue,
+              let previousDouble = (previousValue as? NSString)?.doubleValue,
+              previousDouble != 0 else {
+            // Handle the case where conversion to double fails or previousValue is 0
+            return 0
+        }
+
+        // Calculate percentage difference
+        return ((currentDouble - previousDouble) / abs(previousDouble)) * 100
+    }
+    
+    func configureCell(_ cell: pastMonthRidesCell, with object: pastMonthRides, hasData: Bool, isIncrease: Bool?, rowIndex: Int) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "de_DE")
+        dateFormatter.timeZone = TimeZone.current
+        dateFormatter.dateFormat = "MMMM yyyy"
+
+        cell.monthLabel?.text = dateFormatter.string(from: object.date)
+        cell.distanceLabel.text = object.totalDistace?.description
+        cell.timeLabel.text = object.totalTimeElapsed?.description
+
+        // Set the visibility of placeholderLabel based on hasData
+        //cell.placeholderLabel.isHidden = hasData
+
+        // Update distancePercentageArrow and timePercentageArrow based on increase or decrease
+        if let isIncrease = isIncrease {
+            if isIncrease {
+                // Set arrow.up.forward.circle in systemGreen color
+                cell.distancePercentageArrow.setImage(UIImage(systemName: "arrow.up.forward.circle"), for: .normal)
+                cell.timePercentageArrow.setImage(UIImage(systemName: "arrow.up.forward.circle"), for: .normal)
+                cell.distancePercentageArrow.tintColor = .systemGreen
+                cell.timePercentageArrow.tintColor = .systemGreen
+            } else {
+                // Set arrow.down.forward.circle in systemRed color
+                cell.distancePercentageArrow.setImage(UIImage(systemName: "arrow.down.forward.circle"), for: .normal)
+                cell.timePercentageArrow.setImage(UIImage(systemName: "arrow.down.forward.circle"), for: .normal)
+                cell.distancePercentageArrow.tintColor = .systemRed
+                cell.timePercentageArrow.tintColor = .systemRed
+            }
+        } else {
+            // Set arrow.right.circle in systemBlue color for the first entry
+            cell.distancePercentageArrow.setImage(UIImage(systemName: "arrow.right.circle"), for: .normal)
+            cell.timePercentageArrow.setImage(UIImage(systemName: "arrow.right.circle"), for: .normal)
+            cell.distancePercentageArrow.tintColor = .systemBlue
+            cell.timePercentageArrow.tintColor = .systemBlue
+        }
+    }
+
+
+
+
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         // Add spacing between cells
         let spacing: CGFloat = 10
         cell.contentView.frame = cell.contentView.frame.inset(by: UIEdgeInsets(top: spacing, left: 0, bottom: spacing, right: 0))
     }
     
-    // MARK: TableViewFunction to delete rows.
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            let realm = try! Realm()
-            let objects = realm.objects(pastMonthRides.self).sorted(byKeyPath: "date", ascending: false)
-            let object = objects[indexPath.row]
-            
-            let alert = UIAlertController(title: "Monatseintrag löschen", message: "Möchtest du diesen Eintrag wirklich löschen?", preferredStyle: .actionSheet)
-            
-            alert.addAction(UIAlertAction(title: "Löschen", style: .destructive, handler: { _ in
-                // If the user confirms, delete the row
-                try! realm.write {
-                    realm.delete(object)
-                }
-                
-                tableView.deleteRows(at: [indexPath], with: .automatic)
-            }))
-            
-            alert.addAction(UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil))
-            
-            present(alert, animated: true, completion: nil)
-        }
-    }
     
     // MARK: Set the gap between rows:
     
