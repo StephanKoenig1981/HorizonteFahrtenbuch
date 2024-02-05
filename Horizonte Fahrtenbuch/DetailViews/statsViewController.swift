@@ -304,7 +304,7 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
          }*/
          
          emailText += "<br><br>"
-         emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V2.5.6 generiert. - © 2023 - 2024 Stephan König"
+         emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V3.0.0 generiert. - © 2023 - 2024 Stephan König"
          
          if MFMailComposeViewController.canSendMail() {
              let mailComposer = MFMailComposeViewController()
@@ -436,30 +436,6 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
         cell.contentView.frame = cell.contentView.frame.inset(by: UIEdgeInsets(top: spacing, left: 0, bottom: spacing, right: 0))
     }
     
-    // MARK: TableViewFunction to delete rows.
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            let realm = try! Realm()
-            let objects = realm.objects(pastMonthRides.self).sorted(byKeyPath: "date", ascending: false)
-            let object = objects[indexPath.row]
-            
-            let alert = UIAlertController(title: "Monatseintrag löschen", message: "Möchtest du diesen Eintrag wirklich löschen?", preferredStyle: .actionSheet)
-            
-            alert.addAction(UIAlertAction(title: "Löschen", style: .destructive, handler: { _ in
-                // If the user confirms, delete the row
-                try! realm.write {
-                    realm.delete(object)
-                }
-                
-                tableView.deleteRows(at: [indexPath], with: .automatic)
-            }))
-            
-            alert.addAction(UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil))
-            
-            present(alert, animated: true, completion: nil)
-        }
-    }
     
     // MARK: Set the gap between rows:
     
