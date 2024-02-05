@@ -7,11 +7,20 @@
 
 
 import UIKit
+import Foundation
+
 
 class pastMonthRidesCell: UITableViewCell {
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
+    
+    @IBOutlet weak var timePercentageLabel: UILabel!
+    @IBOutlet weak var distancePercentageLabel: UILabel!
+    
+    @IBOutlet weak var distancePercentageArrow: UIButton!
+    @IBOutlet weak var timePercentageArrow: UIButton!
+   
     
     override func layoutSubviews() {
             super.layoutSubviews()
