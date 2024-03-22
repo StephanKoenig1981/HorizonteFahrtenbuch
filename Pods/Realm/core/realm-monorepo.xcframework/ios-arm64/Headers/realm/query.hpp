@@ -211,6 +211,11 @@ public:
     Query& like(ColKey column_key, StringData value, bool case_sensitive = true);
     Query& fulltext(ColKey column_key, StringData value);
     Query& fulltext(ColKey column_key, StringData value, const LinkMap&);
+    Query& greater(ColKey column_key, StringData value);
+    Query& greater_equal(ColKey column_key, StringData value);
+    Query& less(ColKey column_key, StringData value);
+    Query& less_equal(ColKey column_key, StringData value);
+
 
     // These are shortcuts for equal(StringData(c_str)) and
     // not_equal(StringData(c_str)), and are needed to avoid unwanted
@@ -287,6 +292,10 @@ public:
         return m_table;
     }
 
+    bool has_conditions() const
+    {
+        return m_groups.size() > 0 && m_groups[0].m_root_node;
+    }
     void get_outside_versions(TableVersions&) const;
 
     // True if matching rows are guaranteed to be returned in table order.
@@ -359,10 +368,6 @@ private:
     size_t do_count(size_t limit = size_t(-1)) const;
     void delete_nodes() noexcept;
 
-    bool has_conditions() const
-    {
-        return m_groups.size() > 0 && m_groups[0].m_root_node;
-    }
     ParentNode* root_node() const
     {
         REALM_ASSERT(m_groups.size());

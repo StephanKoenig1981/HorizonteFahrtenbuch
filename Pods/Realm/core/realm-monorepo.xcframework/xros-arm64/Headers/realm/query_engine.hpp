@@ -67,30 +67,31 @@ TConditionValue:    Type of values in condition column. That is, int64_t, float,
 #define REALM_QUERY_ENGINE_HPP
 
 #include <algorithm>
+#include <array>
 #include <functional>
 #include <sstream>
 #include <string>
-#include <array>
 
+#include <realm/array_backlink.hpp>
 #include <realm/array_basic.hpp>
-#include <realm/array_key.hpp>
-#include <realm/array_string.hpp>
 #include <realm/array_binary.hpp>
-#include <realm/array_timestamp.hpp>
+#include <realm/array_bool.hpp>
 #include <realm/array_decimal128.hpp>
 #include <realm/array_fixed_bytes.hpp>
-#include <realm/array_mixed.hpp>
+#include <realm/array_key.hpp>
 #include <realm/array_list.hpp>
-#include <realm/array_bool.hpp>
-#include <realm/array_backlink.hpp>
-#include <realm/column_type_traits.hpp>
-#include <realm/query_conditions.hpp>
-#include <realm/table.hpp>
+#include <realm/array_mixed.hpp>
+#include <realm/array_string.hpp>
+#include <realm/array_timestamp.hpp>
 #include <realm/column_integer.hpp>
+#include <realm/column_type_traits.hpp>
+#include <realm/index_string.hpp>
+#include <realm/query_conditions.hpp>
+#include <realm/query_expression.hpp>
+#include <realm/table.hpp>
 #include <realm/unicode.hpp>
 #include <realm/util/serializer.hpp>
 #include <realm/utilities.hpp>
-#include <realm/index_string.hpp>
 
 #include <map>
 #include <unordered_set>
@@ -302,7 +303,7 @@ protected:
 
 class IndexEvaluator {
 public:
-    void init(StringIndex* index, Mixed value);
+    void init(SearchIndex* index, Mixed value);
     void init(std::vector<ObjKey>* storage);
 
     size_t do_search_index(const Cluster* cluster, size_t start, size_t end);
@@ -475,7 +476,7 @@ public:
         m_nb_needles = m_needles.size();
 
         if (has_search_index() && m_nb_needles == 0) {
-            StringIndex* index = ParentNode::m_table->get_search_index(ParentNode::m_condition_column_key);
+            SearchIndex* index = ParentNode::m_table->get_search_index(ParentNode::m_condition_column_key);
             m_index_evaluator = IndexEvaluator();
             m_index_evaluator->init(index, BaseType::m_value);
             IntegerNodeBase<LeafType>::m_dT = 0;
@@ -842,7 +843,7 @@ public:
 
         if constexpr (std::is_same_v<TConditionFunction, Equal>) {
             if (m_index_evaluator) {
-                StringIndex* index = m_table->get_search_index(m_condition_column_key);
+                SearchIndex* index = m_table->get_search_index(m_condition_column_key);
                 m_index_evaluator->init(index, m_value);
                 this->m_dT = 0;
             }
@@ -953,7 +954,7 @@ public:
 
         if constexpr (std::is_same_v<TConditionFunction, Equal>) {
             if (m_index_evaluator) {
-                StringIndex* index =
+                SearchIndex* index =
                     TimestampNodeBase::m_table->get_search_index(TimestampNodeBase::m_condition_column_key);
                 m_index_evaluator->init(index, TimestampNodeBase::m_value);
                 this->m_dT = 0;
@@ -1172,7 +1173,7 @@ public:
         }
 
         if (m_index_evaluator) {
-            StringIndex* index = BaseType::m_table->get_search_index(BaseType::m_condition_column_key);
+            SearchIndex* index = BaseType::m_table->get_search_index(BaseType::m_condition_column_key);
             m_index_evaluator->init(index, m_optional_value);
             this->m_dT = 0;
         }
@@ -1302,7 +1303,7 @@ protected:
     void get_ownership()
     {
         if (m_value.is_type(type_String, type_Binary)) {
-            auto bin = m_value.get_binary();
+            auto bin = m_value.export_to_type<BinaryData>();
             m_buffer = OwnedBinaryData(bin.data(), bin.size());
             auto tmp = m_buffer.get();
             if (m_value.is_type(type_String)) {
@@ -1475,6 +1476,7 @@ public:
 
     StringNodeBase(StringData v, ColKey column)
         : m_value(v.is_null() ? util::none : util::make_optional(std::string(v)))
+        , m_string_value(m_value)
     {
         m_condition_column_key = column;
         m_dT = 10.0;
@@ -1510,6 +1512,7 @@ public:
     StringNodeBase(const StringNodeBase& from)
         : ParentNode(from)
         , m_value(from.m_value)
+        , m_string_value(m_value)
         , m_is_string_enum(from.m_is_string_enum)
     {
     }
@@ -1517,17 +1520,14 @@ public:
     std::string describe(util::serializer::SerialisationState& state) const override
     {
         REALM_ASSERT(m_condition_column_key);
-        StringData sd;
-        if (bool(StringNodeBase::m_value)) {
-            sd = StringData(*StringNodeBase::m_value);
-        }
         return state.describe_column(ParentNode::m_table, m_condition_column_key) + " " + describe_condition() + " " +
-               util::serializer::print_value(sd);
+               util::serializer::print_value(m_string_value);
     }
 
 protected:
     std::optional<std::string> m_value;
     std::optional<ArrayString> m_leaf;
+    StringData m_string_value;
 
     bool m_is_string_enum = false;
 
@@ -1545,9 +1545,14 @@ protected:
 template <class TConditionFunction>
 class StringNode : public StringNodeBase {
 public:
+    constexpr static bool case_sensitive_comparison =
+        is_any_v<TConditionFunction, Greater, GreaterEqual, Less, LessEqual>;
     StringNode(StringData v, ColKey column)
         : StringNodeBase(v, column)
     {
+        if constexpr (case_sensitive_comparison) {
+            return;
+        }
         auto upper = case_map(v, true);
         auto lower = case_map(v, false);
         if (!upper || !lower) {
@@ -1572,8 +1577,15 @@ public:
         for (size_t s = start; s < end; ++s) {
             StringData t = get_string(s);
 
-            if (cond(StringData(m_value), m_ucase.c_str(), m_lcase.c_str(), t))
-                return s;
+            if constexpr (case_sensitive_comparison) {
+                // case insensitive not implemented for: >, >=, <, <=
+                if (cond(t, m_string_value))
+                    return s;
+            }
+            else {
+                if (cond(m_string_value, m_ucase.c_str(), m_lcase.c_str(), t))
+                    return s;
+            }
         }
         return not_found;
     }
@@ -1638,7 +1650,7 @@ public:
         for (size_t s = start; s < end; ++s) {
             StringData t = get_string(s);
 
-            if (cond(StringData(m_value), m_charmap, t))
+            if (cond(m_string_value, m_charmap, t))
                 return s;
         }
         return not_found;
@@ -1719,7 +1731,7 @@ public:
             if (!bool(m_value)) {
                 return s;
             }
-            if (cond(StringData(m_value), m_ucase.c_str(), m_lcase.c_str(), m_charmap, t))
+            if (cond(m_string_value, m_ucase.c_str(), m_lcase.c_str(), m_charmap, t))
                 return s;
         }
         return not_found;
@@ -1900,7 +1912,6 @@ private:
 };
 
 
-class LinkMap;
 class StringNodeFulltext : public StringNodeEqualBase {
 public:
     StringNodeFulltext(StringData v, ColKey column, std::unique_ptr<LinkMap> lm = {});
@@ -2328,7 +2339,7 @@ public:
         m_dT = 50.0;
         m_condition_column_key = origin_column_key;
         auto column_type = origin_column_key.get_type();
-        REALM_ASSERT(column_type == col_type_Link || column_type == col_type_LinkList);
+        REALM_ASSERT(column_type == col_type_Link);
         REALM_ASSERT(!m_target_keys.empty());
     }
 
