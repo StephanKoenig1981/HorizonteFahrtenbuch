@@ -249,7 +249,7 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
 
     // MARK: Delete contacts from tableView
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+   /* override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
         
         let generator = UINotificationFeedbackGenerator()
@@ -281,7 +281,8 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
         // Present the alert controller
         present(alertController, animated: true, completion: nil)
     }
-        
+    */
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
     }
