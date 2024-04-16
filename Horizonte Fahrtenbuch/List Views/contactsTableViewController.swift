@@ -46,12 +46,11 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Fix color for UISearchbar
+        // Fix color for UISearchBar
         
         if let textfield = clientSearchBar.value(forKey: "searchField") as? UITextField {
-
             textfield.attributedPlaceholder = NSAttributedString(string: textfield.placeholder ?? "", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
-
+            
             if let leftView = textfield.leftView as? UIImageView {
                 leftView.image = leftView.image?.withRenderingMode(.alwaysTemplate)
                 leftView.tintColor = UIColor.lightGray
@@ -63,12 +62,12 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
         // MARK: Tap Recoginzer
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard(_:)))
-            tableView.addGestureRecognizer(tapGesture)
+        tableView.addGestureRecognizer(tapGesture)
         
+        // Initialize filteredResults with all objects sorted alphabetically
+        filteredResults = realm.objects(clients.self).sorted(byKeyPath: "client", ascending: true)
         
-        filteredResults = realm.objects(clients.self)   // <-- initialize Filtered Results
         // Register for changes in Realm Notifications
-       
         
         clientSearchBar.delegate = self
         clientTableView.delegate = self
@@ -78,13 +77,12 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
         
         clientTableView.rowHeight = 225 // same as storyboard, but better to declare it here too
         
-        // MARK: Setting placeholder text for the tableView beeing empty
+        // MARK: Setting placeholder text for the tableView being empty
         
         placeholderLabel.text = "Es wurden noch keine Kontakte gespeichert."
         placeholderLabel.textAlignment = .center
         placeholderLabel.textColor = .gray
         clientTableView.backgroundView = placeholderLabel
-        
     }
     
     // MARK: Setting Up User Interface
@@ -105,28 +103,17 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
             let unsortedFilteredResults = realm.objects(clients.self)
                 .filter("client CONTAINS[c] %@ OR street CONTAINS[c] %@", searchTerm, searchTerm)
             
-            // Convert the filtered results to an array
-            var sortedObjects = Array(unsortedFilteredResults)
-            
-            // Sort the array alphabetically while ignoring capitalization
-            sortedObjects.sort {
-                guard let client1 = $0.client?.lowercased(), let client2 = $1.client?.lowercased() else { return false }
-                return client1.localizedStandardCompare(client2) == .orderedAscending
-            }
-            
-            // Convert the sorted array back to Results
-            filteredResults = realm.objects(clients.self).filter("uniqueKey IN %@", sortedObjects.map { $0.uniqueKey })
+            // Sort the filtered results alphabetically by the 'client' property
+            filteredResults = unsortedFilteredResults.sorted(byKeyPath: "client", ascending: true)
         }
+        
+        // Log the sorted results
+        print("Sorted filteredResults: \(filteredResults)")
+        
         // Reload data after updating filtered results
         tableView.reloadData()
     }
 
-    func compareCaseInsensitive(_ string1: String?, _ string2: String?) -> Bool {
-        guard let string1 = string1?.lowercased(), let string2 = string2?.lowercased() else {
-            return false
-        }
-        return string1.localizedCaseInsensitiveCompare(string2) == .orderedAscending
-    }
     
     override func viewWillAppear(_ animated: Bool) {
             // Add a background view to the table view
@@ -146,11 +133,12 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = clientTableView.dequeueReusableCell(withIdentifier: "customClientCell", for: indexPath) as! clientsTableViewCell
         
-        let sortedObjects = filteredResults.sorted(by: { (client1, client2) -> Bool in
-            guard let clientName1 = client1.client?.lowercased(), let clientName2 = client2.client?.lowercased() else { return false }
-            return clientName1.localizedCaseInsensitiveCompare(clientName2) == .orderedAscending
-        })
-        let object = sortedObjects[indexPath.row]
+        guard indexPath.row < filteredResults.count else {
+            // Handle case where indexPath is out of bounds
+            return cell
+        }
+        
+        let object = filteredResults[indexPath.row]
         
         cell.clientNameLabel?.text = object.client?.description
         cell.clientsContactPersonLabel?.text = object.clientContactPerson?.description
@@ -249,7 +237,7 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
 
     // MARK: Delete contacts from tableView
     
-   /* override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
         
         let generator = UINotificationFeedbackGenerator()
@@ -281,11 +269,8 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
         // Present the alert controller
         present(alertController, animated: true, completion: nil)
     }
-    */
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
-    }
+    
     
     @objc func hideKeyboard(_ sender: UITapGestureRecognizer) {
         tableView.endEditing(true)
@@ -294,13 +279,16 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
     
     // MARK: SearchBar Function
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
             filteredResults = realm.objects(clients.self)
-            tableView.reloadData()
+                .sorted(byKeyPath: "client", ascending: true)
         } else {
             filterResults(searchTerm: searchText)
         }
+        
+        // Reload the table view to reflect the changes
+        tableView.reloadData()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
