@@ -18,7 +18,7 @@ class archivedRidesTableViewController: UITableViewController, UISearchBarDelega
     // MARK: Initializing Realm
     
     let realm = try! Realm()
-    let results = try! Realm().objects(archivedRides.self).sorted(byKeyPath: "date", ascending: false)
+    let results = try! Realm().objects(archivedRides.self).sorted(byKeyPath: "dateActual", ascending: false)
     
     var notificationToken: NotificationToken?
     
@@ -88,6 +88,11 @@ class archivedRidesTableViewController: UITableViewController, UISearchBarDelega
         placeholderLabel.textAlignment = .center
         placeholderLabel.textColor = .gray
         archivedRidesTableView.backgroundView = placeholderLabel
+        
+        // MARK: Tap Recoginzer
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard(_:)))
+        tableView.addGestureRecognizer(tapGesture)
     }
     
     override func viewWillAppear(_ animated: Bool) {
