@@ -139,11 +139,6 @@ class addRideViewController: UIViewController, UITextFieldDelegate {
             currentRides.currentClientName = clientTextfield.text
             currentRides.distanceDriven = distanceTextfield.text
             currentRides.supplementDate = dateFormatter.string(from: supplementDate)
-            currentRides.date = dateFormatter.string(from: date)
-            currentRides.isManuallySaved = true
-            
-            
-            
             currentRides.isManuallySaved = true
             
             saveRealmObject(currentRides: currentRides)
