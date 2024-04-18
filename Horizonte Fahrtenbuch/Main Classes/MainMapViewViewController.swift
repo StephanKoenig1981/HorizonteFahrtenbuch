@@ -12,6 +12,17 @@ import CoreLocation
 import ActivityKit
 import LocalAuthentication
 
+// MARK: Custom
+
+class DestinationPolyline: MKPolyline {
+    // You can add additional properties here if needed
+}
+
+class TraveledPolyline: MKPolyline {
+    // Custom class for traveled routes
+}
+
+// MARK: Main
 
 class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITextFieldDelegate {
     
@@ -245,7 +256,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         // Basic Map Setup
         
         mapView.showsCompass = true
-        mapView.showsScale = false
+        mapView.showsScale = true
         mapView.showsTraffic = true
         
         //mapview setup to show user location
@@ -253,8 +264,9 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         mapView.delegate = self
         mapView.mapType = MKMapType(rawValue: 0)!
         mapView.setUserTrackingMode(.followWithHeading, animated: true)
-        
+
     }
+    
     
     // MARK: Setting the delegate for ContactsTableViewController
     
@@ -383,37 +395,45 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
                     
                     // MARK: Zoom to fit Polyline into screensize. Important for MKSnapshotter
                     
-                    if let first = mapView.overlays.first {
-                        let rect = mapView.overlays.reduce(first.boundingMapRect, {$0.union($1.boundingMapRect)})
-                        mapView.setVisibleMapRect(rect, edgePadding: UIEdgeInsets(top: 190.0, left: 90.0, bottom: 70.0, right: 70.0), animated: true)
+                    /*guard let currentLocation = locations.last else { return }
+
+                        let center = CLLocationCoordinate2D(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
+                        let region = MKCoordinateRegion(center: center, latitudinalMeters: 250, longitudinalMeters: 50)
+                        mapView.setRegion(region, animated: true)
+                           
+                           //mapView.setVisibleMapRect(adjustedRect, edgePadding: mapPadding, animated: true)*/
                     }
                 }
             }
         }
-    }
+    
     
     // MARK: Base setup for drawing the polyline
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        
-        
-        if overlay is MKPolyline{
+        if let polyline = overlay as? DestinationPolyline {
+            let renderer = MKPolylineRenderer(polyline: polyline)
+            renderer.strokeColor = .blue
+            renderer.lineWidth = 6
+            return renderer
+        } else if overlay is TraveledPolyline {
             let renderer = MKPolylineRenderer(overlay: overlay)
-            
-            
-            // Change the stroke color depending on if it's on the way back or not. (Color is inverted since button was pressed programatically before.
-            
-            if isWayBack == false {
-                renderer.strokeColor = UIColor.systemCyan
-            } else if isWayBack == true {
-                renderer.strokeColor = UIColor.systemOrange
-            }
+            renderer.strokeColor = .orange
             renderer.lineWidth = 6
             return renderer
         }
-        return MKOverlayRenderer()
+        // Fallback for any other polyline
+        let renderer = MKPolylineRenderer(overlay: overlay)
+        renderer.strokeColor = .orange
+        renderer.lineWidth = 6
+        return renderer
     }
     
+    func addTraveledRoute(coordinates: [CLLocationCoordinate2D]) {
+        print("Adding traveled route with \(coordinates.count) coordinates.")
+        let polyline = TraveledPolyline(coordinates: coordinates, count: coordinates.count)
+        mapView.addOverlay(polyline)
+    }
     
     // MARK: Stopwatch Functions and Update Traveled Distance
     
@@ -567,10 +587,10 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         
         // Disabling scrolling, zooming, pitching and rotating when start was pressed.
         
-        mapView.isZoomEnabled = false
+        /*mapView.isZoomEnabled = false
         mapView.isScrollEnabled = false
         mapView.isRotateEnabled = false
-        mapView.isPitchEnabled = false
+        mapView.isPitchEnabled = false*/
         
         // Fade In delivery Button
         
@@ -582,7 +602,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         let generator = UINotificationFeedbackGenerator()
         generator.notificationOccurred(.success)
         
-        locationButton.isEnabled = false
+        locationButton.isEnabled = true
         
         if timerCounting
         {
@@ -1158,6 +1178,14 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
 
 // MARK: Extensions
 
+extension MKPolyline {
+    var coordinates: [CLLocationCoordinate2D] {
+        var coords = [CLLocationCoordinate2D](repeating: CLLocationCoordinate2D(), count: pointCount)
+        getCoordinates(&coords, range: NSRange(location: 0, length: pointCount))
+        return coords
+    }
+}
+
 extension TimeInterval {
     // Formats the TimeInterval (which is in seconds) into a hours and minutes string
     func formatAsDuration() -> String {
@@ -1187,7 +1215,7 @@ extension MainMapViewViewController: ContactSelectionDelegate {
                 }
 
                 self.startProgrammatically()
-                self.calculateRouteToDestination(street: street, city: city, postalCode: postalCode)
+                self.calculateRouteToDestination(street: street, city: city, postalCode: postalCode, clientName: clientName)
                 self.etaView.topNotchViewfadeIn(duration: 0.7)
 
                 // Start or restart the timer
@@ -1201,7 +1229,7 @@ extension MainMapViewViewController: ContactSelectionDelegate {
             self.routeToLocation(destination: destination)
         }
     
-    func calculateRouteToDestination(street: String, city: String, postalCode: String) {
+    func calculateRouteToDestination(street: String, city: String, postalCode: String, clientName: String) {
         let geocoder = CLGeocoder()
         let addressString = "\(street), \(postalCode) \(city)"
         
@@ -1220,9 +1248,28 @@ extension MainMapViewViewController: ContactSelectionDelegate {
                 return
             }
             
+            // Update the destination annotation with the client name
+            DispatchQueue.main.async {
+                strongSelf.updateDestinationAnnotation(at: location.coordinate, withName: clientName)
+            }
+            
             strongSelf.currentDestination = location
             strongSelf.routeToLocation(destination: location)
         }
+    }
+
+    
+    func updateDestinationAnnotation(at coordinate: CLLocationCoordinate2D, withName name: String) {
+        // Remove existing destination annotation if it exists
+        if let existingAnnotation = mapView.annotations.first(where: { ($0 as? MKPointAnnotation)?.title == "Destination" }) {
+            mapView.removeAnnotation(existingAnnotation)
+        }
+        
+        // Create a new annotation for the destination
+        let destinationAnnotation = MKPointAnnotation()
+        destinationAnnotation.coordinate = coordinate
+        destinationAnnotation.title = name  // Set the client's name as the title
+        mapView.addAnnotation(destinationAnnotation)
     }
 
     func showAlert(title: String, message: String) {
@@ -1244,12 +1291,19 @@ extension MainMapViewViewController: ContactSelectionDelegate {
 
         let directions = MKDirections(request: directionRequest)
         directions.calculate { [weak self] (response, error) in
-            guard let strongSelf = self, let response = response else {
+            guard let strongSelf = self, let response = response, let route = response.routes.first else {
                 print("Directions calculation failed: \(error?.localizedDescription ?? "No error provided")")
                 return
             }
+
+            // Extract the coordinates from the route's polyline
+            let routeCoordinates = route.polyline.coordinates
             
-            let route = response.routes[0]
+            // Create a custom polyline for the route to the destination
+            let polyline = DestinationPolyline(coordinates: routeCoordinates, count: routeCoordinates.count)
+            strongSelf.mapView.addOverlay(polyline, level: .aboveRoads)
+
+            // Update ETA labels
             let arrivalDate = Date().addingTimeInterval(route.expectedTravelTime)
             strongSelf.etaLabel.text = strongSelf.formatAsTime(date: arrivalDate)
             strongSelf.etaDistanceLabel.text = route.distance.formatAsDistance()

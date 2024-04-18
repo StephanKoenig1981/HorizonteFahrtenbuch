@@ -552,7 +552,7 @@
                                 </constraints>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Die App wurde zur Sicherheit gesperrt und muss neu gestartet werden, um eine erneute Authentifizierung durchzuführen." textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yQc-PM-sOS">
-                                <rect key="frame" x="58" y="485" width="317" height="128"/>
+                                <rect key="frame" x="58" y="485" width="319" height="128"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="K5p-88-2OD"/>
@@ -561,8 +561,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V4.0.1 - © 2023 - 2024 Stephan König - GPL 3.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="loR-iG-pV8">
-                                <rect key="frame" x="57" y="822" width="317" height="11"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V4.0.2 - © 2023 - 2024 Stephan König - GPL 3.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="loR-iG-pV8">
+                                <rect key="frame" x="57" y="822" width="319" height="11"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1438,25 +1438,25 @@
                                         <rect key="frame" x="93" y="745" width="244" height="81"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ankunftszeit:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fc9-nb-jFT">
-                                                <rect key="frame" x="8" y="17" width="110.33333333333333" height="21"/>
+                                                <rect key="frame" x="14.999999999999993" y="17" width="110.33333333333331" height="21"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                 <color key="textColor" red="0.62352941179999999" green="0.41176470590000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restdistanz:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O9Y-Vp-m1J">
-                                                <rect key="frame" x="8" y="46" width="102" height="21"/>
+                                                <rect key="frame" x="15" y="46" width="102" height="21"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                 <color key="textColor" red="0.62352941179999999" green="0.41176470590000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="---.-- Km" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fIm-sj-mlK">
-                                                <rect key="frame" x="128" y="46" width="108" height="21"/>
+                                                <rect key="frame" x="121" y="46" width="108" height="21"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                 <color key="textColor" red="0.62352941179999999" green="0.41176470590000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--:--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KEr-Zg-ma3">
-                                                <rect key="frame" x="164" y="17" width="72" height="21"/>
+                                                <rect key="frame" x="157" y="17" width="72" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="72" id="ek8-ic-frz"/>
                                                 </constraints>
@@ -1467,15 +1467,15 @@
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstItem="fc9-nb-jFT" firstAttribute="leading" secondItem="tiW-YL-1ya" secondAttribute="leadingMargin" id="Boh-OM-QAB"/>
-                                            <constraint firstItem="fc9-nb-jFT" firstAttribute="leading" secondItem="O9Y-Vp-m1J" secondAttribute="leading" id="Dv6-Fi-oao"/>
+                                            <constraint firstItem="fc9-nb-jFT" firstAttribute="leading" secondItem="tiW-YL-1ya" secondAttribute="leadingMargin" constant="7" id="Boh-OM-QAB"/>
+                                            <constraint firstItem="fc9-nb-jFT" firstAttribute="leading" secondItem="O9Y-Vp-m1J" secondAttribute="leading" constant="-7.1054273576010019e-15" id="Dv6-Fi-oao"/>
                                             <constraint firstItem="fc9-nb-jFT" firstAttribute="top" secondItem="tiW-YL-1ya" secondAttribute="top" constant="17" id="Jsy-sc-FlA"/>
                                             <constraint firstItem="fc9-nb-jFT" firstAttribute="baseline" secondItem="KEr-Zg-ma3" secondAttribute="baseline" id="OyG-Tq-yho"/>
                                             <constraint firstItem="O9Y-Vp-m1J" firstAttribute="top" secondItem="fc9-nb-jFT" secondAttribute="bottom" constant="8" id="Rnp-UI-79G"/>
                                             <constraint firstItem="O9Y-Vp-m1J" firstAttribute="baseline" secondItem="fIm-sj-mlK" secondAttribute="baseline" id="T8H-kI-LH9"/>
                                             <constraint firstAttribute="width" constant="244" id="XAp-XQ-pIV"/>
                                             <constraint firstAttribute="height" constant="81" id="n8e-6T-ygb"/>
-                                            <constraint firstItem="KEr-Zg-ma3" firstAttribute="trailing" secondItem="tiW-YL-1ya" secondAttribute="trailingMargin" id="x4H-1F-JT4"/>
+                                            <constraint firstItem="KEr-Zg-ma3" firstAttribute="trailing" secondItem="tiW-YL-1ya" secondAttribute="trailingMargin" constant="-7" id="x4H-1F-JT4"/>
                                             <constraint firstItem="KEr-Zg-ma3" firstAttribute="trailing" secondItem="fIm-sj-mlK" secondAttribute="trailing" id="zAe-PG-42z"/>
                                         </constraints>
                                     </view>
@@ -1827,7 +1827,7 @@
                                     <segue destination="33C-9P-Pzo" kind="show" id="6HV-Dq-FNx"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V4.0.1 - © 2023 - 2024 Stephan König - GPL 3.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfl-98-Qbj">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V4.0.2 - © 2023 - 2024 Stephan König - GPL 3.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfl-98-Qbj">
                                 <rect key="frame" x="53" y="891" width="324" height="11"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2538,8 +2538,8 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V4.0.1 - © 2023 - 2024 Stephan König - GPL 3.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4p6-Nh-qrN">
-                                <rect key="frame" x="56.666666666666657" y="891" width="317" height="11"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V4.0.2 - © 2023 - 2024 Stephan König - GPL 3.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4p6-Nh-qrN">
+                                <rect key="frame" x="55.666666666666657" y="891" width="319" height="11"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
