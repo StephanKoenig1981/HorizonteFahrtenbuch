@@ -141,7 +141,6 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         authenticateWithBiometrics()
         
         // Initialize Realm and print Realm Database file URL
@@ -265,10 +264,9 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         mapView.delegate = self
         mapView.mapType = MKMapType(rawValue: 0)!
         mapView.setUserTrackingMode(.followWithHeading, animated: true)
-       
-        
-    }
 
+    }
+    
     
     // MARK: Setting the delegate for ContactsTableViewController
     
@@ -397,13 +395,13 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
                     
                     // MARK: Zoom to fit Polyline into screensize. Important for MKSnapshotter
                     
-                    guard let currentLocation = locations.last else { return }
+                    /*guard let currentLocation = locations.last else { return }
 
                         let center = CLLocationCoordinate2D(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
                         let region = MKCoordinateRegion(center: center, latitudinalMeters: 250, longitudinalMeters: 50)
                         mapView.setRegion(region, animated: true)
                            
-                           //mapView.setVisibleMapRect(adjustedRect, edgePadding: mapPadding, animated: true)
+                           //mapView.setVisibleMapRect(adjustedRect, edgePadding: mapPadding, animated: true)*/
                     }
                 }
             }
