@@ -15,6 +15,10 @@ import LocalAuthentication
 
 class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITextFieldDelegate {
     
+    // Update Timer when riding to a customer started from the adressbook
+    
+    var updateTimer: Timer?
+    var currentDestination: CLLocation?
     
     // MARK: Variables for Location determination
     
@@ -100,6 +104,10 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     @IBOutlet weak var phoneButtonView: UIView!
     @IBOutlet weak var phoneButton: UIButton!
     
+    @IBOutlet weak var etaView: UIView!
+    @IBOutlet weak var etaLabel: UILabel!
+    @IBOutlet weak var etaDistanceLabel: UILabel!
+    
     // MARK: Outlets for the Segmented control view and segmented control
     
     @IBOutlet weak var segmentedControlView: UIView!
@@ -165,6 +173,10 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         
         clientTextFieldView.layer.cornerRadius = 20
         clientTextFieldView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+        
+        // Corner Radius for ETA view
+        
+        etaView.layer.cornerRadius = 10
         
         // Customizing the Maptype Selector
         
@@ -686,6 +698,22 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
                 mapView.removeAnnotation(annotation)
             }
             
+            // Invalidate ETA Timer Updates and fade ETA View Out
+            
+            updateTimer?.invalidate()
+            updateTimer = nil
+            
+            // Check if the timer has been invalidated
+            
+            // Check if the timer has been invalidated and print the status
+                if updateTimer?.isValid ?? false {
+                    print("Timer is still active.")
+                } else {
+                    print("Timer has been successfully invalidated.")
+                }
+            
+            self.etaView.fadeOut()
+            
             // Fade Delivery View Out and turn the button color back to systemOrange
             
             deliveryView.fadeDeliveryViewOut(duration: 0.5)
@@ -796,6 +824,20 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
                 if let annotation = mapView.annotations.first(where: { $0.title == "Start" }) {
                     mapView.removeAnnotation(annotation)
                 }
+                
+                // Invalidate ETA Timer Updates and fade ETA View Out
+                
+                updateTimer?.invalidate()
+                updateTimer = nil
+                
+                // Check if the timer has been invalidated and print the status
+                    if updateTimer?.isValid ?? false {
+                        print("Timer is still active.")
+                    } else {
+                        print("Timer has been successfully invalidated.")
+                    }
+                
+                self.etaView.fadeOut()
                 
                 // Fade Delivery View Out and turn it's color back to systemOrange
                 
@@ -932,6 +974,8 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         }))
         self.present(alert, animated: true, completion: nil)
     }
+    
+    // MARK:
     
     // MARK: Function for fading in and out the phone view
     
@@ -1107,23 +1151,97 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
 
 // MARK: Extensions
 
+extension TimeInterval {
+    // Formats the TimeInterval (which is in seconds) into a hours and minutes string
+    func formatAsDuration() -> String {
+        let hours = Int(self) / 3600
+        let minutes = Int(self) % 3600 / 60
+        return String(format: "%02i hours %02i minutes", hours, minutes)
+    }
+}
+
+extension CLLocationDistance {
+    // Formats the CLLocationDistance (which is in meters) into a kilometers string
+    func formatAsDistance() -> String {
+        let kilometers = self / 1000
+        return String(format: "%.2f Km", kilometers)
+    }
+}
+
 extension MainMapViewViewController: ContactSelectionDelegate {
-    func didSelectContact(clientName: String, phoneNumber: String) {
-        DispatchQueue.main.async {
+    func didSelectContact(clientName: String, phoneNumber: String, street: String, city: String, postalCode: String) {
+            DispatchQueue.main.async {
                 self.clientTextField.text = clientName
                 self.phoneNumber = phoneNumber
-            
-                // If the phone number is not nil, fade the phone button view in
-            
+
                 if !phoneNumber.isEmpty {
-                        self.fadePhoneViewIn()
-                        self.fadePhoneButtonIn()
-                    }
-                // Programmatically press the start button to start the ride
-            
+                    self.fadePhoneViewIn()
+                    self.fadePhoneButtonIn()
+                }
+
                 self.startProgrammatically()
+                self.calculateRouteToDestination(street: street, city: city, postalCode: postalCode)
+                self.etaView.topNotchViewfadeIn(duration: 0.7)
+
+                // Start or restart the timer
+                self.updateTimer?.invalidate()
+                self.updateTimer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(self.updateETA), userInfo: nil, repeats: true)
             }
+        }
+    
+    @objc func updateETA() {
+            guard let destination = currentDestination else { return }
+            self.routeToLocation(destination: destination)
+        }
+    
+    func calculateRouteToDestination(street: String, city: String, postalCode: String) {
+        let geocoder = CLGeocoder()
+        let addressString = "\(street), \(postalCode) \(city)"
+        
+        geocoder.geocodeAddressString(addressString) { [weak self] (placemarks, error) in
+            guard let strongSelf = self, let placemark = placemarks?.first, let location = placemark.location else {
+                print("Geocoding failed: \(error?.localizedDescription ?? "No error provided")")
+                return
+            }
+            
+            strongSelf.currentDestination = location
+            strongSelf.routeToLocation(destination: location)
+        }
     }
+
+    func routeToLocation(destination: CLLocation) {
+        guard let sourceCoordinates = locationManager.location?.coordinate else { return }
+
+        let destinationCoordinates = destination.coordinate
+        let sourcePlacemark = MKPlacemark(coordinate: sourceCoordinates)
+        let destinationPlacemark = MKPlacemark(coordinate: destinationCoordinates)
+        let directionRequest = MKDirections.Request()
+        directionRequest.source = MKMapItem(placemark: sourcePlacemark)
+        directionRequest.destination = MKMapItem(placemark: destinationPlacemark)
+        directionRequest.transportType = .automobile
+
+        let directions = MKDirections(request: directionRequest)
+        directions.calculate { [weak self] (response, error) in
+            guard let strongSelf = self, let response = response else {
+                print("Directions calculation failed: \(error?.localizedDescription ?? "No error provided")")
+                return
+            }
+            
+            let route = response.routes[0]
+            let arrivalDate = Date().addingTimeInterval(route.expectedTravelTime)
+            strongSelf.etaLabel.text = strongSelf.formatAsTime(date: arrivalDate)
+            strongSelf.etaDistanceLabel.text = route.distance.formatAsDistance()
+        }
+    }
+
+    
+    func formatAsTime(date: Date) -> String {
+         let dateFormatter = DateFormatter()
+         dateFormatter.dateFormat = "HH:mm" // 24-hour time format
+         return dateFormatter.string(from: date)
+     }
+    
+    
 
     func startProgrammatically() {
             let dummyButton = UIButton()

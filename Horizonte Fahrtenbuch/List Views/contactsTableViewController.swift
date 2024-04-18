@@ -10,7 +10,7 @@ import RealmSwift
 import CoreLocation
 
 protocol ContactSelectionDelegate: AnyObject {
-    func didSelectContact(clientName: String, phoneNumber: String)
+    func didSelectContact(clientName: String, phoneNumber: String, street: String, city: String, postalCode: String)
 }
 
 
@@ -188,14 +188,16 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
             
             print("startRideButton pressed at Index", indexPath)
             
-            if let clientName = object.client, let phoneNumber = object.phone {
-                print("Client Name: \(clientName), Phone: \(phoneNumber)")
+            if let clientName = object.client, let phoneNumber = object.phone, let street = object.street, let city = object.city, let postalCode = object.postalCode {
+                let fullAddress = "\(street), \(postalCode) \(city)"
+                print("Client Name: \(clientName), Phone: \(phoneNumber), Address: \(fullAddress)")
                 
-                let alert = UIAlertController(title: "Fahrt starten?", message: "Möchtest du wirklich diese Fahrt für \(clientName) starten?", preferredStyle: .actionSheet)
+                let alertMessage = "Möchtest du wirklich diese Fahrt für \(clientName) starten? Adresse: \(fullAddress)"
+                let alert = UIAlertController(title: "Fahrt starten?", message: alertMessage, preferredStyle: .actionSheet)
                 
                 let yesAction = UIAlertAction(title: "Ja", style: .default) { [weak self] _ in
                     self?.dismiss(animated: true) {
-                        self?.delegate?.didSelectContact(clientName: clientName, phoneNumber: phoneNumber)
+                        self?.delegate?.didSelectContact(clientName: clientName, phoneNumber: phoneNumber, street: street, city: city, postalCode: postalCode)
                     }
                 }
                 alert.addAction(yesAction)
@@ -205,7 +207,7 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
                 
                 self.present(alert, animated: true, completion: nil)
             } else {
-                print("Client name or phone number is missing")
+                print("Client name, phone number, or address is missing")
             }
         }
         
