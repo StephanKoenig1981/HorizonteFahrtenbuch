@@ -20,6 +20,13 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     var updateTimer: Timer?
     var currentDestination: CLLocation?
     
+    // Static property for DateFormatter
+        static let dateFormatter: DateFormatter = {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "HH:mm" // 24-hour time format
+            return formatter
+        }()
+    
     // MARK: Variables for Location determination
     
     var coordinates :[CLLocationCoordinate2D] = []
@@ -1199,14 +1206,29 @@ extension MainMapViewViewController: ContactSelectionDelegate {
         let addressString = "\(street), \(postalCode) \(city)"
         
         geocoder.geocodeAddressString(addressString) { [weak self] (placemarks, error) in
-            guard let strongSelf = self, let placemark = placemarks?.first, let location = placemark.location else {
-                print("Geocoding failed: \(error?.localizedDescription ?? "No error provided")")
+            guard let strongSelf = self else { return }
+            if let error = error {
+                print("Geocoding failed: \(error.localizedDescription)")
+                DispatchQueue.main.async {
+                    strongSelf.showAlert(title: "Geocoding Error", message: "Unable to find location for the provided address.")
+                }
+                return
+            }
+
+            guard let location = placemarks?.first?.location else {
+                print("No location found for the provided address.")
                 return
             }
             
             strongSelf.currentDestination = location
             strongSelf.routeToLocation(destination: location)
         }
+    }
+
+    func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        self.present(alert, animated: true)
     }
 
     func routeToLocation(destination: CLLocation) {
@@ -1236,10 +1258,8 @@ extension MainMapViewViewController: ContactSelectionDelegate {
 
     
     func formatAsTime(date: Date) -> String {
-         let dateFormatter = DateFormatter()
-         dateFormatter.dateFormat = "HH:mm" // 24-hour time format
-         return dateFormatter.string(from: date)
-     }
+            return MainMapViewViewController.dateFormatter.string(from: date)
+        }
     
     
 
