@@ -17,6 +17,10 @@ class personalDetailsViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var bossNameTextfield: UITextField!
     @IBOutlet weak var emailTextfield: UITextField!
     
+    @IBOutlet weak var companyAddress: UITextField!
+    @IBOutlet weak var companyPostalCode: UITextField!
+    @IBOutlet weak var companyCity: UITextField!
+    
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var logoView: UIImageView!
     
@@ -47,6 +51,9 @@ class personalDetailsViewController: UIViewController, UITextFieldDelegate {
         yourNameTextfield.text = lastSavedModel?.yourName
         bossNameTextfield.text = lastSavedModel?.bossName
         emailTextfield.text = lastSavedModel?.email
+        companyAddress.text = lastSavedModel?.companyStreet
+        companyPostalCode.text = lastSavedModel?.companyPostalCode
+        companyCity.text = lastSavedModel?.companyCity
     }
     
     // Function to check if the local Realm file exists
@@ -146,28 +153,34 @@ class personalDetailsViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func saveButtonPressed(_ sender: Any) {
-        // Get the text from the text fields
-        guard let yourName = yourNameTextfield.text,
-              let bossName = bossNameTextfield.text,
-              let email = emailTextfield.text
-        else {
-            return // Exit if there's no text in either of the fields
-        }
-        
-        // Set up the Realm database
-        let realm = try! Realm()
-        let lastSavedModel = realm.objects(personalDetails.self).last ?? personalDetails()
-        
-        
-        try! realm.write {
-            lastSavedModel.yourName = yourName
-            lastSavedModel.bossName = bossName
-            lastSavedModel.email = email
-            realm.add(lastSavedModel, update: .modified)
-        }
-        
-        
-        logoView.fadeIn(duration: 0.7)
+        // Get the text from all text fields
+            guard let yourName = yourNameTextfield.text,
+                  let bossName = bossNameTextfield.text,
+                  let email = emailTextfield.text,
+                  let companyCityText = companyCity.text,
+                  let companyPostalCodeText = companyPostalCode.text,
+                  let companyStreetText = companyAddress.text else {
+                print("One or more fields are empty.")
+                return // Exit if there's no text in any of the fields
+            }
+            
+            // Set up the Realm database
+            let realm = try! Realm()
+            let lastSavedModel = realm.objects(personalDetails.self).last ?? personalDetails()
+
+            try! realm.write {
+                lastSavedModel.yourName = yourName
+                lastSavedModel.bossName = bossName
+                lastSavedModel.email = email
+                lastSavedModel.companyCity = companyCityText
+                lastSavedModel.companyPostalCode = companyPostalCodeText
+                lastSavedModel.companyStreet = companyStreetText
+
+                realm.add(lastSavedModel, update: .modified)
+            }
+
+            // Assuming logoView is a UIView you want to show as confirmation or feedback
+            logoView.fadeIn(duration: 0.7)
     }
     
     // Utility method to get URL of default.realm
