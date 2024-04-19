@@ -311,7 +311,7 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
         }
         
          emailText += "<br><br>"
-         emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V4.0.2 generiert. - © 2023 - 2024 Stephan König"
+         emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V4.0.3 generiert. - © 2023 - 2024 Stephan König (GPL 3.0)"
          
          if MFMailComposeViewController.canSendMail() {
              let mailComposer = MFMailComposeViewController()
@@ -402,7 +402,7 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
              }
              
              emailText += "<br><br>"
-             emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V4.0.2 generiert. - © 2023 - 2024 Stephan König"
+             emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V4.0.3 generiert. - © 2023 - 2024 Stephan König (GPL 3.0)"
              
              if MFMailComposeViewController.canSendMail() {
                  let mailComposer = MFMailComposeViewController()

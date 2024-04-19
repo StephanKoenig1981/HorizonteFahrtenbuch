@@ -31,6 +31,10 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     var updateTimer: Timer?
     var currentDestination: CLLocation?
     
+    // Variable for destination polyline
+    
+    var destinationPolyline: MKPolyline?
+    
     // Static property for DateFormatter
         static let dateFormatter: DateFormatter = {
             let formatter = DateFormatter()
@@ -144,7 +148,6 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         authenticateWithBiometrics()
         
         // Initialize Realm and print Realm Database file URL
-        
         
         lazy var realm:Realm = {
             return try! Realm()
@@ -1296,12 +1299,16 @@ extension MainMapViewViewController: ContactSelectionDelegate {
                 return
             }
 
-            // Extract the coordinates from the route's polyline
+            // Remove existing destination polyline from the map
+            if let polyline = strongSelf.destinationPolyline {
+                strongSelf.mapView.removeOverlay(polyline)
+            }
+
+            // Extract the coordinates from the route's polyline and create a new destination polyline
             let routeCoordinates = route.polyline.coordinates
-            
-            // Create a custom polyline for the route to the destination
-            let polyline = DestinationPolyline(coordinates: routeCoordinates, count: routeCoordinates.count)
-            strongSelf.mapView.addOverlay(polyline, level: .aboveRoads)
+            let newPolyline = DestinationPolyline(coordinates: routeCoordinates, count: routeCoordinates.count)
+            strongSelf.mapView.addOverlay(newPolyline, level: .aboveRoads)
+            strongSelf.destinationPolyline = newPolyline  // Keep track of the current polyline
 
             // Update ETA labels
             let arrivalDate = Date().addingTimeInterval(route.expectedTravelTime)
