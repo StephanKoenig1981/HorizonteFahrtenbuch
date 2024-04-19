@@ -723,6 +723,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         alert.addAction(UIAlertAction(title: "Ohne speichern beenden", style: .destructive, handler: { [self]_ in
             
             self.mapView.removeAnnotations(self.mapView.annotations)
+            self.deliveryButton.isUserInteractionEnabled = true
             
             // Remove the annotation pin
             
@@ -852,6 +853,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
             case .destructive:
                 
                 self.mapView.removeAnnotations(self.mapView.annotations)
+                self.deliveryButton.isUserInteractionEnabled = true
                 
                 // Remove the annotation pin
                 
