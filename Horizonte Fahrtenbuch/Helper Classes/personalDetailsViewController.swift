@@ -41,7 +41,9 @@ class personalDetailsViewController: UIViewController, UITextFieldDelegate {
         yourNameTextfield.attributedPlaceholder = NSAttributedString(string: "Dein Name", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         bossNameTextfield.attributedPlaceholder = NSAttributedString(string: "Name des Chefs", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         emailTextfield.attributedPlaceholder = NSAttributedString(string: "beispiel@xyz.ch", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-        
+        companyCity.attributedPlaceholder = NSAttributedString(string: "Thalwil", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        companyAddress.attributedPlaceholder = NSAttributedString(string: "Schützenstrasse 7", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        companyPostalCode.attributedPlaceholder = NSAttributedString(string: "8800", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         
         // Set up the Realm database and retrieve the last saved data
         let realm = try! Realm()
@@ -54,6 +56,7 @@ class personalDetailsViewController: UIViewController, UITextFieldDelegate {
         companyAddress.text = lastSavedModel?.companyStreet
         companyPostalCode.text = lastSavedModel?.companyPostalCode
         companyCity.text = lastSavedModel?.companyCity
+        
     }
     
     // Function to check if the local Realm file exists

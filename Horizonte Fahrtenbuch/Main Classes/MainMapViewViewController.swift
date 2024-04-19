@@ -1151,22 +1151,33 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     }
     
     @IBAction func deliveryButtonPressed(_ sender: UIButton) {
-        
-        
-        
         let generator = UINotificationFeedbackGenerator()
         generator.notificationOccurred(.error)
-    
-        
-        // Change the button color to systemGreen when pressed
-        
+
         deliveryButton.tintColor = UIColor.systemGreen
-        
-        // Set the image using UIImage and specify rendering mode as .alwaysTemplate
-        
         deliveryButton.setImage(UIImage(systemName: "checkmark.seal.fill")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        
         deliveryTime = Date()
+        
+        // Plot the route back to the company
+        let realm = try! Realm()
+        if let details = realm.objects(personalDetails.self).first {
+            let street = details.companyStreet ?? ""
+            let city = details.companyCity ?? ""
+            let postalCode = details.companyPostalCode ?? ""
+            
+            self.calculateRouteToDestination(street: street, city: city, postalCode: postalCode, clientName: "Arbeitgeber")
+        }
+        
+        // Invalidate and restart the timer
+        updateTimer?.invalidate()
+        updateTimer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(updateETA), userInfo: nil, repeats: true)
+
+        // Show ETA View
+        self.etaView.topNotchViewfadeIn(duration: 0.7)
+        
+        // Disable the button for further presses
+        
+        self.deliveryButton.isUserInteractionEnabled = false
     }
     
     @IBAction func phoneButtonPressed(_ sender: Any) {
@@ -1245,7 +1256,7 @@ extension MainMapViewViewController: ContactSelectionDelegate {
             if let error = error {
                 print("Geocoding failed: \(error.localizedDescription)")
                 DispatchQueue.main.async {
-                    strongSelf.showAlert(title: "Geocoding Error", message: "Unable to find location for the provided address.")
+                    strongSelf.showAlert(title: "Fehler", message: "Es wurde keine Adresse für die Rückfahrt gefunden. Bitte überprüfe Deine Angaben in den Einstellungen.")
                 }
                 return
             }
