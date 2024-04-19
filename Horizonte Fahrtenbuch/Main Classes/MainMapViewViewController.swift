@@ -722,6 +722,8 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         alert.addAction(UIAlertAction(title: "Fortsetzen", style: .cancel))
         alert.addAction(UIAlertAction(title: "Ohne speichern beenden", style: .destructive, handler: { [self]_ in
             
+            self.mapView.removeAnnotations(self.mapView.annotations)
+            
             // Remove the annotation pin
             
             if let annotation = mapView.annotations.first(where: { $0.title == "Start" }) {
@@ -848,6 +850,8 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
                 self.dismiss(animated: true)
                 
             case .destructive:
+                
+                self.mapView.removeAnnotations(self.mapView.annotations)
                 
                 // Remove the annotation pin
                 
@@ -1263,6 +1267,11 @@ extension MainMapViewViewController: ContactSelectionDelegate {
 
     
     func updateDestinationAnnotation(at coordinate: CLLocationCoordinate2D, withName name: String) {
+        
+        // Remove all anntotations
+        
+        self.mapView.removeAnnotations(self.mapView.annotations)
+        
         // Remove existing destination annotation if it exists
         if let existingAnnotation = mapView.annotations.first(where: { ($0 as? MKPointAnnotation)?.title == "Destination" }) {
             mapView.removeAnnotation(existingAnnotation)
