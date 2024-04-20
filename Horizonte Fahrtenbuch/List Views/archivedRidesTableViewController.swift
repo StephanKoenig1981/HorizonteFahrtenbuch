@@ -344,6 +344,7 @@ class archivedRidesTableViewController: UITableViewController, UISearchBarDelega
                     currentRide.encodedPolyline = rideToRestore.encodedPolyline
                     currentRide.startTime = rideToRestore.startTime
                     currentRide.endTime = rideToRestore.endTime
+                    currentRide.deliveryTime = rideToRestore.deliveryTime
                     
                     self.realm.add(currentRide)
                     self.realm.delete(rideToRestore)
