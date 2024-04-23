@@ -119,7 +119,7 @@ class clientDetailViewController: UIViewController, CLLocationManagerDelegate, M
         
         let renderer = MKPolylineRenderer(polyline: polyline)
         renderer.strokeColor = .blue
-        renderer.lineWidth = 4.0
+        renderer.lineWidth = 6.0
         return renderer
     }
     
