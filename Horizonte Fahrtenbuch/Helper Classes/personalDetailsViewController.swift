@@ -29,13 +29,6 @@ class personalDetailsViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let userDefaults = UserDefaults.standard
-            let authenticationKey = "AuthenticationEnabled"
-            let authenticationEnabled = userDefaults.bool(forKey: authenticationKey)
-
-            faceIDToggleSwitch.setOn(authenticationEnabled, animated: false)
-        
-        
         restoreDatabaseFromICloud()
         
         yourNameTextfield.attributedPlaceholder = NSAttributedString(string: "Dein Name", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
