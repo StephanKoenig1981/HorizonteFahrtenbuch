@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 73;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -495,6 +495,7 @@
 				};
 			};
 			buildConfigurationList = 080841F329C8FBF10030BB7E /* Build configuration list for PBXProject "Horizonte Fahrtenbuch" */;
+			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = de;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -503,7 +504,6 @@
 				de,
 			);
 			mainGroup = 080841EF29C8FBF10030BB7E;
-			preferredProjectObjectVersion = 73;
 			productRefGroup = 080841F929C8FBF10030BB7E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
