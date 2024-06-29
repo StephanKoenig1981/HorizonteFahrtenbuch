@@ -23,8 +23,8 @@
 // interprets as being undefined.
 #define REALM_VERSION_MAJOR 14
 #define REALM_VERSION_MINOR 10
-#define REALM_VERSION_PATCH 1
+#define REALM_VERSION_PATCH 2
 #define REALM_VERSION_EXTRA ""
-#define REALM_VERSION_STRING "14.10.1"
+#define REALM_VERSION_STRING "14.10.2"
 
 #endif // REALM_VERSION_NUMBERS_HPP
