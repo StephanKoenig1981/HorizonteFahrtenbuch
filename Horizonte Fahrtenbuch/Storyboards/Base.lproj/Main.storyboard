@@ -1760,7 +1760,7 @@
                                     <segue destination="33C-9P-Pzo" kind="show" id="6HV-Dq-FNx"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V4.2.1 - © 2023 - 2024 Stephan König - GPL 3.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfl-98-Qbj">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V4.2.2 - © 2023 - 2024 Stephan König - GPL 3.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfl-98-Qbj">
                                 <rect key="frame" x="16" y="891" width="398" height="11"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2409,7 +2409,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7qV-KY-iwx">
-                                <rect key="frame" x="129" y="476" width="140.33333333333337" height="33"/>
+                                <rect key="frame" x="144" y="476" width="142.33333333333337" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="33" id="e89-EY-xJC"/>
                                 </constraints>
@@ -2424,7 +2424,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Persönliche Angaben" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A8q-qE-bHb">
-                                <rect key="frame" x="26" y="125" width="346.33333333333331" height="38"/>
+                                <rect key="frame" x="26" y="125" width="348.33333333333331" height="38"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="38" id="RRF-l1-Zun"/>
                                 </constraints>
@@ -2498,14 +2498,8 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V4.2.1 - © 2023 - 2024 Stephan König - GPL 3.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4p6-Nh-qrN">
-                                <rect key="frame" x="40.666666666666657" y="891" width="317" height="11"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="9"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Datenbank Backup" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zDr-0f-YFU">
-                                <rect key="frame" x="26" y="570" width="346.33333333333331" height="32"/>
+                                <rect key="frame" x="26" y="570" width="348.33333333333331" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="1Dv-Tr-xde"/>
                                 </constraints>
@@ -2556,6 +2550,12 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V4.2.2 - © 2023 - 2024 Stephan König - GPL 3.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4p6-Nh-qrN">
+                                <rect key="frame" x="57" y="891" width="319" height="11"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="FKW-fk-Cmx"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -2577,10 +2577,10 @@
                             <constraint firstItem="OXH-yf-8k2" firstAttribute="leading" secondItem="uJZ-ej-Hh5" secondAttribute="leading" id="Grz-lc-cKX"/>
                             <constraint firstItem="9Un-dL-vSx" firstAttribute="trailing" secondItem="PqN-pZ-5VL" secondAttribute="trailingMargin" id="H4j-kA-r1e"/>
                             <constraint firstItem="sKR-LO-OWH" firstAttribute="top" secondItem="zDr-0f-YFU" secondAttribute="bottom" constant="19" id="J1x-aP-LYe"/>
-                            <constraint firstItem="zDr-0f-YFU" firstAttribute="centerX" secondItem="4p6-Nh-qrN" secondAttribute="centerX" id="JMM-pX-tgx"/>
+                            <constraint firstItem="zDr-0f-YFU" firstAttribute="centerX" secondItem="4p6-Nh-qrN" secondAttribute="centerX" constant="-16.333333333333343" id="JMM-pX-tgx"/>
                             <constraint firstItem="7qV-KY-iwx" firstAttribute="top" secondItem="gRE-1B-Gyd" secondAttribute="bottom" constant="55" id="JsX-Cr-Tv5"/>
                             <constraint firstItem="uJZ-ej-Hh5" firstAttribute="leading" secondItem="5rc-Wc-nf1" secondAttribute="leading" id="Khq-cx-FYn"/>
-                            <constraint firstItem="7qV-KY-iwx" firstAttribute="centerX" secondItem="zDr-0f-YFU" secondAttribute="centerX" id="L17-UQ-v2L"/>
+                            <constraint firstItem="7qV-KY-iwx" firstAttribute="centerX" secondItem="zDr-0f-YFU" secondAttribute="centerX" constant="15.000000000000085" id="L17-UQ-v2L"/>
                             <constraint firstItem="ycP-f4-WDh" firstAttribute="leading" secondItem="uJZ-ej-Hh5" secondAttribute="trailing" constant="21" id="LNP-Ns-I2D"/>
                             <constraint firstItem="KZg-xm-MWt" firstAttribute="bottom" secondItem="7ng-sS-auk" secondAttribute="bottom" constant="-6" id="Lrw-a2-zjG"/>
                             <constraint firstItem="px2-Qf-ags" firstAttribute="leading" secondItem="OXH-yf-8k2" secondAttribute="leading" id="LzJ-n4-6lD"/>
@@ -2593,7 +2593,7 @@
                             <constraint firstItem="9Un-dL-vSx" firstAttribute="leading" secondItem="7ng-sS-auk" secondAttribute="leading" id="UBi-zy-qPO"/>
                             <constraint firstItem="mCr-wu-KvM" firstAttribute="top" secondItem="wh6-ZU-pOm" secondAttribute="bottom" constant="9" id="Uj5-qz-fC7"/>
                             <constraint firstItem="OXH-yf-8k2" firstAttribute="top" secondItem="px2-Qf-ags" secondAttribute="bottom" constant="21" id="V3w-u9-Joa"/>
-                            <constraint firstItem="4p6-Nh-qrN" firstAttribute="leading" secondItem="FKW-fk-Cmx" secondAttribute="leading" constant="40.666666666666657" id="VKM-Nh-HJV"/>
+                            <constraint firstItem="4p6-Nh-qrN" firstAttribute="leading" secondItem="FKW-fk-Cmx" secondAttribute="leading" constant="57" id="VKM-Nh-HJV"/>
                             <constraint firstItem="emD-cc-oQY" firstAttribute="top" secondItem="A8q-qE-bHb" secondAttribute="bottom" constant="23" id="VyK-4n-SBf"/>
                             <constraint firstItem="5rc-Wc-nf1" firstAttribute="top" secondItem="uJZ-ej-Hh5" secondAttribute="bottom" constant="21" id="WQL-BO-ahv"/>
                             <constraint firstAttribute="bottom" secondItem="zDr-0f-YFU" secondAttribute="bottom" constant="320" id="ZQi-hb-zEG"/>
@@ -2608,7 +2608,7 @@
                             <constraint firstItem="cpM-ow-5be" firstAttribute="leading" secondItem="sKR-LO-OWH" secondAttribute="trailing" constant="22" id="nPf-KF-nH3"/>
                             <constraint firstItem="OXH-yf-8k2" firstAttribute="centerY" secondItem="mCr-wu-KvM" secondAttribute="centerY" constant="-0.5" id="nU6-f5-Qr8"/>
                             <constraint firstAttribute="trailing" secondItem="zy7-wO-CkB" secondAttribute="trailing" id="pyJ-JS-g3Q"/>
-                            <constraint firstItem="7qV-KY-iwx" firstAttribute="leading" secondItem="FKW-fk-Cmx" secondAttribute="leading" constant="129" id="qB9-lp-uRF"/>
+                            <constraint firstItem="7qV-KY-iwx" firstAttribute="leading" secondItem="FKW-fk-Cmx" secondAttribute="leading" constant="144" id="qB9-lp-uRF"/>
                             <constraint firstItem="mCr-wu-KvM" firstAttribute="trailing" secondItem="ycP-f4-WDh" secondAttribute="trailing" id="r7d-dl-j3G"/>
                             <constraint firstItem="emD-cc-oQY" firstAttribute="leading" secondItem="KZg-xm-MWt" secondAttribute="leading" id="rhs-be-91L"/>
                             <constraint firstItem="cpM-ow-5be" firstAttribute="width" secondItem="sKR-LO-OWH" secondAttribute="width" id="vPv-yS-pa8"/>
