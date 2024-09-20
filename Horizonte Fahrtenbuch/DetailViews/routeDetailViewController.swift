@@ -91,7 +91,7 @@ class routeDetailViewController: UIViewController {
         let polyLine = MKPolyline(coordinates: points, count: points.count)
         routeDetailMapView.addOverlay(polyLine)
         
-        routeDetailMapView.setVisibleMapRect(polyLine.boundingMapRect, edgePadding: UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 50), animated: true)
+        routeDetailMapView.setVisibleMapRect(polyLine.boundingMapRect, edgePadding: UIEdgeInsets(top: 70, left: 70, bottom: 70, right: 70), animated: true)
         
         clientNameLabel.text = clientName?.description
         drivenDistanceLabel.text = distanceDriven?.description
