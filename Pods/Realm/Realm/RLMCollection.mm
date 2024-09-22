@@ -533,8 +533,7 @@ RLMNotificationToken *RLMAddNotificationBlock(id c, id block,
         if (!token->_realm) {
             return;
         }
-        RLMRealm *realm = [RLMRealm realmWithConfiguration:config queue:queue error:nil];
-        token->_realm = realm;
+        RLMRealm *realm = token->_realm = [RLMRealm realmWithConfiguration:config queue:queue error:nil];
         id collection = [realm resolveThreadSafeReference:tsr];
         token->_token = [collection addNotificationCallback:block keyPaths:info->keyPathArrayFromStringArray(keyPaths)];
     });

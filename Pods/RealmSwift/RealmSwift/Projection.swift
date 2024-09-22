@@ -305,7 +305,12 @@ extension ProjectionObservable {
     public func observe(keyPaths: [String]? = nil,
                         on queue: DispatchQueue? = nil,
                         _ block: @escaping (ObjectChange<Self>) -> Void) -> NotificationToken {
-        let kps: [String] = schema.map(\.originPropertyKeyPathString)
+        var kps: [String] = schema.map(\.originPropertyKeyPathString)
+
+        // NEXT-MAJOR: stop conflating empty array and nil
+        if keyPaths?.isEmpty == false {
+            kps = kps.filter { keyPaths!.contains($0) }
+        }
 
         // If we're observing on a different queue, we need a projection which
         // wraps an object confined to that queue. We'll lazily create it the

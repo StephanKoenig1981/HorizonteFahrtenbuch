@@ -55,7 +55,7 @@ RLM_HEADER_AUDIT_BEGIN(nullability, sendability)
 
  These property instances map to columns in the core database.
  */
-NS_SWIFT_SENDABLE RLM_FINAL // not actually immutable, but the public API kinda is
+RLM_SWIFT_SENDABLE RLM_FINAL // not actually immutable, but the public API kinda is
 @interface RLMProperty : NSObject
 
 #pragma mark - Properties
@@ -127,7 +127,7 @@ NS_SWIFT_SENDABLE RLM_FINAL // not actually immutable, but the public API kinda 
 /**
  An `RLMPropertyDescriptor` instance represents a specific property on a given class.
  */
-NS_SWIFT_SENDABLE RLM_FINAL
+RLM_SWIFT_SENDABLE RLM_FINAL
 @interface RLMPropertyDescriptor : NSObject
 
 /**

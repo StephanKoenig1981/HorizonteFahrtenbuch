@@ -18,7 +18,7 @@
 
 #import <Realm/RLMConstants.h>
 
-@class RLMRealmConfiguration, RLMRealm, RLMObject, RLMSchema, RLMMigration, RLMNotificationToken, RLMThreadSafeReference, RLMAsyncOpenTask;
+@class RLMRealmConfiguration, RLMRealm, RLMObject, RLMSchema, RLMMigration, RLMNotificationToken, RLMThreadSafeReference, RLMAsyncOpenTask, RLMSyncSubscriptionSet;
 
 /**
  A callback block for opening Realms asynchronously.
@@ -109,7 +109,7 @@ RLM_HEADER_AUDIT_BEGIN(nullability, sendability)
 
  @return An `RLMRealm` instance.
  */
-+ (nullable instancetype)realmWithConfiguration:(RLMRealmConfiguration *)configuration error:(NSError **)error NS_RETURNS_RETAINED;
++ (nullable instancetype)realmWithConfiguration:(RLMRealmConfiguration *)configuration error:(NSError **)error;
 
 /**
  Obtains an `RLMRealm` instance with the given configuration bound to the given queue.
@@ -134,7 +134,7 @@ RLM_HEADER_AUDIT_BEGIN(nullability, sendability)
  */
 + (nullable instancetype)realmWithConfiguration:(RLMRealmConfiguration *)configuration
                                           queue:(nullable dispatch_queue_t)queue
-                                          error:(NSError **)error NS_RETURNS_RETAINED;
+                                          error:(NSError **)error;
 
 /**
  Obtains an `RLMRealm` instance persisted at a specified file URL.
@@ -143,7 +143,7 @@ RLM_HEADER_AUDIT_BEGIN(nullability, sendability)
 
  @return An `RLMRealm` instance.
  */
-+ (instancetype)realmWithURL:(NSURL *)fileURL NS_RETURNS_RETAINED;
++ (instancetype)realmWithURL:(NSURL *)fileURL;
 
 /**
  Asynchronously open a Realm and deliver it to a block on the given queue.
@@ -243,6 +243,9 @@ RLM_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /**
  Writes a copy of the Realm to a given location specified by a given configuration.
+
+ If the configuration supplied is derived from a `RLMUser` then this Realm will be copied with
+ sync functionality enabled.
 
  The destination file cannot already exist.
 
@@ -858,6 +861,16 @@ NS_REFINED_FOR_SWIFT;
  */
 - (void)deleteAllObjects;
 
+#pragma mark - Sync Subscriptions
+
+/**
+ Represents the active subscriptions for this realm, which can be used to add/remove/update
+ and search flexible sync subscriptions.
+ Getting the subscriptions from a local or partition-based configured realm will thrown an exception.
+ */
+@property (nonatomic, readonly, nonnull) RLMSyncSubscriptionSet *subscriptions;
+
+
 #pragma mark - Migrations
 
 /**
@@ -869,7 +882,7 @@ NS_REFINED_FOR_SWIFT;
 
  @param oldSchemaVersion    The schema version of the Realm being migrated.
  */
-NS_SWIFT_SENDABLE
+RLM_SWIFT_SENDABLE
 typedef void (^RLMMigrationBlock)(RLMMigration *migration, uint64_t oldSchemaVersion);
 
 /**
@@ -935,7 +948,7 @@ NS_REFINED_FOR_SWIFT;
  When you wish to stop, call the `-invalidate` method. Notifications are also stopped if
  the token is deallocated.
  */
-NS_SWIFT_SENDABLE // is internally thread-safe
+RLM_SWIFT_SENDABLE // is internally thread-safe
 @interface RLMNotificationToken : NSObject
 /// Stops notifications for the change subscription that returned this token.
 ///

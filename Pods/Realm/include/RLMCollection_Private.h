@@ -33,7 +33,7 @@ RLMNotificationToken *RLMAddNotificationBlock(id collection, id block,
                                               NSArray<NSString *> *_Nullable keyPaths,
                                               dispatch_queue_t _Nullable queue);
 
-typedef NS_CLOSED_ENUM(int32_t, RLMCollectionType) {
+typedef RLM_CLOSED_ENUM(int32_t, RLMCollectionType) {
     RLMCollectionTypeArray = 0,
     RLMCollectionTypeSet = 1,
     RLMCollectionTypeDictionary = 2
