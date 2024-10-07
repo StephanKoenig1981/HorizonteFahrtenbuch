@@ -123,7 +123,7 @@ class clientReportViewController: UIViewController, UITextFieldDelegate, MFMailC
                         totalDistance += distanceDouble
                     }
                 }
-                emailText += "<b>Gefahrene Distanz: \(ride.distanceDriven ?? "")<br>"
+                emailText += "<b>Gefahrene Distanz: \(ride.distanceDriven ?? "")</b><br>"
 
                 if let timeString = ride.timeElapsed, let rideTime = timeIntervalFrom(timeString: timeString) {
                     totalTime += rideTime
@@ -149,7 +149,7 @@ class clientReportViewController: UIViewController, UITextFieldDelegate, MFMailC
                         totalDistance += distanceDouble
                     }
                 }
-                emailText += "<b>Gefahrene Distanz: \(ride.distanceDriven ?? "")<br>"
+                emailText += "<b>Gefahrene Distanz: \(ride.distanceDriven ?? "")</b><br>"
 
                 if let timeString = ride.timeElapsed, let rideTime = timeIntervalFrom(timeString: timeString) {
                     totalTime += rideTime
@@ -162,10 +162,11 @@ class clientReportViewController: UIViewController, UITextFieldDelegate, MFMailC
         // Format total distance and total time
         let totalTimeFormatted = formatTimeInterval(totalTime)
         emailText += "<br><b>Gesamte Gefahrene Distanz: \(String(format: "%.2f", totalDistance)) km</b><br>"
-        emailText += "<b>Gesamte Gefahrene Zeit: \(totalTimeFormatted)</b><br><br><br>"
+        emailText += "<b>Gesamte Gefahrene Zeit: \(totalTimeFormatted)</b><br><br>"
+        emailText += "_________________________________<br><br>"
         
         emailText += "Mit besten Grüssen,<br><br>\(yourName)<br><br>"
-        emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V5.0.0 generiert. - © 2023 - 2024 Stephan König (GPL 3.0)"
+        emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V5.0.1 generiert. - © 2023 - 2024 Stephan König (GPL 3.0)"
         
         // Create a date formatter for German locale
         let dateFormatterForSubject = DateFormatter()
