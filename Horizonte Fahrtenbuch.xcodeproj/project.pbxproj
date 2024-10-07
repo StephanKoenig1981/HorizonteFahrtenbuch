@@ -25,6 +25,7 @@
 		085DAE9B2A1901FD0028450A /* pastMonthRidesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DAE9A2A1901FD0028450A /* pastMonthRidesCell.swift */; };
 		085DAE9D2A1909AC0028450A /* pastMonthRides.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DAE9C2A1909AC0028450A /* pastMonthRides.swift */; };
 		0863585A29F30C4100FA36D1 /* addContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0863585929F30C4100FA36D1 /* addContactViewController.swift */; };
+		08671A902CB447B2001B1860 /* clientReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08671A8F2CB447B2001B1860 /* clientReportViewController.swift */; };
 		087319512A1FEF8E008B3704 /* archivedRidesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087319502A1FEF8E008B3704 /* archivedRidesTableViewCell.swift */; };
 		087319552A1FF593008B3704 /* archivedRides.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087319542A1FF593008B3704 /* archivedRides.swift */; };
 		087696C429F9C8D700246942 /* pastRidesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087696C329F9C8D700246942 /* pastRidesTableViewCell.swift */; };
@@ -116,6 +117,7 @@
 		085DAE9A2A1901FD0028450A /* pastMonthRidesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pastMonthRidesCell.swift; sourceTree = "<group>"; };
 		085DAE9C2A1909AC0028450A /* pastMonthRides.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pastMonthRides.swift; sourceTree = "<group>"; };
 		0863585929F30C4100FA36D1 /* addContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addContactViewController.swift; sourceTree = "<group>"; };
+		08671A8F2CB447B2001B1860 /* clientReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = clientReportViewController.swift; sourceTree = "<group>"; };
 		087319502A1FEF8E008B3704 /* archivedRidesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = archivedRidesTableViewCell.swift; sourceTree = "<group>"; };
 		087319522A1FF195008B3704 /* archivedRidesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = archivedRidesTableViewController.swift; sourceTree = "<group>"; };
 		087319542A1FF593008B3704 /* archivedRides.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = archivedRides.swift; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 				084F85E22A0EC61900D1045D /* clientDetailViewController.swift */,
 				08CDD3D72A1406EF00D44868 /* routeDetailViewController.swift */,
 				085DAE982A18FAE60028450A /* statsViewController.swift */,
+				08671A8F2CB447B2001B1860 /* clientReportViewController.swift */,
 			);
 			path = DetailViews;
 			sourceTree = "<group>";
@@ -694,6 +697,7 @@
 				0863585A29F30C4100FA36D1 /* addContactViewController.swift in Sources */,
 				087319552A1FF593008B3704 /* archivedRides.swift in Sources */,
 				087319512A1FEF8E008B3704 /* archivedRidesTableViewCell.swift in Sources */,
+				08671A902CB447B2001B1860 /* clientReportViewController.swift in Sources */,
 				082C98D329F6E9FC00296204 /* pastRidesTableViewController.swift in Sources */,
 				087696C429F9C8D700246942 /* pastRidesTableViewCell.swift in Sources */,
 				08C9BFBA29F5CB040005DDA4 /* contactsTableViewController.swift in Sources */,
@@ -924,7 +928,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.3.2;
+				MARKETING_VERSION = 5.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.horizonte.ch.Horizonte-Fahrtenbuch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -969,7 +973,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.3.2;
+				MARKETING_VERSION = 5.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.horizonte.ch.Horizonte-Fahrtenbuch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1088,7 +1092,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 4.3.2;
+				MARKETING_VERSION = 5.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.horizonte.ch.Horizonte-Fahrtenbuch.Fahrtenbuch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1124,7 +1128,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 4.3.2;
+				MARKETING_VERSION = 5.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.horizonte.ch.Horizonte-Fahrtenbuch.Fahrtenbuch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

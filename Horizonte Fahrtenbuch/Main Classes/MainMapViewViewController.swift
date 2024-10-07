@@ -115,6 +115,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var clientTextFieldView: UIView!
     @IBOutlet weak var clientTextField: UITextField!
+    @IBOutlet weak var clientReportButtonView: UIView!
     
     @IBOutlet weak var personalDetailButton: UIButton!
     @IBOutlet weak var personalDetailView: UIView!
@@ -122,6 +123,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
     @IBOutlet weak var settingsView: UIView!
     @IBOutlet weak var deliveryButton: UIButton!
     @IBOutlet weak var deliveryView: UIView!
+    @IBOutlet weak var clientReportButton: UIButton!
     
     @IBOutlet weak var phoneButtonView: UIView!
     @IBOutlet weak var phoneButton: UIButton!
@@ -179,11 +181,14 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         addressBookButtonView.layer.cornerRadius = 25
         addressBookButton.tintColor = UIColor.systemPurple //init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
         
+        clientReportButtonView.layer.cornerRadius = 25
+        clientReportButton.tintColor = UIColor.systemTeal //init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+        
         settingsButtonView.layer.cornerRadius = 25
         settingsButton.tintColor = UIColor.systemPurple //init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
         
         personalDetailView.layer.cornerRadius = 25
-        personalDetailButton.tintColor = UIColor.systemPurple //init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+        personalDetailButton.tintColor = UIColor.systemTeal //init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
         
         segmentedControlView.clipsToBounds = true
         segmentedControlView.layer.cornerRadius = 15
