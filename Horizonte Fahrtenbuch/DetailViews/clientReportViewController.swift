@@ -53,7 +53,14 @@ class clientReportViewController: UIViewController, UITextFieldDelegate, MFMailC
         var totalTime: TimeInterval = 0.0 // TimeInterval is in seconds
         
         // Realm
-        let realm = try! Realm()
+        let realm: Realm
+        do {
+            realm = try Realm()
+        } catch {
+            print("Failed to initialize Realm: \(error.localizedDescription)")
+            return // Handle the error appropriately
+        }
+        
         let startDate = startDatePicker.date
         let endDate = endDatePicker.date
         
@@ -69,56 +76,103 @@ class clientReportViewController: UIViewController, UITextFieldDelegate, MFMailC
         // Query current rides
         let currentRides = realm.objects(currentRide.self)
             .filter("dateActual >= %@ AND dateActual <= %@ AND currentClientName CONTAINS[c] %@", startDate, endDate, clientName)
-            .sorted(byKeyPath: "dateActual", ascending: true)
         
         // Query archived rides similarly
         let archivedRides = realm.objects(archivedRides.self)
             .filter("dateActual >= %@ AND dateActual <= %@ AND currentClientName CONTAINS[c] %@", startDate, endDate, clientName)
-            .sorted(byKeyPath: "dateActual", ascending: true)
+
+        // Combine current and archived rides
+        var allRides: [AnyObject] = []
+        allRides.append(contentsOf: currentRides.map { $0 as AnyObject }) // Cast to AnyObject
+        allRides.append(contentsOf: archivedRides.map { $0 as AnyObject }) // Cast to AnyObject
         
+        // Sort the combined rides by date
+        allRides.sort {
+            let date1 = ($0 as? currentRide)?.dateActual ?? ($0 as? archivedRides)?.dateActual ?? Date.distantPast
+            let date2 = ($1 as? currentRide)?.dateActual ?? ($1 as? archivedRides)?.dateActual ?? Date.distantPast
+            return date1 < date2
+        }
+
         // Get personal details (assuming you have this model)
         let personalDetails = realm.objects(personalDetails.self).last
         let yourName = personalDetails?.yourName ?? ""
-        let email = ""
+        let email = "" // Ensure you have a valid email address
         
         var emailText = "Guten Tag,<br><br> Untenstehend erhalten Sie die zusannengefasste Fahrtenliste für den Kunden \(clientName):<br><br>"
-        
+
         // Build detailed report
-        for ride in currentRides {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "d. MMMM yyyy"
-            let dateString = ride.dateActual != nil ? dateFormatter.string(from: ride.dateActual!) : "No date"
-            emailText += "<b>\(dateString)</b><br><br>"
-            emailText += "\(ride.currentClientName ?? "")<br><br>"
-            dateFormatter.dateFormat = "HH:mm"
-            let startTimeString = ride.startTime != nil ? dateFormatter.string(from: ride.startTime!) : "--:--"
-            let endTimeString = ride.endTime != nil ? dateFormatter.string(from: ride.endTime!) : "--:--"
-            emailText += "\(startTimeString) - \(endTimeString)<br><br>"
-            
-            // Debugging: Print distance driven value before conversion
-            print("Distance Driven (String): \(ride.distanceDriven ?? "nil")")
-            
-            // Convert distanceDriven to Double and accumulate total distance
-            if let distance = ride.distanceDriven {
-                let cleanedDistance = distance.replacingOccurrences(of: " Km", with: "")
-                
-                if let distanceDouble = Double(cleanedDistance.trimmingCharacters(in: .whitespaces)) {
-                    totalDistance += distanceDouble
+        for ride in allRides {
+            if let ride = ride as? currentRide { // Check if ride is of type currentRide
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "d. MMMM yyyy"
+                let dateString = ride.dateActual != nil ? dateFormatter.string(from: ride.dateActual!) : "No date"
+                emailText += "<b>\(dateString)</b><br><br>"
+                emailText += "\(ride.currentClientName ?? "")<br><br>"
+                dateFormatter.dateFormat = "HH:mm"
+                let startTimeString = ride.startTime != nil ? dateFormatter.string(from: ride.startTime!) : "--:--"
+                let endTimeString = ride.endTime != nil ? dateFormatter.string(from: ride.endTime!) : "--:--"
+                emailText += "\(startTimeString) - \(endTimeString)<br><br>"
+
+                // Debugging: Print distance driven value before conversion
+                print("Distance Driven (String): \(ride.distanceDriven ?? "nil")")
+
+                // Convert distanceDriven to Double and accumulate total distance
+                if let distance = ride.distanceDriven {
+                    let cleanedDistance = distance.replacingOccurrences(of: " Km", with: "")
+                    
+                    if let distanceDouble = Double(cleanedDistance.trimmingCharacters(in: .whitespaces)) {
+                        totalDistance += distanceDouble
+                    } else {
+                        print("Could not convert distanceDriven to Double")
+                    }
                 } else {
-                    print("Could not convert distanceDriven to Double")
+                    print("Distance Driven is nil")
                 }
-            } else {
-                print("Distance Driven is nil")
+
+                emailText += "<b>Gefahrene Distanz: \(ride.distanceDriven ?? "")<br>"
+
+                // Convert timeElapsed to TimeInterval and accumulate total time
+                if let timeString = ride.timeElapsed, let rideTime = timeIntervalFrom(timeString: timeString) {
+                    totalTime += rideTime
+                }
+                emailText += "<b>Gefahrene Zeit: \(ride.timeElapsed ?? "")</b><br>"
+                emailText += "_________________________________<br><br>"
+            } else if let ride = ride as? archivedRides { // Check if ride is of type archivedRides
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "d. MMMM yyyy"
+                let dateString = ride.dateActual != nil ? dateFormatter.string(from: ride.dateActual!) : "No date"
+                emailText += "<b>\(dateString)</b><br><br>"
+                emailText += "\(ride.currentClientName ?? "")<br><br>"
+                dateFormatter.dateFormat = "HH:mm"
+                let startTimeString = ride.startTime != nil ? dateFormatter.string(from: ride.startTime!) : "--:--"
+                let endTimeString = ride.endTime != nil ? dateFormatter.string(from: ride.endTime!) : "--:--"
+                emailText += "\(startTimeString) - \(endTimeString)<br><br>"
+
+                // Debugging: Print distance driven value before conversion
+                print("Distance Driven (String): \(ride.distanceDriven ?? "nil")")
+
+                // Convert distanceDriven to Double and accumulate total distance
+                if let distance = ride.distanceDriven {
+                    let cleanedDistance = distance.replacingOccurrences(of: " Km", with: "")
+                    
+                    if let distanceDouble = Double(cleanedDistance.trimmingCharacters(in: .whitespaces)) {
+                        totalDistance += distanceDouble
+                    } else {
+                        print("Could not convert distanceDriven to Double")
+                    }
+                } else {
+                    print("Distance Driven is nil")
+                }
+
+                emailText += "<b>Gefahrene Distanz: \(ride.distanceDriven ?? "")<br>"
+
+                // Convert timeElapsed to TimeInterval and accumulate total time
+                if let timeString = ride.timeElapsed, let rideTime = timeIntervalFrom(timeString: timeString) {
+                    totalTime += rideTime
+                }
+                emailText += "<b>Gefahrene Zeit: \(ride.timeElapsed ?? "")</b><br>"
+                emailText += "_________________________________<br><br>"
             }
-            
-            emailText += "<b>Gefahrene Distanz: \(ride.distanceDriven ?? "")<br>"
-            
-            // Convert timeElapsed to TimeInterval and accumulate total time
-            if let timeString = ride.timeElapsed, let rideTime = timeIntervalFrom(timeString: timeString) {
-                totalTime += rideTime
-            }
-            emailText += "<b>Gefahrene Zeit: \(ride.timeElapsed ?? "")</b><br>"
-            emailText += "_________________________________<br><br>"
         }
         
         // Format total distance and total time
@@ -127,7 +181,6 @@ class clientReportViewController: UIViewController, UITextFieldDelegate, MFMailC
         emailText += "<b>Gesamte Gefahrene Zeit: \(totalTimeFormatted)</b><br><br><br>"
         
         emailText += "Mit besten Grüssen,<br><br>\(yourName)<br><br>"
-        
         emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V5.0.0 generiert. - © 2023 - 2024 Stephan König (GPL 3.0)"
         
         // Create a date formatter for German locale
