@@ -9,7 +9,7 @@ import UIKit
 import RealmSwift
 import MessageUI
 
-class clientReportViewController: UIViewController, MFMailComposeViewControllerDelegate {
+class clientReportViewController: UIViewController, UITextFieldDelegate, MFMailComposeViewControllerDelegate {
 
    // MARK: Outlets
     
@@ -32,6 +32,9 @@ class clientReportViewController: UIViewController, MFMailComposeViewControllerD
         
         endDatePicker.setValue(UIColor.white, forKeyPath: "textColor")
         endDatePicker.tintColor = UIColor.systemPurple
+        
+        // Set the delegate for the client name text field
+        clientNameTextfield.delegate = self
         
         // Do any additional setup after loading the view.
     }
@@ -155,6 +158,13 @@ class clientReportViewController: UIViewController, MFMailComposeViewControllerD
         // Dismiss the mail compose view controller
         controller.dismiss(animated: true, completion: nil)
     }
+    
+    // MARK: Functions for keyboard actions
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
         
         // Helper function to convert time string to TimeInterval
@@ -174,4 +184,5 @@ class clientReportViewController: UIViewController, MFMailComposeViewControllerD
             let seconds = Int(timeInterval) % 60
             return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
         }
+
 
