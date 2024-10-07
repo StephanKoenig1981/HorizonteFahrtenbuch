@@ -102,71 +102,55 @@ class clientReportViewController: UIViewController, UITextFieldDelegate, MFMailC
 
         // Build detailed report
         for ride in allRides {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "d. MMMM yyyy"
+            let dateString: String
+
             if let ride = ride as? currentRide { // Check if ride is of type currentRide
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "d. MMMM yyyy"
-                let dateString = ride.dateActual != nil ? dateFormatter.string(from: ride.dateActual!) : "No date"
-                emailText += "<b>\(dateString)</b><br><br>"
+                dateString = ride.dateActual != nil ? dateFormatter.string(from: ride.dateActual!) : "No date"
+                emailText += "<b><span style=\"color: #9CC769;\">\(dateString)</span></b><br><br>"
                 emailText += "\(ride.currentClientName ?? "")<br><br>"
+
                 dateFormatter.dateFormat = "HH:mm"
                 let startTimeString = ride.startTime != nil ? dateFormatter.string(from: ride.startTime!) : "--:--"
                 let endTimeString = ride.endTime != nil ? dateFormatter.string(from: ride.endTime!) : "--:--"
                 emailText += "\(startTimeString) - \(endTimeString)<br><br>"
 
-                // Debugging: Print distance driven value before conversion
-                print("Distance Driven (String): \(ride.distanceDriven ?? "nil")")
-
-                // Convert distanceDriven to Double and accumulate total distance
+                // Accumulate total distance and time
                 if let distance = ride.distanceDriven {
                     let cleanedDistance = distance.replacingOccurrences(of: " Km", with: "")
-                    
                     if let distanceDouble = Double(cleanedDistance.trimmingCharacters(in: .whitespaces)) {
                         totalDistance += distanceDouble
-                    } else {
-                        print("Could not convert distanceDriven to Double")
                     }
-                } else {
-                    print("Distance Driven is nil")
                 }
-
                 emailText += "<b>Gefahrene Distanz: \(ride.distanceDriven ?? "")<br>"
 
-                // Convert timeElapsed to TimeInterval and accumulate total time
                 if let timeString = ride.timeElapsed, let rideTime = timeIntervalFrom(timeString: timeString) {
                     totalTime += rideTime
                 }
                 emailText += "<b>Gefahrene Zeit: \(ride.timeElapsed ?? "")</b><br>"
                 emailText += "_________________________________<br><br>"
+                
             } else if let ride = ride as? archivedRides { // Check if ride is of type archivedRides
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "d. MMMM yyyy"
-                let dateString = ride.dateActual != nil ? dateFormatter.string(from: ride.dateActual!) : "No date"
-                emailText += "<b>\(dateString)</b><br><br>"
+                dateString = ride.dateActual != nil ? dateFormatter.string(from: ride.dateActual!) : "No date"
+                // Ensure the date is also bold and green
+                emailText += "<b><span style=\"color: #9CC769;\">\(dateString)</span></b><br><br>"
                 emailText += "\(ride.currentClientName ?? "")<br><br>"
+
                 dateFormatter.dateFormat = "HH:mm"
                 let startTimeString = ride.startTime != nil ? dateFormatter.string(from: ride.startTime!) : "--:--"
                 let endTimeString = ride.endTime != nil ? dateFormatter.string(from: ride.endTime!) : "--:--"
                 emailText += "\(startTimeString) - \(endTimeString)<br><br>"
 
-                // Debugging: Print distance driven value before conversion
-                print("Distance Driven (String): \(ride.distanceDriven ?? "nil")")
-
-                // Convert distanceDriven to Double and accumulate total distance
+                // Accumulate total distance and time
                 if let distance = ride.distanceDriven {
                     let cleanedDistance = distance.replacingOccurrences(of: " Km", with: "")
-                    
                     if let distanceDouble = Double(cleanedDistance.trimmingCharacters(in: .whitespaces)) {
                         totalDistance += distanceDouble
-                    } else {
-                        print("Could not convert distanceDriven to Double")
                     }
-                } else {
-                    print("Distance Driven is nil")
                 }
-
                 emailText += "<b>Gefahrene Distanz: \(ride.distanceDriven ?? "")<br>"
 
-                // Convert timeElapsed to TimeInterval and accumulate total time
                 if let timeString = ride.timeElapsed, let rideTime = timeIntervalFrom(timeString: timeString) {
                     totalTime += rideTime
                 }
