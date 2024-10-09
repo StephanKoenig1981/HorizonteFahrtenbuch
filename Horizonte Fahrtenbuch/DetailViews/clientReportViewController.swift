@@ -61,8 +61,16 @@ class clientReportViewController: UIViewController, UITextFieldDelegate, MFMailC
             return // Handle the error appropriately
         }
         
-        let startDate = startDatePicker.date
-        let endDate = endDatePicker.date
+        let calendar = Calendar.current
+        
+        // Normalize the start date to the beginning of the day (00:00:00)
+        let startOfDay = calendar.startOfDay(for: startDatePicker.date)
+        
+        // Normalize the end date to the last second of the day (23:59:59)
+        var components = DateComponents()
+        components.day = 1
+        components.second = -1
+        let endOfDay = calendar.date(byAdding: components, to: calendar.startOfDay(for: endDatePicker.date)) ?? endDatePicker.date
         
         // Get client name
         guard let clientName = clientNameTextfield.text, !clientName.isEmpty else {
@@ -75,11 +83,11 @@ class clientReportViewController: UIViewController, UITextFieldDelegate, MFMailC
         
         // Query current rides
         let currentRides = realm.objects(currentRide.self)
-            .filter("dateActual >= %@ AND dateActual <= %@ AND currentClientName CONTAINS[c] %@", startDate, endDate, clientName)
+            .filter("dateActual >= %@ AND dateActual <= %@ AND currentClientName CONTAINS[c] %@", startOfDay, endOfDay, clientName)
         
         // Query archived rides similarly
         let archivedRides = realm.objects(archivedRides.self)
-            .filter("dateActual >= %@ AND dateActual <= %@ AND currentClientName CONTAINS[c] %@", startDate, endDate, clientName)
+            .filter("dateActual >= %@ AND dateActual <= %@ AND currentClientName CONTAINS[c] %@", startOfDay, endOfDay, clientName)
 
         // Combine current and archived rides
         var allRides: [AnyObject] = []
@@ -174,8 +182,8 @@ class clientReportViewController: UIViewController, UITextFieldDelegate, MFMailC
         dateFormatterForSubject.dateFormat = "d. MMMM yyyy" // Format to only show day, month, and year
 
         // Format the start and end dates
-        let formattedStartDate = dateFormatterForSubject.string(from: startDate)
-        let formattedEndDate = dateFormatterForSubject.string(from: endDate)
+        let formattedStartDate = dateFormatterForSubject.string(from: startOfDay)
+        let formattedEndDate = dateFormatterForSubject.string(from: endOfDay)
 
         if MFMailComposeViewController.canSendMail() {
             let mailComposer = MFMailComposeViewController()
@@ -190,6 +198,7 @@ class clientReportViewController: UIViewController, UITextFieldDelegate, MFMailC
             print("Cannot send mails")
         }
     }
+
 
     // MARK: - MFMailComposeViewControllerDelegate
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
