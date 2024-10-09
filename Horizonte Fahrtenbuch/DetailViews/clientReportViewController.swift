@@ -108,21 +108,25 @@ class clientReportViewController: UIViewController, UITextFieldDelegate, MFMailC
         
         var emailText = "Guten Tag,<br><br> Untenstehend erhalten Sie die zusannengefasste Fahrtenliste für den Kunden \(clientName):<br><br>"
 
+        // Temporary variable to accumulate ride details
+        var rideDetails = ""
+
         // Build detailed report
         for ride in allRides {
+            
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "d. MMMM yyyy"
             let dateString: String
 
             if let ride = ride as? currentRide { // Check if ride is of type currentRide
                 dateString = ride.dateActual != nil ? dateFormatter.string(from: ride.dateActual!) : "No date"
-                emailText += "<b><span style=\"color: #9CC769;\">\(dateString)</span></b><br><br>"
-                emailText += "\(ride.currentClientName ?? "")<br><br>"
+                rideDetails += "<b><span style=\"color: #9CC769;\">\(dateString)</span></b><br><br>"
+                rideDetails += "\(ride.currentClientName ?? "")<br><br>"
 
                 dateFormatter.dateFormat = "HH:mm"
                 let startTimeString = ride.startTime != nil ? dateFormatter.string(from: ride.startTime!) : "--:--"
                 let endTimeString = ride.endTime != nil ? dateFormatter.string(from: ride.endTime!) : "--:--"
-                emailText += "\(startTimeString) - \(endTimeString)<br><br>"
+                rideDetails += "\(startTimeString) - \(endTimeString)<br><br>"
 
                 // Accumulate total distance and time
                 if let distance = ride.distanceDriven {
@@ -131,24 +135,23 @@ class clientReportViewController: UIViewController, UITextFieldDelegate, MFMailC
                         totalDistance += distanceDouble
                     }
                 }
-                emailText += "<b>Gefahrene Distanz: \(ride.distanceDriven ?? "")</b><br>"
+                rideDetails += "<b>Gefahrene Distanz: &nbsp \(ride.distanceDriven ?? "")</b><br>"
 
                 if let timeString = ride.timeElapsed, let rideTime = timeIntervalFrom(timeString: timeString) {
                     totalTime += rideTime
                 }
-                emailText += "<b>Gefahrene Zeit: \(ride.timeElapsed ?? "")</b><br>"
-                emailText += "_________________________________<br><br>"
+                rideDetails += "<b>Gefahrene Zeit: &nbsp  &nbsp  &nbsp &nbsp &nbsp  \(ride.timeElapsed ?? "")</b><br>"
+                rideDetails += "_________________________________<br><br>"
                 
             } else if let ride = ride as? archivedRides { // Check if ride is of type archivedRides
                 dateString = ride.dateActual != nil ? dateFormatter.string(from: ride.dateActual!) : "No date"
-                // Ensure the date is also bold and green
-                emailText += "<b><span style=\"color: #9CC769;\">\(dateString)</span></b><br><br>"
-                emailText += "\(ride.currentClientName ?? "")<br><br>"
+                rideDetails += "<b><span style=\"color: #9CC769;\">\(dateString)</span></b><br><br>"
+                rideDetails += "\(ride.currentClientName ?? "")<br><br>"
 
                 dateFormatter.dateFormat = "HH:mm"
                 let startTimeString = ride.startTime != nil ? dateFormatter.string(from: ride.startTime!) : "--:--"
                 let endTimeString = ride.endTime != nil ? dateFormatter.string(from: ride.endTime!) : "--:--"
-                emailText += "\(startTimeString) - \(endTimeString)<br><br>"
+                rideDetails += "\(startTimeString) - \(endTimeString)<br><br>"
 
                 // Accumulate total distance and time
                 if let distance = ride.distanceDriven {
@@ -157,24 +160,31 @@ class clientReportViewController: UIViewController, UITextFieldDelegate, MFMailC
                         totalDistance += distanceDouble
                     }
                 }
-                emailText += "<b>Gefahrene Distanz: \(ride.distanceDriven ?? "")</b><br>"
+                rideDetails += "<b>Gefahrene Distanz: &nbsp \(ride.distanceDriven ?? "")</b><br>"
 
                 if let timeString = ride.timeElapsed, let rideTime = timeIntervalFrom(timeString: timeString) {
                     totalTime += rideTime
                 }
-                emailText += "<b>Gefahrene Zeit: \(ride.timeElapsed ?? "")</b><br>"
-                emailText += "_________________________________<br><br>"
+                rideDetails += "<b>Gefahrene Zeit: &nbsp  &nbsp &nbsp &nbsp &nbsp \(ride.timeElapsed ?? "")</b><br>"
+                rideDetails += "_________________________________<br><br>"
             }
         }
-        
-        // Format total distance and total time
+
+        // Format total distance and total time after accumulating all the data
         let totalTimeFormatted = formatTimeInterval(totalTime)
-        emailText += "<br><b>Gesamte Gefahrene Distanz: \(String(format: "%.2f", totalDistance)) km</b><br>"
-        emailText += "<b>Gesamte Gefahrene Zeit: \(totalTimeFormatted)</b><br><br>"
+        let totalRides = allRides.count // Count the number of rides
         emailText += "_________________________________<br><br>"
-        
+        emailText += "<b><span style=\"color: #9CC769;\">TOTALE:</span></b><br>"
+        emailText += "<br><b>Gesamte Gefahrene Distanz: &nbsp \(String(format: "%.2f", totalDistance)) km</b><br>"
+        emailText += "<b>Gesamte Gefahrene Zeit: &nbsp &nbsp &nbsp &nbsp &nbsp    \(totalTimeFormatted)</b><br><br>"
+        emailText += "<b>Anzahl Fahrten: \(totalRides) &nbsp &nbsp </b><br><br>"
+        emailText += "_________________________________<br><br>"
+
+        // Append ride details after the totals
+        emailText += rideDetails
+
         emailText += "Mit besten Grüssen,<br><br>\(yourName)<br><br>"
-        emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V5.0.1 generiert. - © 2023 - 2024 Stephan König (GPL 3.0)"
+        emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V5.0.2 generiert. - © 2023 - 2024 Stephan König (GPL 3.0)"
         
         // Create a date formatter for German locale
         let dateFormatterForSubject = DateFormatter()
@@ -198,6 +208,7 @@ class clientReportViewController: UIViewController, UITextFieldDelegate, MFMailC
             print("Cannot send mails")
         }
     }
+
 
 
     // MARK: - MFMailComposeViewControllerDelegate

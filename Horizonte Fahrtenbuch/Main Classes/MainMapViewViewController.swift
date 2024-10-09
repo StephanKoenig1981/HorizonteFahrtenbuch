@@ -185,7 +185,7 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         clientReportButton.tintColor = UIColor.systemTeal //init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
         
         settingsButtonView.layer.cornerRadius = 25
-        settingsButton.tintColor = UIColor.systemPurple //init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+        settingsButton.tintColor = UIColor.systemTeal //init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
         
         personalDetailView.layer.cornerRadius = 25
         personalDetailButton.tintColor = UIColor.systemTeal //init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
