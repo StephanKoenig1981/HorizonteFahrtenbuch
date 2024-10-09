@@ -75,7 +75,7 @@ class clientReportViewController: UIViewController, UITextFieldDelegate, MFMailC
         // Get client name
         guard let clientName = clientNameTextfield.text, !clientName.isEmpty else {
             // Handle empty client name, show an alert
-            let alert = UIAlertController(title: "Fehler", message: "Name ist erforderlich", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Fehler", message: "Kundenname ist erforderlich", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             present(alert, animated: true, completion: nil)
             return
@@ -184,7 +184,7 @@ class clientReportViewController: UIViewController, UITextFieldDelegate, MFMailC
         emailText += rideDetails
 
         emailText += "Mit besten Grüssen,<br><br>\(yourName)<br><br>"
-        emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V5.0.2 generiert. - © 2023 - 2024 Stephan König (GPL 3.0)"
+        emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V5.0.3 generiert. - © 2023 - 2024 Stephan König (GPL 3.0)"
         
         // Create a date formatter for German locale
         let dateFormatterForSubject = DateFormatter()
