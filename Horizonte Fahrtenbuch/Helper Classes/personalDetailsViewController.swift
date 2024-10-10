@@ -19,12 +19,8 @@ class personalDetailsViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var companyAddress: UITextField!
     @IBOutlet weak var companyPostalCode: UITextField!
-    @IBOutlet weak var companyCity: UITextField!
+    @IBOutlet weak var companyCity: UITextField!   
     
-    @IBOutlet weak var textView: UITextView!
-    @IBOutlet weak var logoView: UIImageView!
-    
-    @IBOutlet weak var faceIDToggleSwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -174,9 +170,6 @@ class personalDetailsViewController: UIViewController, UITextFieldDelegate {
 
                 realm.add(lastSavedModel, update: .modified)
             }
-
-            // Assuming logoView is a UIView you want to show as confirmation or feedback
-            logoView.fadeIn(duration: 0.7)
     }
     
     // Utility method to get URL of default.realm
@@ -247,30 +240,6 @@ class personalDetailsViewController: UIViewController, UITextFieldDelegate {
         
         restoreFromiCloudDrive()
         
-    }
-    
-    // MARK: IBAction for FaceID / TouchID
-    
-    @IBAction func faceIDToggleSwitchChanged(_ sender: UISwitch) {
-        
-        // User defaults for FaceID / Touch ID toggle switch
-        let userDefaults = UserDefaults.standard
-        let authenticationKey = "AuthenticationEnabled"
-        
-        if sender.isOn {
-            authenticateUser { success in
-                DispatchQueue.main.async {
-                    if success {
-                        userDefaults.set(true, forKey: authenticationKey)
-                        self.faceIDToggleSwitch.setOn(true, animated: true)
-                    } else {
-                        self.faceIDToggleSwitch.setOn(false, animated: true)
-                    }
-                }
-            }
-        } else {
-            userDefaults.set(false, forKey: authenticationKey)
-        }
     }
 }
 
