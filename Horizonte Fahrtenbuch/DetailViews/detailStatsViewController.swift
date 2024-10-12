@@ -174,6 +174,12 @@ class detailStatsViewController: UIViewController, MFMailComposeViewControllerDe
     // MARK: Button Functions
     
     @IBAction func sendStatsButtonPressed(_ sender: Any) {
+        
+        // MARK: Haptic Feedback for start
+        
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
+        
         sendTotalReport()
     }
     
@@ -212,21 +218,38 @@ class detailStatsViewController: UIViewController, MFMailComposeViewControllerDe
         // Get your name
         let yourName = personalDetails.last?.yourName ?? "Ihr Name"
 
+        // Get the current year
+        let currentYear = Calendar.current.component(.year, from: Date())
+
+        // Filter current rides for the current year
+        let allRides = Array(currentRides) + Array(archivedRides)
+        
+        let currentYearRides = allRides.filter { ride in
+            if let ride = ride as? currentRide, let date = ride.dateActual {
+                return Calendar.current.isDate(date, equalTo: Date(), toGranularity: .year)
+            } else if let ride = ride as? archivedRides, let date = ride.dateActual {
+                return Calendar.current.isDate(date, equalTo: Date(), toGranularity: .year)
+            }
+            return false
+        }
+
+        // Prepare email body
         var emailBody = "<html><body>"
         emailBody += "<p>Guten Tag,</p>"
         emailBody += "<p>Untenstehend finden Sie eine Zusammenfassung über alle aufgezeichneten Fahrten:</p>"
         emailBody += "<br><b><span style=\"color: #9CC769;\">Gesamtanzahl Fahrten:</span></b> &nbsp&nbsp&nbsp&nbsp&nbsp\(currentRides.count + archivedRides.count)<br>"
         emailBody += "<b><span style=\"color: #9CC769;\">Gesamtdistanz:</span></b> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp\(overallDistanceLabel.text ?? "0.0 km")<br>"
         emailBody += "<b><span style=\"color: #9CC769;\">Gesamte gefahrene Zeit:</span></b> &nbsp \(overallTimeLabel.text ?? "00:00:00")<br><br>"
-        emailBody += "<b><span style=\"color: #9CC769;\">Gesamtdistanz \(Calendar.current.component(.year, from: Date())):</span></b>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp\(currentYearDistanceLabel.text ?? "0.0 km")<br>"
-        emailBody += "<b><span style=\"color: #9CC769;\">Gesamtzeit \(Calendar.current.component(.year, from: Date())):</span></b> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp\(currentYearTimeLabel.text ?? "00:00:00")<br><br>"
+        emailBody += "<b><span style=\"color: #9CC769;\">Anzahl Fahrten \(currentYear):</span></b> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp\(currentYearRides.count)<br>"
+        emailBody += "<b><span style=\"color: #9CC769;\">Gesamtdistanz \(currentYear):</span></b>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp\(currentYearDistanceLabel.text ?? "0.0 km")<br>"
+        emailBody += "<b><span style=\"color: #9CC769;\">Gesamtzeit \(currentYear):</span></b> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp\(currentYearTimeLabel.text ?? "00:00:00")<br><br>"
         emailBody += "<b><span style=\"color: #9CC769;\">Gesamte Durchschnittsdistanz:</span></b> &nbsp&nbsp&nbsp&nbsp&nbsp\(overallAverageDistanceLabel.text ?? "0.0 km")<br>"
         emailBody += "<b><span style=\"color: #9CC769;\">Gesamte Durchschnittszeit:</span></b>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp \(overallAverageTimeLabel.text ?? "00:00:00")<br><br>"
-        emailBody += "<b><span style=\"color: #9CC769;\">Durchschnittsdistanz \(Calendar.current.component(.year, from: Date())):</span></b> &nbsp&nbsp&nbsp\(currentYearAverageDistanceLabel.text ?? "0.0 km")<br>"
-        emailBody += "<b><span style=\"color: #9CC769;\">Durchschnittszeit \(Calendar.current.component(.year, from: Date())):</span></b> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp\(currentYearAverageTimeLabel.text ?? "00:00:00")<br><br>"
+        emailBody += "<b><span style=\"color: #9CC769;\">Durchschnittsdistanz \(currentYear):</span></b> &nbsp&nbsp&nbsp\(currentYearAverageDistanceLabel.text ?? "0.0 km")<br>"
+        emailBody += "<b><span style=\"color: #9CC769;\">Durchschnittszeit \(currentYear):</span></b> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp\(currentYearAverageTimeLabel.text ?? "00:00:00")<br><br>"
         emailBody += "<p>Mit besten Grüssen,<br><br>\(yourName)</p><br>"
         emailBody += "_________________________________<br><br>"
-        emailBody += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V6.0.0 generiert. - © 2023 - 2024 Stephan König (GPL 3.0)"
+        emailBody += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V6.0.1 generiert. - © 2023 - 2024 Stephan König (GPL 3.0)"
         emailBody += "</body></html>"
 
         return emailBody
