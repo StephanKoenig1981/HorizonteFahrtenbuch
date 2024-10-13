@@ -165,16 +165,16 @@ class detailStatsViewController: UIViewController, MFMailComposeViewControllerDe
         let currentYearAverageTime = currentYearTime / max(Double(currentYearRides.count), 1)
 
         // Update UI Labels with formatted values
-        overallDistanceLabel.text = String(format: "%.1f km", totalDistance) // 0.0 format
+        overallDistanceLabel.text = String(format: "%.1f Km", totalDistance) // 0.0 format
         overallTimeLabel.text = formatTime(totalTime) // 00:00:00 format
 
-        currentYearDistanceLabel.text = String(format: "%.1f km", currentYearDistance) // 0.0 format
+        currentYearDistanceLabel.text = String(format: "%.1f Km", currentYearDistance) // 0.0 format
         currentYearTimeLabel.text = formatTime(currentYearTime) // 00:00:00 format
 
-        overallAverageDistanceLabel.text = String(format: "%.1f km", averageDistance) // 0.0 format
+        overallAverageDistanceLabel.text = String(format: "%.1f Km", averageDistance) // 0.0 format
         overallAverageTimeLabel.text = formatTime(averageTime) // 00:00:00 format
 
-        currentYearAverageDistanceLabel.text = String(format: "%.1f km", currentYearAverageDistance) // 0.0 format
+        currentYearAverageDistanceLabel.text = String(format: "%.1f Km", currentYearAverageDistance) // 0.0 format
         currentYearAverageTimeLabel.text = formatTime(currentYearAverageTime) // 00:00:00 format
     }
 
@@ -252,18 +252,18 @@ class detailStatsViewController: UIViewController, MFMailComposeViewControllerDe
         emailBody += "<p>Guten Tag,</p>"
         emailBody += "<p>Untenstehend finden Sie eine Zusammenfassung über alle aufgezeichneten Fahrten:</p>"
         emailBody += "<br><b><span style=\"color: #9CC769;\">Gesamtanzahl Fahrten:</span></b> &nbsp&nbsp&nbsp&nbsp&nbsp\(currentRides.count + archivedRides.count)<br>"
-        emailBody += "<b><span style=\"color: #9CC769;\">Gesamtdistanz:</span></b> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp\(overallDistanceLabel.text ?? "0.0 km")<br>"
+        emailBody += "<b><span style=\"color: #9CC769;\">Gesamtdistanz:</span></b> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp\(overallDistanceLabel.text ?? "0.0 Km")<br>"
         emailBody += "<b><span style=\"color: #9CC769;\">Gesamte gefahrene Zeit:</span></b> &nbsp \(overallTimeLabel.text ?? "00:00:00")<br><br>"
         emailBody += "<b><span style=\"color: #9CC769;\">Anzahl Fahrten \(currentYear):</span></b> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp\(currentYearRides.count)<br>"
-        emailBody += "<b><span style=\"color: #9CC769;\">Gesamtdistanz \(currentYear):</span></b>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp\(currentYearDistanceLabel.text ?? "0.0 km")<br>"
+        emailBody += "<b><span style=\"color: #9CC769;\">Gesamtdistanz \(currentYear):</span></b>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp\(currentYearDistanceLabel.text ?? "0.0 Km")<br>"
         emailBody += "<b><span style=\"color: #9CC769;\">Gesamtzeit \(currentYear):</span></b> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp\(currentYearTimeLabel.text ?? "00:00:00")<br><br>"
-        emailBody += "<b><span style=\"color: #9CC769;\">Gesamte Durchschnittsdistanz:</span></b> &nbsp&nbsp&nbsp&nbsp&nbsp\(overallAverageDistanceLabel.text ?? "0.0 km")<br>"
+        emailBody += "<b><span style=\"color: #9CC769;\">Gesamte Durchschnittsdistanz:</span></b> &nbsp&nbsp&nbsp&nbsp&nbsp\(overallAverageDistanceLabel.text ?? "0.0 Km")<br>"
         emailBody += "<b><span style=\"color: #9CC769;\">Gesamte Durchschnittszeit:</span></b>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp \(overallAverageTimeLabel.text ?? "00:00:00")<br><br>"
-        emailBody += "<b><span style=\"color: #9CC769;\">Durchschnittsdistanz \(currentYear):</span></b> &nbsp&nbsp&nbsp\(currentYearAverageDistanceLabel.text ?? "0.0 km")<br>"
+        emailBody += "<b><span style=\"color: #9CC769;\">Durchschnittsdistanz \(currentYear):</span></b> &nbsp&nbsp&nbsp\(currentYearAverageDistanceLabel.text ?? "0.0 Km")<br>"
         emailBody += "<b><span style=\"color: #9CC769;\">Durchschnittszeit \(currentYear):</span></b> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp\(currentYearAverageTimeLabel.text ?? "00:00:00")<br><br>"
         emailBody += "<p>Mit besten Grüssen,<br><br>\(yourName)</p><br>"
         emailBody += "_________________________________<br><br>"
-        emailBody += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V6.0.2 generiert. - © 2023 - 2024 Stephan König (GPL 3.0)"
+        emailBody += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V6.0.3 generiert. - © 2023 - 2024 Stephan König (GPL 3.0)"
         emailBody += "</body></html>"
 
         return emailBody
