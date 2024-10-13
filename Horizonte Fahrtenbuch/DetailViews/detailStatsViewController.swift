@@ -42,7 +42,7 @@ class detailStatsViewController: UIViewController, MFMailComposeViewControllerDe
         super.viewDidLoad()
         
         currentYearTitleLabel.text = "Total \(Calendar.current.component(.year, from: Date()))"
-        currentYearAverageTitleLabel.text = "Durchschnitt pro Fahrt \(Calendar.current.component(.year, from: Date()))"
+        currentYearAverageTitleLabel.text = "Durchschnitt  \(Calendar.current.component(.year, from: Date()))"
         
         loadRideStats()
         
@@ -61,6 +61,20 @@ class detailStatsViewController: UIViewController, MFMailComposeViewControllerDe
         // Combine both ride collections
         let allRides = Array(currentRides) + Array(archivedRides)
 
+        // Get the first ride date from both currentRide and archivedRides
+        let firstCurrentRideDate = currentRides.min(by: { $0.dateActual ?? Date() < $1.dateActual ?? Date() })?.dateActual
+        let firstArchivedRideDate = archivedRides.min(by: { $0.dateActual ?? Date() < $1.dateActual ?? Date() })?.dateActual
+        
+        // Find the earliest date between both collections
+        let firstRideDate = min(firstCurrentRideDate ?? Date(), firstArchivedRideDate ?? Date())
+        
+        // Extract the year of the first ride
+        let firstRideYear = Calendar.current.component(.year, from: firstRideDate)
+
+        // Update the overall total and average title labels with the first ride year
+        overallTotalTitleLabel.text = "Total seit \(firstRideYear)"
+        overallAverageTitleLabel.text = "Durchschnitt seit \(firstRideYear)"
+        
         // Update the amount of rides labels
         overallAmountOfRidesLabel.text = "\(allRides.count)"
         
@@ -249,7 +263,7 @@ class detailStatsViewController: UIViewController, MFMailComposeViewControllerDe
         emailBody += "<b><span style=\"color: #9CC769;\">Durchschnittszeit \(currentYear):</span></b> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp\(currentYearAverageTimeLabel.text ?? "00:00:00")<br><br>"
         emailBody += "<p>Mit besten Grüssen,<br><br>\(yourName)</p><br>"
         emailBody += "_________________________________<br><br>"
-        emailBody += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V6.0.1 generiert. - © 2023 - 2024 Stephan König (GPL 3.0)"
+        emailBody += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V6.0.2 generiert. - © 2023 - 2024 Stephan König (GPL 3.0)"
         emailBody += "</body></html>"
 
         return emailBody

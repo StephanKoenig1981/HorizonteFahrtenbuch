@@ -311,7 +311,7 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
         }
         
          emailText += "<br><br>"
-         emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V6.0.1 generiert. - © 2023 - 2024 Stephan König (GPL 3.0)"
+         emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V6.0.2 generiert. - © 2023 - 2024 Stephan König (GPL 3.0)"
          
          if MFMailComposeViewController.canSendMail() {
              let mailComposer = MFMailComposeViewController()
@@ -402,7 +402,7 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
              }
              
              emailText += "<br><br>"
-             emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V6.0.1 generiert. - © 2023 - 2024 Stephan König (GPL 3.0)"
+             emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V6.0.2 generiert. - © 2023 - 2024 Stephan König (GPL 3.0)"
              
              if MFMailComposeViewController.canSendMail() {
                  let mailComposer = MFMailComposeViewController()
@@ -544,6 +544,12 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
         return 90.0 // Set the height of the cell to be 10 points more than what you have specified in the Storyboard or programmatically
     }
     @IBAction func statsButtonPressed(_ sender: Any) {
+        // MARK: Haptic Feedback for start
+        
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
+    }
+    @IBAction func archivedRidesButtonPressed(_ sender: Any) {
         // MARK: Haptic Feedback for start
         
         let generator = UINotificationFeedbackGenerator()
