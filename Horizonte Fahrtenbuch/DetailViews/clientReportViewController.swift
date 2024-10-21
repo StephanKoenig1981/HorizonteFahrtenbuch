@@ -181,7 +181,7 @@ class clientReportViewController: UIViewController, UITextFieldDelegate, MFMailC
         let totalRides = allRides.count // Count the number of rides
         emailText += "_________________________________<br><br>"
         emailText += "<b><span style=\"color: #9CC769;\">TOTALE:</span></b><br>"
-        emailText += "<br><b>Gesamte Gefahrene Distanz: &nbsp \(String(format: "%.2f", totalDistance)) km</b><br>"
+        emailText += "<br><b>Gesamte Gefahrene Distanz: &nbsp \(String(format: "%.2f", totalDistance)) Km</b><br>"
         emailText += "<b>Gesamte Gefahrene Zeit: &nbsp &nbsp &nbsp &nbsp &nbsp    \(totalTimeFormatted)</b><br><br>"
         emailText += "<b>Anzahl Fahrten: \(totalRides) &nbsp &nbsp </b><br><br>"
         emailText += "_________________________________<br><br>"
