@@ -271,9 +271,16 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         mapView.delegate = self
         mapView.mapType = MKMapType(rawValue: 0)!
         mapView.setUserTrackingMode(.followWithHeading, animated: true)
-
+        
+        // Add Tap Gesture to Dismiss Keyboard
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapGesture)
     }
     
+    // Dismiss Keyboard Method
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
     
     // MARK: Setting the delegate for ContactsTableViewController
     

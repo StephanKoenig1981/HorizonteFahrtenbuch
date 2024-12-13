@@ -36,7 +36,14 @@ class clientReportViewController: UIViewController, UITextFieldDelegate, MFMailC
         // Set the delegate for the client name text field
         clientNameTextfield.delegate = self
         
-        // Do any additional setup after loading the view.
+        // Add Tap Gesture to Dismiss Keyboard
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    // Dismiss Keyboard Method
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     @IBAction func createReportButtonPressed(_ sender: Any) {
@@ -190,7 +197,7 @@ class clientReportViewController: UIViewController, UITextFieldDelegate, MFMailC
         emailText += rideDetails
 
         emailText += "Mit besten Grüssen,<br><br>\(yourName)<br><br>"
-        emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V6.0.4 generiert. - © 2023 - 2024 Stephan König (GPL 3.0)"
+        emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V6.1.0 generiert. - © 2023 - 2024 Stephan König (GPL 3.0)"
         
         // Create a date formatter for German locale
         let dateFormatterForSubject = DateFormatter()

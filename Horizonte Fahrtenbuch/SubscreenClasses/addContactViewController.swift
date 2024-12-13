@@ -47,7 +47,15 @@ class addContactViewController: UIViewController, UITextFieldDelegate {
         postalCodeTextfield.attributedPlaceholder = NSAttributedString(string: "PLZ", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         cityTextfield.attributedPlaceholder = NSAttributedString(string: "Ort", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         phoneTextfield.attributedPlaceholder = NSAttributedString(string: "Telefon", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-
+        
+        // Add Tap Gesture to Dismiss Keyboard
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    // Dismiss Keyboard Method
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     // MARK: Hickup workaround code to hide keyboard when return is pressed

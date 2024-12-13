@@ -43,6 +43,17 @@ class addRideViewController: UIViewController, UITextFieldDelegate {
         durationTextfield.delegate = self
         distanceTextfield.delegate = self
         
+        // Tap recognizer
+        
+        // Add Tap Gesture to Dismiss Keyboard
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapGesture)
+        
+    }
+    
+    // Dismiss Keyboard Method
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     // MARK: Functions for keyboard actions

@@ -58,9 +58,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // MARK: Starting the keyboard Manager
         
-        IQKeyboardManager.shared.enable = true
-            return true
-    
+        IQKeyboardManager.shared.isEnabled = true
+        return true
     }
 
     // MARK: UISceneSession Lifecycle
