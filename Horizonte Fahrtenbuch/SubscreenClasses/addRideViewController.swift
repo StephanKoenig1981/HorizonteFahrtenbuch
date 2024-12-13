@@ -17,98 +17,113 @@ class addRideViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var distanceTextfield: UITextField!
     override func viewDidLoad() {
-           super.viewDidLoad()
+            super.viewDidLoad()
 
-           datePicker.overrideUserInterfaceStyle = .dark
-           datePicker.setValue(UIColor.white, forKeyPath: "textColor")
-           datePicker.tintColor = UIColor.systemPurple
-
-           clientTextfield.attributedPlaceholder = NSAttributedString(
-               string: "Kunde",
-               attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
-           )
-           durationTextfield.attributedPlaceholder = NSAttributedString(
-               string: "00:00:00",
-               attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
-           )
-           distanceTextfield.attributedPlaceholder = NSAttributedString(
-               string: "24.0",
-               attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
-           )
-
-           // Disable Swipe Down gesture
-           if #available(iOS 13.0, *) {
-               self.isModalInPresentation = true
-           }
-
-           let vc = UIViewController()
-           vc.presentationController?.presentedView?.gestureRecognizers?[0].isEnabled = false
-
-           // Delegates for Textfields
-           clientTextfield.delegate = self
-           durationTextfield.delegate = self
-           distanceTextfield.delegate = self
-
-           // Add Tap Gesture to Dismiss Keyboard
-           let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-           view.addGestureRecognizer(tapGesture)
-       }
-
-       // Dismiss Keyboard Method
-       @objc func dismissKeyboard() {
-           view.endEditing(true)
-       }
-
-       // MARK: - Validation Functions
-       func isValidTimeFormat(_ input: String) -> Bool {
-           let timeRegex = "^\\d{2}:\\d{2}:\\d{2}$"
-           let timeTest = NSPredicate(format: "SELF MATCHES %@", timeRegex)
-           return timeTest.evaluate(with: input)
-       }
-
-    func isValidDistanceFormat(_ input: String) -> Bool {
-        let distanceRegex = "^\\d+\\.\\d$" // Require at least one digit before and exactly one digit after the decimal
-        let distanceTest = NSPredicate(format: "SELF MATCHES %@", distanceRegex)
-        return distanceTest.evaluate(with: input)
-    }
-
-       // MARK: - UITextFieldDelegate Methods
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        guard let currentText = textField.text as NSString? else { return true }
-        let newString = currentText.replacingCharacters(in: range, with: string)
-        
-        if textField == durationTextfield {
-            let partialTimeRegex = "^\\d{0,2}(:\\d{0,2})?(:\\d{0,2})?$"
-            return NSPredicate(format: "SELF MATCHES %@", partialTimeRegex).evaluate(with: newString)
-        } else if textField == distanceTextfield {
-            let partialDistanceRegex = "^\\d+(\\.\\d{0,1})?$"
-            return NSPredicate(format: "SELF MATCHES %@", partialDistanceRegex).evaluate(with: newString)
+            setupUI()
+            setupDelegates()
+            addTapGesture()
         }
         
-        return true
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField == durationTextfield, let text = textField.text, !isValidTimeFormat(text) {
-            showAlert(message: "Bitte fülle das Feld im folgenden Format aus:\n\n00:00:00")
-            textField.text = ""
-        } else if textField == distanceTextfield, let text = textField.text {
-            let exactDistanceRegex = "^\\d+\\.\\d$"
-            let isValid = NSPredicate(format: "SELF MATCHES %@", exactDistanceRegex).evaluate(with: text)
-            if !isValid {
-                showAlert(message: "Bitte fülle das Feld im folgenden Format aus:\n\n0.0")
-                textField.text = ""
+        private func setupUI() {
+            datePicker.overrideUserInterfaceStyle = .dark
+            datePicker.setValue(UIColor.white, forKeyPath: "textColor")
+            datePicker.tintColor = UIColor.systemPurple
+
+            clientTextfield.attributedPlaceholder = NSAttributedString(
+                string: "Kunde",
+                attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
+            )
+            durationTextfield.attributedPlaceholder = NSAttributedString(
+                string: "00:00:00",
+                attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
+            )
+            distanceTextfield.attributedPlaceholder = NSAttributedString(
+                string: "24.0",
+                attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
+            )
+            
+            // Disable Swipe Down gesture to dismiss modal
+            if #available(iOS 13.0, *) {
+                self.isModalInPresentation = true
             }
         }
+        
+        private func setupDelegates() {
+            clientTextfield.delegate = self
+            durationTextfield.delegate = self
+            distanceTextfield.delegate = self
+        }
+        
+    private func addTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.delegate = self // Ensure this is correctly set
+        view.addGestureRecognizer(tapGesture)
     }
 
-       // MARK: - Alert for Feedback
-       func showAlert(message: String) {
-           let alert = UIAlertController(title: "Eingabe im falschen Format\n", message: message, preferredStyle: .alert)
-           alert.addAction(UIAlertAction(title: "OK", style: .default))
-           present(alert, animated: true)
-       }
+        
+        // Prevent triggering alert on tapping outside of textfields
+        func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+            if let touchedView = touch.view, touchedView.isDescendant(of: clientTextfield) ||
+                touchedView.isDescendant(of: durationTextfield) ||
+                touchedView.isDescendant(of: distanceTextfield) {
+                return false
+            }
+            return true
+        }
+
+        @objc func dismissKeyboard() {
+            view.endEditing(true)
+        }
+        
+        // MARK: - Validation Functions
+        func isValidTimeFormat(_ input: String) -> Bool {
+            let timeRegex = "^\\d{2}:\\d{2}:\\d{2}$"
+            let timeTest = NSPredicate(format: "SELF MATCHES %@", timeRegex)
+            return timeTest.evaluate(with: input)
+        }
+
+        func isValidDistanceFormat(_ input: String) -> Bool {
+            let distanceRegex = "^\\d+\\.\\d$"
+            let distanceTest = NSPredicate(format: "SELF MATCHES %@", distanceRegex)
+            return distanceTest.evaluate(with: input)
+        }
+
+        // MARK: - UITextFieldDelegate Methods
+        func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+            guard let currentText = textField.text as NSString? else { return true }
+            let newString = currentText.replacingCharacters(in: range, with: string)
+            
+            if textField == durationTextfield {
+                let partialTimeRegex = "^\\d{0,2}(:\\d{0,2})?(:\\d{0,2})?$"
+                return NSPredicate(format: "SELF MATCHES %@", partialTimeRegex).evaluate(with: newString)
+            } else if textField == distanceTextfield {
+                let partialDistanceRegex = "^\\d+(\\.\\d{0,1})?$"
+                return NSPredicate(format: "SELF MATCHES %@", partialDistanceRegex).evaluate(with: newString)
+            }
+            
+            return true
+        }
+        
+        func textFieldDidEndEditing(_ textField: UITextField) {
+            if textField == durationTextfield, let text = textField.text, !isValidTimeFormat(text) {
+                textField.text = ""
+                showAlertIfNeeded(message: "Bitte fülle das Feld im folgenden Format aus:\n\n00:00:00")
+            } else if textField == distanceTextfield, let text = textField.text, !isValidDistanceFormat(text) {
+                textField.text = ""
+                showAlertIfNeeded(message: "Bitte fülle das Feld im folgenden Format aus:\n\n0.0")
+            }
+        }
+
+        // MARK: - Alert for Feedback
+        func showAlertIfNeeded(message: String) {
+            guard self.isBeingPresented || self.navigationController?.isBeingPresented == true else {
+                return // Don't show alert when conditions are met
+            }
+            let alert = UIAlertController(title: "Eingabe im falschen Format\n", message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            present(alert, animated: true)
+        }
+
    
     @IBAction func saveButtonPressed(_ sender: Any) {
         
@@ -132,11 +147,12 @@ class addRideViewController: UIViewController, UITextFieldDelegate {
             return
         }
 
-        // Proceed with saving the data
+        // Append "Km" to distance text if valid
         if let distanceText = distanceTextfield.text {
             distanceTextfield.text = "\(distanceText) Km"
         }
 
+        // Prepare the currentRide object for saving
         let currentRides = currentRide()
         let date = datePicker.date
         let supplementDate = Date()
@@ -151,28 +167,35 @@ class addRideViewController: UIViewController, UITextFieldDelegate {
         currentRides.supplementDate = dateFormatter.string(from: supplementDate)
         currentRides.isManuallySaved = true
 
+        // Save to Realm database
         saveRealmObject(currentRides: currentRides)
         self.dismiss(animated: true)
+    }
+    
+    // Always display an alert without restrictions
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: "Eingabe im falschen Format\n", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
     }
     
     
     // MARK: Function for finally saving client to database
     
     func saveRealmObject(currentRides: currentRide) {
-            let realm = try? Realm()
-            try? realm?.write {
-                realm?.add(currentRides)
-            }
-            print("Data Was Saved To Realm Database.")
-        }
+           let realm = try? Realm()
+           try? realm?.write {
+               realm?.add(currentRides)
+           }
+           print("Data Was Saved To Realm Database.")
+       }
     
     @IBAction func cancellButtonPressed(_ sender: Any) {
         
-        // Haptic feedback
         let generator = UINotificationFeedbackGenerator()
-        generator.notificationOccurred(.error)
-        
-        let alert = UIAlertController(
+               generator.notificationOccurred(.error)
+               
+               let alert = UIAlertController(
                    title: "Bist du sicher?",
                    message: "Bist du sicher, dass du abbrechen möchtest ohne die Fahrt zu speichern?",
                    preferredStyle: .actionSheet
@@ -185,4 +208,6 @@ class addRideViewController: UIViewController, UITextFieldDelegate {
            }
 }
 
+// Extension to explicitly confirm protocol conformance
+extension addRideViewController: UIGestureRecognizerDelegate {}
 
