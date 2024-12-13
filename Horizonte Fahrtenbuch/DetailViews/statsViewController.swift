@@ -373,7 +373,7 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
                 emailText += "  Total gefahrene Distanz: &nbsp &nbsp\(tuple.totalDistance)<br>"
 
                 let formattedTime = timeFormatted(tuple.totalTime)
-                emailText += "<b>  Total gefahrene Zeit: &nbsp &nbsp &nbsp &nbsp\(formattedTime)</b><br>"
+                emailText += "<b>  Total gefahrene Zeit: &nbsp &nbsp &nbsp &nbsp \(formattedTime)</b><br>"
                 emailText += "_________________________________<br>"
             }
             
@@ -402,7 +402,7 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
              }
              
              emailText += "<br><br>"
-             emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V6.1.3 generiert. - © 2023 - 2024 Stephan König (GPL 3.0)"
+             emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V6.1.4 generiert. - © 2023 - 2024 Stephan König (GPL 3.0)"
              
              if MFMailComposeViewController.canSendMail() {
                  let mailComposer = MFMailComposeViewController()
@@ -452,43 +452,65 @@ class statsViewController: UIViewController, MFMailComposeViewControllerDelegate
 
         let currentObject = sortedObjects[indexPath.row]
         
-        let originalIndex: Int
-        if let index = originalObjects.index(of: currentObject) {
-            originalIndex = index
-        } else {
-            return UITableViewCell() // Handle the case where the object is not found in the original array
-        }
-
-        guard originalIndex > 0 else {
+        // For the last entry (oldest), show 0%
+        if indexPath.row == sortedObjects.count - 1 {
+            cell.distancePercentageLabel.text = "0%"
+            cell.timePercentageLabel.text = "0%"
             configureCell(cell, with: currentObject, hasData: hasData, isIncrease: nil, rowIndex: indexPath.row)
             return cell
         }
 
-        let previousObject = originalObjects[originalIndex - 1]
+        // For all other entries, calculate the difference with the previous entry
+        let nextObject = sortedObjects[indexPath.row + 1]
 
-        let distanceDifference = calculatePercentageDifference(currentValue: currentObject.totalDistace ?? 0.0,
-                                                               previousValue: previousObject.totalDistace ?? 0.0)
-        let timeDifference = calculatePercentageDifference(currentValue: currentObject.totalTimeElapsed ?? 0.0,
-                                                           previousValue: previousObject.totalTimeElapsed ?? 0.0)
+        let distanceDifference = calculatePercentageDifference(currentValue: currentObject.totalDistace ?? "0",
+                                                             previousValue: nextObject.totalDistace ?? "0")
+        let timeDifference = calculatePercentageDifference(currentValue: currentObject.totalTimeElapsed ?? "0",
+                                                           previousValue: nextObject.totalTimeElapsed ?? "0")
 
-        cell.distancePercentageLabel.text = "\(Int(distanceDifference))%"
-        cell.timePercentageLabel.text = "\(Int(timeDifference))%"
+        cell.distancePercentageLabel.text = String(format: "%.1f%%", distanceDifference)
+        cell.timePercentageLabel.text = String(format: "%.1f%%", timeDifference)
 
         configureCell(cell, with: currentObject, hasData: hasData, isIncrease: distanceDifference > 0, rowIndex: indexPath.row)
 
         return cell
     }
     
-    func calculatePercentageDifference(currentValue: Any, previousValue: Any) -> Double {
-        guard let currentDouble = (currentValue as? NSString)?.doubleValue,
-              let previousDouble = (previousValue as? NSString)?.doubleValue,
-              previousDouble != 0 else {
-            // Handle the case where conversion to double fails or previousValue is 0
+    func calculatePercentageDifference(currentValue: String, previousValue: String) -> Double {
+        // Check if the string contains ":" to determine if it's a time value
+        if currentValue.contains(":") {
+            // Convert time strings to total seconds for comparison
+            let currentSeconds = timeStringToSeconds(currentValue)
+            let previousSeconds = timeStringToSeconds(previousValue)
+            
+            guard previousSeconds != 0 else {
+                return 0
+            }
+            
+            return ((Double(currentSeconds) - Double(previousSeconds)) / Double(previousSeconds)) * 100
+        } else {
+            // Handle distance values (existing logic)
+            let currentNumeric = Double(currentValue.components(separatedBy: CharacterSet.decimalDigits.union([".", ","]).inverted).joined().replacingOccurrences(of: ",", with: ".")) ?? 0
+            let previousNumeric = Double(previousValue.components(separatedBy: CharacterSet.decimalDigits.union([".", ","]).inverted).joined().replacingOccurrences(of: ",", with: ".")) ?? 0
+            
+            guard previousNumeric != 0 else {
+                return 0
+            }
+
+            return ((currentNumeric - previousNumeric) / previousNumeric) * 100
+        }
+    }
+
+    func timeStringToSeconds(_ timeString: String) -> Int {
+        let components = timeString.split(separator: ":")
+        guard components.count == 3,
+              let hours = Int(components[0]),
+              let minutes = Int(components[1]),
+              let seconds = Int(components[2]) else {
             return 0
         }
-
-        // Calculate percentage difference
-        return ((currentDouble - previousDouble) / abs(previousDouble)) * 100
+        
+        return hours * 3600 + minutes * 60 + seconds
     }
     
     func configureCell(_ cell: pastMonthRidesCell, with object: pastMonthRides, hasData: Bool, isIncrease: Bool?, rowIndex: Int) {
