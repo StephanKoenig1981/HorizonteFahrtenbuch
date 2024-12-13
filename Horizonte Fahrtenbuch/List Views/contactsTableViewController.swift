@@ -28,96 +28,124 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
     // MARK: Initializing Realm
     
     let realm = try! Realm()
-    let results = try! Realm().objects(clients.self).sorted(byKeyPath: "client")
-    var notificationToken: NotificationToken?
+    private var realmNotificationToken: NotificationToken?
     
     var hasData: Bool = false
     let placeholderLabel = UILabel()
     
     // MARK: Array for filtered data and deinitialization of Notifications
     
-    var filteredResults: [clients] = []
+    private var filteredResults: [clients] = []
+    private var cachedClients: [clients] = []
+    private var backgroundTask: UIBackgroundTaskIdentifier = .invalid
+    private var cellConfigurations: [IndexPath: [Any]] = [:]
     
     deinit {
-        notificationToken?.invalidate()
+        realmNotificationToken?.invalidate()
+        if backgroundTask != .invalid {
+            UIApplication.shared.endBackgroundTask(backgroundTask)
+            backgroundTask = .invalid
+        }
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Fix color for UISearchBar
+        setupUI()
+        setupSearchBar()
+        setupTableView()
+        
+        // Setup Realm notifications
+        let clientResults = realm.objects(clients.self)
+        realmNotificationToken = clientResults.observe { [weak self] changes in
+            guard let self = self else { return }
+            switch changes {
+            case .initial:
+                self.cachedClients = Array(self.realm.objects(clients.self))
+                    .sorted { ($0.client ?? "").localizedCaseInsensitiveCompare($1.client ?? "") == .orderedAscending }
+                self.reloadData()
+            case .update:
+                self.cachedClients = Array(self.realm.objects(clients.self))
+                    .sorted { ($0.client ?? "").localizedCaseInsensitiveCompare($1.client ?? "") == .orderedAscending }
+                self.reloadData()
+            case .error(let error):
+                print("Error observing Realm changes: \(error)")
+            }
+        }
+        
+        // Initial data load
+        reloadData()
+    }
+    
+    private func setupUI() {
+        self.title = "Kunden"
+        
+        // Setup placeholder
+        placeholderLabel.text = "Es wurden noch keine Kontakte gespeichert."
+        placeholderLabel.textAlignment = .center
+        placeholderLabel.textColor = .gray
+    }
+    
+    private func setupSearchBar() {
+        clientSearchBar.delegate = self
+        clientSearchBar.overrideUserInterfaceStyle = .dark
         
         if let textfield = clientSearchBar.value(forKey: "searchField") as? UITextField {
-            textfield.attributedPlaceholder = NSAttributedString(string: textfield.placeholder ?? "", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
+            textfield.attributedPlaceholder = NSAttributedString(
+                string: textfield.placeholder ?? "",
+                attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
+            )
             
             if let leftView = textfield.leftView as? UIImageView {
                 leftView.image = leftView.image?.withRenderingMode(.alwaysTemplate)
                 leftView.tintColor = UIColor.lightGray
             }
         }
+    }
+    
+    private func setupTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.rowHeight = Constants.rowHeight
+        tableView.backgroundColor = .clear
+        tableView.separatorStyle = .none
         
-        clientSearchBar.overrideUserInterfaceStyle = .dark
-        
-        // MARK: Tap Recoginzer
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard(_:)))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         tableView.addGestureRecognizer(tapGesture)
-        
-        // Initialize filteredResults with all objects sorted alphabetically
-        filteredResults = Array(realm.objects(clients.self))
-            .sorted { ($0.client ?? "").localizedCaseInsensitiveCompare($1.client ?? "") == .orderedAscending }
-        
-        // Register for changes in Realm Notifications
-        
-        clientSearchBar.delegate = self
-        clientTableView.delegate = self
-        clientTableView.dataSource = self
-        
-        setupUI()
-        
-        clientTableView.rowHeight = 225 // same as storyboard, but better to declare it here too
-        
-        // MARK: Setting placeholder text for the tableView being empty
-        
-        placeholderLabel.text = "Es wurden noch keine Kontakte gespeichert."
-        placeholderLabel.textAlignment = .center
-        placeholderLabel.textColor = .gray
-        clientTableView.backgroundView = placeholderLabel
     }
-    
-    // MARK: Setting Up User Interface
-        func setupUI() {
-            self.title = "Kunden"
-        }
-    
-    // MARK: Filter Data Function
-    
-    func filterResults(searchTerm: String) {
-        if searchTerm.isEmpty {
-            filteredResults = Array(realm.objects(clients.self))
-                .sorted { ($0.client ?? "").localizedCaseInsensitiveCompare($1.client ?? "") == .orderedAscending }
-        } else {
-            let unsortedFilteredResults = realm.objects(clients.self)
-                .filter("client CONTAINS[c] %@ OR street CONTAINS[c] %@", searchTerm, searchTerm)
-            
-            filteredResults = Array(unsortedFilteredResults)
-                .sorted { ($0.client ?? "").localizedCaseInsensitiveCompare($1.client ?? "") == .orderedAscending }
-        }
-        
-        placeholderLabel.isHidden = filteredResults.count > 0
-        tableView.reloadData()
-    }
-
     
     override func viewWillAppear(_ animated: Bool) {
-            // Add a background view to the table view
-              let backgroundImage = UIImage(named: "purpleGradient.png")
-              let imageView = UIImageView(image: backgroundImage)
-              self.tableView.backgroundView = imageView
+        super.viewWillAppear(animated)
+        
+        // Set background
+        let backgroundImage = UIImage(named: "purpleGradient.png")
+        let imageView = UIImageView(image: backgroundImage)
+        tableView.backgroundView = imageView
+        
+        // Always reload data when view appears
+        reloadData()
+    }
+    
+    private func reloadData() {
+        // Use cached data instead of querying Realm every time
+        let allClients = cachedClients
+        
+        if let searchText = clientSearchBar.text, !searchText.isEmpty {
+            // Use more efficient string comparison
+            let searchTextLower = searchText.lowercased()
+            filteredResults = allClients.filter {
+                ($0.client?.lowercased().contains(searchTextLower) ?? false) ||
+                ($0.street?.lowercased().contains(searchTextLower) ?? false)
+            }
+        } else {
+            filteredResults = allClients
         }
-
-
+        
+        placeholderLabel.isHidden = !filteredResults.isEmpty
+        tableView.reloadData()
+    }
+    
     // MARK: Define the number of rows beeing presented
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -128,101 +156,10 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = clientTableView.dequeueReusableCell(withIdentifier: "customClientCell", for: indexPath) as! clientsTableViewCell
         
-        guard indexPath.row < filteredResults.count else {
-            // Handle case where indexPath is out of bounds
-            return cell
-        }
+        guard indexPath.row < filteredResults.count else { return cell }
         
         let object = filteredResults[indexPath.row]
-        
-        cell.clientNameLabel?.text = object.client?.description
-        cell.clientsContactPersonLabel?.text = object.clientContactPerson?.description
-        cell.clientStreetLabel?.text = object.street?.description
-        cell.clientPostalCodeLabel?.text = object.postalCode?.description
-        cell.clientCityLabel?.text = object.city?.description
-        
-        cell.clientPhoneLabel?.text = object.phone?.description
-        
-        cell.clientNameLabel.textColor = UIColor(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
-        
-        // Action for making a phone call
-        cell.buttonPressed = {
-            guard let phone = object.phone, let url = URL(string: "tel://\(phone)"), UIApplication.shared.canOpenURL(url) else {
-                return
-            }
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            print("phoneButton at Index", indexPath)
-        }
-        
-        // Action for Map Button
-        cell.routeButtonPressed = {
-            print("mapButtonPressed at Index", indexPath)
-            let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "clientDetailViewController") as! clientDetailViewController
-            
-            if let street = object.street?.description, let city = object.city?.description {
-                var address = "\(street), \(city)"
-                let name = object.client?.description ?? ""
-                
-                self.getLocationFromAddress(address: address) { (location, error) in
-                    guard let location = location else {
-                        return
-                    }
-                    detailVC.latitude = location.latitude
-                    detailVC.longitude = location.longitude
-                    detailVC.clientName = name
-                    
-                    self.navigationController?.pushViewController(detailVC, animated: true)
-                }
-            }
-        }
-        
-        // Action for Start Ride Button Pressed
-        cell.startRideButtonPressed = {
-            let generator = UINotificationFeedbackGenerator()
-            generator.notificationOccurred(.error)
-            
-            print("startRideButton pressed at Index", indexPath)
-            
-            if let clientName = object.client, let phoneNumber = object.phone, let street = object.street, let city = object.city, let postalCode = object.postalCode {
-                let fullAddress = "\(street), \(postalCode) \(city)"
-                print("Client Name: \(clientName), Phone: \(phoneNumber), Address: \(fullAddress)")
-                
-                let alertMessage = "Möchtest du wirklich diese Fahrt für \(clientName) starten? Adresse: \(fullAddress)"
-                let alert = UIAlertController(title: "Fahrt starten?", message: alertMessage, preferredStyle: .actionSheet)
-                
-                let yesAction = UIAlertAction(title: "Ja", style: .default) { [weak self] _ in
-                    self?.dismiss(animated: true) {
-                        self?.delegate?.didSelectContact(clientName: clientName, phoneNumber: phoneNumber, street: street, city: city, postalCode: postalCode)
-                    }
-                }
-                alert.addAction(yesAction)
-                
-                let noAction = UIAlertAction(title: "Abbrechen", style: .destructive, handler: nil)
-                alert.addAction(noAction)
-                
-                self.present(alert, animated: true, completion: nil)
-            } else {
-                print("Client name, phone number, or address is missing")
-            }
-        }
-        
-        // Disabling the phone button if no phone number is in the contact details.
-        if object.phone?.description == "" {
-            cell.phoneButton.isEnabled = false
-            cell.phoneButton.tintColor = .systemGray
-            cell.phoneButton.overrideUserInterfaceStyle = .dark
-        } else {
-            cell.phoneButton.isEnabled = true
-            cell.phoneButton.tintColor = .systemOrange
-        }
-        
-        // Generate Address
-        let street = object.street?.description
-        let city = object.city?.description ?? ""
-        let address = "\(street), \(city)"
-        
-        // Check if the TableView is provided with data, else show placeholder text.
-        placeholderLabel.isHidden = filteredResults.count > 0
+        configureCell(cell, with: object, at: indexPath)
         
         return cell
     }
@@ -237,35 +174,7 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
         generator.notificationOccurred(.error)
 
         // Create alert controller to confirm deletion
-        let alertController = UIAlertController(title: "Kundeneintrag löschen", message: "Bist du sicher, dass du den Kundeneintrag löschen möchtest?", preferredStyle: .actionSheet)
-        
-        // Add cancel action to alert controller
-        let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil)
-        alertController.addAction(cancelAction)
-        
-        // Add delete action to alert controller
-        let deleteAction = UIAlertAction(title: "Löschen", style: .destructive) { [weak self] (action) in
-            guard let self = self,
-                  indexPath.row < self.filteredResults.count else { return }
-            
-            // Delete the corresponding object from the data source
-            let objectToDelete = self.filteredResults[indexPath.row]
-            
-            // First remove from filteredResults array
-            self.filteredResults.remove(at: indexPath.row)
-            
-            // Then delete from Realm
-            try! self.realm.write {
-                self.realm.delete(objectToDelete)
-            }
-            
-            // Finally update the table view
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-            
-            // Update placeholder visibility
-            self.placeholderLabel.isHidden = self.filteredResults.count > 0
-        }
-        alertController.addAction(deleteAction)
+        let alertController = createDeleteAlert(for: indexPath)
         
         // Present the alert controller
         present(alertController, animated: true, completion: nil)
@@ -280,15 +189,17 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
     
     // MARK: SearchBar Function
     
-   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText.isEmpty {
-            filteredResults = Array(realm.objects(clients.self))
-                .sorted { ($0.client ?? "").localizedCaseInsensitiveCompare($1.client ?? "") == .orderedAscending }
-        } else {
-            filterResults(searchTerm: searchText)
-        }
+    private var searchWorkItem: DispatchWorkItem?
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchWorkItem?.cancel()
         
-        tableView.reloadData()
+        let workItem = DispatchWorkItem { [weak self] in
+            self?.reloadData()
+        }
+        searchWorkItem = workItem
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: workItem)
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -297,7 +208,13 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
     
     // MARK: Geocoding Address
     
-    func getLocationFromAddress(address: String, completionHandler: @escaping (CLLocationCoordinate2D?, NSError?) -> Void) {
+    private enum ContactError: Error {
+        case invalidAddress
+        case geocodingFailed
+        case missingClientData
+    }
+    
+    private func getLocationFromAddress(address: String, completionHandler: @escaping (CLLocationCoordinate2D?, NSError?) -> Void) {
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(address) { (placemarks, error) in
             if error == nil {
@@ -321,5 +238,163 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
     
     @IBAction func routeButtonPressed(_ sender: Any) {
         
+    }
+    
+    private func createDeleteAlert(for indexPath: IndexPath) -> UIAlertController {
+        let alertController = UIAlertController(
+            title: "Kundeneintrag löschen",
+            message: "Bist du sicher, dass du den Kundeneintrag löschen möchtest?",
+            preferredStyle: .actionSheet
+        )
+        
+        alertController.addAction(UIAlertAction(title: "Abbrechen", style: .cancel))
+        alertController.addAction(createDeleteAction(for: indexPath))
+        
+        return alertController
+    }
+    
+    private func createDeleteAction(for indexPath: IndexPath) -> UIAlertAction {
+        return UIAlertAction(title: "Löschen", style: .destructive) { [weak self] _ in
+            self?.deleteClient(at: indexPath)
+        }
+    }
+    
+    private func deleteClient(at indexPath: IndexPath) {
+        guard indexPath.row < filteredResults.count else { return }
+        
+        let objectToDelete = filteredResults[indexPath.row]
+        filteredResults.remove(at: indexPath.row)
+        
+        try! realm.write {
+            realm.delete(objectToDelete)
+        }
+        
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+        placeholderLabel.isHidden = !filteredResults.isEmpty
+    }
+    
+    private func filterClients(_ clients: [clients], with searchText: String) -> [clients] {
+        return clients.filter {
+            ($0.client?.localizedCaseInsensitiveContains(searchText) ?? false) ||
+            ($0.street?.localizedCaseInsensitiveContains(searchText) ?? false)
+        }
+    }
+    
+    private func provideFeedback(_ type: UINotificationFeedbackGenerator.FeedbackType) {
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(type)
+    }
+    
+    private func configureCell(_ cell: clientsTableViewCell, with client: clients, at indexPath: IndexPath) {
+        cell.configure(with: client)
+        
+        cell.buttonPressed = { [weak self] in
+            self?.handlePhoneCall(for: client)
+        }
+        
+        cell.routeButtonPressed = { [weak self] in
+            self?.handleRouteButton(for: client)
+        }
+        
+        cell.startRideButtonPressed = { [weak self] in
+            self?.handleStartRide(for: client)
+        }
+    }
+    
+    private func handlePhoneCall(for client: clients) {
+        guard let phone = client.phone,
+              let url = URL(string: "tel://\(phone)"),
+              UIApplication.shared.canOpenURL(url) else { return }
+        
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
+    
+    private func handleRouteButton(for client: clients) {
+        print("mapButtonPressed")
+        let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "clientDetailViewController") as! clientDetailViewController
+        
+        if let street = client.street?.description, let city = client.city?.description {
+            let address = "\(street), \(city)"
+            let name = client.client?.description ?? ""
+            
+            self.getLocationFromAddress(address: address) { (location, error) in
+                guard let location = location else {
+                    return
+                }
+                detailVC.latitude = location.latitude
+                detailVC.longitude = location.longitude
+                detailVC.clientName = name
+                
+                self.navigationController?.pushViewController(detailVC, animated: true)
+            }
+        }
+    }
+    
+    private func handleStartRide(for client: clients) {
+        provideFeedback(.error)
+        
+        print("startRideButton pressed")
+        
+        if let clientName = client.client,
+           let phoneNumber = client.phone,
+           let street = client.street,
+           let city = client.city,
+           let postalCode = client.postalCode {
+            
+            let fullAddress = "\(street), \(postalCode) \(city)"
+            print("Client Name: \(clientName), Phone: \(phoneNumber), Address: \(fullAddress)")
+            
+            let alertMessage = "Möchtest du wirklich diese Fahrt für \(clientName) starten? Adresse: \(fullAddress)"
+            let alert = UIAlertController(title: "Fahrt starten?", message: alertMessage, preferredStyle: .actionSheet)
+            
+            let yesAction = UIAlertAction(title: "Ja", style: .default) { [weak self] _ in
+                self?.dismiss(animated: true) {
+                    self?.delegate?.didSelectContact(clientName: clientName, 
+                                                  phoneNumber: phoneNumber, 
+                                                  street: street, 
+                                                  city: city, 
+                                                  postalCode: postalCode)
+                }
+            }
+            alert.addAction(yesAction)
+            
+            let noAction = UIAlertAction(title: "Abbrechen", style: .destructive, handler: nil)
+            alert.addAction(noAction)
+            
+            present(alert, animated: true, completion: nil)
+        } else {
+            print("Client name, phone number, or address is missing")
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // Clean up cell configurations when cells are no longer visible
+        cellConfigurations.removeValue(forKey: indexPath)
+    }
+}
+
+private enum Constants {
+    static let rowHeight: CGFloat = 225.0
+    static let greenColor = UIColor(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
+    static let backgroundImageName = "purpleGradient.png"
+    static let placeholderText = "Es wurden noch keine Kontakte gespeichert."
+}
+
+private extension clientsTableViewCell {
+    func configure(with client: clients) {
+        clientNameLabel?.text = client.client?.description
+        clientsContactPersonLabel?.text = client.clientContactPerson?.description
+        clientStreetLabel?.text = client.street?.description
+        clientPostalCodeLabel?.text = client.postalCode?.description
+        clientCityLabel?.text = client.city?.description
+        clientPhoneLabel?.text = client.phone?.description
+        
+        clientNameLabel.textColor = Constants.greenColor
+        
+        // Configure phone button
+        let hasPhone = !(client.phone?.description.isEmpty ?? true)
+        phoneButton.isEnabled = hasPhone
+        phoneButton.tintColor = hasPhone ? .systemOrange : .systemGray
+        phoneButton.overrideUserInterfaceStyle = hasPhone ? .unspecified : .dark
     }
 }
