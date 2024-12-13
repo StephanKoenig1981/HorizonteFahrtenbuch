@@ -46,6 +46,15 @@ class personalDetailsViewController: UIViewController, UITextFieldDelegate {
         companyPostalCode.text = lastSavedModel?.companyPostalCode
         companyCity.text = lastSavedModel?.companyCity
         
+        // Add Tap Gesture to Dismiss Keyboard
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapGesture)
+        
+    }
+    
+    // Dismiss Keyboard Method
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     // Function to check if the local Realm file exists

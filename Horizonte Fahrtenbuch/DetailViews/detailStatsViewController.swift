@@ -263,7 +263,7 @@ class detailStatsViewController: UIViewController, MFMailComposeViewControllerDe
         emailBody += "<b><span style=\"color: #9CC769;\">Durchschnittszeit \(currentYear):</span></b> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp\(currentYearAverageTimeLabel.text ?? "00:00:00")<br><br>"
         emailBody += "<p>Mit besten Grüssen,<br><br>\(yourName)</p><br>"
         emailBody += "_________________________________<br><br>"
-        emailBody += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V6.1.0 generiert. - © 2023 - 2024 Stephan König (GPL 3.0)"
+        emailBody += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V6.1.1 generiert. - © 2023 - 2024 Stephan König (GPL 3.0)"
         emailBody += "</body></html>"
 
         return emailBody
