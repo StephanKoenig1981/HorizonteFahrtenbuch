@@ -36,7 +36,7 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
     
     // MARK: Array for filtered data and deinitialization of Notifications
     
-    var filteredResults: Results<clients>!
+    var filteredResults: [clients] = []
     
     deinit {
         notificationToken?.invalidate()
@@ -65,7 +65,8 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
         tableView.addGestureRecognizer(tapGesture)
         
         // Initialize filteredResults with all objects sorted alphabetically
-        filteredResults = realm.objects(clients.self).sorted(byKeyPath: "client", ascending: true)
+        filteredResults = Array(realm.objects(clients.self))
+            .sorted { ($0.client ?? "").localizedCaseInsensitiveCompare($1.client ?? "") == .orderedAscending }
         
         // Register for changes in Realm Notifications
         
@@ -87,8 +88,6 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
     
     // MARK: Setting Up User Interface
         func setupUI() {
-            clientTableView.register(clientsTableViewCell.self, forCellReuseIdentifier: "clientCell")
-
             self.title = "Kunden"
         }
     
@@ -96,21 +95,17 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
     
     func filterResults(searchTerm: String) {
         if searchTerm.isEmpty {
-            // Output all elements sorted alphabetically in a case-insensitive manner
-            filteredResults = realm.objects(clients.self).sorted(byKeyPath: "client", ascending: true)
+            filteredResults = Array(realm.objects(clients.self))
+                .sorted { ($0.client ?? "").localizedCaseInsensitiveCompare($1.client ?? "") == .orderedAscending }
         } else {
-            // Filter and output selected elements
             let unsortedFilteredResults = realm.objects(clients.self)
                 .filter("client CONTAINS[c] %@ OR street CONTAINS[c] %@", searchTerm, searchTerm)
             
-            // Sort the filtered results alphabetically by the 'client' property
-            filteredResults = unsortedFilteredResults.sorted(byKeyPath: "client", ascending: true)
+            filteredResults = Array(unsortedFilteredResults)
+                .sorted { ($0.client ?? "").localizedCaseInsensitiveCompare($1.client ?? "") == .orderedAscending }
         }
         
-        // Log the sorted results
-        print("Sorted filteredResults: \(filteredResults)")
-        
-        // Reload data after updating filtered results
+        placeholderLabel.isHidden = filteredResults.count > 0
         tableView.reloadData()
     }
 
@@ -127,7 +122,7 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return filteredResults?.count ?? 0
+        return filteredResults.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -227,11 +222,7 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
         let address = "\(street), \(city)"
         
         // Check if the TableView is provided with data, else show placeholder text.
-        if !hasData {
-            placeholderLabel.isHidden = true
-        } else {
-            placeholderLabel.isHidden = false
-        }
+        placeholderLabel.isHidden = filteredResults.count > 0
         
         return cell
     }
@@ -253,18 +244,26 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
         alertController.addAction(cancelAction)
         
         // Add delete action to alert controller
-        let deleteAction = UIAlertAction(title: "Löschen", style: .destructive) { (action) in
-            // Ensure the index path is valid
-            guard indexPath.row < self.filteredResults.count else { return }
+        let deleteAction = UIAlertAction(title: "Löschen", style: .destructive) { [weak self] (action) in
+            guard let self = self,
+                  indexPath.row < self.filteredResults.count else { return }
             
             // Delete the corresponding object from the data source
             let objectToDelete = self.filteredResults[indexPath.row]
+            
+            // First remove from filteredResults array
+            self.filteredResults.remove(at: indexPath.row)
+            
+            // Then delete from Realm
             try! self.realm.write {
                 self.realm.delete(objectToDelete)
             }
             
-            // Animate the deletion on the table view
+            // Finally update the table view
             tableView.deleteRows(at: [indexPath], with: .automatic)
+            
+            // Update placeholder visibility
+            self.placeholderLabel.isHidden = self.filteredResults.count > 0
         }
         alertController.addAction(deleteAction)
         
@@ -283,13 +282,12 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
     
    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
-            filteredResults = realm.objects(clients.self)
-                .sorted(byKeyPath: "client", ascending: true)
+            filteredResults = Array(realm.objects(clients.self))
+                .sorted { ($0.client ?? "").localizedCaseInsensitiveCompare($1.client ?? "") == .orderedAscending }
         } else {
             filterResults(searchTerm: searchText)
         }
         
-        // Reload the table view to reflect the changes
         tableView.reloadData()
     }
     
