@@ -122,13 +122,13 @@ class addRideViewController: UIViewController, UITextFieldDelegate {
         
         // Validate duration format
         if let durationText = durationTextfield.text, !isValidTimeFormat(durationText) {
-            showAlert(message: "Please ensure the duration is in the format 00:00:00")
+            showAlert(message: "Bitte fülle das Feld im folgenden Format aus:\n\n00:00:00")
             return
         }
         
         // Validate distance format
         if let distanceText = distanceTextfield.text, !isValidDistanceFormat(distanceText) {
-            showAlert(message: "Please enter a valid distance in the format 0.0")
+            showAlert(message: "Bitte fülle das Feld im folgenden Format aus:\n\n0.0")
             return
         }
 
