@@ -175,9 +175,6 @@ class MainMapViewViewController: UIViewController, CLLocationManagerDelegate, MK
         menuButtonView.layer.cornerRadius = 25
         menuButton.tintColor = UIColor.systemPurple //init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
         
-        addContactButtonView.layer.cornerRadius = 25
-        addContactButton.tintColor = UIColor.systemPurple //init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
-        
         addressBookButtonView.layer.cornerRadius = 25
         addressBookButton.tintColor = UIColor.systemPurple //init(red: 156/255, green: 199/255, blue: 105/255, alpha: 1.0)
         

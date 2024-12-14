@@ -23,6 +23,7 @@ class contactsTableViewController: UITableViewController, UISearchBarDelegate, C
     
     @IBOutlet var clientTableView: UITableView!
     
+    @IBOutlet weak var addContactButton: UIBarButtonItem!
     @IBOutlet weak var clientSearchBar: UISearchBar!
     
     // MARK: Initializing Realm

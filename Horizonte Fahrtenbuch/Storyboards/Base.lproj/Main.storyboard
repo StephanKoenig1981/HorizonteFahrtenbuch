@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="scaleToFill" editable="NO" text="Willkommen" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u0k-W2-dmc">
-                                <rect key="frame" x="73" y="263" width="5096.666666666667" height="1238"/>
+                                <rect key="frame" x="73" y="263" width="5097.333333333333" height="1238.3333333333333"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="u0k-W2-dmc" secondAttribute="height" multiplier="247:60" id="txc-gR-Bia"/>
@@ -36,7 +36,7 @@
                                 </constraints>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Zuerst müssen wir einige Dinge einrichten, um das Fahrtenbuch optimal nutzen zu können. " textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f4E-nX-Jls">
-                                <rect key="frame" x="76" y="1520" width="5089.666666666667" height="1567"/>
+                                <rect key="frame" x="76" y="1520.333333333333" width="5090.333333333333" height="1567"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" summaryElement="YES" notEnabled="YES"/>
@@ -49,7 +49,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dUg-xJ-j65">
-                                <rect key="frame" x="73" y="3095" width="5096.666666666667" height="35"/>
+                                <rect key="frame" x="73" y="3095.3333333333335" width="5097.333333333333" height="35"/>
                                 <color key="tintColor" red="0.64705884459999996" green="0.77647060160000003" blue="0.45490196350000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="tinted" title="Standortfreigabe erteilen" cornerStyle="capsule">
@@ -61,13 +61,13 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="Tp3-Xq-jik">
-                                <rect key="frame" x="76" y="3151" width="5093.666666666667" height="2133.6666666666661"/>
+                                <rect key="frame" x="76" y="3151.3333333333339" width="5094.333333333333" height="2133.6666666666661"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Tp3-Xq-jik" secondAttribute="height" multiplier="241:101" constant="3" id="fcm-NO-JCc"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3B6-QJ-SQI">
-                                <rect key="frame" x="73" y="5306.666666666667" width="5096.666666666667" height="35"/>
+                                <rect key="frame" x="73" y="5307" width="5097.333333333333" height="35"/>
                                 <color key="tintColor" red="0.64705884459999996" green="0.77647060160000003" blue="0.45490196350000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="tinted" title="Weiter" cornerStyle="capsule">
@@ -949,8 +949,16 @@
                             <outlet property="delegate" destination="WeZ-ig-gme" id="rCN-Wx-zsc"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="X90-zh-FWP"/>
+                    <navigationItem key="navigationItem" id="X90-zh-FWP">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="PJw-1R-NXC">
+                            <color key="tintColor" red="0.61176470589999998" green="0.78039215689999997" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <segue destination="SDW-bC-dEn" kind="presentation" id="t2d-hJ-9fj"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="addContactButton" destination="PJw-1R-NXC" id="Ueh-i4-SDD"/>
                         <outlet property="clientSearchBar" destination="LRq-Io-w8N" id="MWa-Et-cTS"/>
                         <outlet property="clientTableView" destination="kqT-BY-YUa" id="xTh-1h-Qjp"/>
                     </connections>
@@ -1088,41 +1096,13 @@
                                             <constraint firstItem="l8p-Wk-jh1" firstAttribute="top" secondItem="H1K-us-mHC" secondAttribute="top" constant="8" id="mAJ-as-H7Z"/>
                                         </constraints>
                                     </view>
-                                    <view alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tb2-4Y-QLO">
-                                        <rect key="frame" x="8" y="119" width="51" height="51"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7oK-LJ-Jko">
-                                                <rect key="frame" x="2" y="8" width="47" height="34"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="34" id="Gwn-8j-CkQ"/>
-                                                    <constraint firstAttribute="width" constant="47" id="jUt-rM-My3"/>
-                                                </constraints>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" image="person.crop.circle.fill.badge.plus" catalog="system"/>
-                                                <connections>
-                                                    <action selector="addContactButtonPressed:" destination="K7b-6J-Pvw" eventType="touchUpInside" id="W1m-vQ-k4H"/>
-                                                    <action selector="menuButtonPressed:" destination="K7b-6J-Pvw" eventType="touchUpInside" id="Fdk-UO-wLu"/>
-                                                    <segue destination="SDW-bC-dEn" kind="show" identifier="addContactSegue" id="n4T-ZL-0ba"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstItem="7oK-LJ-Jko" firstAttribute="top" secondItem="tb2-4Y-QLO" secondAttribute="top" constant="8" id="5ni-ae-J3w"/>
-                                            <constraint firstAttribute="height" constant="51" id="8LU-n7-kDb"/>
-                                            <constraint firstAttribute="width" constant="51" id="9Yt-Ru-dI5"/>
-                                            <constraint firstItem="7oK-LJ-Jko" firstAttribute="leading" secondItem="tb2-4Y-QLO" secondAttribute="leading" constant="2" id="H9y-WM-I4G"/>
-                                            <constraint firstAttribute="bottom" secondItem="7oK-LJ-Jko" secondAttribute="bottom" constant="9" id="ThM-05-Ccf"/>
-                                            <constraint firstAttribute="trailing" secondItem="7oK-LJ-Jko" secondAttribute="trailing" constant="2" id="mNT-Be-rkn"/>
-                                        </constraints>
-                                    </view>
                                     <view alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z6c-w4-Unb">
-                                        <rect key="frame" x="8" y="178" width="51" height="51"/>
+                                        <rect key="frame" x="8" y="118" width="51" height="51"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gAV-Yt-EqJ">
                                                 <rect key="frame" x="2" y="8" width="47" height="34"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" image="menucard.fill" catalog="system"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="person.fill" catalog="system"/>
                                                 <connections>
                                                     <action selector="addContactButtonPressed:" destination="K7b-6J-Pvw" eventType="touchUpInside" id="SKU-28-4Kf"/>
                                                     <action selector="addressBookButtonPressed:" destination="K7b-6J-Pvw" eventType="touchUpInside" id="M77-9L-7b2"/>
@@ -1143,7 +1123,7 @@
                                         </constraints>
                                     </view>
                                     <view alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mAN-lf-jyj">
-                                        <rect key="frame" x="8" y="236" width="51" height="51"/>
+                                        <rect key="frame" x="8" y="176" width="51" height="51"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o5v-2Y-iWX">
                                                 <rect key="frame" x="2" y="8" width="47" height="34"/>
@@ -1262,7 +1242,7 @@
                                         </constraints>
                                     </view>
                                     <view alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mi4-g7-G9h">
-                                        <rect key="frame" x="8" y="352" width="51" height="51"/>
+                                        <rect key="frame" x="8" y="292" width="51" height="51"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9cR-ra-32N">
                                                 <rect key="frame" x="2" y="8" width="47" height="34"/>
@@ -1293,7 +1273,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Rw-z4-YYg">
-                                        <rect key="frame" x="9" y="490" width="51" height="51"/>
+                                        <rect key="frame" x="9" y="430" width="51" height="51"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0k3-Oz-4AU">
                                                 <rect key="frame" x="2" y="8" width="47" height="34"/>
@@ -1322,7 +1302,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rRi-35-eub">
-                                        <rect key="frame" x="8" y="431" width="51" height="51"/>
+                                        <rect key="frame" x="8" y="371" width="51" height="51"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0gB-hN-wGv">
                                                 <rect key="frame" x="2" y="8" width="47" height="34"/>
@@ -1399,7 +1379,7 @@
                                         </constraints>
                                     </view>
                                     <view alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XvU-hD-taa">
-                                        <rect key="frame" x="8" y="294" width="51" height="51"/>
+                                        <rect key="frame" x="8" y="234" width="51" height="51"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kth-kd-Zql">
                                                 <rect key="frame" x="2" y="8" width="47" height="34"/>
@@ -1428,12 +1408,10 @@
                                     <constraint firstItem="rRi-35-eub" firstAttribute="top" secondItem="mi4-g7-G9h" secondAttribute="bottom" constant="28" id="0ya-xP-NDR"/>
                                     <constraint firstItem="5Rw-z4-YYg" firstAttribute="top" secondItem="rRi-35-eub" secondAttribute="bottom" constant="8" id="1AG-EM-rj7"/>
                                     <constraint firstItem="zRx-WB-SuS" firstAttribute="leading" secondItem="rln-FP-q4v" secondAttribute="leading" constant="99" id="2ik-Aw-f3J"/>
-                                    <constraint firstItem="tb2-4Y-QLO" firstAttribute="top" secondItem="H1K-us-mHC" secondAttribute="bottom" constant="8" symbolic="YES" id="2yk-65-bIg"/>
                                     <constraint firstItem="isM-cH-fZc" firstAttribute="top" secondItem="rln-FP-q4v" secondAttribute="top" id="4Ca-2w-hsK"/>
                                     <constraint firstItem="mi4-g7-G9h" firstAttribute="leading" secondItem="rln-FP-q4v" secondAttribute="leading" constant="8" id="4iO-0Q-Vag"/>
                                     <constraint firstItem="TGn-q2-5b7" firstAttribute="leading" secondItem="rln-FP-q4v" secondAttribute="leading" id="9V3-jk-a5t"/>
                                     <constraint firstItem="H1K-us-mHC" firstAttribute="leading" secondItem="rln-FP-q4v" secondAttribute="leading" constant="8" id="AOq-aZ-FFI"/>
-                                    <constraint firstItem="tb2-4Y-QLO" firstAttribute="leading" secondItem="rln-FP-q4v" secondAttribute="leading" constant="8" id="BSW-A4-wM3"/>
                                     <constraint firstItem="bcE-r6-LV8" firstAttribute="leading" secondItem="rln-FP-q4v" secondAttribute="leading" id="FnW-if-Wg0"/>
                                     <constraint firstItem="z6c-w4-Unb" firstAttribute="leading" secondItem="rln-FP-q4v" secondAttribute="leading" constant="8" id="GXV-X0-RwD"/>
                                     <constraint firstAttribute="trailing" secondItem="zRx-WB-SuS" secondAttribute="trailing" constant="98" id="Iuq-oy-UWn"/>
@@ -1442,6 +1420,7 @@
                                     <constraint firstItem="mi4-g7-G9h" firstAttribute="top" secondItem="XvU-hD-taa" secondAttribute="bottom" constant="7" id="O7c-dY-Ht4"/>
                                     <constraint firstAttribute="trailing" secondItem="bcE-r6-LV8" secondAttribute="trailing" id="TJb-tK-GLu"/>
                                     <constraint firstItem="rRi-35-eub" firstAttribute="leading" secondItem="rln-FP-q4v" secondAttribute="leading" constant="8" id="W5b-uC-oLZ"/>
+                                    <constraint firstItem="z6c-w4-Unb" firstAttribute="top" secondItem="H1K-us-mHC" secondAttribute="bottom" constant="7" id="Xe3-TZ-qJa"/>
                                     <constraint firstAttribute="trailing" secondItem="SYF-7v-vKo" secondAttribute="trailing" id="Zkg-Be-zHJ"/>
                                     <constraint firstItem="mi4-g7-G9h" firstAttribute="top" secondItem="mAN-lf-jyj" secondAttribute="bottom" constant="65" id="afT-yc-BzX"/>
                                     <constraint firstItem="mAN-lf-jyj" firstAttribute="leading" secondItem="rln-FP-q4v" secondAttribute="leading" constant="8" id="eLQ-2T-eLm"/>
@@ -1449,7 +1428,6 @@
                                     <constraint firstAttribute="bottom" secondItem="isM-cH-fZc" secondAttribute="bottom" constant="-18" id="jWc-QW-4qk"/>
                                     <constraint firstItem="H1K-us-mHC" firstAttribute="top" secondItem="rln-FP-q4v" secondAttribute="top" constant="60" id="lQ9-vs-TVf"/>
                                     <constraint firstItem="tiW-YL-1ya" firstAttribute="centerX" secondItem="bcE-r6-LV8" secondAttribute="centerX" id="pCC-Qj-izJ"/>
-                                    <constraint firstItem="z6c-w4-Unb" firstAttribute="top" secondItem="tb2-4Y-QLO" secondAttribute="bottom" constant="8" symbolic="YES" id="pLG-Gq-4rh"/>
                                     <constraint firstAttribute="trailing" secondItem="isM-cH-fZc" secondAttribute="trailing" id="pRg-9p-rmB"/>
                                     <constraint firstItem="isM-cH-fZc" firstAttribute="leading" secondItem="rln-FP-q4v" secondAttribute="leading" id="qrz-FG-0M4"/>
                                     <constraint firstItem="TGn-q2-5b7" firstAttribute="top" secondItem="tiW-YL-1ya" secondAttribute="bottom" constant="15.33" id="syp-eT-LXX"/>
@@ -1517,8 +1495,6 @@
                     </view>
                     <connections>
                         <outlet property="TopNotchView" destination="1Eu-nI-m0D" id="Vrh-jT-834"/>
-                        <outlet property="addContactButton" destination="7oK-LJ-Jko" id="9YX-Fo-gCn"/>
-                        <outlet property="addContactButtonView" destination="tb2-4Y-QLO" id="GgO-jW-BwZ"/>
                         <outlet property="addressBookButton" destination="gAV-Yt-EqJ" id="v0G-cy-Ncn"/>
                         <outlet property="addressBookButtonView" destination="z6c-w4-Unb" id="fRW-Pd-s6X"/>
                         <outlet property="baseToolbarView" destination="TGn-q2-5b7" id="HgO-WA-b8x"/>
@@ -1776,7 +1752,7 @@
                                     <segue destination="33C-9P-Pzo" kind="show" id="6HV-Dq-FNx"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V6.1.6 - © 2023 - 2024 Stephan König - GPL 3.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfl-98-Qbj">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V7.0.0 - © 2025 - 2024 Stephan König - GPL 3.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfl-98-Qbj">
                                 <rect key="frame" x="16" y="833" width="370" height="11"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2208,7 +2184,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartInsertDeleteType="no"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V6.1.6 - © 2023 - 2024 Stephan König - GPL 3.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g57-pt-sUe">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V7.0.0 - © 2023 - 2025 Stephan König - GPL 3.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g57-pt-sUe">
                                 <rect key="frame" x="42" y="833" width="318" height="11"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2342,8 +2318,8 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="PLZ:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pPg-b2-RgW">
-                                        <rect key="frame" x="13" y="252" width="36" height="19.333333333333314"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PLZ:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pPg-b2-RgW">
+                                        <rect key="frame" x="13" y="250.33333333333334" width="36" height="19.333333333333343"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="19.333333333333314" id="txv-3f-rHM"/>
                                         </constraints>
@@ -2401,14 +2377,14 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lmd-IB-buZ">
-                                        <rect key="frame" x="170" y="292" width="8" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lmd-IB-buZ">
+                                        <rect key="frame" x="170" y="290.33333333333331" width="8" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6lH-DS-qqE">
-                                        <rect key="frame" x="13" y="385" width="170" height="35"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6lH-DS-qqE">
+                                        <rect key="frame" x="13" y="383.33333333333331" width="170" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="170" id="Szg-Sz-cc7"/>
                                         </constraints>
@@ -2421,8 +2397,8 @@
                                             <action selector="cancelButtonPressed:" destination="SDW-bC-dEn" eventType="touchUpInside" id="62k-gb-0M0"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Alle Daten werden verschlüsselt gespeichert." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bGJ-sv-JHw">
-                                        <rect key="frame" x="5" y="448" width="389" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alle Daten werden verschlüsselt gespeichert." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bGJ-sv-JHw">
+                                        <rect key="frame" x="5" y="446.33333333333331" width="389" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="TSY-20-8H6"/>
                                         </constraints>
@@ -2625,7 +2601,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartInsertDeleteType="no"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V6.1.6 - © 2023 - 2024 Stephan König - GPL 3.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4p6-Nh-qrN">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V7.0.0 - © 2023 - 2025 Stephan König - GPL 3.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4p6-Nh-qrN">
                                 <rect key="frame" x="16" y="833" width="370" height="11"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2821,7 +2797,7 @@
                                 <color key="textColor" systemColor="systemOrangeColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V6.1.6 - © 2023 - 2024 Stephan König - GPL 3.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Amd-G7-Ill">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V7.0.0 - © 2023 - 2025 Stephan König - GPL 3.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Amd-G7-Ill">
                                 <rect key="frame" x="14" y="833" width="374" height="11"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3156,9 +3132,8 @@
         <image name="house.and.flag.circle.fill" catalog="system" width="32" height="32"/>
         <image name="location.circle.fill" catalog="system" width="32" height="32"/>
         <image name="map.fill" catalog="system" width="32" height="32"/>
-        <image name="menucard.fill" catalog="system" width="32" height="32"/>
         <image name="pencil.circle" catalog="system" width="32" height="32"/>
-        <image name="person.crop.circle.fill.badge.plus" catalog="system" width="32" height="32"/>
+        <image name="person.fill" catalog="system" width="32" height="32"/>
         <image name="phone" catalog="system" width="32" height="32"/>
         <image name="phone.fill" catalog="system" width="32" height="32"/>
         <image name="play.circle" catalog="system" width="32" height="32"/>
