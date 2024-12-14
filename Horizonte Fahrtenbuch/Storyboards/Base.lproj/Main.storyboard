@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="scaleToFill" editable="NO" text="Willkommen" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u0k-W2-dmc">
-                                <rect key="frame" x="73" y="263" width="5097.333333333333" height="1238.3333333333333"/>
+                                <rect key="frame" x="73" y="263" width="256" height="62.333333333333314"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="u0k-W2-dmc" secondAttribute="height" multiplier="247:60" id="txc-gR-Bia"/>
@@ -36,7 +36,7 @@
                                 </constraints>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Zuerst müssen wir einige Dinge einrichten, um das Fahrtenbuch optimal nutzen zu können. " textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f4E-nX-Jls">
-                                <rect key="frame" x="76" y="1520.333333333333" width="5090.333333333333" height="1567"/>
+                                <rect key="frame" x="76" y="344.33333333333326" width="249" height="114.66666666666674"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" summaryElement="YES" notEnabled="YES"/>
@@ -49,7 +49,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dUg-xJ-j65">
-                                <rect key="frame" x="73" y="3095.3333333333335" width="5097.333333333333" height="35"/>
+                                <rect key="frame" x="73" y="467" width="256" height="35"/>
                                 <color key="tintColor" red="0.64705884459999996" green="0.77647060160000003" blue="0.45490196350000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="tinted" title="Standortfreigabe erteilen" cornerStyle="capsule">
@@ -61,13 +61,13 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="Tp3-Xq-jik">
-                                <rect key="frame" x="76" y="3151.3333333333339" width="5094.333333333333" height="2133.6666666666661"/>
+                                <rect key="frame" x="76" y="523" width="253" height="104.66666666666652"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Tp3-Xq-jik" secondAttribute="height" multiplier="241:101" constant="3" id="fcm-NO-JCc"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3B6-QJ-SQI">
-                                <rect key="frame" x="73" y="5307" width="5097.333333333333" height="35"/>
+                                <rect key="frame" x="73" y="649.66666666666697" width="256" height="35"/>
                                 <color key="tintColor" red="0.64705884459999996" green="0.77647060160000003" blue="0.45490196350000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="tinted" title="Weiter" cornerStyle="capsule">
@@ -1752,7 +1752,7 @@
                                     <segue destination="33C-9P-Pzo" kind="show" id="6HV-Dq-FNx"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V7.0.0 - © 2025 - 2024 Stephan König - GPL 3.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfl-98-Qbj">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V7.0.1 - © 2023 - 2025 Stephan König - GPL 3.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfl-98-Qbj">
                                 <rect key="frame" x="16" y="833" width="370" height="11"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2184,8 +2184,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartInsertDeleteType="no"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V7.0.0 - © 2023 - 2025 Stephan König - GPL 3.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g57-pt-sUe">
-                                <rect key="frame" x="42" y="833" width="318" height="11"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V7.0.1 - © 2023 - 2025 Stephan König - GPL 3.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g57-pt-sUe">
+                                <rect key="frame" x="42" y="833" width="316" height="11"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -2264,8 +2264,8 @@
                                         <color key="textColor" systemColor="systemOrangeColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Kundenname" textAlignment="right" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="paz-2e-gy7">
-                                        <rect key="frame" x="180" y="117" width="205" height="34.333333333333314"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Kundenname" textAlignment="right" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="paz-2e-gy7">
+                                        <rect key="frame" x="180" y="118" width="205" height="34.333333333333258"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" enablesReturnKeyAutomatically="YES" smartInsertDeleteType="no" textContentType="organization"/>
@@ -2295,7 +2295,7 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="phonePad" smartInsertDeleteType="no" textContentType="tel"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kunde:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R83-hu-O91">
-                                        <rect key="frame" x="13" y="125.33333333333331" width="54" height="19"/>
+                                        <rect key="frame" x="13" y="125.66666666666669" width="54" height="19"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="19" id="e4w-Fz-8gf"/>
                                         </constraints>
@@ -2319,7 +2319,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PLZ:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pPg-b2-RgW">
-                                        <rect key="frame" x="13" y="250.33333333333334" width="36" height="19.333333333333343"/>
+                                        <rect key="frame" x="13" y="250.00000000000003" width="36" height="19.333333333333343"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="19.333333333333314" id="txv-3f-rHM"/>
                                         </constraints>
@@ -2357,7 +2357,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HYt-AD-zWX">
-                                        <rect key="frame" x="170" y="124.00000000000001" width="8" height="21.666666666666671"/>
+                                        <rect key="frame" x="170" y="124.99999999999999" width="8" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -2369,7 +2369,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kAr-OK-L3C">
-                                        <rect key="frame" x="170" y="209.66666666666666" width="8" height="21"/>
+                                        <rect key="frame" x="170" y="209.33333333333334" width="8" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="uxy-D6-fxM"/>
                                         </constraints>
@@ -2378,13 +2378,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lmd-IB-buZ">
-                                        <rect key="frame" x="170" y="290.33333333333331" width="8" height="21"/>
+                                        <rect key="frame" x="170" y="290" width="8" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6lH-DS-qqE">
-                                        <rect key="frame" x="13" y="383.33333333333331" width="170" height="35"/>
+                                        <rect key="frame" x="13" y="383" width="170" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="170" id="Szg-Sz-cc7"/>
                                         </constraints>
@@ -2398,7 +2398,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alle Daten werden verschlüsselt gespeichert." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bGJ-sv-JHw">
-                                        <rect key="frame" x="5" y="446.33333333333331" width="389" height="21"/>
+                                        <rect key="frame" x="5" y="446" width="389" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="TSY-20-8H6"/>
                                         </constraints>
@@ -2412,7 +2412,7 @@
                                     <constraint firstItem="QKo-bn-LX7" firstAttribute="leading" secondItem="6lH-DS-qqE" secondAttribute="trailing" constant="32" id="0cj-AV-vvU"/>
                                     <constraint firstItem="Ayb-nD-olV" firstAttribute="leading" secondItem="gr5-Ta-GNW" secondAttribute="leading" id="4mS-9D-DM3"/>
                                     <constraint firstItem="V7l-SG-NhB" firstAttribute="leading" secondItem="lmd-IB-buZ" secondAttribute="leading" id="5xo-R9-rZy"/>
-                                    <constraint firstItem="OhX-vS-WdU" firstAttribute="top" secondItem="R83-hu-O91" secondAttribute="bottom" constant="22" id="6SP-tX-tF0"/>
+                                    <constraint firstItem="OhX-vS-WdU" firstAttribute="top" secondItem="R83-hu-O91" secondAttribute="bottom" constant="20.666666666666742" id="6SP-tX-tF0"/>
                                     <constraint firstItem="ZFV-yO-Y2a" firstAttribute="top" secondItem="OhX-vS-WdU" secondAttribute="bottom" constant="19" id="7w1-BR-BNk"/>
                                     <constraint firstItem="gfn-lz-cd9" firstAttribute="top" secondItem="gr5-Ta-GNW" secondAttribute="bottom" constant="8" id="9eh-fV-ep3"/>
                                     <constraint firstItem="bGJ-sv-JHw" firstAttribute="top" secondItem="6lH-DS-qqE" secondAttribute="bottom" constant="28" id="CEs-Fe-bQh"/>
@@ -2421,7 +2421,7 @@
                                     <constraint firstItem="sPg-8Y-rhA" firstAttribute="leading" secondItem="Ayb-nD-olV" secondAttribute="leading" id="H1L-Ri-gRz"/>
                                     <constraint firstItem="OhX-vS-WdU" firstAttribute="centerY" secondItem="sPg-8Y-rhA" secondAttribute="centerY" id="Hv5-JE-oFa"/>
                                     <constraint firstItem="lmd-IB-buZ" firstAttribute="top" secondItem="V7l-SG-NhB" secondAttribute="bottom" constant="21" id="I0G-Yn-vcM"/>
-                                    <constraint firstItem="paz-2e-gy7" firstAttribute="top" secondItem="BBM-OY-18l" secondAttribute="top" constant="117" id="J5x-gi-SZS"/>
+                                    <constraint firstItem="paz-2e-gy7" firstAttribute="top" secondItem="BBM-OY-18l" secondAttribute="top" constant="118" id="J5x-gi-SZS"/>
                                     <constraint firstItem="paz-2e-gy7" firstAttribute="leading" secondItem="HYt-AD-zWX" secondAttribute="trailing" constant="2" id="J7i-sy-Mxr"/>
                                     <constraint firstItem="paz-2e-gy7" firstAttribute="trailing" secondItem="QKo-bn-LX7" secondAttribute="trailing" id="Jtg-k2-zRC"/>
                                     <constraint firstItem="gr5-Ta-GNW" firstAttribute="leading" secondItem="dm7-aq-RjR" secondAttribute="leading" id="Jyv-OL-61K"/>
@@ -2439,7 +2439,7 @@
                                     <constraint firstItem="gfn-lz-cd9" firstAttribute="trailing" secondItem="dm7-aq-RjR" secondAttribute="trailing" id="VKJ-ae-9GY"/>
                                     <constraint firstItem="R83-hu-O91" firstAttribute="leading" secondItem="OhX-vS-WdU" secondAttribute="leading" id="VKr-Z7-qVI"/>
                                     <constraint firstItem="QKo-bn-LX7" firstAttribute="trailing" secondItem="bGJ-sv-JHw" secondAttribute="trailing" constant="-9" id="Vbh-Ea-JyJ"/>
-                                    <constraint firstItem="paz-2e-gy7" firstAttribute="top" secondItem="QUV-ql-5RU" secondAttribute="bottom" constant="27" id="Y5R-TK-ZW4"/>
+                                    <constraint firstItem="paz-2e-gy7" firstAttribute="top" secondItem="QUV-ql-5RU" secondAttribute="bottom" constant="28" id="Y5R-TK-ZW4"/>
                                     <constraint firstItem="OhX-vS-WdU" firstAttribute="leading" secondItem="ZFV-yO-Y2a" secondAttribute="leading" id="YR9-7j-l9b"/>
                                     <constraint firstItem="gr5-Ta-GNW" firstAttribute="trailing" secondItem="gfn-lz-cd9" secondAttribute="trailing" id="Yyf-ih-T2j"/>
                                     <constraint firstItem="ZFV-yO-Y2a" firstAttribute="centerY" secondItem="kAr-OK-L3C" secondAttribute="centerY" id="ZhN-TG-9Zx"/>
@@ -2459,7 +2459,7 @@
                                     <constraint firstItem="ySh-SB-xPo" firstAttribute="leading" secondItem="6lH-DS-qqE" secondAttribute="leading" id="jDj-bR-GZz"/>
                                     <constraint firstItem="ZFV-yO-Y2a" firstAttribute="leading" secondItem="pPg-b2-RgW" secondAttribute="leading" id="mPT-au-afG"/>
                                     <constraint firstItem="Ayb-nD-olV" firstAttribute="leading" secondItem="kAr-OK-L3C" secondAttribute="trailing" constant="3" id="oIS-Es-T0E"/>
-                                    <constraint firstItem="HYt-AD-zWX" firstAttribute="top" secondItem="QUV-ql-5RU" secondAttribute="bottom" constant="34" id="pAX-vB-bUh"/>
+                                    <constraint firstItem="HYt-AD-zWX" firstAttribute="top" secondItem="QUV-ql-5RU" secondAttribute="bottom" constant="35" id="pAX-vB-bUh"/>
                                     <constraint firstItem="sPg-8Y-rhA" firstAttribute="top" secondItem="paz-2e-gy7" secondAttribute="bottom" constant="8.6666666666666856" id="qBk-kR-dpX"/>
                                     <constraint firstItem="pPg-b2-RgW" firstAttribute="centerY" secondItem="gr5-Ta-GNW" secondAttribute="centerY" id="rTm-IP-AO1"/>
                                     <constraint firstItem="Ayb-nD-olV" firstAttribute="trailing" secondItem="gr5-Ta-GNW" secondAttribute="trailing" id="rTn-7R-Rec"/>
@@ -2601,7 +2601,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartInsertDeleteType="no"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V7.0.0 - © 2023 - 2025 Stephan König - GPL 3.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4p6-Nh-qrN">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V7.0.1 - © 2023 - 2025 Stephan König - GPL 3.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4p6-Nh-qrN">
                                 <rect key="frame" x="16" y="833" width="370" height="11"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2797,7 +2797,7 @@
                                 <color key="textColor" systemColor="systemOrangeColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V7.0.0 - © 2023 - 2025 Stephan König - GPL 3.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Amd-G7-Ill">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V7.0.1 - © 2023 - 2025 Stephan König - GPL 3.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Amd-G7-Ill">
                                 <rect key="frame" x="14" y="833" width="374" height="11"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3145,34 +3145,34 @@
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="secondaryLabelColor">
-            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemCyanColor">
-            <color red="0.1960784314" green="0.67843137249999996" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.19607843137254902" green="0.67843137254901964" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGreenColor">
-            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemIndigoColor">
-            <color red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemMintColor">
-            <color red="0.0" green="0.78039215689999997" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.7803921568627451" blue="0.74509803921568629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemPurpleColor">
-            <color red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemTealColor">
-            <color red="0.18823529410000001" green="0.69019607839999997" blue="0.78039215689999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
