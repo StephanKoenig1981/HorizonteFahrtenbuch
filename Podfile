@@ -1,14 +1,6 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
-target 'FahrtenbuchExtension' do
-  # Comment the next line if you don't want to use dynamic frameworks
-  use_frameworks!
-
-  # Pods for FahrtenbuchExtension
-
-end
-
 target 'Horizonte Fahrtenbuch' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
