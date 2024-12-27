@@ -39,11 +39,11 @@ PODS:
     - IQKeyboardCore
   - IQTextView (1.0.5):
     - IQKeyboardToolbar/Placeholderable
-  - Realm (20.0.0):
-    - Realm/Headers (= 20.0.0)
-  - Realm/Headers (20.0.0)
-  - RealmSwift (20.0.0):
-    - Realm (= 20.0.0)
+  - Realm (20.0.1):
+    - Realm/Headers (= 20.0.1)
+  - Realm/Headers (20.0.1)
+  - RealmSwift (20.0.1):
+    - Realm (= 20.0.1)
 
 DEPENDENCIES:
   - IQKeyboardManagerSwift
@@ -71,8 +71,8 @@ SPEC CHECKSUMS:
   IQKeyboardToolbarManager: 6f4072ac620c2572d4af8c09f42a801f3e4909f7
   IQTextInputViewNotification: f5e954d8881fd9808b744e49e024cc0d4bcfe572
   IQTextView: ae13b4922f22e6f027f62c557d9f4f236b19d5c7
-  Realm: a799b5f9145623fb0bfe149fe81422863631dd0f
-  RealmSwift: f8c4354ebd5053343e6ab9f4eda244145308a51e
+  Realm: 9572204903ef28caeb3c03bb30c1147f354ee3e7
+  RealmSwift: d230b44017a55a1ba97de6a944da1fe3bedb92b5
 
 PODFILE CHECKSUM: 0a032e14f0a5aa9c590832c520c47b5bd85581e3
 

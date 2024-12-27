@@ -197,7 +197,7 @@ class clientReportViewController: UIViewController, UITextFieldDelegate, MFMailC
         emailText += rideDetails
 
         emailText += "Mit besten Grüssen,<br><br>\(yourName)<br><br>"
-        emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V7.0.5 generiert. - © 2023 - 2025 Stephan König (GPL 3.0)"
+        emailText += "Dieser Bericht wurde durch die Horizonte Fahrtenbuch App V7.0.6 generiert. - © 2023 - 2025 Stephan König (GPL 3.0)"
         
         // Create a date formatter for German locale
         let dateFormatterForSubject = DateFormatter()
