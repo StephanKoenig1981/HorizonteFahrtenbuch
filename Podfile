@@ -16,6 +16,6 @@ target 'Horizonte Fahrtenbuch' do
     # Pods for testing
   end
 
-      pod 'RealmSwift', '~>10'
+      pod 'RealmSwift' #, '~>10'
       pod 'IQKeyboardManagerSwift'
 end

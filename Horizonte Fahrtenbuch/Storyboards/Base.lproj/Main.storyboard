@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="scaleToFill" editable="NO" text="Willkommen" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u0k-W2-dmc">
-                                <rect key="frame" x="77" y="263" width="5096.666666666667" height="1238"/>
+                                <rect key="frame" x="77" y="263" width="5097.333333333333" height="1238.3333333333333"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="u0k-W2-dmc" secondAttribute="height" multiplier="247:60" id="txc-gR-Bia"/>
@@ -36,7 +36,7 @@
                                 </constraints>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Zuerst müssen wir einige Dinge einrichten, um das Fahrtenbuch optimal nutzen zu können. " textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f4E-nX-Jls">
-                                <rect key="frame" x="80" y="1520" width="5089.666666666667" height="1567"/>
+                                <rect key="frame" x="80" y="1520.333333333333" width="5090.333333333333" height="1567"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" summaryElement="YES" notEnabled="YES"/>
@@ -49,7 +49,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dUg-xJ-j65">
-                                <rect key="frame" x="77" y="3095" width="5096.666666666667" height="35"/>
+                                <rect key="frame" x="77" y="3095.3333333333335" width="5097.333333333333" height="35"/>
                                 <color key="tintColor" red="0.64705884459999996" green="0.77647060160000003" blue="0.45490196350000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="tinted" title="Standortfreigabe erteilen" cornerStyle="capsule">
@@ -61,13 +61,13 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="Tp3-Xq-jik">
-                                <rect key="frame" x="80" y="3151" width="5093.666666666667" height="2133.6666666666661"/>
+                                <rect key="frame" x="80" y="3151.3333333333339" width="5094.333333333333" height="2133.6666666666661"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Tp3-Xq-jik" secondAttribute="height" multiplier="241:101" constant="3" id="fcm-NO-JCc"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3B6-QJ-SQI">
-                                <rect key="frame" x="77" y="5306.666666666667" width="5096.666666666667" height="35"/>
+                                <rect key="frame" x="77" y="5307" width="5097.333333333333" height="35"/>
                                 <color key="tintColor" red="0.64705884459999996" green="0.77647060160000003" blue="0.45490196350000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="tinted" title="Weiter" cornerStyle="capsule">
@@ -242,7 +242,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="purpleGradient" translatesAutoresizingMaskIntoConstraints="NO" id="yZV-2p-FaW">
-                                <rect key="frame" x="0.0" y="-13" width="440" height="959"/>
+                                <rect key="frame" x="0.0" y="0.0" width="440" height="946"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fahrt hinzufügen" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="emF-zB-YpJ">
                                 <rect key="frame" x="20" y="56" width="400" height="36"/>
@@ -316,7 +316,7 @@
                                 </connections>
                             </button>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="rQR-fW-Rtg">
-                                <rect key="frame" x="178" y="139" width="242" height="37.333333333333485"/>
+                                <rect key="frame" x="178" y="139" width="242" height="37.333333333333343"/>
                                 <color key="tintColor" systemColor="systemPurpleColor"/>
                                 <locale key="locale" localeIdentifier="de_DE"/>
                             </datePicker>
@@ -1765,7 +1765,7 @@
                                     <segue destination="33C-9P-Pzo" kind="show" id="6HV-Dq-FNx"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V7.0.3 - © 2023 - 2025 Stephan König - GPL 3.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfl-98-Qbj">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V7.0.5 - © 2023 - 2025 Stephan König - GPL 3.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfl-98-Qbj">
                                 <rect key="frame" x="16" y="915" width="408" height="11"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2192,7 +2192,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartInsertDeleteType="no"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Horizonte Fahrtenbuch V7.0.4 - © 2023 - 2025 Stephan König - GPL 3.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g57-pt-sUe">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Horizonte Fahrtenbuch V7.0.5 - © 2023 - 2025 Stephan König - GPL 3.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g57-pt-sUe">
                                 <rect key="frame" x="42" y="915" width="378" height="11"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2277,7 +2277,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QKo-bn-LX7">
-                                        <rect key="frame" x="236" y="414.66666666666674" width="170" height="35"/>
+                                        <rect key="frame" x="236" y="414.66666666666669" width="170" height="35"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="Speichern" cornerStyle="capsule">
                                             <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2288,7 +2288,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6lH-DS-qqE">
-                                        <rect key="frame" x="34" y="414.66666666666674" width="170" height="35"/>
+                                        <rect key="frame" x="34" y="414.66666666666669" width="170" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="170" id="wVg-oL-1Pf"/>
                                         </constraints>
@@ -2317,7 +2317,7 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" enablesReturnKeyAutomatically="YES" smartInsertDeleteType="no" textContentType="organization"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Ansprechperson" textAlignment="right" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="sPg-8Y-rhA">
-                                        <rect key="frame" x="201" y="180.66666666666663" width="205" height="34"/>
+                                        <rect key="frame" x="201" y="180.66666666666666" width="205" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="34" id="AEz-c4-8cx"/>
                                         </constraints>
@@ -2326,7 +2326,7 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartInsertDeleteType="no" textContentType="name"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Postleitzahl" textAlignment="right" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="gr5-Ta-GNW">
-                                        <rect key="frame" x="201" y="268.66666666666663" width="205" height="34"/>
+                                        <rect key="frame" x="201" y="268.66666666666669" width="205" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="34" id="2hb-rS-NMS"/>
                                         </constraints>
@@ -2335,7 +2335,7 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" smartInsertDeleteType="no" textContentType="postal-code"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Ort" textAlignment="right" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="gfn-lz-cd9">
-                                        <rect key="frame" x="202" y="306.66666666666674" width="204" height="34"/>
+                                        <rect key="frame" x="202" y="306.66666666666669" width="204" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="34" id="d3i-bh-H1s"/>
                                         </constraints>
@@ -2344,7 +2344,7 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartInsertDeleteType="no" textContentType="address-level2"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Telefon" textAlignment="right" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="dm7-aq-RjR">
-                                        <rect key="frame" x="201" y="350.66666666666674" width="205" height="34"/>
+                                        <rect key="frame" x="201" y="350.66666666666669" width="205" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="34" id="RWD-E2-Ogc"/>
                                         </constraints>
@@ -2353,7 +2353,7 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="phonePad" smartInsertDeleteType="no" textContentType="tel"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Strasse" textAlignment="right" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Ayb-nD-olV">
-                                        <rect key="frame" x="201" y="222.66666666666663" width="205" height="34"/>
+                                        <rect key="frame" x="201" y="222.66666666666666" width="205" height="33.999999999999972"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="34" id="hVT-Y4-tJL"/>
                                         </constraints>
@@ -2377,7 +2377,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Strasse:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZFV-yO-Y2a">
-                                        <rect key="frame" x="27" y="227.33333333333337" width="75" height="22.666666666666629"/>
+                                        <rect key="frame" x="27" y="227.33333333333334" width="75" height="22.666666666666657"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22.666666666666657" id="2aq-PC-CVS"/>
                                             <constraint firstAttribute="width" constant="75" id="2fn-2r-gep"/>
@@ -2387,7 +2387,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PLZ:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pPg-b2-RgW">
-                                        <rect key="frame" x="27" y="274.66666666666663" width="36" height="19.333333333333371"/>
+                                        <rect key="frame" x="27" y="274.66666666666669" width="36" height="19.333333333333314"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="19.333333333333343" id="jAd-hT-310"/>
                                         </constraints>
@@ -2396,7 +2396,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ort:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="66M-Ci-w68">
-                                        <rect key="frame" x="27" y="311.33333333333326" width="30" height="22.666666666666742"/>
+                                        <rect key="frame" x="27" y="311.33333333333331" width="30" height="22.666666666666686"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22.666666666666686" id="tPo-F7-cCz"/>
                                         </constraints>
@@ -2405,7 +2405,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Telefon:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ySh-SB-xPo">
-                                        <rect key="frame" x="27" y="355.33333333333326" width="61" height="22"/>
+                                        <rect key="frame" x="27" y="355.33333333333331" width="61" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22" id="akp-rc-qnl"/>
                                         </constraints>
@@ -2414,7 +2414,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HYt-AD-zWX">
-                                        <rect key="frame" x="184" y="147" width="8" height="20.333333333333371"/>
+                                        <rect key="frame" x="184" y="147" width="8" height="20.333333333333343"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -2426,13 +2426,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kAr-OK-L3C">
-                                        <rect key="frame" x="184" y="226.66666666666663" width="8" height="21"/>
+                                        <rect key="frame" x="184" y="226.66666666666666" width="8" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lmd-IB-buZ">
-                                        <rect key="frame" x="184" y="310.33333333333326" width="8" height="21"/>
+                                        <rect key="frame" x="184" y="310.33333333333331" width="8" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -2630,7 +2630,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartInsertDeleteType="no"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V7.0.4 - © 2023 - 2025 Stephan König - GPL 3.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4p6-Nh-qrN">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horizonte Fahrtenbuch V7.0.5 - © 2023 - 2025 Stephan König - GPL 3.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4p6-Nh-qrN">
                                 <rect key="frame" x="20" y="915" width="400" height="11"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2832,7 +2832,7 @@
                                 <color key="textColor" systemColor="systemOrangeColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Horizonte Fahrtenbuch V7.0.4 - © 2023 - 2025 Stephan König - GPL 3.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Amd-G7-Ill">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Horizonte Fahrtenbuch V7.0.5 - © 2023 - 2025 Stephan König - GPL 3.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Amd-G7-Ill">
                                 <rect key="frame" x="14" y="915" width="412.33333333333331" height="11"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
