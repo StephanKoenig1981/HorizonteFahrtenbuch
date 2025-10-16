@@ -1,2 +1,5 @@
 Pods
 install.sh
+*.xcuserstate
+*/xcuserdatad/
+.gitignore
