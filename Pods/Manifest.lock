@@ -1,49 +1,47 @@
 PODS:
-  - IQKeyboardCore (1.0.5)
-  - IQKeyboardManagerSwift (8.0.0):
-    - IQKeyboardManagerSwift/Appearance (= 8.0.0)
-    - IQKeyboardManagerSwift/Core (= 8.0.0)
-    - IQKeyboardManagerSwift/IQKeyboardReturnManager (= 8.0.0)
-    - IQKeyboardManagerSwift/IQKeyboardToolbarManager (= 8.0.0)
-    - IQKeyboardManagerSwift/IQTextView (= 8.0.0)
-    - IQKeyboardManagerSwift/Resign (= 8.0.0)
-  - IQKeyboardManagerSwift/Appearance (8.0.0):
+  - IQKeyboardCore (1.0.8)
+  - IQKeyboardManagerSwift (8.0.1):
+    - IQKeyboardManagerSwift/Appearance (= 8.0.1)
+    - IQKeyboardManagerSwift/Core (= 8.0.1)
+    - IQKeyboardManagerSwift/IQKeyboardReturnManager (= 8.0.1)
+    - IQKeyboardManagerSwift/IQKeyboardToolbarManager (= 8.0.1)
+    - IQKeyboardManagerSwift/IQTextView (= 8.0.1)
+    - IQKeyboardManagerSwift/Resign (= 8.0.1)
+  - IQKeyboardManagerSwift/Appearance (8.0.1):
     - IQKeyboardManagerSwift/Core
-  - IQKeyboardManagerSwift/Core (8.0.0):
+  - IQKeyboardManagerSwift/Core (8.0.1):
     - IQKeyboardNotification
     - IQTextInputViewNotification
-  - IQKeyboardManagerSwift/IQKeyboardReturnManager (8.0.0):
+  - IQKeyboardManagerSwift/IQKeyboardReturnManager (8.0.1):
     - IQKeyboardReturnManager
-  - IQKeyboardManagerSwift/IQKeyboardToolbarManager (8.0.0):
+  - IQKeyboardManagerSwift/IQKeyboardToolbarManager (8.0.1):
     - IQKeyboardManagerSwift/Core
     - IQKeyboardToolbarManager
-  - IQKeyboardManagerSwift/IQTextView (8.0.0):
+  - IQKeyboardManagerSwift/IQTextView (8.0.1):
     - IQTextView
-  - IQKeyboardManagerSwift/Resign (8.0.0):
+  - IQKeyboardManagerSwift/Resign (8.0.1):
     - IQKeyboardManagerSwift/Core
-  - IQKeyboardNotification (1.0.3)
-  - IQKeyboardReturnManager (1.0.4):
-    - IQKeyboardCore (= 1.0.5)
-  - IQKeyboardToolbar (1.1.1):
+  - IQKeyboardNotification (1.0.6)
+  - IQKeyboardReturnManager (1.0.6):
     - IQKeyboardCore
-    - IQKeyboardToolbar/Core (= 1.1.1)
-  - IQKeyboardToolbar/Core (1.1.1):
+  - IQKeyboardToolbar (1.1.2):
+    - IQKeyboardToolbar/Core (= 1.1.2)
+  - IQKeyboardToolbar/Core (1.1.2):
     - IQKeyboardCore
     - IQKeyboardToolbar/Placeholderable
-  - IQKeyboardToolbar/Placeholderable (1.1.1):
-    - IQKeyboardCore
-  - IQKeyboardToolbarManager (1.1.2):
+  - IQKeyboardToolbar/Placeholderable (1.1.2)
+  - IQKeyboardToolbarManager (1.1.4):
     - IQKeyboardToolbar
     - IQTextInputViewNotification
-  - IQTextInputViewNotification (1.0.8):
+  - IQTextInputViewNotification (1.0.9):
     - IQKeyboardCore
   - IQTextView (1.0.5):
     - IQKeyboardToolbar/Placeholderable
-  - Realm (20.0.1):
-    - Realm/Headers (= 20.0.1)
-  - Realm/Headers (20.0.1)
-  - RealmSwift (20.0.1):
-    - Realm (= 20.0.1)
+  - Realm (20.0.3):
+    - Realm/Headers (= 20.0.3)
+  - Realm/Headers (20.0.3)
+  - RealmSwift (20.0.3):
+    - Realm (= 20.0.3)
 
 DEPENDENCIES:
   - IQKeyboardManagerSwift
@@ -63,17 +61,17 @@ SPEC REPOS:
     - RealmSwift
 
 SPEC CHECKSUMS:
-  IQKeyboardCore: 28c8bf3bcd8ba5aa1570b318cbc4da94b861711e
-  IQKeyboardManagerSwift: 0c6fbbaa2e60739e48d7cf59f25661471a7a3a65
-  IQKeyboardNotification: d7382c4466c5a5adef92c7452ebf861b36050088
-  IQKeyboardReturnManager: 972be48528ce9e7508ab3ab15ac7efac803f17f5
-  IQKeyboardToolbar: d4bdccfb78324aec2f3920659c77bb89acd33312
-  IQKeyboardToolbarManager: 6f4072ac620c2572d4af8c09f42a801f3e4909f7
-  IQTextInputViewNotification: f5e954d8881fd9808b744e49e024cc0d4bcfe572
+  IQKeyboardCore: 8652977ec919cf5351aa2977fedd1a6546476fbc
+  IQKeyboardManagerSwift: 835fc9c6e4732398113406d84900ad2e8f141218
+  IQKeyboardNotification: eb4910401f5a0e68f97e71c62f8a0c5b7e9d535c
+  IQKeyboardReturnManager: fcbf51fc68d7536fc1fbcca5231c4e82576b12ac
+  IQKeyboardToolbar: a8aab764a27d55892b951e58ebfffdde14a01ce8
+  IQKeyboardToolbarManager: c8a575e8b5fffe5873d0e75312244498a0759473
+  IQTextInputViewNotification: 3b9fb27a16e7ee8958cc9092cfb07a1a9e1fd559
   IQTextView: ae13b4922f22e6f027f62c557d9f4f236b19d5c7
-  Realm: 9572204903ef28caeb3c03bb30c1147f354ee3e7
-  RealmSwift: d230b44017a55a1ba97de6a944da1fe3bedb92b5
+  Realm: 853e5089d6042dff807bda000277eadfe2da93d2
+  RealmSwift: f33c19577cefcbf681345d721fcbc7b42be4c949
 
-PODFILE CHECKSUM: 0a032e14f0a5aa9c590832c520c47b5bd85581e3
+PODFILE CHECKSUM: 74e36316a582d31b237eb8c3784d23d0db8c2f2a
 
 COCOAPODS: 1.16.2
